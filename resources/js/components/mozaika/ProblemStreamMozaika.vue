@@ -48,34 +48,32 @@ export default {
             });
         },
 
-        // websocketData() {
-        //     Echo.channel("RunningStreams").listen(
-        //         "BroadcastMonitoredStreamsEvent",
-        //         (e) => {
-        //             if (e[0].length > 0) {
-        //                 this.problemStreans = e[0];
-        //                 this.count = e[0].length;
-        //             } else {
-        //                 this.problemStreans = null;
-        //                 this.count = 0;
-        //             }
-        //         }
-        //     );
-        // },
+        websocketData() {
+            Echo.channel("ProblemStreams").listen(
+                "BroadcastProblemStreamsEvent",
+                (e) => {
+                    if (e[0].length > 0) {
+                        this.problemStreans = e[0];
+                        this.count = e[0].length;
+                    } else {
+                        this.problemStreans = null;
+                        this.count = 0;
+                    }
+                }
+            );
+        },
     },
 
     mounted() {
-        // this.websocketData();
+        this.websocketData();
+        // setInterval(
+        //     function () {
+        //         try {
+        //             this.index();
+        //         } catch (error) {}
+        //     }.bind(this),
+        //     5000
+        // );
     },
-    // mounted() {
-    //     setInterval(
-    //         function () {
-    //             try {
-    //                 this.index();
-    //             } catch (error) {}
-    //         }.bind(this),
-    //         2000
-    //     );
-    // },
 };
 </script>

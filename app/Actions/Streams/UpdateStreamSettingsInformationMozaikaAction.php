@@ -3,7 +3,10 @@
 namespace App\Actions\Streams;
 
 use Illuminate\Support\Facades\Cache;
+use App\Events\BroadcastErrorStreamsEvent;
 use App\Actions\Cache\RemoveItemsFromCache;
+use App\Events\BroadcastProblemStreamsEvent;
+use App\Events\BroadcastMonitoredStreamsEvent;
 
 class UpdateStreamSettingsInformationMozaikaAction
 {
@@ -46,5 +49,9 @@ class UpdateStreamSettingsInformationMozaikaAction
         } else {
             Cache::put('showStreamDiscontinuity_' . $stream->id, []);
         }
+
+        BroadcastErrorStreamsEvent::dispatch();
+        BroadcastMonitoredStreamsEvent::dispatch();
+        BroadcastProblemStreamsEvent::dispatch();
     }
 }

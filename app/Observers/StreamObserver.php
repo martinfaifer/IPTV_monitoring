@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Cache;
 use App\Events\BroadcastErrorStreamsEvent;
+use App\Events\BroadcastProblemStreamsEvent;
 use App\Events\BroadcastMonitoredStreamsEvent;
 use App\Actions\Cache\DeleteAllStreamCacheDataAction;
 
@@ -38,6 +39,7 @@ class StreamObserver
         // fired Up events for mozaika
         BroadcastErrorStreamsEvent::dispatch();
         BroadcastMonitoredStreamsEvent::dispatch();
+        BroadcastProblemStreamsEvent::dispatch();
     }
 
     /**
@@ -57,6 +59,10 @@ class StreamObserver
         (new DeleteAllStreamCacheDataAction())->execute($stream);
         Cache::forget('streams');
         Cache::put('streams', Stream::all());
+
+        BroadcastErrorStreamsEvent::dispatch();
+        BroadcastMonitoredStreamsEvent::dispatch();
+        BroadcastProblemStreamsEvent::dispatch();
     }
 
     /**

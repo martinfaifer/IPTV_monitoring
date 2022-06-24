@@ -74,18 +74,15 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.websocketData();
-  } // mounted() {
-  //     setInterval(
-  //         function () {
-  //             try {
-  //                 this.index();
-  //             } catch (error) {}
-  //         }.bind(this),
-  //         2000
-  //     );
-  // },
-
+    this.websocketData(); // setInterval(
+    //     function () {
+    //         try {
+    //             this.index();
+    //         } catch (error) {}
+    //     }.bind(this),
+    //     5000
+    // );
+  }
 });
 
 /***/ }),
@@ -363,34 +360,31 @@ __webpack_require__.r(__webpack_exports__);
           _this.count = 0;
         }
       });
-    } // websocketData() {
-    //     Echo.channel("RunningStreams").listen(
-    //         "BroadcastMonitoredStreamsEvent",
-    //         (e) => {
-    //             if (e[0].length > 0) {
-    //                 this.problemStreans = e[0];
-    //                 this.count = e[0].length;
-    //             } else {
-    //                 this.problemStreans = null;
-    //                 this.count = 0;
-    //             }
-    //         }
-    //     );
-    // },
+    },
+    websocketData: function websocketData() {
+      var _this2 = this;
 
+      Echo.channel("ProblemStreams").listen("BroadcastProblemStreamsEvent", function (e) {
+        if (e[0].length > 0) {
+          _this2.problemStreans = e[0];
+          _this2.count = e[0].length;
+        } else {
+          _this2.problemStreans = null;
+          _this2.count = 0;
+        }
+      });
+    }
   },
-  mounted: function mounted() {// this.websocketData();
-  } // mounted() {
-  //     setInterval(
-  //         function () {
-  //             try {
-  //                 this.index();
-  //             } catch (error) {}
-  //         }.bind(this),
-  //         2000
-  //     );
-  // },
-
+  mounted: function mounted() {
+    this.websocketData(); // setInterval(
+    //     function () {
+    //         try {
+    //             this.index();
+    //         } catch (error) {}
+    //     }.bind(this),
+    //     5000
+    // );
+  }
 });
 
 /***/ }),

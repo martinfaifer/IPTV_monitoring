@@ -1,0 +1,50 @@
+klice v Cache pro streamy a jejich popisy
+    - klíč 'streams' => klíč pod kterým jsou uloženy veškeré streamy
+    - klíč 'streamTS_{$stream->id}' => klíč pod kterým jsou uloženy informace o Transport Stream protokolu, kdy values obsahuje 'country', 'packets', 'pcrbitrate'
+    - klíč 'streamInvalidSync_{$stream->id}' => klíč pod kterým je uložena chyba ve formátu
+            [
+                'status' => "invalidSync_warning",
+                'message' => "Nepodařilo se získat informaci o synchronizaci audia / videa"
+            ]
+        nebo
+            [
+                'status' => "invalidSync_warning",
+                'message' => "Desynchronizace Audia / videa"
+            ]
+    - klíč 'streamTransportErrors_{$stream->id}' => klíč pod kterým je uložena chyba ve formátu
+            [
+                'status' => "transporterrors_warning",
+                'message' => "Nepodařilo se získat informaci o transport streamu"
+            ]
+        nebo
+            [
+                'status' => "transporterrors_warning",
+                'message' => "Zobrazila se TS chyba"
+            ]
+    - klíč 'streamService_{$stream->id}' => klíč pod kterým jsou uloženy informace o Service Pidech, kdy obsahuje values 'tsid', 'pmtpid', 'pcrpid', 'provider', 'name'
+    - klíč 'streamPids_{$stream->id}' => klíč pod kterým jsou uloženy informace o Pidech ve streamu, kdy obsahje values 'videoPid', 'audioPid', 'caPid'
+    - klíč 'streamAudioPids_{$stream->id}' => klíč pod kterým jsou uloženy informace o Audio Pidech, který obsahuje více rozměrné pole indexované dle Pidu a hodnoty v poly 'pid', 'access', 'language', 'bitrate', 'scrambled', 'discontinuities', 'description'
+    - klíč 'streamAudioAccess_{$stream->id}' => klíč pod kterým je uložena chyba ve formátu
+            [
+                'status' => "audio_is_not_dekrypted",
+                'message' => "Desynchronizace nebo nedekryptace Audia na pidu {$audioPid}"
+            ]
+    - klíč 'streamAudioBitrate_{$stream->id}' => klíč pod kterým je uložna chyba ve formátu
+            [
+                'status' => "no_audio_bitrate",
+                'message' => "Audio má nulový datový tok na pidu {$audioPid}"
+            ]
+    - klíč 'streamVideoPids_{$stream->id}' => klíč pod kterým jsou uloženy informace o Video Pidech, který obsahuje více rozměrné pole indexované dle Pidu a hodnoty v poly 'pid', 'discontinuities', 'description', 'bitrate', 'scrambled', 'access', 'dexcription'
+    - klíč 'streamVideoAccess_{$stream->id}' => klíč pod kterým je uložena chyba ve formátu
+            [
+                'status' => "video_is_not_dekrypted",
+                'message' => "Nedekryptuje se video na pidu {$videoPid}"
+            ]
+    - klíč 'streamVideoBitrate_{$stream->id}' => klíč pod kterým je uložena chyba ve formátu
+            [
+                'status' => "no_video_bitrate",
+                'message' => "Video má nulový datový tok na pidu {$videoPid}"
+            ]
+    - klíč 'streamCaPids_{$stream->id}' => klíč pod kterým jsou uloženy informace o CA Pidu s hodnotama 'scrambled', 'access', 'description', 'discontinuities'
+    - klíč 'streamIsMonitoring_'{$stream->id} => klič ve kterém je uložen processPid, který odpovídá procesu na pozadí
+    - klíč 'streamsErrorHistory' => klíč ve kterém jsou uloženy výpadky streamů ( uloženo je posledních 50 výpadků )

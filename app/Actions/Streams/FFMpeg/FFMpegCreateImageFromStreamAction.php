@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Actions\Streams\FFMpeg;
+
+use App\Events\BroadcastStreamImageEvent;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
+
+class FFMpegCreateImageFromStreamAction
+{
+    public $imageName;
+
+    public function execute(object $stream)
+    {
+        $this->imageName = Str::slug($stream->nazev).'.jpg';
+
+        $this->remove_file(public_path("storage/streamImages/{$this->imageName}"));
+
+        if (str_contains($stream->stream_url, 'http')) {
+            shell_exec("ffmpeg -ss 3 -i {$stream->stream_url} -vframes:v 1 ".public_path("storage/streamImages/{$this->imageName}"));
+        } else {
+            shell_exec("ffmpeg -ss 3 -i udp://{$stream->stream_url} -vframes:v 1 ".public_path("storage/streamImages/{$this->imageName}"));
+        }
+
+        // dispatch event for broadcast new image
+        BroadcastStreamImageEvent::dispatch($stream);
+        $this->cache_image(public_path("storage/streamImages/{$this->imageName}"));
+    }
+
+    private function remove_file(string $imageName): void
+    {
+        try {
+            unlink($imageName);
+        } catch (\Throwable $th) {
+            //
+        }
+    }
+
+    public function cache_image(string $imagePath)
+    {
+        return Image::cache(function ($image) use ($imagePath) {
+            $image->make($imagePath);
+        });
+    }
+}

@@ -41,7 +41,7 @@
             </div>
         </div>
         <v-navigation-drawer
-            style="z-index: 10"
+            style="z-index: 100"
             overlay-color="rgb(17, 27, 45)"
             v-model="alertSideBar"
             absolute
@@ -52,6 +52,7 @@
         >
             <p
                 class="mt-2 ml-3 text-left caption text--disabled font-weight-medium"
+                fixed
             >
                 Historie událostí
             </p>
@@ -147,6 +148,10 @@ export default {
                 return "red";
             }
 
+            if (status == "stop") {
+                return "orange";
+            }
+
             if (status == "error") {
                 return "red";
             }
@@ -179,6 +184,10 @@ export default {
 
             if (status == "error") {
                 return "shadow-blur-error-alert";
+            }
+
+            if (status == "stop") {
+                return "shadow-blur-warning";
             }
 
             if (status == "issue") {

@@ -17,9 +17,9 @@ class FFMpegCreateImageFromStreamAction
         $this->remove_file(public_path("storage/streamImages/{$this->imageName}"));
 
         if (str_contains($stream->stream_url, 'http')) {
-            shell_exec("ffmpeg -ss 3 -i {$stream->stream_url} -vframes:v 1 ".public_path("storage/streamImages/{$this->imageName}"));
+            shell_exec("ffmpeg -hwaccel cuda -i {$stream->stream_url} -vframes:v 1 ".public_path("storage/streamImages/{$this->imageName}"));
         } else {
-            shell_exec("ffmpeg -ss 3 -i udp://{$stream->stream_url} -vframes:v 1 ".public_path("storage/streamImages/{$this->imageName}"));
+            shell_exec("ffmpeg -hwaccel cuda -i udp://{$stream->stream_url} -vframes:v 1 ".public_path("storage/streamImages/{$this->imageName}"));
         }
 
         // dispatch event for broadcast new image

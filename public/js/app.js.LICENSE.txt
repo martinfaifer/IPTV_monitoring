@@ -1,7 +1,15 @@
 /*!
- * ApexCharts v3.35.2
+ * ApexCharts v3.35.5
  * (c) 2018-2022 ApexCharts
  * Released under the MIT License.
+ */
+
+/*!
+ * Pusher JavaScript Library v7.0.6
+ * https://pusher.com/
+ *
+ * Copyright 2020, Pusher
+ * Released under the MIT licence.
  */
 
 /*!

@@ -15,9 +15,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('streams:diagnostic')->everyMinute();
-        $schedule->command('streams:start_issue')->everyMinute();
-        // $schedule->command('streams:check_if_running')->everyMinute();
+        $schedule->command('streams:start_diagnostic')->everyMinute();
+        $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute();
+        $schedule->command('system:take_network_data')->everyMinute();
+
+        // $schedule->command('streams:start_issue')->everyMinute();
+        $schedule->command('streams:check_if_running')->everyTwoMinutes();
         $schedule->command('streams:create_image')->everyFiveMinutes();
     }
 
@@ -28,7 +31,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

@@ -22,25 +22,26 @@ class StreamDiagnosticTsDuckAnalyzeTransportStreamService implements DiagnosticA
 
     public function analyze(Collection $tsDuckCollection, object $stream): void
     {
-        foreach ($tsDuckCollection['ts'] as $collection) {
-            if (str_contains($collection, 'invalidsyncs')) {
-                $this->check_invalid_sync_in_stream(str_replace('invalidsyncs=', '', $collection), $stream);
+        foreach ($tsDuckCollection as $collection) {
+
+            if (array_key_exists("packets", $collection)) {
+
+                if (array_key_exists("invalid-syncs", $collection['packets'])) {
+                    $this->check_invalid_sync_in_stream($collection['packets']['invalid-syncs'], $stream);
+                }
+
+                // transport-errors
+                if (array_key_exists("transport-errors", $collection['packets'])) {
+                    $this->check_transport_errors_in_stream($collection['packets']['transport-errors'], $stream);
+                }
+
+                if (array_key_exists("total", $collection['packets'])) {
+                    $this->packets = $collection['packets']['total'];
+                }
             }
 
-            if (str_contains($collection, 'transporterrors=')) {
-                $this->check_transport_errors_in_stream(str_replace('transporterrors=', '', $collection), $stream);
-            }
-
-            if (str_contains($collection, 'country=')) {
-                $this->country = str_replace('country=', '', $collection);
-            }
-
-            if (str_contains($collection, 'packets=')) {
-                $this->packets = str_replace('packets=', '', $collection);
-            }
-
-            if (str_contains($collection, 'pcrbitrate=')) {
-                $this->pcrbitrate = str_replace('pcrbitrate=', '', $collection);
+            if (array_key_exists("pcr-bitrate", $collection)) {
+                $this->pcrbitrate = $collection['pcr-bitrate'];
             }
         }
 
@@ -63,19 +64,16 @@ class StreamDiagnosticTsDuckAnalyzeTransportStreamService implements DiagnosticA
                 'status' => 'invalidSync_warning',
                 'message' => 'Nepodařilo se získat informaci o synchronizaci audia / videa',
             ];
-            (new StoreItemsToCache())->execute('streamInvalidSync_'.$stream->id, $outputErrStats);
-            exit();
-        }
-
-        if ($invalidsyncs != '0') {
+            (new StoreItemsToCache())->execute('streamInvalidSync_' . $stream->id, $outputErrStats);
+        } else if ($invalidsyncs != '0') {
             $outputErrStats = [
                 'status' => 'invalidSync_warning',
                 'message' => 'Desynchronizace Audia / videa',
             ];
-            (new StoreItemsToCache())->execute('streamInvalidSync_'.$stream->id, $outputErrStats);
-            exit();
+            (new StoreItemsToCache())->execute('streamInvalidSync_' . $stream->id, $outputErrStats);
+        } else {
+            (new RemoveItemsFromCache())->execute('streamInvalidSync_' . $stream->id);
         }
-        (new RemoveItemsFromCache())->execute('streamInvalidSync_'.$stream->id);
     }
 
     private function check_transport_errors_in_stream(string|null $transporterrors, object $stream): void
@@ -87,25 +85,21 @@ class StreamDiagnosticTsDuckAnalyzeTransportStreamService implements DiagnosticA
                 'status' => 'transporterrors_warning',
                 'message' => 'Nepodařilo se získat informaci o transport streamu',
             ];
-            (new StoreItemsToCache())->execute('streamTransportErrors_'.$stream->id, $outputErrStats);
-            exit();
-        }
-
-        if ($transporterrors != '0') {
+            (new StoreItemsToCache())->execute('streamTransportErrors_' . $stream->id, $outputErrStats);
+        } else if ($transporterrors != '0') {
             $outputErrStats = [
                 'status' => 'transporterrors_warning',
                 'message' => 'Zobrazila se TS chyba',
             ];
-            (new StoreItemsToCache())->execute('streamTransportErrors_'.$stream->id, $outputErrStats);
-            exit();
+            (new StoreItemsToCache())->execute('streamTransportErrors_' . $stream->id, $outputErrStats);
+        } else {
+            (new RemoveItemsFromCache())->execute('streamTransportErrors_' . $stream->id);
         }
-
-        (new RemoveItemsFromCache())->execute('streamTransportErrors_'.$stream->id);
     }
 
     public function store_to_cache(object $stream, $country, $packets, $pcrbitrate): void
     {
-        (new StoreItemsToCache())->execute('streamTS_'.$stream->id, [
+        (new StoreItemsToCache())->execute('streamTS_' . $stream->id, [
             'country' => $country,
             'packets' => $packets,
             'pcrbitrate' => $pcrbitrate,

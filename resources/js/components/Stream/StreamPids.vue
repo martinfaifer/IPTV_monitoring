@@ -10,11 +10,38 @@
                             <template v-slot:default>
                                 <tbody>
                                     <tr
-                                        v-for="pidValue in pidValues[0]"
-                                        :key="pidValue"
+                                        v-for="(
+                                            pidValue, pidKey
+                                        ) in pidValues[0]"
+                                        :key="pidKey"
                                     >
                                         <td class="caption">
-                                            {{ pidValue }}
+                                            <span
+                                                class="font-weight-bold d-flex justify-start"
+                                                >{{ pidKey }}:</span
+                                            >
+                                            <span
+                                                v-if="
+                                                    typeof pidValue == 'object'
+                                                "
+                                            >
+                                                <span
+                                                    v-for="(
+                                                        value, key
+                                                    ) in pidValue"
+                                                    :key="key"
+                                                    class="d-flex justify-end"
+                                                >
+                                                    {{ key }}: {{ value }}
+                                                    <br />
+                                                </span>
+                                            </span>
+                                            <span
+                                                v-else
+                                                class="d-flex justify-end"
+                                            >
+                                                {{ pidValue }}
+                                            </span>
                                         </td>
                                     </tr>
                                 </tbody>

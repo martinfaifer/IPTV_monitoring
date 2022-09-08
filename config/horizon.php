@@ -151,7 +151,7 @@ return [
     |
     */
 
-    'memory_limit' => 64,
+    'memory_limit' => 128,
 
     /*
     |--------------------------------------------------------------------------
@@ -246,8 +246,8 @@ return [
                 'queue' => ['ffmpeg'],
                 'balance' => 'auto',
                 'minProcesses' => 1,
-                'maxProcesses' => 50,
-                'balanceMaxShift' => 25,
+                'maxProcesses' => 5,
+                'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'tries' => 1,
             ],
@@ -256,7 +256,7 @@ return [
                 'queue' => ['ws-stream'],
                 'balance' => 'auto',
                 'minProcesses' => 1,
-                'maxProcesses' => 50,
+                'maxProcesses' => 100,
                 'balanceMaxShift' => 25,
                 'balanceCooldown' => 1,
                 'tries' => 1,

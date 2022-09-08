@@ -20,18 +20,12 @@ class BroadcastAudioVideoStreamPidsEvent implements ShouldBroadcast, ShouldQueue
 
     public $queue = 'ws-stream';
 
-    public $stream;
-
-    public $videoPids;
-
-    public $audioPids;
-
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(object $stream, $videoPids, $audioPids)
+    public function __construct(public object $stream, public $videoPids, public $audioPids)
     {
         $this->stream = $stream;
         $this->videoPids = $videoPids;

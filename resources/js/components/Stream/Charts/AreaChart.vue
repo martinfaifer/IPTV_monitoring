@@ -24,6 +24,9 @@ export default {
                 },
                 colors: ["#3490dc"],
                 chart: {
+                    toolbar: {
+                        show: false,
+                    },
                     type: "area",
                     animations: {
                         enabled: false,
@@ -77,6 +80,10 @@ export default {
             if (this.$route.params.streamId) {
                 this.index();
             }
+        });
+
+        this.$nextTick(() => {
+            window.dispatchEvent(new Event("resize"));
         });
     },
     watch: {

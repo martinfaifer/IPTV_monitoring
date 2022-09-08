@@ -22,7 +22,10 @@ let Layout = () => import("./components/layout/layout.vue");
 let Mozaika = () => import("./components/mozaika/mozaika.vue");
 let streamLayout = () => import("./components/Stream/streamLayout.vue");
 let SettingsLayout = () => import("./components/Settings/settingsLayout.vue");
-let SettingsStreams = () => import("./components/Settings/Streams/settingsStreams.vue")
+let SettingsDashboard = () =>
+    import("./components/Settings/Dashboard/settingsDashboard.vue");
+let SettingsStreams = () =>
+    import("./components/Settings/Streams/settingsStreams.vue");
 let Login = () => import("./components/Auth/Login.vue");
 let PageNotFound = () => import("./components/PageNotFound/PageNotFound.vue");
 
@@ -44,11 +47,12 @@ let routes = [
                 component: SettingsLayout,
                 children: [
                     {
+                        component: SettingsDashboard,
                         path: "/settings/dashboard",
                     },
                     {
                         path: "/settings/streams",
-                        component: SettingsStreams
+                        component: SettingsStreams,
                     },
                     {
                         path: "/settings/users",
@@ -58,8 +62,8 @@ let routes = [
                     },
                     {
                         path: "/settings/webhook",
-                    }
-                ]
+                    },
+                ],
             },
         ],
     },

@@ -306,18 +306,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -342,6 +330,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Search_search_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Search/search.vue */ "./resources/js/components/layout/navigation/Search/search.vue");
 /* harmony import */ var _User_user_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./User/user.vue */ "./resources/js/components/layout/navigation/User/user.vue");
+//
 //
 //
 //
@@ -491,6 +480,10 @@ __webpack_require__.r(__webpack_exports__);
         return "red";
       }
 
+      if (status == "stop") {
+        return "orange";
+      }
+
       if (status == "error") {
         return "red";
       }
@@ -522,6 +515,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (status == "error") {
         return "shadow-blur-error-alert";
+      }
+
+      if (status == "stop") {
+        return "shadow-blur-warning";
       }
 
       if (status == "issue") {
@@ -1271,7 +1268,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "v-list-item",
-                { attrs: { link: "", to: "/settings" } },
+                { attrs: { link: "", to: "/settings/dashboard" } },
                 [
                   _vm._v("\n                Nastavení"),
                   _c("v-spacer"),
@@ -1461,7 +1458,7 @@ var render = function () {
       _c(
         "v-navigation-drawer",
         {
-          staticStyle: { "z-index": "10" },
+          staticStyle: { "z-index": "100" },
           attrs: {
             "overlay-color": "rgb(17, 27, 45)",
             absolute: "",
@@ -1484,6 +1481,7 @@ var render = function () {
             {
               staticClass:
                 "mt-2 ml-3 text-left caption text--disabled font-weight-medium",
+              attrs: { fixed: "" },
             },
             [_vm._v("\n            Historie událostí\n        ")]
           ),

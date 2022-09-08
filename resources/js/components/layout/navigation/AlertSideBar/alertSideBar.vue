@@ -17,7 +17,11 @@
             </span>
         </v-tooltip>
 
-        <v-navigation-drawer v-model="alertSideBar" absolute temporary>
+        <v-navigation-drawer
+            v-model="alertSideBar"
+            absolute
+            temporary
+        >
             <v-list-item>
                 <v-list-item-avatar>
                     <v-img

@@ -16,6 +16,8 @@ class BroadcastStreamImageEvent implements ShouldBroadcast
 
     public $stream;
 
+    public $queue = 'ws-stream';
+
     /**
      * Create a new event instance.
      *

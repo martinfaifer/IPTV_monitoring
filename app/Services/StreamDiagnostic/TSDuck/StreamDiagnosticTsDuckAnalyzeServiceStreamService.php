@@ -25,25 +25,27 @@ class StreamDiagnosticTsDuckAnalyzeServiceStreamService implements DiagnosticAna
 
     public function analyze(Collection $tsDuckCollection, object $stream): void
     {
-        foreach ($tsDuckCollection['service'] as $collection) {
-            if (str_contains($collection, 'tsid')) {
-                $this->tsid = str_replace('tsid=', '', $collection);
+        foreach ($tsDuckCollection as $collection) {
+
+            if (array_key_exists("tsid", $collection)) {
+                $this->tsid = $collection['tsid'];
             }
 
-            if (str_contains($collection, 'pmtpid')) {
-                $this->pmtpid = str_replace('pmtpid=', '', $collection);
+            if (array_key_exists("pmt-pid", $collection)) {
+                $this->pmtpid = $collection['pmt-pid'];
             }
 
-            if (str_contains($collection, 'pcrpid')) {
-                $this->pcrpid = str_replace('pcrpid=', '', $collection);
+            // pcr-pid
+            if (array_key_exists("pcr-pid", $collection)) {
+                $this->pcrpid = $collection['pcr-pid'];
             }
 
-            if (str_contains($collection, 'provider')) {
-                $this->provider = str_replace('provider=', '', $collection);
+            if (array_key_exists("provider", $collection)) {
+                $this->provider = $collection['provider'];
             }
 
-            if (str_contains($collection, 'name')) {
-                $this->name = str_replace('name=', '', $collection);
+            if (array_key_exists("type-name", $collection)) {
+                $this->name = $collection['type-name'];
             }
         }
 
@@ -52,7 +54,7 @@ class StreamDiagnosticTsDuckAnalyzeServiceStreamService implements DiagnosticAna
 
     public function store_to_cache(object $stream, $tsid, $pmtpid, $pcrpid, $provider, $name): void
     {
-        (new StoreItemsToCache())->execute('streamService_'.$stream->id, [
+        (new StoreItemsToCache())->execute('streamService_' . $stream->id, [
             'tsid' => $tsid,
             'pmtpid' => $pmtpid,
             'pcrpid' => $pcrpid,

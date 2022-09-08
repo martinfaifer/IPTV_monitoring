@@ -17,15 +17,9 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
 
     public $audioPid = [];
 
-    public $caPid = [];
+    public $ecmPid = [];
 
-    public $pmtPid = [];
-
-    public $batPid = [];
-
-    public $catPid = [];
-
-    public $patPid = [];
+    public $emm = [];
 
     public $videoPidsAgregated = [];
 
@@ -41,53 +35,40 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
     public function analyze(Collection $tsDuckCollection, object $stream): void
     {
         foreach ($tsDuckCollection['pids'] as $collection) {
-            $collection = collect($collection);
 
-            if ($collection->contains('video')) {
-                $this->videoPid[] = $collection;
+            if ($collection['video'] == true) {
+                $this->videoPid[] = [...$collection];
             }
 
-            if ($collection->contains('audio')) {
-                $this->audioPid[] = $collection;
+            if ($collection['audio'] == true) {
+                $this->audioPid[] = [...$collection];
             }
 
-            if ($collection->contains('ecm')) {
-                $this->caPid[] = $collection;
+            if ($collection['ecm'] == true) {
+                $this->ecmPid[] = [...$collection];
             }
 
-            if ($collection->contains('pmt')) {
-                $this->pmtPid[] = $collection;
-            }
-
-            if ($collection->contains('description=SDT/BAT')) {
-                $this->batPid[] = $collection;
-            }
-
-            if ($collection->contains('description=CAT')) {
-                $this->catPid[] = $collection;
-            }
-
-            if ($collection->contains('description=PAT')) {
-                $this->patPid[] = $collection;
+            if ($collection['emm'] == true) {
+                $this->emm[] = $collection['emm'];
             }
         }
 
-        $this->store_to_cache($stream, $this->videoPid, $this->audioPid, $this->caPid);
+        $this->store_to_cache($stream);
 
-        if (! empty($this->videoPid)) {
+        if (!empty($this->videoPid)) {
             $this->collect_video_pids($stream, $this->videoPid);
         }
 
-        if (! empty($this->audioPid)) {
+        if (!empty($this->audioPid)) {
             $this->collect_audio_pids($stream, $this->audioPid);
         }
 
-        if (! empty($this->caPid)) {
-            $this->collect_ca_pids($stream, $this->caPid);
-        }
+        // if (!empty($this->ecmPid)) {
+        //     $this->collect_ca_pids($stream, $this->ecmPid);
+        // }
 
         // broadcast information about video and audio pids
-        BroadcastAudioVideoStreamPidsEvent::dispatch($stream, Cache::get('streamVideoPids_'.$stream->id), Cache::get('streamAudioPids_'.$stream->id));
+        BroadcastAudioVideoStreamPidsEvent::dispatch($stream, Cache::get('streamVideoPids_' . $stream->id), Cache::get('streamAudioPids_' . $stream->id));
     }
 
     /**
@@ -98,46 +79,42 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
      * @param  array  $audiosPids
      * @return void
      */
-    private function collect_audio_pids(object $stream, array $audiosPids): void
+    private function collect_audio_pids(object $stream, array $audioPids): void
     {
-        foreach ($audiosPids as $audioPids) {
-            foreach ($audioPids as $audioPid) {
-                if (str_contains($audioPid, 'pid')) {
-                    $audioPidId = str_replace('pid=', '', $audioPid);
-                    $this->audioPidsAgregated[$audioPidId]['pid'] = $audioPidId;
+        foreach ($audioPids as $audioPid) {
+
+            if (array_key_exists("id", $audioPid)) {
+                $audioPidId = $audioPid['id'];
+                $this->audioPidsAgregated[$audioPidId]['pid'] = $audioPidId;
+            }
+
+            if (array_key_exists('language', $audioPid)) {
+                $this->audioPidsAgregated[$audioPidId]['language'] = $audioPid['language'];
+            }
+
+            if (array_key_exists("bitrate", $audioPid)) {
+                $this->audioPidsAgregated[$audioPidId]['bitrate'] = $audioPid['bitrate'];
+                $this->check_if_audio_bitrate_is_zero($audioPid['bitrate'], $audioPidId, $stream);
+                (new StoreStreamPidDataFroChartToCache())->execute('streamPidBitrate_' . $audioPidId . '_' . $stream->id, $audioPid['bitrate'] / 1048576, $audioPid);
+            }
+
+            if (array_key_exists("packets", $audioPid)) {
+                if (array_key_exists("scrambled", $audioPid['packets'])) {
+                    $this->audioPidsAgregated[$audioPidId]['scrambled'] = $audioPid['packets']['scrambled'];
                 }
 
-                if (str_contains($audioPid, 'access')) {
-                    $this->audioPidsAgregated[$audioPidId]['access'] = str_replace('access=', '', $audioPid);
-                    $this->check_if_audio_is_dekrypted($this->audioPidsAgregated[$audioPidId]['access'], $audioPidId, $stream);
+                if (array_key_exists('discontinuities', $audioPid['packets'])) {
+                    $this->audioPidsAgregated[$audioPidId]['discontinuities'] = $audioPid['packets']['discontinuities'];
+                    (new StoreStreamPidDiscontinuityAction())->execute('streamDiscontinuityPidErrors_' . $audioPidId . '_' . $stream->id, $audioPid['packets']['discontinuities']);
                 }
+            }
 
-                if (str_contains($audioPid, 'language')) {
-                    $this->audioPidsAgregated[$audioPidId]['language'] = str_replace('language=', '', $audioPid);
-                }
-
-                if (str_contains($audioPid, 'bitrate=')) {
-                    $this->audioPidsAgregated[$audioPidId]['bitrate'] = str_replace('bitrate=', '', $audioPid);
-                    $this->check_if_audio_bitrate_is_zero($this->audioPidsAgregated[$audioPidId]['bitrate'], $audioPidId, $stream);
-                    (new StoreStreamPidDataFroChartToCache())->execute('streamPidBitrate_'.$audioPidId.'_'.$stream->id, $this->audioPidsAgregated[$audioPidId]['bitrate'] / 1048576, $audioPid);
-                }
-
-                if (str_contains($audioPid, 'scrambled')) {
-                    $this->audioPidsAgregated[$audioPidId]['scrambled'] = str_replace('scrambled=', '', $audioPid);
-                }
-
-                if (str_contains($audioPid, 'discontinuities')) {
-                    $this->audioPidsAgregated[$audioPidId]['discontinuities'] = str_replace('discontinuities=', '', $audioPid);
-                    (new StoreStreamPidDiscontinuityAction())->execute('streamDiscontinuityPidErrors_'.$audioPidId.'_'.$stream->id, $this->audioPidsAgregated[$audioPidId]['discontinuities']);
-                }
-
-                if (str_contains($audioPid, 'description')) {
-                    $this->audioPidsAgregated[$audioPidId]['description'] = str_replace('description=', '', $audioPid);
-                }
+            if (array_key_exists("description", $audioPid)) {
+                $this->audioPidsAgregated[$audioPidId]['description'] = $audioPid['description'];
             }
         }
 
-        (new StoreItemsToCache())->execute('streamAudioPids_'.$stream->id, $this->audioPidsAgregated);
+        (new StoreItemsToCache())->execute('streamAudioPids_' . $stream->id, $this->audioPidsAgregated);
     }
 
     /**
@@ -153,8 +130,8 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
     private function check_if_audio_is_dekrypted(string $audioPidAccess, string $audioPid, object $stream): void
     {
         $audioPidAccess == 'clear'
-            ? (new RemoveItemsFromCache())->execute('streamAudioAccess_'.$stream->id)
-            : (new StoreItemsToCache())->execute('streamAudioAccess_'.$stream->id, [
+            ? (new RemoveItemsFromCache())->execute('streamAudioAccess_' . $stream->id)
+            : (new StoreItemsToCache())->execute('streamAudioAccess_' . $stream->id, [
                 'status' => 'audio_is_not_dekrypted',
                 'message' => "Desynchronizace nebo nedekryptace Audia na pidu {$audioPid}",
             ]);
@@ -173,11 +150,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
     private function check_if_audio_bitrate_is_zero(string $audioBitrate, string $audioPid, object $stream): void
     {
         $audioBitrate == 0
-            ? (new StoreItemsToCache())->execute('streamAudioBitrate_'.$stream->id, [
+            ? (new StoreItemsToCache())->execute('streamAudioBitrate_' . $stream->id, [
                 'status' => 'no_audio_bitrate',
                 'message' => "Audio má nulový datový tok na pidu {$audioPid}",
             ])
-            : (new RemoveItemsFromCache())->execute('streamAudioBitrate_'.$stream->id);
+            : (new RemoveItemsFromCache())->execute('streamAudioBitrate_' . $stream->id);
     }
 
     /**
@@ -188,47 +165,48 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
      * @param  array  $videosPids
      * @return void
      */
-    private function collect_video_pids(object $stream, array $videosPids): void
+    private function collect_video_pids(object $stream, array $videoPids): void
     {
-        foreach ($videosPids as $videoPids) {
-            foreach ($videoPids as $videoPid) {
-                if (str_contains($videoPid, 'pid')) {
-                    $videoPidId = str_replace('pid=', '', $videoPid);
-                    $this->videoPidsAgregated[$videoPidId]['pid'] = $videoPidId;
+        foreach ($videoPids as $videoPid) {
+            if (array_key_exists("id", $videoPid)) {
+                $videoPidId = $videoPid['id'];
+                $this->videoPidsAgregated[$videoPidId]['pid'] = $videoPidId;
+            }
+
+            if (array_key_exists("packets", $videoPid)) {
+                if (array_key_exists("discontinuities", $videoPid['packets'])) {
+                    $this->videoPidsAgregated[$videoPidId]['discontinuities'] = $videoPid['packets']['discontinuities'];
+                    (new StoreStreamPidDiscontinuityAction())->execute('streamDiscontinuityPidErrors_' . $videoPidId . '_' . $stream->id, $videoPid['packets']['discontinuities']);
                 }
 
-                if (str_contains($videoPid, 'discontinuities')) {
-                    $this->videoPidsAgregated[$videoPidId]['discontinuities'] = str_replace('discontinuities=', '', $videoPid);
-                    (new StoreStreamPidDiscontinuityAction())->execute('streamDiscontinuityPidErrors_'.$videoPidId.'_'.$stream->id, $this->videoPidsAgregated[$videoPidId]['discontinuities']);
+                if (array_key_exists('scrambled', $videoPid)) {
+                    $this->videoPidsAgregated[$videoPidId]['scrambled'] = $videoPid['scrambled'];
                 }
+            }
 
-                if (str_contains($videoPid, 'description')) {
-                    $this->videoPidsAgregated[$videoPidId]['description'] = str_replace('description=', '', $videoPid);
-                }
+            if (array_key_exists('description', $videoPid)) {
+                $this->videoPidsAgregated[$videoPidId]['description'] = $videoPid['description'];
+            }
 
-                if (str_contains($videoPid, 'bitrate=')) {
-                    $this->videoPidsAgregated[$videoPidId]['bitrate'] = str_replace('bitrate=', '', $videoPid);
-                    $this->check_if_video_bitrate_is_zero($this->videoPidsAgregated[$videoPidId]['bitrate'], $videoPid, $stream);
-                    // store to cache for chart
-                    (new StoreStreamPidDataFroChartToCache())->execute('streamPidBitrate_'.$videoPidId.'_'.$stream->id, $this->videoPidsAgregated[$videoPidId]['bitrate'] / 1048576, $videoPid);
-                }
 
-                if (str_contains($videoPid, 'scrambled')) {
-                    $this->videoPidsAgregated[$videoPidId]['scrambled'] = str_replace('scrambled=', '', $videoPid);
-                }
+            if (array_key_exists('bitrate', $videoPid)) {
+                $this->videoPidsAgregated[$videoPidId]['bitrate'] = $videoPid['bitrate'];
+                $this->check_if_video_bitrate_is_zero($videoPid['bitrate'], $videoPidId, $stream);
+                // store to cache for chart
+                (new StoreStreamPidDataFroChartToCache())->execute('streamPidBitrate_' . $videoPidId . '_' . $stream->id, $videoPid['bitrate'] / 1048576, $videoPid);
+            }
 
-                if (str_contains($videoPid, 'access')) {
-                    $this->videoPidsAgregated[$videoPidId]['access'] = str_replace('access=', '', $videoPid);
-                    $this->check_if_video_is_dekrypted($this->videoPidsAgregated[$videoPidId]['access'], $videoPidId, $stream);
-                }
+            // if (str_contains($videoPid, 'access')) {
+            //     $this->videoPidsAgregated[$videoPidId]['access'] = str_replace('access=', '', $videoPid);
+            //     $this->check_if_video_is_dekrypted($this->videoPidsAgregated[$videoPidId]['access'], $videoPidId, $stream);
+            // }
 
-                if (str_contains($videoPid, 'description')) {
-                    $this->videoPidsAgregated[$videoPidId]['description'] = str_replace('description=', '', $videoPid);
-                }
+            if (array_key_exists('description', $videoPid)) {
+                $this->videoPidsAgregated[$videoPidId]['description'] = $videoPid['description'];
             }
         }
 
-        (new StoreItemsToCache())->execute('streamVideoPids_'.$stream->id, $this->videoPidsAgregated);
+        (new StoreItemsToCache())->execute('streamVideoPids_' . $stream->id, $this->videoPidsAgregated);
     }
 
     /**
@@ -244,8 +222,8 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
     private function check_if_video_is_dekrypted(string $videoPidAccess, string $videoPid, object $stream): void
     {
         $videoPidAccess == 'clear'
-            ? (new RemoveItemsFromCache())->execute('streamVideoAccess_'.$stream->id)
-            : (new StoreItemsToCache())->execute('streamVideoAccess_'.$stream->id, [
+            ? (new RemoveItemsFromCache())->execute('streamVideoAccess_' . $stream->id)
+            : (new StoreItemsToCache())->execute('streamVideoAccess_' . $stream->id, [
                 'status' => 'video_is_not_dekrypted',
                 'message' => "Nedekryptuje se video na pidu {$videoPid}",
             ]);
@@ -264,11 +242,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
     private function check_if_video_bitrate_is_zero(string $viedoBitrate, string $videoPid, object $stream): void
     {
         $viedoBitrate == 0
-            ? (new StoreItemsToCache())->execute('streamVideoBitrate_'.$stream->id, [
+            ? (new StoreItemsToCache())->execute('streamVideoBitrate_' . $stream->id, [
                 'status' => 'no_video_bitrate',
                 'message' => "Video má nulový datový tok na pidu {$videoPid}",
             ])
-            : (new RemoveItemsFromCache())->execute('streamVideoBitrate_'.$stream->id);
+            : (new RemoveItemsFromCache())->execute('streamVideoBitrate_' . $stream->id);
     }
 
     /**
@@ -279,35 +257,35 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
      * @param  array  $casPids
      * @return void
      */
-    private function collect_ca_pids(object $stream, array $casPids): void
-    {
-        foreach ($casPids as $caPids) {
-            foreach ($caPids as $caPid) {
-                if (str_contains($caPid, 'pid')) {
-                    $caPidId = str_replace('pid=', '', $caPid);
-                    $this->caPidsAgregated[$caPidId]['pid'] = $caPidId;
-                }
+    // private function collect_ca_pids(object $stream, array $casPids): void
+    // {
+    //     foreach ($casPids as $caPids) {
+    //         foreach ($caPids as $caPid) {
+    //             if (str_contains($caPid, 'pid')) {
+    //                 $caPidId = str_replace('pid=', '', $caPid);
+    //                 $this->caPidsAgregated[$caPidId]['pid'] = $caPidId;
+    //             }
 
-                if (str_contains($caPid, 'scrambled')) {
-                    $this->caPidsAgregated[$caPidId]['scrambled'] = str_replace('scrambled=', '', $caPid);
-                }
+    //             if (str_contains($caPid, 'scrambled')) {
+    //                 $this->caPidsAgregated[$caPidId]['scrambled'] = str_replace('scrambled=', '', $caPid);
+    //             }
 
-                if (str_contains($caPid, 'access')) {
-                    $this->caPidsAgregated[$caPidId]['access'] = str_replace('access=', '', $caPid);
-                }
+    //             if (str_contains($caPid, 'access')) {
+    //                 $this->caPidsAgregated[$caPidId]['access'] = str_replace('access=', '', $caPid);
+    //             }
 
-                if (str_contains($caPid, 'description')) {
-                    $this->caPidsAgregated[$caPidId]['description'] = str_replace('description=', '', $caPid);
-                }
+    //             if (str_contains($caPid, 'description')) {
+    //                 $this->caPidsAgregated[$caPidId]['description'] = str_replace('description=', '', $caPid);
+    //             }
 
-                if (str_contains($caPid, 'discontinuities')) {
-                    $this->caPidsAgregated[$caPidId]['discontinuities'] = str_replace('discontinuities=', '', $caPid);
-                }
-            }
-        }
+    //             if (str_contains($caPid, 'discontinuities')) {
+    //                 $this->caPidsAgregated[$caPidId]['discontinuities'] = str_replace('discontinuities=', '', $caPid);
+    //             }
+    //         }
+    //     }
 
-        (new StoreItemsToCache())->execute('streamCaPids_'.$stream->id, $this->caPidsAgregated);
-    }
+    //     (new StoreItemsToCache())->execute('streamCaPids_' . $stream->id, $this->caPidsAgregated);
+    // }
 
     /**
      * globální fuknce pro uložení informací o videoPidech AudioPidech a CAPidech do Cache pod klíčem 'streamPids_' . $stream->id
@@ -318,14 +296,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
      * @param  array  $caPid
      * @return void
      */
-    public function store_to_cache(object $stream, array $videoPid, array $audioPid, array $caPid): void
+    public function store_to_cache(object $stream): void
     {
-        (new StoreItemsToCache())->execute('streamPids_'.$stream->id, [
-            'pmtPid' => $this->pmtPid,
-            'batPid' => $this->batPid,
-            'catPid' => $this->catPid,
-            'patPid' => $this->patPid,
-            'caPid' => $caPid,
+        (new StoreItemsToCache())->execute('streamPids_' . $stream->id, [
+            'emm' => $this->emm,
+            'ecmPid' => $this->ecmPid,
         ]);
     }
 }

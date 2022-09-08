@@ -214,6 +214,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -236,7 +237,7 @@ __webpack_require__.r(__webpack_exports__);
         text: "Status",
         value: "status"
       }, {
-        text: "Dohleduje se od ",
+        text: "Dohleduje se",
         value: "monitored_at"
       }, {
         text: "Akce",
@@ -744,6 +745,7 @@ var render = function () {
                                 attrs: {
                                   dense: "",
                                   outlined: "",
+                                  autofocus: "",
                                   "error-messages": _vm.errors.nazev,
                                   label: "Název sreamu",
                                   type: "text",

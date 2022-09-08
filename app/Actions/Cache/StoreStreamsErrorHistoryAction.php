@@ -42,7 +42,8 @@ class StoreStreamsErrorHistoryAction
             'starting' => 'starting',
             'stopped' => 'stop',
             'can_not_start' => 'error',
-            'issue' => 'issue'
+            'issue' => 'issue',
+            'crash' => 'crash'
         };
     }
 
@@ -54,7 +55,8 @@ class StoreStreamsErrorHistoryAction
             'starting' => 'Zařazuje se do fronty na dohled',
             'stopped' => 'Dohled je zastaven',
             'can_not_start' => 'Ve výpadku',
-            'issue' => 'Vyskytla se chyba ve streamu / přestal odpovídat process'
+            'issue' => 'Vyskytla se chyba ve streamu / přestal odpovídat process',
+            'crash' => "Přestala fungovat diagnostika streamu"
         };
     }
 }

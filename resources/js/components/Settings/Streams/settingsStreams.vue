@@ -157,6 +157,7 @@
                                 <v-text-field
                                     dense
                                     outlined
+                                    autofocus
                                     :error-messages="errors.nazev"
                                     v-model="formData.nazev"
                                     label="Název sreamu"
@@ -216,7 +217,7 @@ export default {
                 { text: "Stream", value: "nazev" },
                 { text: "Url", value: "stream_url" },
                 { text: "Status", value: "status" },
-                { text: "Dohleduje se od ", value: "monitored_at" },
+                { text: "Dohleduje se", value: "monitored_at" },
                 { text: "Akce", value: "actions" },
             ],
         };

@@ -1,17 +1,5 @@
 <template>
     <div class="mx-1">
-        <!-- <v-tooltip bottom color="#192B4B">
-            <template v-slot:activator="{ on }">
-                <v-btn v-on="on" icon>
-                    <v-icon> mdi-account </v-icon>
-                </v-btn>
-            </template>
-            <span>
-                <v-container>
-                    <v-row> uživatel </v-row>
-                </v-container>
-            </span>
-        </v-tooltip> -->
 
         <v-menu transition="scroll-y-transition">
             <template v-slot:activator="{ on }">
@@ -27,7 +15,7 @@
                         >mdi-account-cog-outline</v-icon
                     >
                 </v-list-item>
-                <v-list-item link to="/settings">
+                <v-list-item link to="/settings/dashboard">
                     Nastavení<v-spacer></v-spacer
                     ><v-icon color="green" right x-small>mdi-settings</v-icon>
                 </v-list-item>

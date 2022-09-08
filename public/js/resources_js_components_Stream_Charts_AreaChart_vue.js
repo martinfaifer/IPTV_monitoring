@@ -44,6 +44,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         },
         colors: ["#3490dc"],
         chart: {
+          toolbar: {
+            show: false
+          },
           type: "area",
           animations: {
             enabled: false,
@@ -109,6 +112,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (_this2.$route.params.streamId) {
         _this2.index();
       }
+    });
+    this.$nextTick(function () {
+      window.dispatchEvent(new Event("resize"));
     });
   },
   watch: {

@@ -673,6 +673,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2466,17 +2493,72 @@ var render = function () {
                                   return [
                                     _c(
                                       "tbody",
-                                      _vm._l(pidValues[0], function (pidValue) {
-                                        return _c("tr", { key: pidValue }, [
-                                          _c("td", { staticClass: "caption" }, [
-                                            _vm._v(
-                                              "\n                                        " +
-                                                _vm._s(pidValue) +
-                                                "\n                                    "
+                                      _vm._l(
+                                        pidValues[0],
+                                        function (pidValue, pidKey) {
+                                          return _c("tr", { key: pidKey }, [
+                                            _c(
+                                              "td",
+                                              { staticClass: "caption" },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "font-weight-bold d-flex justify-start",
+                                                  },
+                                                  [_vm._v(_vm._s(pidKey) + ":")]
+                                                ),
+                                                _vm._v(" "),
+                                                typeof pidValue == "object"
+                                                  ? _c(
+                                                      "span",
+                                                      _vm._l(
+                                                        pidValue,
+                                                        function (value, key) {
+                                                          return _c(
+                                                            "span",
+                                                            {
+                                                              key: key,
+                                                              staticClass:
+                                                                "d-flex justify-end",
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "\n                                                " +
+                                                                  _vm._s(key) +
+                                                                  ": " +
+                                                                  _vm._s(
+                                                                    value
+                                                                  ) +
+                                                                  "\n                                                "
+                                                              ),
+                                                              _c("br"),
+                                                            ]
+                                                          )
+                                                        }
+                                                      ),
+                                                      0
+                                                    )
+                                                  : _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "d-flex justify-end",
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                            " +
+                                                            _vm._s(pidValue) +
+                                                            "\n                                        "
+                                                        ),
+                                                      ]
+                                                    ),
+                                              ]
                                             ),
-                                          ]),
-                                        ])
-                                      }),
+                                          ])
+                                        }
+                                      ),
                                       0
                                     ),
                                   ]

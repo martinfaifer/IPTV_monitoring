@@ -12,8 +12,8 @@ class StreamDiagnosticTsDuckAnalyzedService
             new StreamDiagnosticTsDuckAnalyzeTransportStreamService($tsDuckCollection->only('ts'), $stream);
         }
 
-        if ($tsDuckCollection->has('service')) {
-            new StreamDiagnosticTsDuckAnalyzeServiceStreamService($tsDuckCollection->only('service'), $stream);
+        if ($tsDuckCollection->has('services')) {
+            new StreamDiagnosticTsDuckAnalyzeServiceStreamService($tsDuckCollection->only('services'), $stream);
         }
 
         if ($tsDuckCollection->has('pids')) {

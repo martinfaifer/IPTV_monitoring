@@ -21,14 +21,14 @@ class UpdateStreamStatusAction
                 'monitored_at' => $this->monitored_at,
             ]);
 
-            (new SendWebhookAction())->execute($status, [
-                'data' => [
-                    [
-                        'stream' => $stream->nazev,
-                        'status' => $status,
-                    ],
-                ],
-            ]);
+            // (new SendWebhookAction())->execute($status, [
+            //     'data' => [
+            //         [
+            //             'stream' => $stream->nazev,
+            //             'status' => $status,
+            //         ],
+            //     ],
+            // ]);
             (new StoreStreamsErrorHistoryAction())->execute($stream, $status);
         }
     }

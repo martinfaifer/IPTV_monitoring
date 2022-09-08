@@ -1,31 +1,32 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Search\SearchController;
-use App\Http\Controllers\Settings\Sreams\SettingsStreamController;
-use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
-use App\Http\Controllers\Streams\NotRunningStreamsController;
+use App\Http\Controllers\Streams\StreamController;
+use App\Http\Controllers\StreamsHistoryStatusController;
 use App\Http\Controllers\Streams\ProblemStreamsController;
 use App\Http\Controllers\Streams\RunningStreamsController;
-use App\Http\Controllers\Streams\ShowAudioStreamPidsController;
-use App\Http\Controllers\Streams\ShowServiceStreamPidsController;
-use App\Http\Controllers\Streams\ShowStreamImageController;
 use App\Http\Controllers\Streams\ShowStreamPidsController;
-use App\Http\Controllers\Streams\ShowVideoStreamPidsController;
-use App\Http\Controllers\Streams\StreamController;
 use App\Http\Controllers\Streams\StreamPidChartController;
+use App\Http\Controllers\Streams\StreamsHistoryController;
+use App\Http\Controllers\Streams\ShowStreamImageController;
+use App\Http\Controllers\Streams\NotRunningStreamsController;
+use App\Http\Controllers\Streams\ShowAudioStreamPidsController;
+use App\Http\Controllers\Streams\ShowVideoStreamPidsController;
+use App\Http\Controllers\Streams\ShowServiceStreamPidsController;
+use App\Http\Controllers\Settings\Sreams\SettingsStreamController;
 use App\Http\Controllers\Streams\StreamPidDiscontinuityController;
 use App\Http\Controllers\Streams\StreamSettingsInformtionMozaikaController;
-use App\Http\Controllers\Streams\StreamsHistoryController;
 use App\Http\Controllers\Streams\StreStreamPidDiscontinuityResetController;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::prefix('auth')->group(function () {
-    Route::post('login', );
+    Route::post('login',);
 });
 
 Route::post('search', SearchController::class);
@@ -54,13 +55,13 @@ Route::prefix('streams')->group(function () {
 });
 
 Route::prefix('settings')->group(function () {
+    Route::prefix("dashboard")->group(function () {
+        Route::get("", \Spatie\Health\Http\Controllers\HealthCheckJsonResultsController::class);
+        Route::get("streams/status-history", StreamsHistoryStatusController::class);
+    });
     Route::prefix('streams')->group(function () {
         Route::get('', [SettingsStreamController::class, 'index']);
         Route::post('', [SettingsStreamController::class, 'store']);
         Route::delete('{stream}', [SettingsStreamController::class, 'destroy']);
     });
-});
-
-Route::get('test', function () {
-    Artisan::call('ffprobe:test');
 });

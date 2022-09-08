@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\NetworkStatistic;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 class TakeNetworkDataCommand extends Command
 {
@@ -35,6 +36,6 @@ class TakeNetworkDataCommand extends Command
             'tx' => $tx
         ]);
 
-        // vypocet je rozdil packetu / 1024 / 1024 / 8
+        Artisan::call('system:calculate_network_speed');
     }
 }

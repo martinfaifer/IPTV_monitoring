@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Search\SearchController;
+use App\Http\Controllers\Settings\Dashboard\Network\AvgNetworkSpeedController;
 use App\Http\Controllers\Streams\StreamController;
 use App\Http\Controllers\StreamsHistoryStatusController;
 use App\Http\Controllers\Streams\ProblemStreamsController;
@@ -20,6 +21,8 @@ use App\Http\Controllers\Streams\StreamPidDiscontinuityController;
 use App\Http\Controllers\Streams\StreamSettingsInformtionMozaikaController;
 use App\Http\Controllers\Streams\StreStreamPidDiscontinuityResetController;
 use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
+use App\Models\AvgNetworkSpeed;
+use App\Models\NetworkStatistic;
 
 Route::get('/', function () {
     return view('welcome');
@@ -58,6 +61,7 @@ Route::prefix('settings')->group(function () {
     Route::prefix("dashboard")->group(function () {
         Route::get("", \Spatie\Health\Http\Controllers\HealthCheckJsonResultsController::class);
         Route::get("streams/status-history", StreamsHistoryStatusController::class);
+        Route::get('network-speed', AvgNetworkSpeedController::class);
     });
     Route::prefix('streams')->group(function () {
         Route::get('', [SettingsStreamController::class, 'index']);
@@ -65,3 +69,4 @@ Route::prefix('settings')->group(function () {
         Route::delete('{stream}', [SettingsStreamController::class, 'destroy']);
     });
 });
+

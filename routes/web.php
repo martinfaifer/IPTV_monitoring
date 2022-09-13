@@ -28,6 +28,7 @@ use App\Http\Controllers\Streams\StreamSettingsInformtionMozaikaController;
 use App\Http\Controllers\Streams\StreStreamPidDiscontinuityResetController;
 use App\Http\Controllers\Settings\Dashboard\Network\AvgNetworkSpeedController;
 use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
+use App\Http\Controllers\UserGeneratePasswordController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -92,6 +93,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('', [UserController::class, 'index']);
             Route::post('', [UserController::class, 'store']);
             Route::patch('{user}', [UserController::class, 'update']);
+            Route::patch('{user}/generate-password', UserGeneratePasswordController::class);
+            Route::delete('{user}', [UserController::class, 'destroy']);
         });
     });
 });

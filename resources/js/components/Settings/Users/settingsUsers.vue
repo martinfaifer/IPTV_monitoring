@@ -41,8 +41,8 @@
                                     color="info"
                                     >mdi-pencil</v-icon
                                 >
-                                 <v-icon
-                                    @click="changePassword(item.id)"
+                                <v-icon
+                                    @click="changePasswordDialog(item.id)"
                                     small
                                     color="orange"
                                     >mdi-lock</v-icon
@@ -95,6 +95,45 @@
                         outlined
                     >
                         Odebrat
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <v-dialog
+            v-model="generatePasswordDialog"
+            persistent
+            max-width="400px"
+            overlay-color="rgb(17, 27, 45)"
+        >
+            <v-card>
+                <v-card-text>
+                    <v-container class="pt-3">
+                        <v-row>
+                            <v-col cols="12" sm="12" md="12" lg="12">
+                                <p class="mt-6 text-center headline">
+                                    Přejete si vygenerovat nové heslo uživatele?
+                                </p>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-card-text>
+                <v-card-actions color="#101B1D">
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="blue darken-1"
+                        @click="closeDialog()"
+                        plain
+                        outlined
+                    >
+                        Zavřít
+                    </v-btn>
+                    <v-btn
+                        color="red darken-1"
+                        @click="generatePassword()"
+                        plain
+                        outlined
+                    >
+                        Generovat
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -266,6 +305,7 @@ export default {
             createDialog: false,
             warningDialog: false,
             editDialog: false,
+            generatePasswordDialog: false,
             formData: [],
             errors: [],
             userRoles: [],
@@ -324,6 +364,7 @@ export default {
             this.createDialog = false;
             this.warningDialog = false;
             this.editDialog = false;
+            this.generatePasswordDialog = false;
             this.formData = [];
             this.errors = [];
         },
@@ -365,6 +406,21 @@ export default {
                 })
                 .catch((error) => {
                     this.errors = error.response.data.errors;
+                });
+        },
+
+        changePasswordDialog(userId) {
+            this.formData = userId;
+            this.generatePasswordDialog = true;
+        },
+
+        generatePassword() {
+            axios
+                .patch("settings/users/" + this.formData + "/generate-password")
+                .then((response) => {
+                    this.$store.state.alerts = response.data;
+                    this.closeDialog();
+                    this.index();
                 });
         },
     },

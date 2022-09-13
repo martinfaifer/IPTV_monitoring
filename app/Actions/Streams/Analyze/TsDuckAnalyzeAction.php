@@ -7,10 +7,10 @@ class TsDuckAnalyzeAction
     public function execute(string $streamUrl)
     {
         if (str_contains($streamUrl, 'http')) {
-            return shell_exec("tsp -I http {$streamUrl} -P until -s 2 -P analyze --json -O drop");
+            return shell_exec("tsp -I http --connection-timeout 200 {$streamUrl} -P until -s 2 -P analyze --json -O drop");
         }
 
-        return shell_exec("tsp -I ip {$streamUrl} -P until -s 2 -P analyze --json -O drop");
+        return shell_exec("tsp -I ip --connection-timeout 200 {$streamUrl} -P until -s 2 -P analyze --json -O drop");
     }
 
     // spustení streamu ve vlc / mozna i v prohlížeči?

@@ -39,10 +39,10 @@ class CalculateNetworkSpeedCommand extends Command
             $rxs[] = $value->rx;
         }
         $diffTx = $txs[1] - $txs[0];
-        $avgTx = $diffTx / 8388608;
+        $avgTx = $diffTx / 7500000;
 
         $diffRx = $rxs[1] - $rxs[0];
-        $avgRx = $diffRx / 8388608;
+        $avgRx = $diffRx / 7500000;
 
         AvgNetworkSpeed::create([
             'tx' => $avgTx,

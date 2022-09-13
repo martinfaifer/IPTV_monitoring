@@ -56,7 +56,7 @@ return [
 
     'prefix' => env(
         'HORIZON_PREFIX',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_horizon:'
+        Str::slug(env('APP_NAME', 'laravel'), '_') . '_horizon:'
     ),
 
     /*
@@ -151,7 +151,7 @@ return [
     |
     */
 
-    'memory_limit' => 128,
+    'memory_limit' => 64,
 
     /*
     |--------------------------------------------------------------------------
@@ -168,7 +168,7 @@ return [
         'supervisor-1' => [
             'connection' => 'redis',
             'queue' => ['default'],
-            'balance' => 'auto',
+            'balance' => 'simple',
             'maxProcesses' => 10,
             'tries' => 1,
             'nice' => 0,
@@ -180,7 +180,7 @@ return [
             'supervisor-default' => [
                 'connection' => 'redis',
                 'queue' => ['default'],
-                'balance' => 'auto',
+                'balance' => 'simple',
                 'minProcesses' => 50,
                 'maxProcesses' => 300,
                 'balanceMaxShift' => 1,
@@ -190,27 +190,29 @@ return [
             'supervisor-ffprobe' => [
                 'connection' => 'redis',
                 'queue' => ['ffprobe'],
-                'balance' => 'auto',
+                'balance' => 'simple',
                 'minProcesses' => 1,
                 'maxProcesses' => 100,
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'tries' => 1,
+
             ],
             'supervisor-ffmpeg' => [
                 'connection' => 'redis',
                 'queue' => ['ffmpeg'],
-                'balance' => 'auto',
+                'balance' => 'simple',
                 'minProcesses' => 1,
                 'maxProcesses' => 100,
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'tries' => 1,
+
             ],
             'webhook' => [
                 'connection' => 'redis',
                 'queue' => ['webhook'],
-                'balance' => 'auto',
+                'balance' => 'simple',
                 'minProcesses' => 1,
                 'maxProcesses' => 10,
                 'balanceMaxShift' => 1,
@@ -223,18 +225,19 @@ return [
             'default' => [
                 'connection' => 'redis',
                 'queue' => ['default'],
-                'balance' => 'auto',
+                'balance' => 'simple',
                 'minProcesses' => 1,
-                'maxProcesses' => 100,
-                'balanceMaxShift' => 50,
+                'maxProcesses' => 50,
+                'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'nice' => 0,
                 'tries' => 1,
+
             ],
             'ffprobe' => [
                 'connection' => 'redis',
                 'queue' => ['ffprobe'],
-                'balance' => 'auto',
+                'balance' => 'simple',
                 'minProcesses' => 1,
                 'maxProcesses' => 10,
                 'balanceMaxShift' => 5,
@@ -244,27 +247,17 @@ return [
             'ffmpeg' => [
                 'connection' => 'redis',
                 'queue' => ['ffmpeg'],
-                'balance' => 'auto',
+                'balance' => 'simple',
                 'minProcesses' => 1,
                 'maxProcesses' => 5,
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'tries' => 1,
             ],
-            'ws-stream' => [
-                'connection' => 'redis',
-                'queue' => ['ws-stream'],
-                'balance' => 'auto',
-                'minProcesses' => 1,
-                'maxProcesses' => 100,
-                'balanceMaxShift' => 25,
-                'balanceCooldown' => 1,
-                'tries' => 1,
-            ],
             'webhook' => [
                 'connection' => 'redis',
                 'queue' => ['webhook'],
-                'balance' => 'auto',
+                'balance' => 'simple',
                 'minProcesses' => 1,
                 'maxProcesses' => 10,
                 'balanceMaxShift' => 1,

@@ -9,6 +9,7 @@
                     >
                         <v-card-title>
                             <v-text-field
+                                autofocus
                                 outlined
                                 dense
                                 v-model="search"
@@ -83,7 +84,7 @@
                             </template>
                             <template v-slot:item.actions="{ item }">
                                 <v-icon
-                                    @click="openEditDialog(item.id)"
+                                    @click="openEditDialog(item)"
                                     small
                                     color="info"
                                     >mdi-pencil</v-icon
@@ -200,6 +201,88 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+
+        <v-dialog
+            v-model="editDialog"
+            persistent
+            max-width="800px"
+            overlay-color="rgb(17, 27, 45)"
+        >
+            <v-card>
+                <p class="pt-3 text-center subtitle-1">Úprava streamu</p>
+                <v-card-text>
+                    <v-container class="pt-3">
+                        <v-row>
+                            <v-col cols="12" sm="12" md="6" lg="6">
+                                <v-text-field
+                                    dense
+                                    outlined
+                                    autofocus
+                                    :error-messages="errors.nazev"
+                                    v-model="stream.nazev"
+                                    label="Název sreamu"
+                                    type="text"
+                                    color="#0277BD"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="12" md="6" lg="6">
+                                <v-text-field
+                                    dense
+                                    outlined
+                                    readonly
+                                    disabled
+                                    :error-messages="errors.stream_url"
+                                    v-model="stream.stream_url"
+                                    label="dohledová adresa"
+                                    type="text"
+                                    color="#0277BD"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="12" md="6" lg="6">
+                                <!-- změna statusu streamu -->
+                                <span v-if="stream.status == 'stopped'">
+                                    <v-switch
+                                        v-model="changeStreamStatus"
+                                        label="Přidání streamu do fronty ke spuštění"
+                                    ></v-switch>
+                                </span>
+                                <span v-if="stream.status == 'monitoring'">
+                                    <v-switch
+                                        v-model="changeStreamStatus"
+                                        label="Vypnutí dohledování streamu"
+                                    ></v-switch>
+                                </span>
+                                <span v-if="stream.status == 'waiting'">
+                                    <v-switch
+                                        v-model="changeStreamStatus"
+                                        label="Vypnutí dohledování streamu"
+                                    ></v-switch>
+                                </span>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-card-text>
+                <v-card-actions color="#101B1D">
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="blue darken-1"
+                        @click="closeDialog()"
+                        plain
+                        outlined
+                    >
+                        Zavřít
+                    </v-btn>
+                    <v-btn
+                        color="green darken-1"
+                        @click="editStream()"
+                        plain
+                        outlined
+                    >
+                        Uložit
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 <script>
@@ -208,10 +291,13 @@ export default {
         return {
             createDialog: false,
             warningDialog: false,
+            editDialog: false,
+            changeStreamStatus: false,
             formData: [],
             errors: [],
             search: "",
             items: [],
+            stream: [],
             headers: [
                 { text: "Náhled", value: "image" },
                 { text: "Stream", value: "nazev" },
@@ -258,6 +344,8 @@ export default {
         closeDialog() {
             this.createDialog = false;
             this.warningDialog = false;
+            this.editDialog = false;
+            this.changeStreamStatus = false;
             this.formData = [];
             this.errors = [];
         },
@@ -265,19 +353,38 @@ export default {
             this.createDialog = true;
         },
         deleteStream() {
-            axios.delete("settings/streams/" + this.formData).then((response) => {
-                this.$store.state.alerts = response.data;
-                this.closeDialog();
-                this.index();
-            });
+            axios
+                .delete("settings/streams/" + this.formData)
+                .then((response) => {
+                    this.$store.state.alerts = response.data;
+                    this.closeDialog();
+                    this.index();
+                });
         },
         deleteItem(streamId) {
             this.formData = streamId;
             this.warningDialog = true;
         },
 
-        openEditDialog(streamId) {},
-        saveEditDialog() {},
+        openEditDialog(stream) {
+            this.stream = stream;
+            this.editDialog = true;
+        },
+        editStream() {
+            axios
+                .patch("settings/streams/" + this.stream.id, {
+                    nazev: this.stream.nazev,
+                    changeStreamStatus: this.changeStreamStatus,
+                })
+                .then((response) => {
+                    this.$store.state.alerts = response.data;
+                    this.closeDialog();
+                    this.index();
+                })
+                .catch((error) => {
+                    this.errors = error.response.data.errors;
+                });
+        },
     },
 };
 </script>

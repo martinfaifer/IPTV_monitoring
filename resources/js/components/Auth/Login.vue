@@ -23,6 +23,7 @@
                                     prepend-inner-icon="mdi-account"
                                     type="text"
                                     color="#328AF1"
+                                    autofocus
                                 ></v-text-field>
 
                                 <v-text-field
@@ -50,6 +51,22 @@
                     </v-form>
                 </v-col>
             </v-row>
+
+            <v-snackbar
+                v-if="alert == true"
+                :timeout="-1"
+                :value="true"
+                bottom
+                right
+                color="red"
+                elevation="24"
+                class="my-3"
+            >
+                <v-row class="d-flex justify-space-between ml-3 mr-6">
+                    <v-icon>mdi-close</v-icon>
+                    <span class="body-1">Nesprávné přihlašovací údaje</span>
+                </v-row>
+            </v-snackbar>
         </v-container>
     </v-main>
 </template>
@@ -61,7 +78,7 @@ export default {
             errors: [],
             email: null,
             password: null,
-            alert: [],
+            alert: false,
         };
     },
 
@@ -71,17 +88,15 @@ export default {
         login() {
             this.errors = [];
             axios
-                .post("login", {
+                .post("auth/login", {
                     email: this.email,
                     password: this.password,
                 })
                 .then((response) => {
-                    this.alert = response.data;
-                    if (response.data.status === "success") {
-                        this.$store.state.user = response.data.data;
-                        setTimeout(function () {}, 2000);
+                    if (response.data == true) {
                         this.$router.push("/");
                     } else {
+                        this.alert = true;
                         this.email = null;
                         this.password = null;
                     }
@@ -91,6 +106,19 @@ export default {
                 });
         },
     },
-    watch: {},
+    watch: {
+        alert() {
+            if (this.alert == true) {
+                setTimeout(
+                    function () {
+                        this.alert = false;
+                    }.bind(this),
+                    5000
+                );
+            } else {
+                return;
+            }
+        },
+    },
 };
 </script>

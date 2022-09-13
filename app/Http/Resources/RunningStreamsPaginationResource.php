@@ -17,7 +17,7 @@ class RunningStreamsPaginationResource extends JsonResource
      */
     public function toArray($user)
     {
-        $paginatedStreams = Stream::where('status', Stream::STATUS_MONITORING)->paginate();
+        $paginatedStreams = Stream::where('status', Stream::STATUS_MONITORING)->paginate($user->pagination);
 
         $paginatedStreams = $paginatedStreams->toArray();
         foreach ($paginatedStreams['data'] as &$stream) {

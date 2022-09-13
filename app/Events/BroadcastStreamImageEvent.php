@@ -15,9 +15,6 @@ class BroadcastStreamImageEvent implements ShouldBroadcast
     use SerializesModels;
 
     public $stream;
-
-    public $queue = 'ws-stream';
-
     /**
      * Create a new event instance.
      *

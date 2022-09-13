@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // UserSeed::class
             WebhookSendOptionSeed::class,
+            UserRoleSeeder::class
         ]);
     }
 }

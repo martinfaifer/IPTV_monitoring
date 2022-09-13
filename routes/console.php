@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Stream;
+use React\EventLoop\Loop;
 use Illuminate\Support\Facades\Cache;
 use App\Jobs\CreateImageFromStreamJob;
 use App\Jobs\StartStreamDiagnosticJob;
@@ -24,6 +25,16 @@ use App\Services\StreamDiagnostic\FFMpeg\StreamDiagnosticFfProbeService;
 //         StartStreamDiagnosticJob::dispatch($stream);
 //     }
 // });
+
+Artisan::command('test:async', function () {
+    $loop = Loop::get();
+    $loop->addPeriodicTimer(0.1, function () {
+        echo 'tick!' . PHP_EOL;
+        sleep(4);
+        echo 'tick 2' . PHP_EOL;
+    });
+    $loop->run();
+});
 
 
 // Artisan::command('ffprobe:test', function () {

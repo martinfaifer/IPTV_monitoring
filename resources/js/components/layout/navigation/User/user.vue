@@ -1,6 +1,5 @@
 <template>
     <div class="mx-1">
-
         <v-menu transition="scroll-y-transition">
             <template v-slot:activator="{ on }">
                 <v-btn v-on="on" icon>
@@ -20,7 +19,7 @@
                     ><v-icon color="green" right x-small>mdi-settings</v-icon>
                 </v-list-item>
                 <v-divider class="ml-2 mr-2"></v-divider>
-                <v-list-item @click="logOut()">
+                <v-list-item @click="logout()">
                     Odhlásit se
                     <v-spacer></v-spacer
                     ><v-icon color="red" right x-small>mdi-lock</v-icon>
@@ -43,7 +42,13 @@ export default {
     },
 
     created() {},
-    methods: {},
+    methods: {
+        logout() {
+            axios.post("auth/logout").then((response) => {
+                this.$router.push("/login");
+            });
+        },
+    },
 
     watch: {},
 };

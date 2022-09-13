@@ -3,8 +3,8 @@
         link
         :to="'stream/' + stream.stream.id"
         class="overflow-hidden rounded-lg blur shadow-blur shadow-blur-warning"
-        height="120"
-        width="230"
+        height="100"
+        width="210"
     >
         <v-img
             :lazy-src="stream.image"

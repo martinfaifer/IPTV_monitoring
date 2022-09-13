@@ -14,8 +14,6 @@ class BroadcastMonitoredStreamsEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $queue = 'ws-stream';
-
     /**
      * Create a new event instance.
      *

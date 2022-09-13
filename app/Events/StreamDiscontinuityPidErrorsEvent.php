@@ -14,10 +14,6 @@ class StreamDiscontinuityPidErrorsEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $connection = 'redis';
-
-    public $queue = 'ws-stream';
-
     public $channel;
 
     public $dicontinuity;

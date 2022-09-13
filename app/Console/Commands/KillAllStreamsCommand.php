@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Stream;
 use Illuminate\Console\Command;
+use App\Actions\Streams\UpdateStreamStatusAction;
 use App\Actions\Streams\Analyze\MarkStreamForKillAction;
 
 class KillAllStreamsCommand extends Command
@@ -33,6 +34,7 @@ class KillAllStreamsCommand extends Command
         if(count($streams) != 0) {
             foreach ($streams as $stream) {
                 (new MarkStreamForKillAction($stream->stream_url))->execution();
+                (new UpdateStreamStatusAction())->execute($stream, Stream::STATUS_STOPPED);
             }
         }
     }

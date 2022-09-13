@@ -129,7 +129,7 @@
     </div>
 </template>
 <script>
-let AreaChart = () => import("./Charts/AreaChart.vue");
+import AreaChart from "./Charts/AreaChart.vue";
 let StreamAllDiscontinutiesErrors = () =>
     import("./streamAllDiscontinutiesErrors.vue");
 export default {

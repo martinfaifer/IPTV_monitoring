@@ -3,9 +3,7 @@
         <v-col cols="12" sm="12" md="12" lg="12" class="pt-6">
             <v-card class="overflow-hidden rounded-lg blur shadow-blur" flat>
                 <v-card-text>
-                    <p class="title text-center">
-                        Vytížení sítě
-                    </p>
+                    <p class="title text-center">Vytížení sítě</p>
                     <apexchart
                         dark
                         class="info--text"
@@ -69,8 +67,6 @@ export default {
         },
     },
 
-    mounted() {
-        this.websocketData();
-    },
+    mounted() {},
 };
 </script>

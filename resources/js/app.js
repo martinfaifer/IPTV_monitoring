@@ -26,6 +26,8 @@ let SettingsDashboard = () =>
     import("./components/Settings/Dashboard/settingsDashboard.vue");
 let SettingsStreams = () =>
     import("./components/Settings/Streams/settingsStreams.vue");
+let SettingsUser = () =>
+    import("./components/Settings/Users/settingsUsers.vue");
 let Login = () => import("./components/Auth/Login.vue");
 let PageNotFound = () => import("./components/PageNotFound/PageNotFound.vue");
 
@@ -56,6 +58,7 @@ let routes = [
                     },
                     {
                         path: "/settings/users",
+                        component: SettingsUser
                     },
                     {
                         path: "/settings/notifications",

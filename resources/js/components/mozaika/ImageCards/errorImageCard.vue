@@ -3,8 +3,8 @@
         link
         :to="'stream/' + stream.id"
         class="overflow-hidden rounded-lg blur shadow-blur-error"
-        height="120"
-        width="230"
+        height="100"
+        width="210"
         color="#EF5350"
     >
         <v-card-text>

@@ -51,6 +51,10 @@ class StreamDiagnosticTsDuckService
 
     protected function check_if_stream_can_be_kill(object $stream): bool
     {
+        if(!Stream::find($stream->id)) {
+            return true;
+        }
+
         if (!Cache::has('streamIsMonitoring_' . $stream->id)) {
             return true;
         }

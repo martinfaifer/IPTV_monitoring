@@ -10,15 +10,11 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Cache;
 
-class BroadcastAudioVideoStreamPidsEvent implements ShouldBroadcast, ShouldQueue
+class BroadcastAudioVideoStreamPidsEvent implements ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;
     use SerializesModels;
-
-    public $connection = 'redis';
-
-    public $queue = 'ws-stream';
 
     /**
      * Create a new event instance.

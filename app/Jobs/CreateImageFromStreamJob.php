@@ -35,6 +35,10 @@ class CreateImageFromStreamJob implements ShouldQueue
      */
     public function handle()
     {
-        (new FFMpegCreateImageFromStreamAction())->execute($this->stream);
+        try {
+            (new FFMpegCreateImageFromStreamAction())->execute($this->stream);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 }

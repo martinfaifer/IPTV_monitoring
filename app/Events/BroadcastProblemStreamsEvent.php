@@ -15,8 +15,6 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class BroadcastProblemStreamsEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
-    public $queue = 'ws-stream';
     /**
      * Create a new event instance.
      *

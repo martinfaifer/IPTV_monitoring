@@ -19,7 +19,9 @@ import SnackBarNotification from "./navigation/Notifications/snackbarNotificatio
 export default {
     computed: {},
     data() {
-        return {};
+        return {
+            user: [],
+        };
     },
 
     components: {
@@ -27,8 +29,23 @@ export default {
         SnackBarNotification,
     },
 
-    created() {},
-    methods: {},
+    created() {
+        this.index();
+    },
+    methods: {
+        index() {
+            axios
+                .get("users/user")
+                .then((response) => {
+                    this.user = response.data;
+                })
+                .catch((error) => {
+                    if (error.response.status == "401") {
+                        this.$router.push("/login");
+                    }
+                });
+        },
+    },
 
     mounted() {},
 

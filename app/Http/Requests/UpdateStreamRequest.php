@@ -25,18 +25,18 @@ class UpdateStreamRequest extends FormRequest
     {
         return [
             'nazev' => ['required', 'string', 'max:255'],
-            'changeStreamStatus' => ['required', 'boolean']
+            'changeStreamStatus' => ['required', 'boolean'],
         ];
     }
 
     public function messages()
     {
         return [
-            'nazev.required' => "Vyplňte název streamu",
-            'nazev.string' => "Neplatný formát",
-            'nazev.max' => "Maximální počet znaků je 255",
-            'changeStreamStatus.required' => "Chybí hodnota",
-            'changeStreamStatus.boolean' => "Neplatný formát"
+            'nazev.required' => 'Vyplňte název streamu',
+            'nazev.string' => 'Neplatný formát',
+            'nazev.max' => 'Maximální počet znaků je 255',
+            'changeStreamStatus.required' => 'Chybí hodnota',
+            'changeStreamStatus.boolean' => 'Neplatný formát',
         ];
     }
 }

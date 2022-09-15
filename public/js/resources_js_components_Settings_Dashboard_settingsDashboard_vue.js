@@ -64,7 +64,7 @@ __webpack_require__.r(__webpack_exports__);
     index: function index() {
       var _this = this;
 
-      axios.get("settings/dashboard").then(function (response) {
+      axios.get("settings/dashboard?fresh").then(function (response) {
         _this.items = response.data;
       })["catch"](function (error) {
         if (error.response.status == 403) {
@@ -172,8 +172,10 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         xaxis: {
-          show: true,
-          categories: []
+          categories: [],
+          labels: {
+            show: true
+          }
         },
         yaxis: {
           show: true

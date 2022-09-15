@@ -15,6 +15,7 @@ class Stream extends Model
     public const STATUS_STOPPED = 'stopped';
 
     public const STATUS_CAN_NOT_START = 'can_not_start';
+
     public const STATUS_CRASH = 'crash';
 
     public const STATUS_ISSUE = 'issue';

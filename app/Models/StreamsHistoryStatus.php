@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class StreamsHistoryStatus extends Model
 {
     protected $fillable = [
-        'active', 'stoped', 'problem', 'waiting'
+        'active', 'stoped', 'problem', 'waiting',
     ];
 
     protected $casts = [

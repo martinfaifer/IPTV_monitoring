@@ -37,7 +37,7 @@ class User extends Authenticatable
 
     protected function channels(): HasMany
     {
-        return $this->hasMany(Stream::class, 'customData', 'id');
+        return $this->hasMany(Stream::class, 'id', 'customData');
     }
 
     /**

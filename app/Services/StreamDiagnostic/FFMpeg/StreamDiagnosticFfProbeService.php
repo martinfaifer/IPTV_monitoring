@@ -2,10 +2,10 @@
 
 namespace App\Services\StreamDiagnostic\FFMpeg;
 
+use App\Actions\Streams\Analyze\CheckAudioVideoSynchronizationAction;
+use App\Actions\Streams\Analyze\FfProbeAnalyzeAction;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\LazyCollection;
-use App\Actions\Streams\Analyze\FfProbeAnalyzeAction;
-use App\Actions\Streams\Analyze\CheckAudioVideoSynchronizationAction;
 
 class StreamDiagnosticFfProbeService
 {

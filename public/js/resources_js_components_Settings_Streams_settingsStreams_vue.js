@@ -292,12 +292,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1072,10 +1066,7 @@ var render = function () {
                                     ],
                                     1
                                   )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.stream.status == "monitoring"
-                                ? _c(
+                                : _c(
                                     "span",
                                     [
                                       _c("v-switch", {
@@ -1092,29 +1083,7 @@ var render = function () {
                                       }),
                                     ],
                                     1
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.stream.status == "waiting"
-                                ? _c(
-                                    "span",
-                                    [
-                                      _c("v-switch", {
-                                        attrs: {
-                                          label: "Vypnutí dohledování streamu",
-                                        },
-                                        model: {
-                                          value: _vm.changeStreamStatus,
-                                          callback: function ($$v) {
-                                            _vm.changeStreamStatus = $$v
-                                          },
-                                          expression: "changeStreamStatus",
-                                        },
-                                      }),
-                                    ],
-                                    1
-                                  )
-                                : _vm._e(),
+                                  ),
                             ]
                           ),
                         ],

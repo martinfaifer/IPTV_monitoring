@@ -10,6 +10,7 @@ class DeleteStreamAction
     {
         // stop monitoring stream
         (new MarkStreamForKillAction($stream->stream_url))->execution();
+
         return $stream->delete();
     }
 }

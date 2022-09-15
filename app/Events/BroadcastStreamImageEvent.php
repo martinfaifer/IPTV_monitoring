@@ -15,6 +15,7 @@ class BroadcastStreamImageEvent implements ShouldBroadcast
     use SerializesModels;
 
     public $stream;
+
     /**
      * Create a new event instance.
      *

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Actions\Users\Roles;
 
 use App\Models\UserRole;

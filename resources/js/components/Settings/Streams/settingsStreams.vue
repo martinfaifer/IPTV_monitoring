@@ -246,13 +246,7 @@
                                         label="Přidání streamu do fronty ke spuštění"
                                     ></v-switch>
                                 </span>
-                                <span v-if="stream.status == 'monitoring'">
-                                    <v-switch
-                                        v-model="changeStreamStatus"
-                                        label="Vypnutí dohledování streamu"
-                                    ></v-switch>
-                                </span>
-                                <span v-if="stream.status == 'waiting'">
+                                <span v-else>
                                     <v-switch
                                         v-model="changeStreamStatus"
                                         label="Vypnutí dohledování streamu"

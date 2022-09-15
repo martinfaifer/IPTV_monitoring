@@ -56,7 +56,7 @@ class StoreStreamsErrorHistoryAction
             'stopped' => 'Dohled je zastaven',
             'can_not_start' => 'Ve výpadku',
             'issue' => 'Vyskytla se chyba ve streamu / přestal odpovídat process',
-            'crash' => "Přestala fungovat diagnostika streamu"
+            'crash' => 'Přestala fungovat diagnostika streamu'
         };
     }
 }

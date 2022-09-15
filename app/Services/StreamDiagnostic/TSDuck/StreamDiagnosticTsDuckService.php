@@ -2,15 +2,14 @@
 
 namespace App\Services\StreamDiagnostic\TSDuck;
 
-use App\Models\Stream;
-use React\EventLoop\Loop;
-use Illuminate\Support\Facades\Cache;
-use App\Actions\Streams\UpdateStreamStatusAction;
+use App\Actions\Streams\Analyze\CheckIfStreamCanBeKillAction;
 use App\Actions\Streams\Analyze\TsDuckAnalyzeAction;
 use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
-use App\Actions\Streams\Analyze\CheckIfStreamCanBeKillAction;
-use App\Actions\Streams\Analyze\TsDuckOutputToCollectionAction;
+use App\Actions\Streams\UpdateStreamStatusAction;
+use App\Models\Stream;
 use App\Services\StreamDiagnostic\FFMpeg\StreamDiagnosticFfProbeService;
+use Illuminate\Support\Facades\Cache;
+use React\EventLoop\Loop;
 
 class StreamDiagnosticTsDuckService
 {
@@ -51,11 +50,11 @@ class StreamDiagnosticTsDuckService
 
     protected function check_if_stream_can_be_kill(object $stream): bool
     {
-        if(!Stream::find($stream->id)) {
+        if (! Stream::find($stream->id)) {
             return true;
         }
 
-        if (!Cache::has('streamIsMonitoring_' . $stream->id)) {
+        if (! Cache::has('streamIsMonitoring_'.$stream->id)) {
             return true;
         }
 

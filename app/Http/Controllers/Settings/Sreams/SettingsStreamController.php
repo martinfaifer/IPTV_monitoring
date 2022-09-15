@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Settings\Sreams;
 
-use App\Models\Stream;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreStreamRequest;
-use App\Actions\Streams\StoreStreamAction;
-use App\Http\Requests\UpdateStreamRequest;
 use App\Actions\Streams\DeleteStreamAction;
+use App\Actions\Streams\StoreStreamAction;
 use App\Actions\Streams\UpdateStreamAction;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreStreamRequest;
+use App\Http\Requests\UpdateStreamRequest;
 use App\Http\Resources\SettingsStreamResource;
+use App\Models\Stream;
+use Illuminate\Support\Facades\Auth;
 
 class SettingsStreamController extends Controller
 {

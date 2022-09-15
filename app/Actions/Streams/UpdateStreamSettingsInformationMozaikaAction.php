@@ -2,11 +2,11 @@
 
 namespace App\Actions\Streams;
 
-use Illuminate\Support\Facades\Cache;
-use App\Events\BroadcastErrorStreamsEvent;
 use App\Actions\Cache\RemoveItemsFromCache;
-use App\Events\BroadcastProblemStreamsEvent;
+use App\Events\BroadcastErrorStreamsEvent;
 use App\Events\BroadcastMonitoredStreamsEvent;
+use App\Events\BroadcastProblemStreamsEvent;
+use Illuminate\Support\Facades\Cache;
 
 class UpdateStreamSettingsInformationMozaikaAction
 {
@@ -15,39 +15,39 @@ class UpdateStreamSettingsInformationMozaikaAction
         // true = odebrání z cache
         // false = zalození do cache
         if ($formData->invalidSync == true) {
-            (new RemoveItemsFromCache())->execute('showStreamInvalidSync_' . $stream->id);
+            (new RemoveItemsFromCache())->execute('showStreamInvalidSync_'.$stream->id);
         } else {
-            Cache::put('showStreamInvalidSync_' . $stream->id, []);
+            Cache::put('showStreamInvalidSync_'.$stream->id, []);
         }
 
         if ($formData->transportErrors == true) {
-            (new RemoveItemsFromCache())->execute('showStreamTransportErrors_' . $stream->id);
+            (new RemoveItemsFromCache())->execute('showStreamTransportErrors_'.$stream->id);
         } else {
-            Cache::put('showStreamTransportErrors_' . $stream->id, []);
+            Cache::put('showStreamTransportErrors_'.$stream->id, []);
         }
 
         if ($formData->audioAccess == true) {
-            (new RemoveItemsFromCache())->execute('showStreamAudioAccess_' . $stream->id);
+            (new RemoveItemsFromCache())->execute('showStreamAudioAccess_'.$stream->id);
         } else {
-            Cache::put('showStreamAudioAccess_' . $stream->id, []);
+            Cache::put('showStreamAudioAccess_'.$stream->id, []);
         }
 
         if ($formData->videoAccess == true) {
-            (new RemoveItemsFromCache())->execute('showStreamVideoAccess_' . $stream->id);
+            (new RemoveItemsFromCache())->execute('showStreamVideoAccess_'.$stream->id);
         } else {
-            Cache::put('showStreamVideoAccess_' . $stream->id, []);
+            Cache::put('showStreamVideoAccess_'.$stream->id, []);
         }
 
         if ($formData->audioVideoOutOfSync == true) {
-            (new RemoveItemsFromCache())->execute('showStreamAudioVideoOutOfSync_' . $stream->id);
+            (new RemoveItemsFromCache())->execute('showStreamAudioVideoOutOfSync_'.$stream->id);
         } else {
-            Cache::put('showStreamAudioVideoOutOfSync_' . $stream->id, []);
+            Cache::put('showStreamAudioVideoOutOfSync_'.$stream->id, []);
         }
 
         if ($formData->discontinuites == true) {
-            (new RemoveItemsFromCache())->execute('showStreamDiscontinuity_' . $stream->id);
+            (new RemoveItemsFromCache())->execute('showStreamDiscontinuity_'.$stream->id);
         } else {
-            Cache::put('showStreamDiscontinuity_' . $stream->id, []);
+            Cache::put('showStreamDiscontinuity_'.$stream->id, []);
         }
 
         BroadcastErrorStreamsEvent::dispatch();

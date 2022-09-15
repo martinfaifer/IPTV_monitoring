@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum CacheKeyEnum : string
+enum CacheKeyEnum: string
 {
     case STREAMS = 'streams';
     case STREAM_TS = 'streamTS_';

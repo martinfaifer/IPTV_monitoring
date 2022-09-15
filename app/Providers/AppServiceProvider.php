@@ -2,15 +2,14 @@
 
 namespace App\Providers;
 
-
-use Spatie\Health\Facades\Health;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use Spatie\CpuLoadHealthCheck\CpuLoadCheck;
-use Spatie\Health\Checks\Checks\RedisCheck;
 use Spatie\Health\Checks\Checks\DatabaseCheck;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
 use Spatie\Health\Checks\Checks\DatabaseConnectionCountCheck;
+use Spatie\Health\Checks\Checks\RedisCheck;
+use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
+use Spatie\Health\Facades\Health;
 
 class AppServiceProvider extends ServiceProvider
 {

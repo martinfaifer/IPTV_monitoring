@@ -1,59 +1,59 @@
 <?php
 
-use App\Models\UserRole;
-use App\Models\AvgNetworkSpeed;
-use App\Models\NetworkStatistic;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogOutController;
 use App\Http\Controllers\Search\SearchController;
-use App\Http\Controllers\Streams\StreamController;
-use App\Http\Controllers\StreamsHistoryStatusController;
+use App\Http\Controllers\Settings\Dashboard\Network\AvgNetworkSpeedController;
+use App\Http\Controllers\Settings\Sreams\SettingsStreamController;
+use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
+use App\Http\Controllers\Streams\CustomStreamsController;
+use App\Http\Controllers\Streams\NotRunningStreamsController;
 use App\Http\Controllers\Streams\ProblemStreamsController;
 use App\Http\Controllers\Streams\RunningStreamsController;
-use App\Http\Controllers\Streams\ShowStreamPidsController;
-use App\Http\Controllers\Streams\StreamPidChartController;
-use App\Http\Controllers\Streams\StreamsHistoryController;
-use App\Http\Controllers\Streams\ShowStreamImageController;
-use App\Http\Controllers\Streams\NotRunningStreamsController;
 use App\Http\Controllers\Streams\ShowAudioStreamPidsController;
-use App\Http\Controllers\Streams\ShowVideoStreamPidsController;
 use App\Http\Controllers\Streams\ShowServiceStreamPidsController;
-use App\Http\Controllers\Settings\Sreams\SettingsStreamController;
+use App\Http\Controllers\Streams\ShowStreamImageController;
+use App\Http\Controllers\Streams\ShowStreamPidsController;
+use App\Http\Controllers\Streams\ShowVideoStreamPidsController;
+use App\Http\Controllers\Streams\StreamController;
+use App\Http\Controllers\Streams\StreamPidChartController;
 use App\Http\Controllers\Streams\StreamPidDiscontinuityController;
 use App\Http\Controllers\Streams\StreamSettingsInformtionMozaikaController;
+use App\Http\Controllers\Streams\StreamsHistoryController;
 use App\Http\Controllers\Streams\StreStreamPidDiscontinuityResetController;
-use App\Http\Controllers\Settings\Dashboard\Network\AvgNetworkSpeedController;
-use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
+use App\Http\Controllers\StreamsHistoryStatusController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserGeneratePasswordController;
+use App\Http\Controllers\UserRoleController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::prefix('auth')->group(function () {
     Route::post('logout', LogOutController::class);
     Route::post('login', LoginController::class);
     Route::get('login', function () {
-        return response("", 401);
-    })->name("login");
+        return response('', 401);
+    })->name('login');
 });
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('search', SearchController::class);
 
-    Route::prefix("users")->group(function() {
+    Route::prefix('users')->group(function () {
         Route::get('user', [UserController::class, 'show']);
+        Route::patch('pagination', [UserController::class, 'update_pagination']);
+        Route::patch('static-mozaika', [UserController::class, 'update_static_mozaika']);
     });
 
     Route::prefix('streams')->group(function () {
+        Route::get('', [StreamController::class, 'index']);
         Route::get('history', StreamsHistoryController::class);
         Route::get('running', RunningStreamsController::class);
         Route::get('problems', ProblemStreamsController::class);
+        Route::get('custom', CustomStreamsController::class);
         Route::get('not-running', NotRunningStreamsController::class);
         Route::get('image/{stream}', ShowStreamImageController::class);
         Route::prefix('settings')->group(function () {
@@ -74,9 +74,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::prefix('settings')->group(function () {
-        Route::prefix("dashboard")->group(function () {
-            Route::get("", \Spatie\Health\Http\Controllers\HealthCheckJsonResultsController::class);
-            Route::get("streams/status-history", StreamsHistoryStatusController::class);
+        Route::prefix('dashboard')->group(function () {
+            Route::get('', \Spatie\Health\Http\Controllers\HealthCheckJsonResultsController::class);
+            Route::get('streams/status-history', StreamsHistoryStatusController::class);
             Route::get('network-speed', AvgNetworkSpeedController::class);
         });
         Route::prefix('streams')->group(function () {

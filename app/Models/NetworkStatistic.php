@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class NetworkStatistic extends Model
 {
     protected $fillable = [
-        'rx', 'tx'
+        'rx', 'tx',
     ];
 }

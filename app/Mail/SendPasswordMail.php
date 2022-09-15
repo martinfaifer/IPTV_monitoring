@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -30,6 +29,6 @@ class SendPasswordMail extends Mailable
     {
         return $this->from('iptvdohled@grapesc.cz')
             ->markdown('NewPassword')
-            ->subject("Vaše nové heslo");
+            ->subject('Vaše nové heslo');
     }
 }

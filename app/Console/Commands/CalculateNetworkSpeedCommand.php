@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\AvgNetworkSpeed;
-use Illuminate\Console\Command;
 use App\Models\NetworkStatistic;
+use Illuminate\Console\Command;
 
 class CalculateNetworkSpeedCommand extends Command
 {
@@ -30,8 +30,8 @@ class CalculateNetworkSpeedCommand extends Command
     public function handle()
     {
         $dataForOneMinute = NetworkStatistic::take(2)->get();
-        if (!count($dataForOneMinute) == 2) {
-            die();
+        if (! count($dataForOneMinute) == 2) {
+            exit();
         }
         foreach ($dataForOneMinute as $value) {
             $created_at = $value->created_at;
@@ -47,7 +47,7 @@ class CalculateNetworkSpeedCommand extends Command
         AvgNetworkSpeed::create([
             'tx' => $avgTx,
             'rx' => $avgRx,
-            'avg_time' => $created_at
+            'avg_time' => $created_at,
         ]);
 
         NetworkStatistic::first()->delete();

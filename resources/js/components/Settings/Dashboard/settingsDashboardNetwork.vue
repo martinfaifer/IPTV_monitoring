@@ -44,8 +44,10 @@ export default {
                     },
                 },
                 xaxis: {
-                    show: true,
                     categories: [],
+                    labels: {
+                        show: true,
+                    },
                 },
                 yaxis: {
                     show: true,

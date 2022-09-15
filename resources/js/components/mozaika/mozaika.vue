@@ -2,6 +2,7 @@
     <div class="pt-3">
         <ErrorStreamMozaika></ErrorStreamMozaika>
         <ProblemStreamMozaika></ProblemStreamMozaika>
+        <CustomMozaika></CustomMozaika>
         <v-container fluid>
             <p class="text-left caption text--disabled font-weight-medium">
                 Dynamická mozaika
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import CustomMozaika from "./CustomMozaika.vue";
 import ErrorStreamMozaika from "./ErrorStreamMozaika.vue";
 import ProblemStreamMozaika from "./ProblemStreamMozaika.vue";
 import ImageCard from "./ImageCards/ImageCard.vue"
@@ -46,6 +48,7 @@ export default {
         };
     },
     components: {
+        CustomMozaika,
         ErrorStreamMozaika,
         ProblemStreamMozaika,
         ImageCard

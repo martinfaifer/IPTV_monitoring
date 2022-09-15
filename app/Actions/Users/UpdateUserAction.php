@@ -9,8 +9,9 @@ class UpdateUserAction
         try {
             $user->update([
                 'name' => $formData->name,
-                'role_id' => !is_int($formData->role) ? $user->role_id : $formData->role
+                'role_id' => ! is_int($formData->role) ? $user->role_id : $formData->role,
             ]);
+
             return true;
         } catch (\Throwable $th) {
             return false;

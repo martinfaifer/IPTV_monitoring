@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\CreateImageFromStreamJob;
 use App\Models\Stream;
 use Illuminate\Console\Command;
-use App\Jobs\CreateImageFromStreamJob;
 
 class CreateStreamsImagesCommand extends Command
 {

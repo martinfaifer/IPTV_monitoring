@@ -8,6 +8,7 @@ class DeleteUserAction
     {
         try {
             $user->delete();
+
             return true;
         } catch (\Throwable $th) {
             return false;

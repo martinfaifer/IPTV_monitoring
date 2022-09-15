@@ -21,6 +21,9 @@ Vue.config.silent = true;
 let Layout = () => import("./components/layout/layout.vue");
 let Mozaika = () => import("./components/mozaika/mozaika.vue");
 let streamLayout = () => import("./components/Stream/streamLayout.vue");
+let userLayout = () => import("./components/User/UserLayout.vue");
+let userDashboard = () => import("./components/User/userDashboard.vue");
+let userMozaika = () => import("./components/User/userMozaika.vue");
 let SettingsLayout = () => import("./components/Settings/settingsLayout.vue");
 let SettingsDashboard = () =>
     import("./components/Settings/Dashboard/settingsDashboard.vue");
@@ -45,6 +48,20 @@ let routes = [
                 component: streamLayout,
             },
             {
+                path: "user",
+                component: userLayout,
+                children: [
+                    {
+                        path: "/user/dashboard",
+                        component: userDashboard,
+                    },
+                    {
+                        path: "/user/mozaika",
+                        component: userMozaika
+                    }
+                ],
+            },
+            {
                 path: "/settings",
                 component: SettingsLayout,
                 children: [
@@ -58,7 +75,7 @@ let routes = [
                     },
                     {
                         path: "/settings/users",
-                        component: SettingsUser
+                        component: SettingsUser,
                     },
                     {
                         path: "/settings/notifications",

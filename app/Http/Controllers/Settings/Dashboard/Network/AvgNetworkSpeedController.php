@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Settings\Dashboard\Network;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Actions\Network\ShowAvgNetworkSpeedAction;
+use App\Http\Controllers\Controller;
 
 class AvgNetworkSpeedController extends Controller
 {

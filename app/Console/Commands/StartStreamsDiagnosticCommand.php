@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\StartStreamDiagnosticJob;
 use App\Models\Stream;
 use Illuminate\Console\Command;
-use App\Jobs\StartStreamDiagnosticJob;
 
 class StartStreamsDiagnosticCommand extends Command
 {

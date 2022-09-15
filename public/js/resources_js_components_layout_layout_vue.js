@@ -1274,7 +1274,7 @@ var render = function () {
             [
               _c(
                 "v-list-item",
-                { attrs: { link: "", to: "/user/prehled" } },
+                { attrs: { link: "", to: "/user/dashboard" } },
                 [
                   _vm._v(
                     "\n                Uživatelský účet\n                "

@@ -29,10 +29,10 @@ class ChangeStreamsToWaitingCommand extends Command
     public function handle()
     {
         $streams = Stream::where('status', Stream::STATUS_STOPPED)->get();
-        if(count($streams) > 0) {
-            foreach($streams as $stream) {
+        if (count($streams) > 0) {
+            foreach ($streams as $stream) {
                 $stream->update([
-                    'status' => Stream::STATUS_WAITING
+                    'status' => Stream::STATUS_WAITING,
                 ]);
             }
         }

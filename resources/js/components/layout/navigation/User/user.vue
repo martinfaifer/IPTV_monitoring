@@ -7,7 +7,7 @@
                 </v-btn>
             </template>
             <v-list width="200px" color="#192B4B" class="text-center caption">
-                <v-list-item link to="/user/prehled">
+                <v-list-item link to="/user/dashboard">
                     Uživatelský účet
                     <v-spacer></v-spacer
                     ><v-icon color="blue" right x-small

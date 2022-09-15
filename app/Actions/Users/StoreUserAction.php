@@ -13,11 +13,11 @@ class StoreUserAction
                 'name' => $formData->name,
                 'email' => $formData->email,
                 'password' => $formData->password,
-                'role_id' => $formData->role
+                'role_id' => $formData->role,
             ]);
+
             return true;
         }, function () {
-            false;
         });
     }
 }

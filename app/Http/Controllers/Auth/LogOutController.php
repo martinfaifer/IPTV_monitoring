@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Actions\Users\Auth\LogOutAction;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class LogOutController extends Controller
 {

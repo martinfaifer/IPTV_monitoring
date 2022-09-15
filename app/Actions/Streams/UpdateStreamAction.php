@@ -2,9 +2,9 @@
 
 namespace App\Actions\Streams;
 
-use App\Models\Stream;
-use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 use App\Actions\Streams\Analyze\MarkStreamForKillAction;
+use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
+use App\Models\Stream;
 
 class UpdateStreamAction
 {
@@ -14,11 +14,11 @@ class UpdateStreamAction
             $status = $this->pick_stream_status($stream, $formData->changeStreamStatus);
             $stream->update([
                 'nazev' => $formData->nazev,
-                'status' => $status
+                'status' => $status,
             ]);
+
             return true;
         }, function () {
-            false;
         });
     }
 
@@ -30,16 +30,11 @@ class UpdateStreamAction
 
         if ($stream->status == Stream::STATUS_STOPPED) {
             (new UnlockStreamUrlAction($stream))->handle();
+
             return Stream::STATUS_WAITING;
-        }
-
-        if ($stream->status == Stream::STATUS_MONITORING) {
+        } else {
             (new MarkStreamForKillAction($stream->stream_url))->execution();
-            return Stream::STATUS_STOPPED;
-        }
 
-        if ($stream->status == Stream::STATUS_WAITING) {
-            (new MarkStreamForKillAction($stream->stream_url))->execution();
             return Stream::STATUS_STOPPED;
         }
     }

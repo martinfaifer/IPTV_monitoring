@@ -12,10 +12,10 @@ class GeneratePasswordAction
         $randomPassword = Str::random(16);
         try {
             $user->update([
-                'password' => bcrypt($randomPassword)
+                'password' => bcrypt($randomPassword),
             ]);
 
-            if($sendNotification == true) {
+            if ($sendNotification == true) {
                 SendNewPasswordJob::dispatch($user->email, $randomPassword);
             }
 

@@ -2,17 +2,19 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Stream;
-use Illuminate\Console\Command;
-use App\Models\StreamsHistoryStatus;
 use App\Events\BroadcastStoredStreamStatusesEvent;
+use App\Models\Stream;
+use App\Models\StreamsHistoryStatus;
+use Illuminate\Console\Command;
 
 class TakeStreamsStatusesAndStoreToDatabaseCommand extends Command
 {
-
     public int $active = 0;
+
     public int $stoped = 0;
+
     public int $problem = 0;
+
     public int $waiting = 0;
 
     /**
@@ -39,8 +41,7 @@ class TakeStreamsStatusesAndStoreToDatabaseCommand extends Command
         $this->active = Stream::where('status', Stream::STATUS_MONITORING)->count();
         $this->stoped = Stream::where('status', Stream::STATUS_STOPPED)->count();
         $this->waiting = Stream::where('status', Stream::STATUS_WAITING)->count();
-        $this->problem = Stream
-            ::where('status', Stream::STATUS_CAN_NOT_START)
+        $this->problem = Stream::where('status', Stream::STATUS_CAN_NOT_START)
             ->orWhere('status', Stream::STATUS_CRASH)
             ->orWhere('status', Stream::STATUS_ISSUE)
             ->count();
@@ -49,7 +50,7 @@ class TakeStreamsStatusesAndStoreToDatabaseCommand extends Command
             'active' => $this->active,
             'stoped' => $this->stoped,
             'problem' => $this->problem,
-            'waiting' => $this->waiting
+            'waiting' => $this->waiting,
         ]);
 
         BroadcastStoredStreamStatusesEvent::dispatch();

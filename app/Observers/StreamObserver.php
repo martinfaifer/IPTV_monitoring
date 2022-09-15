@@ -2,12 +2,12 @@
 
 namespace App\Observers;
 
+use App\Actions\Cache\DeleteAllStreamCacheDataAction;
+use App\Events\BroadcastErrorStreamsEvent;
+use App\Events\BroadcastMonitoredStreamsEvent;
+use App\Events\BroadcastProblemStreamsEvent;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Cache;
-use App\Events\BroadcastErrorStreamsEvent;
-use App\Events\BroadcastProblemStreamsEvent;
-use App\Events\BroadcastMonitoredStreamsEvent;
-use App\Actions\Cache\DeleteAllStreamCacheDataAction;
 
 class StreamObserver
 {
@@ -51,10 +51,10 @@ class StreamObserver
     public function deleted(Stream $stream)
     {
         // kill stream monitoring process
-        if (Cache::has('streamIsMonitoring_' . $stream->id)) {
-            $processPid = Cache::get('streamIsMonitoring_' . $stream->id);
+        if (Cache::has('streamIsMonitoring_'.$stream->id)) {
+            $processPid = Cache::get('streamIsMonitoring_'.$stream->id);
             shell_exec("kill -9 {$processPid['processPid']}");
-            Cache::pull('streamIsMonitoring_' . $stream->id);
+            Cache::pull('streamIsMonitoring_'.$stream->id);
         }
         (new DeleteAllStreamCacheDataAction())->execute($stream);
         Cache::forget('streams');

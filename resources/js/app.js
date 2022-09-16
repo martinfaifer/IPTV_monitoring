@@ -24,6 +24,7 @@ let streamLayout = () => import("./components/Stream/streamLayout.vue");
 let userLayout = () => import("./components/User/UserLayout.vue");
 let userDashboard = () => import("./components/User/userDashboard.vue");
 let userMozaika = () => import("./components/User/userMozaika.vue");
+let userEdit = () => import("./components/User/userEdit.vue");
 let SettingsLayout = () => import("./components/Settings/settingsLayout.vue");
 let SettingsDashboard = () =>
     import("./components/Settings/Dashboard/settingsDashboard.vue");
@@ -58,6 +59,10 @@ let routes = [
                     {
                         path: "/user/mozaika",
                         component: userMozaika
+                    },
+                    {
+                        path: "/user/edit",
+                        component: userEdit
                     }
                 ],
             },

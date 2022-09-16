@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('user', [UserController::class, 'show']);
         Route::patch('pagination', [UserController::class, 'update_pagination']);
         Route::patch('static-mozaika', [UserController::class, 'update_static_mozaika']);
+        Route::patch("password", [UserController::class, 'update_password']);
     });
 
     Route::prefix('streams')->group(function () {

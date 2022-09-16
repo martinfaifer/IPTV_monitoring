@@ -11,6 +11,8 @@ use App\Actions\Users\DeleteUserAction;
 use App\Actions\Users\UpdateUserAction;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Actions\Users\UpdateUserPasswordAction;
+use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Actions\Users\UpdateUserPaginationAction;
 use App\Http\Requests\UpdateUserPaginationRequest;
 use App\Actions\Users\UpdateUserStaticMozaikaAction;
@@ -52,6 +54,13 @@ class UserController extends Controller
     public function update_static_mozaika(UpdateUserStaticMozaikaRequest $request, UpdateUserStaticMozaikaAction $updateUserStaticMozaikaAction)
     {
         return $updateUserStaticMozaikaAction->execute(Auth::user(), $request)
+            ? $this->success_response('Upraveno')
+            : $this->error_response();
+    }
+
+    public function update_password(UpdateUserPasswordRequest $request, UpdateUserPasswordAction $updateUserPasswordAction)
+    {
+        return $updateUserPasswordAction->execute(Auth::user(), $request)
             ? $this->success_response('Upraveno')
             : $this->error_response();
     }

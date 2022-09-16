@@ -2240,6 +2240,10 @@ var userMozaika = function userMozaika() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_User_userMozaika_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/userMozaika.vue */ "./resources/js/components/User/userMozaika.vue"));
 };
 
+var userEdit = function userEdit() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_User_userEdit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/userEdit.vue */ "./resources/js/components/User/userEdit.vue"));
+};
+
 var SettingsLayout = function SettingsLayout() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Settings_settingsLayout_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Settings/settingsLayout.vue */ "./resources/js/components/Settings/settingsLayout.vue"));
 };
@@ -2282,6 +2286,9 @@ var routes = [{
     }, {
       path: "/user/mozaika",
       component: userMozaika
+    }, {
+      path: "/user/edit",
+      component: userEdit
     }]
   }, {
     path: "/settings",
@@ -91421,7 +91428,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_layout_layout_vue":1,"resources_js_components_mozaika_mozaika_vue":1,"resources_js_components_Stream_streamLayout_vue":1,"resources_js_components_User_UserLayout_vue":1,"resources_js_components_User_userDashboard_vue":1,"resources_js_components_User_userMozaika_vue":1,"resources_js_components_Settings_settingsLayout_vue":1,"resources_js_components_Settings_Dashboard_settingsDashboard_vue":1,"resources_js_components_Settings_Streams_settingsStreams_vue":1,"resources_js_components_Settings_Users_settingsUsers_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_PageNotFound_PageNotFound_vue":1,"resources_js_components_Stream_streamAllDiscontinutiesErrors_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_layout_layout_vue":1,"resources_js_components_mozaika_mozaika_vue":1,"resources_js_components_Stream_streamLayout_vue":1,"resources_js_components_User_UserLayout_vue":1,"resources_js_components_User_userDashboard_vue":1,"resources_js_components_User_userMozaika_vue":1,"resources_js_components_User_userEdit_vue":1,"resources_js_components_Settings_settingsLayout_vue":1,"resources_js_components_Settings_Dashboard_settingsDashboard_vue":1,"resources_js_components_Settings_Streams_settingsStreams_vue":1,"resources_js_components_Settings_Users_settingsUsers_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_PageNotFound_PageNotFound_vue":1,"resources_js_components_Stream_streamAllDiscontinutiesErrors_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

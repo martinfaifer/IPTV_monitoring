@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\Streams\Analyze\MarkStreamForKillAction;
-use App\Actions\Streams\UpdateStreamStatusAction;
 use App\Models\Stream;
 use Illuminate\Console\Command;
+use App\Actions\Streams\UpdateStreamStatusAction;
+use App\Actions\Cache\DeleteStreamPidProcessAction;
+use App\Actions\Streams\Analyze\MarkStreamForKillAction;
 
 class KillAllStreamsCommand extends Command
 {
@@ -35,6 +36,8 @@ class KillAllStreamsCommand extends Command
             foreach ($streams as $stream) {
                 (new MarkStreamForKillAction($stream->stream_url))->execution();
                 (new UpdateStreamStatusAction())->execute($stream, Stream::STATUS_STOPPED);
+                // remove process pid
+                (new DeleteStreamPidProcessAction())->execute($stream);
             }
         }
     }

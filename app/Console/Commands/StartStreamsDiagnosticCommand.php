@@ -32,6 +32,7 @@ class StartStreamsDiagnosticCommand extends Command
         $streams = Stream::where('status', Stream::STATUS_WAITING)->orWhere('status', Stream::STATUS_CRASH)->get();
         foreach ($streams as $stream) {
             StartStreamDiagnosticJob::dispatch($stream);
+            sleep(1);
         }
     }
 }

@@ -25,6 +25,7 @@ let userLayout = () => import("./components/User/UserLayout.vue");
 let userDashboard = () => import("./components/User/userDashboard.vue");
 let userMozaika = () => import("./components/User/userMozaika.vue");
 let userEdit = () => import("./components/User/userEdit.vue");
+let userNotification = () => import("./components/User/userNotification.vue");
 let SettingsLayout = () => import("./components/Settings/settingsLayout.vue");
 let SettingsDashboard = () =>
     import("./components/Settings/Dashboard/settingsDashboard.vue");
@@ -32,6 +33,8 @@ let SettingsStreams = () =>
     import("./components/Settings/Streams/settingsStreams.vue");
 let SettingsUser = () =>
     import("./components/Settings/Users/settingsUsers.vue");
+let SettingsNotifications = () =>
+    import("./components/Settings/Notifications/settingsNotifications.vue");
 let Login = () => import("./components/Auth/Login.vue");
 let PageNotFound = () => import("./components/PageNotFound/PageNotFound.vue");
 
@@ -58,12 +61,16 @@ let routes = [
                     },
                     {
                         path: "/user/mozaika",
-                        component: userMozaika
+                        component: userMozaika,
                     },
                     {
                         path: "/user/edit",
-                        component: userEdit
-                    }
+                        component: userEdit,
+                    },
+                    {
+                        path: "/user/notifications",
+                        component: userNotification,
+                    },
                 ],
             },
             {
@@ -84,6 +91,7 @@ let routes = [
                     },
                     {
                         path: "/settings/notifications",
+                        component: SettingsNotifications,
                     },
                     {
                         path: "/settings/webhook",

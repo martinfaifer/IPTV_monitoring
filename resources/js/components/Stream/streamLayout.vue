@@ -63,6 +63,11 @@ export default {
                     this.stream.status != "monitoring"
                         ? (this.isActiveDialog = true)
                         : (this.isActiveDialog = false);
+                })
+                .catch((error) => {
+                    if (error.response.status == 403) {
+                        this.$router.push("/403");
+                    }
                 });
         },
         checkStreamStatus(streamStatus) {

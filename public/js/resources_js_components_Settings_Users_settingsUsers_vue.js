@@ -319,6 +319,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -661,6 +678,39 @@ var render = function () {
                           search: _vm.search,
                         },
                         scopedSlots: _vm._u([
+                          {
+                            key: "item.customData",
+                            fn: function (ref) {
+                              var item = ref.item
+                              return [
+                                item.customData == null
+                                  ? _c(
+                                      "v-icon",
+                                      { attrs: { small: "", color: "red" } },
+                                      [
+                                        _vm._v(
+                                          "\n                                mdi-close\n                            "
+                                        ),
+                                      ]
+                                    )
+                                  : item.customData == "[]"
+                                  ? _c(
+                                      "v-icon",
+                                      { attrs: { small: "", color: "red" } },
+                                      [
+                                        _vm._v(
+                                          "\n                                mdi-close\n                            "
+                                        ),
+                                      ]
+                                    )
+                                  : _c(
+                                      "v-icon",
+                                      { attrs: { color: "green", small: "" } },
+                                      [_vm._v(" mdi-check ")]
+                                    ),
+                              ]
+                            },
+                          },
                           {
                             key: "item.actions",
                             fn: function (ref) {

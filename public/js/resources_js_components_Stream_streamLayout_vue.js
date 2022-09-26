@@ -1083,6 +1083,10 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("streams/" + this.$route.params.streamId).then(function (response) {
         _this.stream = response.data;
         _this.stream.status != "monitoring" ? _this.isActiveDialog = true : _this.isActiveDialog = false;
+      })["catch"](function (error) {
+        if (error.response.status == 403) {
+          _this.$router.push("/403");
+        }
       });
     },
     checkStreamStatus: function checkStreamStatus(streamStatus) {

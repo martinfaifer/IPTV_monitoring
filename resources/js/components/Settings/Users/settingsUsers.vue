@@ -34,6 +34,23 @@
                             :items="items"
                             :search="search"
                         >
+                            <template v-slot:item.customData="{ item }">
+                                <v-icon
+                                    small
+                                    color="red"
+                                    v-if="item.customData == null"
+                                >
+                                    mdi-close
+                                </v-icon>
+                                <v-icon
+                                    small
+                                    color="red"
+                                    v-else-if="item.customData == '[]'"
+                                >
+                                    mdi-close
+                                </v-icon>
+                                <v-icon v-else color="green" small> mdi-check </v-icon>
+                            </template>
                             <template v-slot:item.actions="{ item }">
                                 <v-icon
                                     @click="openEditDialog(item)"

@@ -2244,6 +2244,10 @@ var userEdit = function userEdit() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_User_userEdit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/userEdit.vue */ "./resources/js/components/User/userEdit.vue"));
 };
 
+var userNotification = function userNotification() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_User_userNotification_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/userNotification.vue */ "./resources/js/components/User/userNotification.vue"));
+};
+
 var SettingsLayout = function SettingsLayout() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Settings_settingsLayout_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Settings/settingsLayout.vue */ "./resources/js/components/Settings/settingsLayout.vue"));
 };
@@ -2258,6 +2262,10 @@ var SettingsStreams = function SettingsStreams() {
 
 var SettingsUser = function SettingsUser() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Settings_Users_settingsUsers_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Settings/Users/settingsUsers.vue */ "./resources/js/components/Settings/Users/settingsUsers.vue"));
+};
+
+var SettingsNotifications = function SettingsNotifications() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_Settings_Notifications_settingsNotifications_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Settings/Notifications/settingsNotifications.vue */ "./resources/js/components/Settings/Notifications/settingsNotifications.vue"));
 };
 
 var Login = function Login() {
@@ -2289,6 +2297,9 @@ var routes = [{
     }, {
       path: "/user/edit",
       component: userEdit
+    }, {
+      path: "/user/notifications",
+      component: userNotification
     }]
   }, {
     path: "/settings",
@@ -2303,7 +2314,8 @@ var routes = [{
       path: "/settings/users",
       component: SettingsUser
     }, {
-      path: "/settings/notifications"
+      path: "/settings/notifications",
+      component: SettingsNotifications
     }, {
       path: "/settings/webhook"
     }]
@@ -91428,7 +91440,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_layout_layout_vue":1,"resources_js_components_mozaika_mozaika_vue":1,"resources_js_components_Stream_streamLayout_vue":1,"resources_js_components_User_UserLayout_vue":1,"resources_js_components_User_userDashboard_vue":1,"resources_js_components_User_userMozaika_vue":1,"resources_js_components_User_userEdit_vue":1,"resources_js_components_Settings_settingsLayout_vue":1,"resources_js_components_Settings_Dashboard_settingsDashboard_vue":1,"resources_js_components_Settings_Streams_settingsStreams_vue":1,"resources_js_components_Settings_Users_settingsUsers_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_PageNotFound_PageNotFound_vue":1,"resources_js_components_Stream_streamAllDiscontinutiesErrors_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_layout_layout_vue":1,"resources_js_components_mozaika_mozaika_vue":1,"resources_js_components_Stream_streamLayout_vue":1,"resources_js_components_User_UserLayout_vue":1,"resources_js_components_User_userDashboard_vue":1,"resources_js_components_User_userMozaika_vue":1,"resources_js_components_User_userEdit_vue":1,"resources_js_components_User_userNotification_vue":1,"resources_js_components_Settings_settingsLayout_vue":1,"resources_js_components_Settings_Dashboard_settingsDashboard_vue":1,"resources_js_components_Settings_Streams_settingsStreams_vue":1,"resources_js_components_Settings_Users_settingsUsers_vue":1,"resources_js_components_Settings_Notifications_settingsNotifications_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_PageNotFound_PageNotFound_vue":1,"resources_js_components_Stream_streamAllDiscontinutiesErrors_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

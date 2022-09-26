@@ -8,7 +8,7 @@ class StoreStreamAction
 {
     public function execute($formData)
     {
-        Stream::create([
+        return Stream::create([
             'nazev' => $formData->nazev,
             'stream_url' => $formData->stream_url,
         ]);

@@ -8,10 +8,13 @@ use Intervention\Image\ImageManagerStatic;
 
 class GetStreamVideoImageAction
 {
-    public function execute(object $stream)
+    public function execute(object $stream, $onlyUrl = false)
     {
-        return rescue(function () use ($stream) {
-            $image = (new FFMpegCreateImageFromStreamAction())->cache_image(public_path('storage/streamImages/'.Str::slug($stream->nazev).'.jpg'));
+        return rescue(function () use ($stream, $onlyUrl) {
+            if ($onlyUrl == true) {
+                return 'storage/streamImages/' . Str::slug($stream->nazev) . '.jpg';
+            }
+            $image = (new FFMpegCreateImageFromStreamAction())->cache_image(public_path('storage/streamImages/' . Str::slug($stream->nazev) . '.jpg'));
 
             return ImageManagerStatic::make($image)->response();
         }, null);

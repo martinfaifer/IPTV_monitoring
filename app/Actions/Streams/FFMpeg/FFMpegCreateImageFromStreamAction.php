@@ -17,15 +17,36 @@ class FFMpegCreateImageFromStreamAction
 
         $this->remove_file(public_path("storage/streamImages/{$this->imageName}"));
 
-        if (str_contains($stream->stream_url, 'http')) {
-            shell_exec("ffmpeg -hwaccel cuda -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}"));
+
+        $isNvidiaGpu = shell_exec('nvidia-smi');
+
+        if (!is_null($isNvidiaGpu)) {
+            $this->create_image_via_nvidia_gpu($stream);
         } else {
-            shell_exec("ffmpeg -hwaccel cuda -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}"));
+            $this->create_image_via_cpu($stream);
         }
 
         $this->resize_image(public_path("storage/streamImages/{$this->imageName}"));
         BroadcastStreamImageEvent::dispatch($stream);
         $this->cache_image(public_path("storage/streamImages/{$this->imageName}"));
+    }
+
+    public function create_image_via_cpu(object $stream)
+    {
+        if (str_contains($stream->stream_url, 'http')) {
+            shell_exec("ffmpeg -ss 3 -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/channelsImages/{$this->imageName}"));
+        } else {
+            shell_exec("ffmpeg -ss 3 -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/channelsImages/{$this->imageName}"));
+        }
+    }
+
+    public function create_image_via_nvidia_gpu(object $stream)
+    {
+        if (str_contains($stream->stream_url, 'http')) {
+            shell_exec("ffmpeg -hwaccel cuda -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}"));
+        } else {
+            shell_exec("ffmpeg -hwaccel cuda -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}"));
+        }
     }
 
     private function remove_file(string $imageName): void

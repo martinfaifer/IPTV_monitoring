@@ -2,9 +2,11 @@
 
 namespace App\Actions\Streams;
 
-use App\Actions\Cache\StoreStreamsErrorHistoryAction;
-use App\Actions\Webhook\SendWebhookAction;
 use App\Models\Stream;
+use App\Jobs\SendErrorStreamWebhookJob;
+use App\Actions\Webhook\SendWebhookAction;
+use App\Actions\Cache\StoreStreamsErrorHistoryAction;
+use App\Actions\Webhook\SendStreamCrashWebhookAction;
 
 class UpdateStreamStatusAction
 {
@@ -21,14 +23,8 @@ class UpdateStreamStatusAction
                 'monitored_at' => $this->monitored_at,
             ]);
 
-            // (new SendWebhookAction())->execute($status, [
-            //     'data' => [
-            //         [
-            //             'stream' => $stream->nazev,
-            //             'status' => $status,
-            //         ],
-            //     ],
-            // ]);
+            // SendErrorStreamWebhookJob::dispatch($stream, $status);
+
             (new StoreStreamsErrorHistoryAction())->execute($stream, $status);
         }
     }

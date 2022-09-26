@@ -47,7 +47,7 @@ export default {
     methods: {
         index() {
             axios
-                .get("settings/dashboard?fresh")
+                .get("settings/dashboard")
                 .then((response) => {
                     this.items = response.data;
                 })

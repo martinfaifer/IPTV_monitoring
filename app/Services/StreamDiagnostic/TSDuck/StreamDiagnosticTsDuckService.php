@@ -2,14 +2,17 @@
 
 namespace App\Services\StreamDiagnostic\TSDuck;
 
-use App\Actions\Streams\Analyze\CheckIfStreamCanBeKillAction;
+use App\Models\Stream;
+use React\EventLoop\Loop;
+use React\EventLoop\Factory;
+use Illuminate\Support\Facades\Cache;
+use App\Actions\Streams\UpdateStreamStatusAction;
+use App\Actions\Cache\DeleteStreamPidProcessAction;
 use App\Actions\Streams\Analyze\TsDuckAnalyzeAction;
 use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
-use App\Actions\Streams\UpdateStreamStatusAction;
-use App\Models\Stream;
+use App\Actions\Cache\StoreStreamDiagnosticTimeStampAction;
+use App\Actions\Streams\Analyze\CheckIfStreamCanBeKillAction;
 use App\Services\StreamDiagnostic\FFMpeg\StreamDiagnosticFfProbeService;
-use Illuminate\Support\Facades\Cache;
-use React\EventLoop\Loop;
 
 class StreamDiagnosticTsDuckService
 {
@@ -23,7 +26,7 @@ class StreamDiagnosticTsDuckService
     public function monitoring(object $stream)
     {
         $loop = Loop::get();
-        $loop->addPeriodicTimer(3.0, function () use ($stream, $loop) {
+        $loop->addPeriodicTimer(4.0, function () use ($stream, $loop) {
             // kontrola zda stream má být dohledován
             if ($this->check_if_stream_can_be_kill($stream) == true) {
                 $this->change_stream_status_and_release_them($stream);
@@ -41,7 +44,8 @@ class StreamDiagnosticTsDuckService
             } else {
                 (new UpdateStreamStatusAction())->execute($stream, Stream::STATUS_MONITORING);
                 (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), $stream));
-                (new StreamDiagnosticFfProbeService($stream));
+                // (new StreamDiagnosticFfProbeService($stream));
+                (new StoreStreamDiagnosticTimeStampAction())->execute($stream);
             }
         });
 
@@ -54,10 +58,6 @@ class StreamDiagnosticTsDuckService
             return true;
         }
 
-        if (! Cache::has('streamIsMonitoring_'.$stream->id)) {
-            return true;
-        }
-
         return (new CheckIfStreamCanBeKillAction($stream->stream_url))->execution() == true
             ? true
             : false;
@@ -67,5 +67,7 @@ class StreamDiagnosticTsDuckService
     {
         (new UnlockStreamUrlAction($stream))->handle();
         (new UpdateStreamStatusAction())->execute($stream, Stream::STATUS_STOPPED);
+        // remove stored pid
+        (new DeleteStreamPidProcessAction())->execute($stream);
     }
 }

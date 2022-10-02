@@ -1838,47 +1838,11 @@ var render = function () {
         "v-card",
         { staticClass: "overflow-hidden rounded-lg blur shadow-blur" },
         [
-          _c(
-            "p",
-            { staticClass: "text-center mt-3" },
-            [
-              _vm._v(
-                "\n            Informace o audio / video pidech\n            "
-              ),
-              _c(
-                "v-btn",
-                {
-                  staticClass: "mx-12",
-                  attrs: {
-                    "x-small": "",
-                    text: "",
-                    plain: "",
-                    outlined: "",
-                    color: "info",
-                  },
-                  on: {
-                    click: function ($event) {
-                      _vm.showFfmpegDetail = !_vm.showFfmpegDetail
-                    },
-                  },
-                },
-                [
-                  _vm.showFfmpegDetail == false
-                    ? _c("span", [
-                        _vm._v(
-                          "\n                Zobrazit detail o pidech z ffmpeg\n            "
-                        ),
-                      ])
-                    : _c("span", [
-                        _vm._v(
-                          "\n                Zakrýt detail o pidech z ffmpegu\n            "
-                        ),
-                      ]),
-                ]
-              ),
-            ],
-            1
-          ),
+          _c("p", { staticClass: "text-center mt-3" }, [
+            _vm._v(
+              "\n            Informace o audio / video pidech\n            "
+            ),
+          ]),
           _vm._v(" "),
           _c(
             "v-card-text",

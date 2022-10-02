@@ -127,6 +127,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | IPTV Dokumentace
+    |--------------------------------------------------------------------------
+    |
+    | This key is used for connection to external system which allows to comunicate
+    | and take data about stream
+    |
+    */
+
+    'iptv_dokumentace' => env('IPTV_DOKUMENTACE', null),
+    'iptv_dokumentace_token' => env('IPTV_DOKUMENTACE_TOKEN', null),
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Maintenance Mode Driver
     |--------------------------------------------------------------------------
     |

@@ -10,6 +10,8 @@ class GetStreamInformationFromIptvDokuAction
 
     public function execute(object $stream)
     {
-        return Http::withToken($this->token)->get("https://wwww.iptvdoku_3.test/api/stream/iptvdohled/{$stream->id}")->json();
+        if (!is_null(config('app.iptv_dokumentace')) || !is_null(config('app.iptv_dokumentace_token'))) {
+            return Http::withToken($this->token)->get(config('app.iptv_dokumentace') . "/api/stream/iptvdohled/{$stream->id}")->json();
+        }
     }
 }

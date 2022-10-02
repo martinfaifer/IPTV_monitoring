@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
 
         // $schedule->command('streams:start_issue')->everyMinute();
         $schedule->command('streams:check_if_running')->everyTwoMinutes();
+        $schedule->command('streams:check_if_stream_is_freeze_in_starting')->everyFiveMinutes();
         $schedule->command('streams:create_image')->everyFiveMinutes();
     }
 

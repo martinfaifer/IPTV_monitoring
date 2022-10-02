@@ -3,7 +3,7 @@
         <v-card class="overflow-hidden rounded-lg blur shadow-blur">
             <p class="text-center mt-3">
                 Informace o audio / video pidech
-                <v-btn
+                <!-- <v-btn
                     @click="showFfmpegDetail = !showFfmpegDetail"
                     x-small
                     text
@@ -18,7 +18,7 @@
                 <span v-else>
                     Zakrýt detail o pidech z ffmpegu
                 </span>
-                </v-btn>
+                </v-btn> -->
             </p>
             <v-card-text>
                 <v-container fluid>

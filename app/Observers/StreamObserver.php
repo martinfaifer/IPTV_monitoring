@@ -2,12 +2,14 @@
 
 namespace App\Observers;
 
-use App\Actions\Cache\DeleteAllStreamCacheDataAction;
-use App\Events\BroadcastErrorStreamsEvent;
-use App\Events\BroadcastMonitoredStreamsEvent;
-use App\Events\BroadcastProblemStreamsEvent;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Cache;
+use App\Events\BroadcastErrorStreamsEvent;
+use App\Events\BroadcastProblemStreamsEvent;
+use App\Events\BroadcastMonitoredStreamsEvent;
+use App\Http\Resources\NotRunningStreamsResource;
+use App\Http\Resources\ShowProblemStreamsResource;
+use App\Actions\Cache\DeleteAllStreamCacheDataAction;
 
 class StreamObserver
 {
@@ -36,10 +38,18 @@ class StreamObserver
         if ($stream->status == Stream::STATUS_WAITING) {
             (new DeleteAllStreamCacheDataAction())->execute($stream);
         }
-        // fired Up events for mozaika
-        BroadcastErrorStreamsEvent::dispatch();
+
+        $notRunnngStreams = new NotRunningStreamsResource((object) []);
+        if (is_array($notRunnngStreams) > 0) {
+            BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
+        }
+
+        $problemStreams = new ShowProblemStreamsResource(Stream::where('status', Stream::STATUS_MONITORING)->get());
+        if (is_array($problemStreams)) {
+            BroadcastProblemStreamsEvent::dispatch($problemStreams);
+        }
+
         BroadcastMonitoredStreamsEvent::dispatch();
-        BroadcastProblemStreamsEvent::dispatch();
     }
 
     /**
@@ -50,19 +60,26 @@ class StreamObserver
      */
     public function deleted(Stream $stream)
     {
-        // kill stream monitoring process
-        if (Cache::has('streamIsMonitoring_'.$stream->id)) {
-            $processPid = Cache::get('streamIsMonitoring_'.$stream->id);
+        if (Cache::has('streamIsMonitoring_' . $stream->id)) {
+            $processPid = Cache::get('streamIsMonitoring_' . $stream->id);
             shell_exec("kill -9 {$processPid['processPid']}");
-            Cache::pull('streamIsMonitoring_'.$stream->id);
+            Cache::pull('streamIsMonitoring_' . $stream->id);
         }
         (new DeleteAllStreamCacheDataAction())->execute($stream);
         Cache::forget('streams');
         Cache::put('streams', Stream::all());
 
-        BroadcastErrorStreamsEvent::dispatch();
+        $notRunnngStreams = new NotRunningStreamsResource((object) []);
+        if (is_array($notRunnngStreams) > 0) {
+            BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
+        }
+
+        $problemStreams = new ShowProblemStreamsResource(Stream::where('status', Stream::STATUS_MONITORING)->get());
+        if (is_array($problemStreams)) {
+            BroadcastProblemStreamsEvent::dispatch($problemStreams);
+        }
+
         BroadcastMonitoredStreamsEvent::dispatch();
-        BroadcastProblemStreamsEvent::dispatch();
     }
 
     /**

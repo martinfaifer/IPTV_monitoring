@@ -31,13 +31,12 @@ class CheckIfStreamsIsFreezInStartingModeCommand extends Command
      */
     public function handle()
     {
-        $freezeStreams = Stream::where('status', Stream::STATUS_STARTING)->where('created_at', '<=', now()->subMinutes(5)->toDateTimeString())->get();
-
-        if (count($freezeStreams) != 0) {
-            foreach ($freezeStreams as $freezeStream) {
+        Stream::where('status', Stream::STATUS_STARTING)->where('created_at', '<=', now()->subMinutes(5)->toDateTimeString())->chunk(10, function ($freezeStreams) {
+            $freezeStreams->each(function ($freezeStream) {
                 (new UnlockStreamUrlAction($freezeStream))->handle();
                 StartStreamDiagnosticJob::dispatch($freezeStream);
-            }
-        }
+            });
+            sleep(3);
+        });
     }
 }

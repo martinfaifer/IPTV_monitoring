@@ -15,6 +15,6 @@ class NotRunningStreamsResource extends JsonResource
      */
     public function toArray($request)
     {
-        return  Stream::where('status', 'can_not_start')->get();
+        return Stream::where('status', 'can_not_start')->get();
     }
 }

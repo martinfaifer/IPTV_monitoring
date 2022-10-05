@@ -29,10 +29,10 @@ class StartStreamsDiagnosticCommand extends Command
      */
     public function handle()
     {
-        $streams = Stream::where('status', Stream::STATUS_WAITING)->orWhere('status', Stream::STATUS_CRASH)->get();
-        foreach ($streams as $stream) {
-            StartStreamDiagnosticJob::dispatch($stream);
-            sleep(1);
-        }
+        Stream::where('status', Stream::STATUS_WAITING)->orWhere('status', Stream::STATUS_CRASH)->chunk(20, function ($streams) {
+            $streams->each(function ($stream) {
+                StartStreamDiagnosticJob::dispatch($stream);
+            });
+        });
     }
 }

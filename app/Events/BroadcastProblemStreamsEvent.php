@@ -14,14 +14,15 @@ class BroadcastProblemStreamsEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $problemStreams;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($problemStreams)
     {
-        //
+        $this->problemStreams = $problemStreams;
     }
 
     /**
@@ -36,6 +37,6 @@ class BroadcastProblemStreamsEvent implements ShouldBroadcast
 
     public function broadcastWith()
     {
-        return [new ShowProblemStreamsResource(Stream::where('status', Stream::STATUS_MONITORING)->get())];
+        return [$this->problemStreams];
     }
 }

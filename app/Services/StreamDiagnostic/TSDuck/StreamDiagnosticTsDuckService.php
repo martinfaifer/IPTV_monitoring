@@ -26,7 +26,7 @@ class StreamDiagnosticTsDuckService
     public function monitoring(object $stream)
     {
         $loop = Loop::get();
-        $loop->addPeriodicTimer(4.0, function () use ($stream, $loop) {
+        $loop->addPeriodicTimer(2.0, function () use ($stream, $loop) {
             // kontrola zda stream má být dohledován
             if ($this->check_if_stream_can_be_kill($stream) == true) {
                 $this->change_stream_status_and_release_them($stream);

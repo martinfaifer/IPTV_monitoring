@@ -34,19 +34,17 @@ class CheckIfStreamsRunningCommand extends Command
     {
         $cmds = [];
 
-        $streams = Stream::where('status', Stream::STATUS_MONITORING)
-            ->get();
-        if (count($streams) > 0) {
-
-            foreach ($streams as $stream) {
-                $cachedLastDiagnosticTime = Cache::get('lastDiagnosticTime_' . $stream->id);
-                if (!is_null($cachedLastDiagnosticTime)) {
-                    if ($cachedLastDiagnosticTime['time'] <= strtotime('-1 minute')) {
-                        (new UnlockStreamUrlAction($stream))->handle();
-                        StartStreamDiagnosticJob::dispatch($stream);
+        Stream::where('status', Stream::STATUS_MONITORING)
+            ->chunk(10, function ($streams) {
+                $streams->each(function ($stream) {
+                    $cachedLastDiagnosticTime = Cache::get('lastDiagnosticTime_' . $stream->id);
+                    if (!is_null($cachedLastDiagnosticTime)) {
+                        if ($cachedLastDiagnosticTime['time'] <= strtotime('-1 minute')) {
+                            (new UnlockStreamUrlAction($stream))->handle();
+                            StartStreamDiagnosticJob::dispatch($stream);
+                        }
                     }
-                }
-            }
-        }
+                });
+            });
     }
 }

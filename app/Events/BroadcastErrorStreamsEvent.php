@@ -15,14 +15,15 @@ class BroadcastErrorStreamsEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
+    public $notRunnngStreams;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($notRunnngStreams)
     {
-        //
+        $this->notRunnngStreams = $notRunnngStreams;
     }
 
     /**
@@ -37,6 +38,6 @@ class BroadcastErrorStreamsEvent implements ShouldBroadcast
 
     public function broadcastWith()
     {
-        return [new NotRunningStreamsResource((object) [])];
+        return [$this->notRunnngStreams];
     }
 }

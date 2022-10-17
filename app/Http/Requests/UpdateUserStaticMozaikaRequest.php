@@ -24,7 +24,7 @@ class UpdateUserStaticMozaikaRequest extends FormRequest
     public function rules()
     {
         return [
-            'customData' => ['nullable']
+            'customData' => ['nullable'],
         ];
     }
 }

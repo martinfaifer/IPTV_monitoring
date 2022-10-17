@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Settings\Notification;
 
-use App\Models\Notification;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreNotificationRequest;
-use App\Actions\Notification\StoreNotificationAction;
 use App\Actions\Notification\DeleteNotificationAction;
 use App\Actions\Notification\IndexNotificationsAction;
+use App\Actions\Notification\StoreNotificationAction;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNotificationRequest;
+use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {

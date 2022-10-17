@@ -2,17 +2,15 @@
 
 namespace App\Services\StreamDiagnostic\TSDuck;
 
-use App\Models\Stream;
-use React\EventLoop\Loop;
-use React\EventLoop\Factory;
-use Illuminate\Support\Facades\Cache;
-use App\Actions\Streams\UpdateStreamStatusAction;
 use App\Actions\Cache\DeleteStreamPidProcessAction;
-use App\Actions\Streams\Analyze\TsDuckAnalyzeAction;
-use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 use App\Actions\Cache\StoreStreamDiagnosticTimeStampAction;
 use App\Actions\Streams\Analyze\CheckIfStreamCanBeKillAction;
+use App\Actions\Streams\Analyze\TsDuckAnalyzeAction;
+use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
+use App\Actions\Streams\UpdateStreamStatusAction;
+use App\Models\Stream;
 use App\Services\StreamDiagnostic\FFMpeg\StreamDiagnosticFfProbeService;
+use React\EventLoop\Loop;
 
 class StreamDiagnosticTsDuckService
 {
@@ -26,7 +24,7 @@ class StreamDiagnosticTsDuckService
     public function monitoring(object $stream)
     {
         $loop = Loop::get();
-        $loop->addPeriodicTimer(2.0, function () use ($stream, $loop) {
+        $loop->addPeriodicTimer(1.0, function () use ($stream, $loop) {
             // kontrola zda stream má být dohledován
             if ($this->check_if_stream_can_be_kill($stream) == true) {
                 $this->change_stream_status_and_release_them($stream);

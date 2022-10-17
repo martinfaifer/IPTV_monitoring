@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('streams:start_issue')->everyMinute();
         $schedule->command('streams:check_if_running')->everyTwoMinutes()->withoutOverlapping()->runInBackground();
         $schedule->command('streams:check_if_stream_is_freeze_in_starting')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command('streams:create_image')->everyFiveMinutes()->runInBackground();
+        $schedule->command('streams:create_image')->everyFiveMinutes()->runInBackground()->withoutOverlapping();
     }
 
     /**
@@ -35,7 +35,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__ . '/Commands');
+        $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
     }

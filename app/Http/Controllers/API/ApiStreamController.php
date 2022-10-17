@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\API;
 
 use App\Actions\Streams\DeleteStreamAction;
-use App\Models\Stream;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Actions\Streams\GetStreamVideoImageAction;
 use App\Actions\Streams\StoreStreamAction;
-use App\Http\Resources\ShowAudioPidResource;
-use App\Http\Resources\ShowVideoPidResource;
-use App\Http\Resources\ShowServicePidResource;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StreamShowApiRequest;
 use App\Http\Requests\Api\StreamStoreApiRequest;
-use App\Actions\Streams\GetStreamVideoImageAction;
+use App\Http\Resources\ShowAudioPidResource;
+use App\Http\Resources\ShowServicePidResource;
+use App\Http\Resources\ShowVideoPidResource;
+use App\Models\Stream;
 
 class ApiStreamController extends Controller
 {
@@ -21,9 +20,9 @@ class ApiStreamController extends Controller
         $stream = Stream::find($request->streamId);
 
         return [
-            'status' => "success",
+            'status' => 'success',
             'streamData' => [
-                'img' => config('app.url') . (new GetStreamVideoImageAction())->execute($stream, true),
+                'img' => config('app.url').(new GetStreamVideoImageAction())->execute($stream, true),
                 'name' => $stream->nazev,
                 'streamStatus' => $stream->status,
                 'streamId' => $stream->id,
@@ -32,8 +31,8 @@ class ApiStreamController extends Controller
                 'streamTS' => new ShowServicePidResource($stream),
                 'audioPids' => new ShowAudioPidResource($stream),
                 'videpPids' => new ShowVideoPidResource($stream),
-                'AVbitrate' => []
-            ]
+                'AVbitrate' => [],
+            ],
         ];
     }
 

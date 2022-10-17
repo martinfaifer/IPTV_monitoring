@@ -6,6 +6,8 @@ use App\Actions\Cache\RemoveItemsFromCache;
 use App\Events\BroadcastErrorStreamsEvent;
 use App\Events\BroadcastMonitoredStreamsEvent;
 use App\Events\BroadcastProblemStreamsEvent;
+use App\Http\Resources\NotRunningStreamsResource;
+use App\Models\Stream;
 use Illuminate\Support\Facades\Cache;
 
 class UpdateStreamSettingsInformationMozaikaAction
@@ -50,8 +52,16 @@ class UpdateStreamSettingsInformationMozaikaAction
             Cache::put('showStreamDiscontinuity_'.$stream->id, []);
         }
 
-        BroadcastErrorStreamsEvent::dispatch();
+        $notRunnngStreams = new NotRunningStreamsResource((object) []);
+        if (is_array($notRunnngStreams) > 0) {
+            BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
+        }
+
+        $problemStreams = new ShowProblemStreeamsResource(Stream::where('status', Stream::STATUS_MONITORING)->get());
+        if (is_array($problemStreams)) {
+            BroadcastProblemStreamsEvent::dispatch($problemStreams);
+        }
+
         BroadcastMonitoredStreamsEvent::dispatch();
-        BroadcastProblemStreamsEvent::dispatch();
     }
 }

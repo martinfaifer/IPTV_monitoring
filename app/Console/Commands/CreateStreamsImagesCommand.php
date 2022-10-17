@@ -29,8 +29,11 @@ class CreateStreamsImagesCommand extends Command
      */
     public function handle()
     {
-        Stream::where('status', Stream::STATUS_MONITORING)->chunk(10, function ($stream) {
-            CreateImageFromStreamJob::dispatch($stream)->onQueue('ffmpeg');
+        Stream::where('status', Stream::STATUS_MONITORING)->chunk(20, function ($streams) {
+            foreach ($streams as $stream) {
+                CreateImageFromStreamJob::dispatch($stream);
+                sleep(1);
+            }
         });
     }
 }

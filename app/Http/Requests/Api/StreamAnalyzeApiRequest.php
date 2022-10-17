@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StreamAnalyzeApiRequest extends FormRequest
@@ -25,7 +24,7 @@ class StreamAnalyzeApiRequest extends FormRequest
     public function rules()
     {
         return [
-            'stream_url' => ['required']
+            'stream_url' => ['required'],
         ];
     }
 }

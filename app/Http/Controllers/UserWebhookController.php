@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Actions\Users\Webhook\GetUserWebhookAction;
 
 class UserWebhookController extends Controller

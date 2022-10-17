@@ -11,6 +11,8 @@ class UserRole extends Model
     ];
 
     const IsAdmin = 1;
+
     const IsEditor = 2;
+
     const IsView = 3;
 }

@@ -19,7 +19,7 @@ class SendStreamCrashWebhookAction
                     WebhookCall::create()
                         ->url($webhook->uri)
                         ->payload([
-                            'error' => $stream->nazev
+                            'error' => $stream->nazev,
                         ])
                         ->useSecret($webhook->secret)
                         ->dispatch();

@@ -2,16 +2,16 @@
 
 namespace App\Http\Resources;
 
-use App\Actions\Cache\GetStreamPidDiscontinuityAction;
+use App\Http\Controllers\Traits\CountStreamErrorTrait;
 use App\Models\Stream;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use App\Http\Controllers\Traits\CountStreamErrorTrait;
 
 class RunningStreamsPaginationResource extends JsonResource
 {
     use CountStreamErrorTrait;
+
     /**
      * Transform the resource into an array.
      *

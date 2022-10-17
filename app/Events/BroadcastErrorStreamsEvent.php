@@ -2,20 +2,20 @@
 
 namespace App\Events;
 
-use App\Http\Resources\NotRunningStreamsResource;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BroadcastErrorStreamsEvent implements ShouldBroadcast
+class BroadcastErrorStreamsEvent implements ShouldBroadcastNow
 {
     use Dispatchable;
     use InteractsWithSockets;
     use SerializesModels;
 
     public $notRunnngStreams;
+
     /**
      * Create a new event instance.
      *

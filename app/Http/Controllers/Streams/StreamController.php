@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Streams;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StreamResource;
-use App\Models\Stream;
 use App\Http\Resources\StreamsResource;
+use App\Models\Stream;
 use Illuminate\Support\Facades\Auth;
 
 class StreamController extends Controller

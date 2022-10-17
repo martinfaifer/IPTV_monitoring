@@ -24,7 +24,7 @@ class StoreNotificationRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'unique:notifications,email']
+            'email' => ['required', 'unique:notifications,email'],
         ];
     }
 }

@@ -2,21 +2,24 @@
 
 namespace App\Actions\Streams\FFMpeg;
 
+use App\Events\BroadcastStreamImageEvent;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Spatie\Image\Image as SpatieImage;
-use App\Events\BroadcastStreamImageEvent;
 
 class FFMpegCreateImageFromStreamAction
 {
     public $imageName;
+    public $filePath;
 
     public function execute(object $stream)
     {
         $this->imageName = Str::slug($stream->nazev) . '.jpg';
+        $this->filePath = public_path("storage/streamImages/{$this->imageName}");
 
-        $this->remove_file(public_path("storage/streamImages/{$this->imageName}"));
-
+        if (file_exists($this->filePath)) {
+            $this->remove_file($this->filePath);
+        }
 
         $isNvidiaGpu = shell_exec('nvidia-smi');
 
@@ -25,10 +28,12 @@ class FFMpegCreateImageFromStreamAction
         } else {
             $this->create_image_via_cpu($stream);
         }
-
-        $this->resize_image(public_path("storage/streamImages/{$this->imageName}"));
-        BroadcastStreamImageEvent::dispatch($stream);
-        $this->cache_image(public_path("storage/streamImages/{$this->imageName}"));
+        try {
+            $this->resize_image($this->filePath);
+            BroadcastStreamImageEvent::dispatch($stream);
+            $this->cache_image($this->filePath);
+        } catch (\Throwable $th) {
+        }
     }
 
     public function create_image_via_cpu(object $stream)

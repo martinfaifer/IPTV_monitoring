@@ -11,7 +11,7 @@ class StoreNotificationAction
         try {
             return Notification::create([
                 'email' => $formData->email,
-                'user_id' => $user->id
+                'user_id' => $user->id,
             ]);
         } catch (\Throwable $th) {
             return false;

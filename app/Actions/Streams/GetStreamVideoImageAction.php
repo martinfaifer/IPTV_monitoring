@@ -12,9 +12,9 @@ class GetStreamVideoImageAction
     {
         return rescue(function () use ($stream, $onlyUrl) {
             if ($onlyUrl == true) {
-                return 'storage/streamImages/' . Str::slug($stream->nazev) . '.jpg';
+                return 'storage/streamImages/'.Str::slug($stream->nazev).'.jpg';
             }
-            $image = (new FFMpegCreateImageFromStreamAction())->cache_image(public_path('storage/streamImages/' . Str::slug($stream->nazev) . '.jpg'));
+            $image = (new FFMpegCreateImageFromStreamAction())->cache_image(public_path('storage/streamImages/'.Str::slug($stream->nazev).'.jpg'));
 
             return ImageManagerStatic::make($image)->response();
         }, null);

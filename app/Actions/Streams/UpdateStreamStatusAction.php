@@ -2,11 +2,9 @@
 
 namespace App\Actions\Streams;
 
-use App\Models\Stream;
-use App\Jobs\SendErrorStreamWebhookJob;
-use App\Actions\Webhook\SendWebhookAction;
 use App\Actions\Cache\StoreStreamsErrorHistoryAction;
-use App\Actions\Webhook\SendStreamCrashWebhookAction;
+use App\Jobs\SendErrorStreamWebhookJob;
+use App\Models\Stream;
 
 class UpdateStreamStatusAction
 {

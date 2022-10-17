@@ -36,17 +36,16 @@ class SendProblemStreamEmailCommand extends Command
 
         $streamNames = [];
         if (count($notificationEmails) != 0 && count($crashedStreams) != 0) {
-
             foreach ($crashedStreams as $crashedStream) {
-                if (!Cache::has($crashedStream->id . "_notificationSended")) {
-                    Cache::put($crashedStream->id . "_notificationSended", []);
+                if (! Cache::has($crashedStream->id.'_notificationSended')) {
+                    Cache::put($crashedStream->id.'_notificationSended', []);
                     array_push($streamNames, ...$crashedStream->nazev);
                 }
             }
 
-            if(count($streamNames) != 0) {
-                $streamNamesString = implode(",",$streamNames);
-                foreach($notificationEmails as $email) {
+            if (count($streamNames) != 0) {
+                $streamNamesString = implode(',', $streamNames);
+                foreach ($notificationEmails as $email) {
                     SendProblemStreamJob::dispatch($email->email, $streamNamesString);
                 }
             }

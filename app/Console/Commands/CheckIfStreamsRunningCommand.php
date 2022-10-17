@@ -2,12 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
+use App\Jobs\StartStreamDiagnosticJob;
 use App\Models\Stream;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
-use App\Jobs\StartStreamDiagnosticJob;
-use App\Actions\Streams\UpdateStreamStatusAction;
-use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 
 class CheckIfStreamsRunningCommand extends Command
 {
@@ -37,8 +36,8 @@ class CheckIfStreamsRunningCommand extends Command
         Stream::where('status', Stream::STATUS_MONITORING)
             ->chunk(10, function ($streams) {
                 $streams->each(function ($stream) {
-                    $cachedLastDiagnosticTime = Cache::get('lastDiagnosticTime_' . $stream->id);
-                    if (!is_null($cachedLastDiagnosticTime)) {
+                    $cachedLastDiagnosticTime = Cache::get('lastDiagnosticTime_'.$stream->id);
+                    if (! is_null($cachedLastDiagnosticTime)) {
                         if ($cachedLastDiagnosticTime['time'] <= strtotime('-1 minute')) {
                             (new UnlockStreamUrlAction($stream))->handle();
                             StartStreamDiagnosticJob::dispatch($stream);

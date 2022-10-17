@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
+use App\Jobs\StartStreamDiagnosticJob;
 use App\Models\Stream;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
-use App\Jobs\StartStreamDiagnosticJob;
-use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 
 class CheckIfStreamsIsFreezInStartingModeCommand extends Command
 {

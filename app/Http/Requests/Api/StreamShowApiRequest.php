@@ -24,7 +24,7 @@ class StreamShowApiRequest extends FormRequest
     public function rules()
     {
         return [
-            'streamId' => ['required', 'exists:streams,id']
+            'streamId' => ['required', 'exists:streams,id'],
         ];
     }
 }

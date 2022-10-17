@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Actions\Users\DeleteUserAction;
 use App\Actions\Users\GetUserAction;
-use Illuminate\Support\Facades\Auth;
 use App\Actions\Users\GetUsersAction;
 use App\Actions\Users\StoreUserAction;
-use App\Actions\Users\DeleteUserAction;
 use App\Actions\Users\UpdateUserAction;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Actions\Users\UpdateUserPasswordAction;
-use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Actions\Users\UpdateUserPaginationAction;
-use App\Http\Requests\UpdateUserPaginationRequest;
+use App\Actions\Users\UpdateUserPasswordAction;
 use App\Actions\Users\UpdateUserStaticMozaikaAction;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserPaginationRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UpdateUserStaticMozaikaRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {

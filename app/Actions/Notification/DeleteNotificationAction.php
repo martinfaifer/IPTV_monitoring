@@ -8,6 +8,7 @@ class DeleteNotificationAction
     {
         try {
             $notification->delete();
+
             return true;
         } catch (\Throwable $th) {
             return false;

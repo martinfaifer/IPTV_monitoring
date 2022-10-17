@@ -8,7 +8,7 @@ class UpdateUserPasswordAction
     {
         try {
             $user->update([
-                'password' => bcrypt($formData->password)
+                'password' => bcrypt($formData->password),
             ]);
 
             return true;

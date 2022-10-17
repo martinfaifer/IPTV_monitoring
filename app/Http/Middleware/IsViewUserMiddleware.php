@@ -19,7 +19,7 @@ class IsViewUserMiddleware
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
-        if (!$user) {
+        if (! $user) {
             return route('login');
         }
 

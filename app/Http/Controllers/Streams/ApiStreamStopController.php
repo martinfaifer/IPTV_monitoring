@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Streams;
 
-use App\Models\Stream;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Actions\Streams\StopStreamAction;
+use App\Http\Controllers\Controller;
+use App\Models\Stream;
 
 class ApiStreamStopController extends Controller
 {

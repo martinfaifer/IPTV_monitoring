@@ -1,35 +1,33 @@
 <?php
 
-use App\Models\Stream;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogOutController;
-use App\Http\Controllers\UserWebhookController;
 use App\Http\Controllers\Search\SearchController;
-use App\Http\Controllers\Streams\StreamController;
-use App\Http\Controllers\StreamsHistoryStatusController;
-use App\Http\Controllers\UserGeneratePasswordController;
-use App\Http\Controllers\Streams\CustomStreamsController;
-use App\Http\Controllers\Streams\ProblemStreamsController;
-use App\Http\Controllers\Streams\RunningStreamsController;
-use App\Http\Controllers\Streams\ShowStreamPidsController;
-use App\Http\Controllers\Streams\StreamPidChartController;
-use App\Http\Controllers\Streams\StreamsHistoryController;
-use App\Http\Controllers\Streams\ShowStreamImageController;
-use App\Http\Controllers\Streams\NotRunningStreamsController;
-use App\Http\Controllers\Streams\ShowAudioStreamPidsController;
-use App\Http\Controllers\Streams\ShowVideoStreamPidsController;
-use App\Http\Controllers\Streams\ShowServiceStreamPidsController;
-use App\Http\Controllers\Settings\Sreams\SettingsStreamController;
-use App\Http\Controllers\Streams\StreamPidDiscontinuityController;
-use App\Http\Controllers\Streams\StreamSettingsInformtionMozaikaController;
-use App\Http\Controllers\Streams\StreStreamPidDiscontinuityResetController;
 use App\Http\Controllers\Settings\Dashboard\Network\AvgNetworkSpeedController;
 use App\Http\Controllers\Settings\Notification\NotificationController;
+use App\Http\Controllers\Settings\Sreams\SettingsStreamController;
 use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
+use App\Http\Controllers\Streams\CustomStreamsController;
+use App\Http\Controllers\Streams\NotRunningStreamsController;
+use App\Http\Controllers\Streams\ProblemStreamsController;
+use App\Http\Controllers\Streams\RunningStreamsController;
+use App\Http\Controllers\Streams\ShowAudioStreamPidsController;
+use App\Http\Controllers\Streams\ShowServiceStreamPidsController;
+use App\Http\Controllers\Streams\ShowStreamImageController;
+use App\Http\Controllers\Streams\ShowStreamPidsController;
+use App\Http\Controllers\Streams\ShowVideoStreamPidsController;
+use App\Http\Controllers\Streams\StreamController;
+use App\Http\Controllers\Streams\StreamPidChartController;
+use App\Http\Controllers\Streams\StreamPidDiscontinuityController;
+use App\Http\Controllers\Streams\StreamSettingsInformtionMozaikaController;
+use App\Http\Controllers\Streams\StreamsHistoryController;
+use App\Http\Controllers\Streams\StreStreamPidDiscontinuityResetController;
+use App\Http\Controllers\StreamsHistoryStatusController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserGeneratePasswordController;
+use App\Http\Controllers\UserRoleController;
+use App\Http\Controllers\UserWebhookController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('user', [UserController::class, 'show']);
         Route::patch('pagination', [UserController::class, 'update_pagination']);
         Route::patch('static-mozaika', [UserController::class, 'update_static_mozaika']);
-        Route::patch("password", [UserController::class, 'update_password']);
+        Route::patch('password', [UserController::class, 'update_password']);
         Route::get('webhooks', [UserWebhookController::class, 'index']);
     });
 
@@ -75,8 +73,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('discontinuity/{stream}/{pid}', StreStreamPidDiscontinuityResetController::class);
             Route::get('{stream}', ShowStreamPidsController::class);
         });
-        Route::get('charts/{stream}/{pid}', StreamPidChartController::class)->middleware('isView');;
-        Route::get('{stream}', [StreamController::class, 'show'])->middleware('isView');;
+        Route::get('charts/{stream}/{pid}', StreamPidChartController::class)->middleware('isView');
+        Route::get('{stream}', [StreamController::class, 'show'])->middleware('isView');
     });
 
     Route::middleware('isView')->prefix('settings')->group(function () {

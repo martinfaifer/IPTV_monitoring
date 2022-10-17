@@ -33,8 +33,8 @@ class UncheckProblemStreamFromCacheCommand extends Command
 
         foreach ($streams as $stream) {
             if ($stream->status != Stream::STATUS_CAN_NOT_START) {
-                if (!Cache::has($stream->id . "_notificationSended")) {
-                    Cache::pull($stream->id . "_notificationSended");
+                if (! Cache::has($stream->id.'_notificationSended')) {
+                    Cache::pull($stream->id.'_notificationSended');
                 }
             }
         }

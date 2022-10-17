@@ -138,7 +138,6 @@ return [
     'iptv_dokumentace' => env('IPTV_DOKUMENTACE', null),
     'iptv_dokumentace_token' => env('IPTV_DOKUMENTACE_TOKEN', null),
 
-
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver

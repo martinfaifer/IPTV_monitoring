@@ -8,6 +8,6 @@ class DeleteStreamPidProcessAction
 {
     public function execute(object $stream)
     {
-        Cache::pull('streamIsMonitoring_' . $stream->id);
+        Cache::pull('streamIsMonitoring_'.$stream->id);
     }
 }

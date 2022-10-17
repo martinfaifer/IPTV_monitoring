@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
+use App\Actions\Streams\Analyze\TsDuckAnalyzeAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StreamAnalyzeApiRequest;
-use App\Actions\Streams\Analyze\TsDuckAnalyzeAction;
 
 class ApiStreamAnalyzeController extends Controller
 {

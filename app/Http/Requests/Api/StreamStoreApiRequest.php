@@ -25,7 +25,7 @@ class StreamStoreApiRequest extends FormRequest
     {
         return [
             'nazev' => ['required', 'string', 'max:255'],
-            'stream_url' => ['required', 'unique:streams,stream_url']
+            'stream_url' => ['required', 'unique:streams,stream_url'],
         ];
     }
 }

@@ -25,18 +25,18 @@ class UpdateUserPasswordRequest extends FormRequest
     {
         return [
             'password' => ['required', 'max:255', 'min:9'],
-            'password_confirm' => ['required', 'same:password']
+            'password_confirm' => ['required', 'same:password'],
         ];
     }
 
     public function messages()
     {
         return [
-            'password.required' => "Vyplňte heslo",
-            'password.max' => "Maximální počet znaků je 255",
-            'password.min' => "Minimální počet znaků je 9",
-            'password_confirm.required' => "Vyplňte heslo",
-            'password_confirm.sane' => "Hesla se neshodují"
+            'password.required' => 'Vyplňte heslo',
+            'password.max' => 'Maximální počet znaků je 255',
+            'password.min' => 'Minimální počet znaků je 9',
+            'password_confirm.required' => 'Vyplňte heslo',
+            'password_confirm.sane' => 'Hesla se neshodují',
         ];
     }
 }

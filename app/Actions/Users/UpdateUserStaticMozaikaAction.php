@@ -8,7 +8,7 @@ class UpdateUserStaticMozaikaAction
     {
         try {
             $user->update([
-                'customData' => $this->select_streams($formData->customData)
+                'customData' => $this->select_streams($formData->customData),
             ]);
 
             return true;
@@ -16,7 +16,6 @@ class UpdateUserStaticMozaikaAction
             return false;
         }
     }
-
 
     public function select_streams($streamsId)
     {

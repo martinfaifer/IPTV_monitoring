@@ -8,8 +8,8 @@ class StoreStreamDiagnosticTimeStampAction
 {
     public function execute(object $stream)
     {
-        Cache::put('lastDiagnosticTime_' . $stream->id, [
-            'time' => time()
+        Cache::put('lastDiagnosticTime_'.$stream->id, [
+            'time' => time(),
         ]);
     }
 }

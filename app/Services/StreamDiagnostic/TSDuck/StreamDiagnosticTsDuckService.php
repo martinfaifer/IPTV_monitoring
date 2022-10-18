@@ -9,7 +9,6 @@ use App\Actions\Streams\Analyze\TsDuckAnalyzeAction;
 use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 use App\Actions\Streams\UpdateStreamStatusAction;
 use App\Models\Stream;
-use App\Services\StreamDiagnostic\FFMpeg\StreamDiagnosticFfProbeService;
 use React\EventLoop\Loop;
 
 class StreamDiagnosticTsDuckService

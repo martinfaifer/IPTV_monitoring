@@ -66,14 +66,14 @@ export default {
 
     mounted() {
         this.websocketData();
-        // setInterval(
-        //     function () {
-        //         try {
-        //             this.index();
-        //         } catch (error) {}
-        //     }.bind(this),
-        //     5000
-        // );
+        setInterval(
+            function () {
+                try {
+                    this.index();
+                } catch (error) {}
+            }.bind(this),
+            5000
+        );
     },
 };
 </script>

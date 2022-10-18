@@ -39,8 +39,8 @@ class StreamObserver
             (new DeleteAllStreamCacheDataAction())->execute($stream);
         }
 
-        $notRunnngStreams = new NotRunningStreamsResource((object) []);
-        if (is_array($notRunnngStreams) > 0) {
+        $notRunnngStreams = new NotRunningStreamsResource((object)[]);
+        if (is_array($notRunnngStreams)) {
             BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
         }
 
@@ -60,10 +60,10 @@ class StreamObserver
      */
     public function deleted(Stream $stream)
     {
-        if (Cache::has('streamIsMonitoring_'.$stream->id)) {
-            $processPid = Cache::get('streamIsMonitoring_'.$stream->id);
+        if (Cache::has('streamIsMonitoring_' . $stream->id)) {
+            $processPid = Cache::get('streamIsMonitoring_' . $stream->id);
             shell_exec("kill -9 {$processPid['processPid']}");
-            Cache::pull('streamIsMonitoring_'.$stream->id);
+            Cache::pull('streamIsMonitoring_' . $stream->id);
         }
         (new DeleteAllStreamCacheDataAction())->execute($stream);
         Cache::forget('streams');

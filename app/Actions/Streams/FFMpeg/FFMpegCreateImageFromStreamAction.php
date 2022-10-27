@@ -30,7 +30,7 @@ class FFMpegCreateImageFromStreamAction
         }
         try {
             $this->resize_image($this->filePath);
-            BroadcastStreamImageEvent::dispatch($stream);
+            event(new BroadcastStreamImageEvent($stream));
             $this->cache_image($this->filePath);
         } catch (\Throwable $th) {
         }

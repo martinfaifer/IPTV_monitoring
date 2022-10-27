@@ -32,7 +32,6 @@ class CreateStreamsImagesCommand extends Command
         Stream::where('status', Stream::STATUS_MONITORING)->chunk(20, function ($streams) {
             foreach ($streams as $stream) {
                 CreateImageFromStreamJob::dispatch($stream);
-                sleep(1);
             }
         });
     }

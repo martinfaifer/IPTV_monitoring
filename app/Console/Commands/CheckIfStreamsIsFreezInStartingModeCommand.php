@@ -35,7 +35,7 @@ class CheckIfStreamsIsFreezInStartingModeCommand extends Command
                 (new UnlockStreamUrlAction($freezeStream))->handle();
                 StartStreamDiagnosticJob::dispatch($freezeStream);
             });
-            sleep(3);
+            sleep(1);
         });
     }
 }

@@ -2,13 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Models\Stream;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 
 class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
 {
@@ -36,7 +37,7 @@ class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
      */
     public function uniqueId()
     {
-        return 'tsduck_streamId_'.$this->stream->id;
+        return 'tsduck_streamId_' . $this->stream->id;
     }
 
     /**
@@ -46,11 +47,12 @@ class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
      */
     public function handle()
     {
-        if (! Cache::has('streamIsMonitoring_'.$this->stream->id)) {
-            $processPid = shell_exec("nohup php artisan stream:diagnostic {$this->stream->id}".' > /dev/null 2>&1 & echo $!; ');
-            Cache::put('streamIsMonitoring_'.$this->stream->id, [
-                'processPid' => $processPid,
-            ]);
-        }
+        $this->stream->update([
+            'status' => Stream::STATUS_WAITING,
+        ]);
+        $processPid = shell_exec("nohup php artisan stream:diagnostic {$this->stream->id}" . ' > /dev/null 2>&1 & echo $!; ');
+        Cache::put('streamIsMonitoring_' . $this->stream->id, [
+            'processPid' => $processPid,
+        ]);
     }
 }

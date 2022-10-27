@@ -23,10 +23,10 @@ class FFMpegCreateImageFromStreamAction
 
         $isNvidiaGpu = shell_exec('nvidia-smi');
 
-        if (!is_null($isNvidiaGpu)) {
-            $this->create_image_via_nvidia_gpu($stream);
-        } else {
+        if (str_contains($isNvidiaGpu, "failed")) {
             $this->create_image_via_cpu($stream);
+        } else {
+            $this->create_image_via_nvidia_gpu($stream);
         }
         try {
             $this->resize_image($this->filePath);
@@ -39,9 +39,9 @@ class FFMpegCreateImageFromStreamAction
     public function create_image_via_cpu(object $stream)
     {
         if (str_contains($stream->stream_url, 'http')) {
-            shell_exec("ffmpeg -ss 3 -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/channelsImages/{$this->imageName}"));
+            shell_exec("ffmpeg -ss 3 -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}"));
         } else {
-            shell_exec("ffmpeg -ss 3 -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/channelsImages/{$this->imageName}"));
+            shell_exec("ffmpeg -ss 3 -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}"));
         }
     }
 

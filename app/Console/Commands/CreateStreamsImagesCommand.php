@@ -29,6 +29,8 @@ class CreateStreamsImagesCommand extends Command
      */
     public function handle()
     {
+        shell_exec('chmod -R 1777 storage/app/public/streamImages/');
+        sleep(1);
         Stream::where('status', Stream::STATUS_MONITORING)->chunk(20, function ($streams) {
             foreach ($streams as $stream) {
                 CreateImageFromStreamJob::dispatch($stream);

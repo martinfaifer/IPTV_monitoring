@@ -23,7 +23,7 @@ class StreamDiagnosticTsDuckAnalyzeTransportStreamService implements DiagnosticA
     public function analyze(Collection $tsDuckCollection, object $stream): void
     {
         foreach ($tsDuckCollection as $collection) {
-            if (array_key_exists('packets', $collection)) {
+            if (array_key_exists('packets', (array) $collection)) {
                 if (array_key_exists('invalid-syncs', $collection['packets'])) {
                     $this->check_invalid_sync_in_stream($collection['packets']['invalid-syncs'], $stream);
                 }
@@ -38,7 +38,7 @@ class StreamDiagnosticTsDuckAnalyzeTransportStreamService implements DiagnosticA
                 }
             }
 
-            if (array_key_exists('pcr-bitrate', $collection)) {
+            if (array_key_exists('pcr-bitrate', (array) $collection)) {
                 $this->pcrbitrate = $collection['pcr-bitrate'];
             }
         }
@@ -62,15 +62,15 @@ class StreamDiagnosticTsDuckAnalyzeTransportStreamService implements DiagnosticA
                 'status' => 'invalidSync_warning',
                 'message' => 'Nepodařilo se získat informaci o synchronizaci audia / videa',
             ];
-            (new StoreItemsToCache())->execute('streamInvalidSync_'.$stream->id, $outputErrStats);
+            (new StoreItemsToCache())->execute(key: 'streamInvalidSync_' . $stream->id, value: $outputErrStats);
         } elseif ($invalidsyncs != '0') {
             $outputErrStats = [
                 'status' => 'invalidSync_warning',
                 'message' => 'Desynchronizace Audia / videa',
             ];
-            (new StoreItemsToCache())->execute('streamInvalidSync_'.$stream->id, $outputErrStats);
+            (new StoreItemsToCache())->execute(key: 'streamInvalidSync_' . $stream->id, value: $outputErrStats);
         } else {
-            (new RemoveItemsFromCache())->execute('streamInvalidSync_'.$stream->id);
+            (new RemoveItemsFromCache())->execute(key: 'streamInvalidSync_' . $stream->id);
         }
     }
 
@@ -83,21 +83,21 @@ class StreamDiagnosticTsDuckAnalyzeTransportStreamService implements DiagnosticA
                 'status' => 'transporterrors_warning',
                 'message' => 'Nepodařilo se získat informaci o transport streamu',
             ];
-            (new StoreItemsToCache())->execute('streamTransportErrors_'.$stream->id, $outputErrStats);
+            (new StoreItemsToCache())->execute(key: 'streamTransportErrors_' . $stream->id, value: $outputErrStats);
         } elseif ($transporterrors != '0') {
             $outputErrStats = [
                 'status' => 'transporterrors_warning',
                 'message' => 'Zobrazila se TS chyba',
             ];
-            (new StoreItemsToCache())->execute('streamTransportErrors_'.$stream->id, $outputErrStats);
+            (new StoreItemsToCache())->execute(key: 'streamTransportErrors_' . $stream->id, value: $outputErrStats);
         } else {
-            (new RemoveItemsFromCache())->execute('streamTransportErrors_'.$stream->id);
+            (new RemoveItemsFromCache())->execute(key: 'streamTransportErrors_' . $stream->id);
         }
     }
 
     public function store_to_cache(object $stream, $country, $packets, $pcrbitrate): void
     {
-        (new StoreItemsToCache())->execute('streamTS_'.$stream->id, [
+        (new StoreItemsToCache())->execute(key: 'streamTS_' . $stream->id, value: [
             'country' => $country,
             'packets' => $packets,
             'pcrbitrate' => $pcrbitrate,

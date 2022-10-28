@@ -29,7 +29,7 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
 
     public function __construct(Collection $tsDuckCollection, object $stream)
     {
-        $this->analyze($tsDuckCollection, $stream);
+        $this->analyze(tsDuckCollection: $tsDuckCollection, stream: $stream);
     }
 
     public function analyze(Collection $tsDuckCollection, object $stream): void
@@ -52,13 +52,13 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
             }
         }
 
-        $this->store_to_cache($stream);
+        $this->store_to_cache(stream: $stream);
 
-        if (! empty($this->videoPid)) {
+        if (!empty($this->videoPid)) {
             $this->collect_video_pids($stream, $this->videoPid);
         }
 
-        if (! empty($this->audioPid)) {
+        if (!empty($this->audioPid)) {
             $this->collect_audio_pids($stream, $this->audioPid);
         }
 
@@ -67,7 +67,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
         // }
 
         // broadcast information about video and audio pids
-        BroadcastAudioVideoStreamPidsEvent::dispatch($stream, Cache::get('streamVideoPids_'.$stream->id), Cache::get('streamAudioPids_'.$stream->id));
+        event(new BroadcastAudioVideoStreamPidsEvent(
+            stream: $stream,
+            videoPids: Cache::get('streamVideoPids_' . $stream->id),
+            audioPids: Cache::get('streamAudioPids_' . $stream->id)
+        ));
     }
 
     /**
@@ -93,7 +97,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
             if (array_key_exists('bitrate', $audioPid)) {
                 $this->audioPidsAgregated[$audioPidId]['bitrate'] = $audioPid['bitrate'];
                 $this->check_if_audio_bitrate_is_zero($audioPid['bitrate'], $audioPidId, $stream);
-                (new StoreStreamPidDataFroChartToCache())->execute('streamPidBitrate_'.$audioPidId.'_'.$stream->id, $audioPid['bitrate'] / 1048576, $audioPid);
+                (new StoreStreamPidDataFroChartToCache())->execute(
+                    key: 'streamPidBitrate_' . $audioPidId . '_' . $stream->id,
+                    value: $audioPid['bitrate'] / 1048576,
+                    pid: $audioPid
+                );
             }
 
             if (array_key_exists('packets', $audioPid)) {
@@ -103,7 +111,10 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
 
                 if (array_key_exists('discontinuities', $audioPid['packets'])) {
                     $this->audioPidsAgregated[$audioPidId]['discontinuities'] = $audioPid['packets']['discontinuities'];
-                    (new StoreStreamPidDiscontinuityAction())->execute('streamDiscontinuityPidErrors_'.$audioPidId.'_'.$stream->id, $audioPid['packets']['discontinuities']);
+                    (new StoreStreamPidDiscontinuityAction())->execute(
+                        key: 'streamDiscontinuityPidErrors_' . $audioPidId . '_' . $stream->id,
+                        dicontinuity: $audioPid['packets']['discontinuities']
+                    );
                 }
             }
 
@@ -112,7 +123,7 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
             }
         }
 
-        (new StoreItemsToCache())->execute('streamAudioPids_'.$stream->id, $this->audioPidsAgregated);
+        (new StoreItemsToCache())->execute(key: 'streamAudioPids_' . $stream->id, value: $this->audioPidsAgregated);
     }
 
     /**
@@ -128,8 +139,8 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
     private function check_if_audio_is_dekrypted(string $audioPidAccess, string $audioPid, object $stream): void
     {
         $audioPidAccess == 'clear'
-            ? (new RemoveItemsFromCache())->execute('streamAudioAccess_'.$stream->id)
-            : (new StoreItemsToCache())->execute('streamAudioAccess_'.$stream->id, [
+            ? (new RemoveItemsFromCache())->execute(key: 'streamAudioAccess_' . $stream->id)
+            : (new StoreItemsToCache())->execute(key: 'streamAudioAccess_' . $stream->id, value: [
                 'status' => 'audio_is_not_dekrypted',
                 'message' => "Desynchronizace nebo nedekryptace Audia na pidu {$audioPid}",
             ]);
@@ -148,11 +159,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
     private function check_if_audio_bitrate_is_zero(string $audioBitrate, string $audioPid, object $stream): void
     {
         $audioBitrate == 0
-            ? (new StoreItemsToCache())->execute('streamAudioBitrate_'.$stream->id, [
+            ? (new StoreItemsToCache())->execute(key: 'streamAudioBitrate_' . $stream->id, value: [
                 'status' => 'no_audio_bitrate',
                 'message' => "Audio má nulový datový tok na pidu {$audioPid}",
             ])
-            : (new RemoveItemsFromCache())->execute('streamAudioBitrate_'.$stream->id);
+            : (new RemoveItemsFromCache())->execute(key: 'streamAudioBitrate_' . $stream->id);
     }
 
     /**
@@ -174,7 +185,10 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
             if (array_key_exists('packets', $videoPid)) {
                 if (array_key_exists('discontinuities', $videoPid['packets'])) {
                     $this->videoPidsAgregated[$videoPidId]['discontinuities'] = $videoPid['packets']['discontinuities'];
-                    (new StoreStreamPidDiscontinuityAction())->execute('streamDiscontinuityPidErrors_'.$videoPidId.'_'.$stream->id, $videoPid['packets']['discontinuities']);
+                    (new StoreStreamPidDiscontinuityAction())->execute(
+                        key: 'streamDiscontinuityPidErrors_' . $videoPidId . '_' . $stream->id,
+                        dicontinuity: $videoPid['packets']['discontinuities']
+                    );
                 }
 
                 if (array_key_exists('scrambled', $videoPid)) {
@@ -190,7 +204,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                 $this->videoPidsAgregated[$videoPidId]['bitrate'] = $videoPid['bitrate'];
                 $this->check_if_video_bitrate_is_zero($videoPid['bitrate'], $videoPidId, $stream);
                 // store to cache for chart
-                (new StoreStreamPidDataFroChartToCache())->execute('streamPidBitrate_'.$videoPidId.'_'.$stream->id, $videoPid['bitrate'] / 1048576, $videoPid);
+                (new StoreStreamPidDataFroChartToCache())->execute(
+                    key: 'streamPidBitrate_' . $videoPidId . '_' . $stream->id,
+                    value: $videoPid['bitrate'] / 1048576,
+                    pid: $videoPid
+                );
             }
 
             // if (str_contains($videoPid, 'access')) {
@@ -203,7 +221,7 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
             }
         }
 
-        (new StoreItemsToCache())->execute('streamVideoPids_'.$stream->id, $this->videoPidsAgregated);
+        (new StoreItemsToCache())->execute(key: 'streamVideoPids_' . $stream->id, value: $this->videoPidsAgregated);
     }
 
     /**
@@ -219,8 +237,8 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
     private function check_if_video_is_dekrypted(string $videoPidAccess, string $videoPid, object $stream): void
     {
         $videoPidAccess == 'clear'
-            ? (new RemoveItemsFromCache())->execute('streamVideoAccess_'.$stream->id)
-            : (new StoreItemsToCache())->execute('streamVideoAccess_'.$stream->id, [
+            ? (new RemoveItemsFromCache())->execute(key: 'streamVideoAccess_' . $stream->id)
+            : (new StoreItemsToCache())->execute(key: 'streamVideoAccess_' . $stream->id, value: [
                 'status' => 'video_is_not_dekrypted',
                 'message' => "Nedekryptuje se video na pidu {$videoPid}",
             ]);
@@ -239,11 +257,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
     private function check_if_video_bitrate_is_zero(string $viedoBitrate, string $videoPid, object $stream): void
     {
         $viedoBitrate == 0
-            ? (new StoreItemsToCache())->execute('streamVideoBitrate_'.$stream->id, [
+            ? (new StoreItemsToCache())->execute(key: 'streamVideoBitrate_' . $stream->id, value: [
                 'status' => 'no_video_bitrate',
                 'message' => "Video má nulový datový tok na pidu {$videoPid}",
             ])
-            : (new RemoveItemsFromCache())->execute('streamVideoBitrate_'.$stream->id);
+            : (new RemoveItemsFromCache())->execute(key: 'streamVideoBitrate_' . $stream->id);
     }
 
     /**
@@ -295,7 +313,7 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
      */
     public function store_to_cache(object $stream): void
     {
-        (new StoreItemsToCache())->execute('streamPids_'.$stream->id, [
+        (new StoreItemsToCache())->execute(key: 'streamPids_' . $stream->id, value: [
             'emm' => $this->emm,
             'ecmPid' => $this->ecmPid,
         ]);

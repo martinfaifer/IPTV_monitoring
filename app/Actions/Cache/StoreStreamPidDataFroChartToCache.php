@@ -18,7 +18,7 @@ class StoreStreamPidDataFroChartToCache
             $originalContent = Cache::get($key);
             $originalContent[] = [...$newdata];
 
-            if (count($originalContent) == 50) {
+            if (count((array)$originalContent) == 50) {
                 array_shift($originalContent);
             }
 

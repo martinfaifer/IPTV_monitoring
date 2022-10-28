@@ -20,7 +20,7 @@ class StreamDiagnosticTsDuckAnalyzeServiceStreamService implements DiagnosticAna
 
     public function __construct(Collection $tsDuckCollection, object $stream)
     {
-        $this->analyze($tsDuckCollection, $stream);
+        $this->analyze(tsDuckCollection: $tsDuckCollection, stream: $stream);
     }
 
     public function analyze(Collection $tsDuckCollection, object $stream): void
@@ -47,12 +47,19 @@ class StreamDiagnosticTsDuckAnalyzeServiceStreamService implements DiagnosticAna
             }
         }
 
-        $this->store_to_cache($stream, $this->tsid, $this->pmtpid, $this->pcrpid, $this->provider, $this->name);
+        $this->store_to_cache(
+            stream: $stream,
+            tsid: $this->tsid,
+            pmtpid: $this->pmtpid,
+            pcrpid: $this->pcrpid,
+            provider: $this->provider,
+            name: $this->name
+        );
     }
 
     public function store_to_cache(object $stream, $tsid, $pmtpid, $pcrpid, $provider, $name): void
     {
-        (new StoreItemsToCache())->execute('streamService_'.$stream->id, [
+        (new StoreItemsToCache())->execute(key: 'streamService_' . $stream->id, value: [
             'tsid' => $tsid,
             'pmtpid' => $pmtpid,
             'pcrpid' => $pcrpid,

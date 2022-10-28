@@ -23,7 +23,7 @@ class UpdateStreamStatusAction
 
             // SendErrorStreamWebhookJob::dispatch($stream, $status);
 
-            (new StoreStreamsErrorHistoryAction())->execute($stream, $status);
+            (new StoreStreamsErrorHistoryAction())->execute(stream: $stream, status: $status);
         }
     }
 }

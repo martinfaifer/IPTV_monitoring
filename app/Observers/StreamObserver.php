@@ -36,20 +36,20 @@ class StreamObserver
         Cache::forget('streams');
         Cache::put('streams', Stream::all());
         if ($stream->status == Stream::STATUS_WAITING) {
-            (new DeleteAllStreamCacheDataAction())->execute($stream);
+            (new DeleteAllStreamCacheDataAction())->execute(stream: $stream);
         }
 
         $notRunnngStreams = new NotRunningStreamsResource((object)[]);
         if (is_array($notRunnngStreams)) {
-            BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
+            event(new BroadcastErrorStreamsEvent(notRunnngStreams: $notRunnngStreams));
         }
 
         $problemStreams = new ShowProblemStreamsResource(Stream::where('status', Stream::STATUS_MONITORING)->get());
         if (is_array($problemStreams)) {
-            BroadcastProblemStreamsEvent::dispatch($problemStreams);
+            event(new BroadcastProblemStreamsEvent(problemStreams: $problemStreams));
         }
 
-        BroadcastMonitoredStreamsEvent::dispatch();
+        event(new BroadcastMonitoredStreamsEvent());
     }
 
     /**
@@ -71,15 +71,15 @@ class StreamObserver
 
         $notRunnngStreams = new NotRunningStreamsResource((object) []);
         if (is_array($notRunnngStreams) > 0) {
-            BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
+            event(new BroadcastErrorStreamsEvent($notRunnngStreams));
         }
 
-        $problemStreams = new ShowProblemStreamsResource(Stream::where('status', Stream::STATUS_MONITORING)->get());
+        $problemStreams = new ShowProblemStreamsResource(resource: Stream::where('status', Stream::STATUS_MONITORING)->get());
         if (is_array($problemStreams)) {
-            BroadcastProblemStreamsEvent::dispatch($problemStreams);
+            event(new BroadcastProblemStreamsEvent($problemStreams));
         }
 
-        BroadcastMonitoredStreamsEvent::dispatch();
+        event(new BroadcastMonitoredStreamsEvent());
     }
 
     /**

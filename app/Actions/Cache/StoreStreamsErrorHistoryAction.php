@@ -19,7 +19,7 @@ class StoreStreamsErrorHistoryAction
             $original = Cache::get('streamsErrorHistory');
             $original[] = [...$newInput];
 
-            if (count($original) == 50) {
+            if (count((array)$original) == 50) {
                 array_shift($original);
             }
 

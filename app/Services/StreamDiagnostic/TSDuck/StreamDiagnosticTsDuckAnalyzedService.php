@@ -9,15 +9,15 @@ class StreamDiagnosticTsDuckAnalyzedService
     public function __construct(Collection $tsDuckCollection, object $stream)
     {
         if ($tsDuckCollection->has('ts')) {
-            new StreamDiagnosticTsDuckAnalyzeTransportStreamService($tsDuckCollection->only('ts'), $stream);
+            new StreamDiagnosticTsDuckAnalyzeTransportStreamService(tsDuckCollection: $tsDuckCollection->only('ts'), stream: $stream);
         }
 
         if ($tsDuckCollection->has('services')) {
-            new StreamDiagnosticTsDuckAnalyzeServiceStreamService($tsDuckCollection->only('services'), $stream);
+            new StreamDiagnosticTsDuckAnalyzeServiceStreamService(tsDuckCollection: $tsDuckCollection->only('services'), stream: $stream);
         }
 
         if ($tsDuckCollection->has('pids')) {
-            new StreamDiagnosticTsDuckAnalyzePidStreamService($tsDuckCollection->only('pids'), $stream);
+            new StreamDiagnosticTsDuckAnalyzePidStreamService(tsDuckCollection: $tsDuckCollection->only('pids'), stream: $stream);
         }
     }
 }

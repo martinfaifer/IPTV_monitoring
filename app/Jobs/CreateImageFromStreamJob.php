@@ -29,6 +29,13 @@ class CreateImageFromStreamJob implements ShouldQueue
     }
 
     /**
+     * Delete the job if its models no longer exist.
+     *
+     * @var bool
+     */
+    public $deleteWhenMissingModels = true;
+
+    /**
      * Execute the job.
      *
      * @return void

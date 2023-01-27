@@ -9,8 +9,8 @@
     <title>{{ config('app.name') }}</title>
     <script>
         window.Laravel = {!! json_encode([
-    'csrfToken' => csrf_token(),
-]) !!};
+            'csrfToken' => csrf_token(),
+        ]) !!};
     </script>
     <script src="http://localhost:8098"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,7 +25,6 @@
         [v-cloak] {
             display: inline !important;
         }
-
     </style>
 </head>
 

@@ -41,7 +41,6 @@ class StreamDiagnosticTsDuckService
 
             // kontrola výstupu
             if (is_null($analyzedResultInArray)) {
-                info($stream->nazev, [$analyzedResultInArray]);
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_CAN_NOT_START);
             } else {
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_MONITORING);

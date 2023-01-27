@@ -71,10 +71,18 @@ $line-height-base: 1.6;
 }
 
 .theme--dark.shadow-blur-submit-btn {
-    box-shadow: inset 0 0 0px 0px rgba(30, 135, 74, 0.9),
-        0 4px 4px 0 rgba(48, 164, 96, 0.2) !important;
+    box-shadow: inset 0 0 0px 0px rgba(4, 82, 217, 0.9),
+        0 4px 4px 0 rgba(4, 82, 217, 0.2) !important;
 }
 
+.theme--dark.success_color {
+    background: rgb(144, 255, 51);
+    background: linear-gradient(
+        183deg,
+    rgba(144, 255, 51) 0%,
+    rgba(14, 172, 175, 1) 100%
+    );
+}
 
 .theme--dark.shadow-blur-card {
     box-shadow: inset 0 0 0px 0px rgba(25, 43, 75, 0.9),

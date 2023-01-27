@@ -24,6 +24,9 @@
                                     type="text"
                                     color="#328AF1"
                                     autofocus
+                                    outlined
+                                    clearable
+                                    class="mb-6"
                                 ></v-text-field>
 
                                 <v-text-field
@@ -34,16 +37,22 @@
                                     prepend-inner-icon="mdi-lock"
                                     type="password"
                                     color="#328AF1"
+                                    outlined
+                                    clearable
                                 ></v-text-field>
                             </v-card-text>
-                            <v-card-actions class="my-6">
+                            <v-card-actions class="mb-6 mx-2">
                                 <v-btn
-                                    color="green darken-1"
+                                    :loading="loading"
                                     block
                                     type="submit"
-                                    class="rounded-lg shadow-blur-submit-btn"
-                                    outlined
-                                    >Přihlášení</v-btn
+                                    class="rounded-md shadow-blur-submit-btn"
+                                    color="blue darken-3"
+                                    height="40"
+                                    >Přihlášení
+                                    <v-icon class="mx-3"
+                                        >mdi-arrow-right</v-icon
+                                    ></v-btn
                                 >
                             </v-card-actions>
                         </v-card>
@@ -74,6 +83,7 @@
 export default {
     data() {
         return {
+            loading: false,
             errors: [],
             email: null,
             password: null,
@@ -86,12 +96,14 @@ export default {
     methods: {
         login() {
             this.errors = [];
+            this.loading = true;
             axios
                 .post("auth/login", {
                     email: this.email,
                     password: this.password,
                 })
                 .then((response) => {
+                    this.loading = false;
                     if (response.data == true) {
                         this.$router.push("/");
                     } else {
@@ -101,6 +113,7 @@ export default {
                     }
                 })
                 .catch((error) => {
+                    this.loading = false;
                     this.errors = error.response.data.errors;
                 });
         },

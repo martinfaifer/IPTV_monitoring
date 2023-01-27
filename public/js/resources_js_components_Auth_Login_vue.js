@@ -83,9 +83,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      loading: false,
       errors: [],
       email: null,
       password: null,
@@ -99,10 +109,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.errors = [];
+      this.loading = true;
       axios.post("auth/login", {
         email: this.email,
         password: this.password
       }).then(function (response) {
+        _this.loading = false;
+
         if (response.data == true) {
           _this.$router.push("/");
         } else {
@@ -111,6 +124,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.password = null;
         }
       })["catch"](function (error) {
+        _this.loading = false;
         _this.errors = error.response.data.errors;
       });
     }
@@ -270,6 +284,7 @@ var render = function () {
                               ),
                               _vm._v(" "),
                               _c("v-text-field", {
+                                staticClass: "mb-6",
                                 attrs: {
                                   "error-messages": _vm.errors.email,
                                   label: "Email",
@@ -278,6 +293,8 @@ var render = function () {
                                   type: "text",
                                   color: "#328AF1",
                                   autofocus: "",
+                                  outlined: "",
+                                  clearable: "",
                                 },
                                 model: {
                                   value: _vm.email,
@@ -296,6 +313,8 @@ var render = function () {
                                   "prepend-inner-icon": "mdi-lock",
                                   type: "password",
                                   color: "#328AF1",
+                                  outlined: "",
+                                  clearable: "",
                                 },
                                 model: {
                                   value: _vm.password,
@@ -311,21 +330,30 @@ var render = function () {
                           _vm._v(" "),
                           _c(
                             "v-card-actions",
-                            { staticClass: "my-6" },
+                            { staticClass: "mb-6 mx-2" },
                             [
                               _c(
                                 "v-btn",
                                 {
                                   staticClass:
-                                    "rounded-lg shadow-blur-submit-btn",
+                                    "rounded-md shadow-blur-submit-btn",
                                   attrs: {
-                                    color: "green darken-1",
+                                    loading: _vm.loading,
                                     block: "",
                                     type: "submit",
-                                    outlined: "",
+                                    color: "blue darken-3",
+                                    height: "40",
                                   },
                                 },
-                                [_vm._v("Přihlášení")]
+                                [
+                                  _vm._v(
+                                    "Přihlášení\n                                "
+                                  ),
+                                  _c("v-icon", { staticClass: "mx-3" }, [
+                                    _vm._v("mdi-arrow-right"),
+                                  ]),
+                                ],
+                                1
                               ),
                             ],
                             1

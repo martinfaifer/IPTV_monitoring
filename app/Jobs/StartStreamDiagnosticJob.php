@@ -47,9 +47,12 @@ class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
      */
     public function handle()
     {
-        $this->stream->update([
-            'status' => Stream::STATUS_WAITING,
-        ]);
+        if ($this->stream->status != Stream::STATUS_WAITING) {
+            $this->stream->update([
+                'status' => Stream::STATUS_WAITING,
+            ]);
+        }
+
         // vyčištění cache
         Cache::pull($this->stream->id . "_" . Stream::STATUS_CAN_NOT_START);
 

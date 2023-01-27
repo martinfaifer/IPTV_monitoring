@@ -47,6 +47,9 @@ class SendProblemStreamNotificationCommand extends Command
         }
 
         // fill crashed stream names
+        if (!$crashedStreams) {
+            exit();
+        }
         foreach ($crashedStreams as $crashedStream) {
             if (!Cache::has($crashedStream->id . '_notificationSended')) {
                 Cache::put($crashedStream->id . '_notificationSended', []);

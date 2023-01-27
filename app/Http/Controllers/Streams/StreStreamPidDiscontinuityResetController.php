@@ -11,8 +11,8 @@ class StreStreamPidDiscontinuityResetController extends Controller
 {
     public function __invoke(Stream $stream, $pid, RemoveItemsFromCache $removeItemsFromCache, GetStreamPidDiscontinuityAction $getStreamPidDiscontinuityAction)
     {
-        $removeItemsFromCache->execute('streamDiscontinuityPidErrors_'.$pid.'_'.$stream->id);
+        $removeItemsFromCache->execute(key: 'streamDiscontinuityPidErrors_' . $pid . '_' . $stream->id);
 
-        return $getStreamPidDiscontinuityAction->execute($stream, $pid);
+        return $getStreamPidDiscontinuityAction->execute(stream: $stream, pid: $pid);
     }
 }

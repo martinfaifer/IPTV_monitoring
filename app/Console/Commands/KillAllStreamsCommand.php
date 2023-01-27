@@ -2,11 +2,14 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\Cache\DeleteStreamPidProcessAction;
-use App\Actions\Streams\Analyze\MarkStreamForKillAction;
-use App\Actions\Streams\UpdateStreamStatusAction;
 use App\Models\Stream;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
+use App\Actions\Streams\UpdateStreamStatusAction;
+use App\Actions\Cache\DeleteStreamPidProcessAction;
+use App\Actions\Streams\Analyze\MarkStreamForKillAction;
+use App\Actions\System\Process\KillAllProcessesByNameAction;
+use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 
 class KillAllStreamsCommand extends Command
 {
@@ -34,11 +37,18 @@ class KillAllStreamsCommand extends Command
         $streams = Stream::get();
         if (count($streams) != 0) {
             foreach ($streams as $stream) {
+                Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
                 (new MarkStreamForKillAction($stream->stream_url))->execution();
                 (new UpdateStreamStatusAction())->execute($stream, Stream::STATUS_STOPPED);
+                (new KillTsDuckStreamProcessAction())->execute($stream);
                 // remove process pid
                 (new DeleteStreamPidProcessAction())->execute($stream);
             }
         }
+
+        // kill all running process for tsduck and ffmpeg
+        (new KillAllProcessesByNameAction())->execute('tsp');
+        (new KillAllProcessesByNameAction())->execute('ffmpeg');
+        (new KillAllProcessesByNameAction())->execute('ffprobe');
     }
 }

@@ -10,6 +10,6 @@ class StreamPidDiscontinuityController extends Controller
 {
     public function __invoke(Stream $stream, int $pid)
     {
-        return (new GetStreamPidDiscontinuityAction())->execute($stream, $pid);
+        return (new GetStreamPidDiscontinuityAction())->execute(stream: $stream, pid: $pid);
     }
 }

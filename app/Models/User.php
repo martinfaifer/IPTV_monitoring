@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use App\Models\UserSlackChannel;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class User extends Authenticatable
 {
@@ -30,15 +32,22 @@ class User extends Authenticatable
         'pagination',
     ];
 
-    protected function userRole(): BelongsTo
+    public function userRole(): BelongsTo
     {
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
     }
 
-    protected function channels(): HasMany
+    public function channels(): HasMany
     {
         return $this->hasMany(Stream::class, 'id', 'customData');
     }
+
+    public function slack_channels(): HasMany
+    {
+        return $this->hasMany(UserSlackChannel::class, 'user_id', 'id');
+    }
+
+
 
     /**
      * The attributes that should be hidden for serialization.

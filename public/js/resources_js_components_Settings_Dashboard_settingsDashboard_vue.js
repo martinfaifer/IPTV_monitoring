@@ -45,6 +45,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -127,8 +133,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -243,9 +247,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      current: [],
       chartOptions: {
         legend: {
           show: false
@@ -287,6 +297,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios.get("settings/dashboard/streams/status-history").then(function (response) {
         _this.chartOptions.xaxis.categories = response.data.categories;
         _this.series = response.data.series;
+        _this.current = response.data.current;
       });
     },
     websocketData: function websocketData() {
@@ -600,9 +611,26 @@ var render = function () {
             1
           ),
           _vm._v(" "),
-          _c("SettingsDashboardNetwork"),
-          _vm._v(" "),
-          _c("SettingsDashboardStreamsStatuses"),
+          _c(
+            "v-row",
+            { staticClass: "mx-auto pt-6" },
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "12", sm: "12", md: "6", lg: "6" } },
+                [_c("SettingsDashboardNetwork")],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", sm: "12", md: "6", lg: "6" } },
+                [_c("SettingsDashboardStreamsStatuses")],
+                1
+              ),
+            ],
+            1
+          ),
         ],
         1
       ),
@@ -636,40 +664,30 @@ var render = function () {
     "div",
     [
       _c(
-        "v-col",
+        "v-card",
         {
-          staticClass: "pt-6",
-          attrs: { cols: "12", sm: "12", md: "12", lg: "12" },
+          staticClass: "overflow-hidden rounded-lg blur shadow-blur",
+          attrs: { flat: "" },
         },
         [
           _c(
-            "v-card",
-            {
-              staticClass: "overflow-hidden rounded-lg blur shadow-blur",
-              attrs: { flat: "" },
-            },
+            "v-card-text",
             [
-              _c(
-                "v-card-text",
-                [
-                  _c("p", { staticClass: "title text-center" }, [
-                    _vm._v("Vytížení sítě"),
-                  ]),
-                  _vm._v(" "),
-                  _c("apexchart", {
-                    ref: "chart",
-                    staticClass: "info--text",
-                    attrs: {
-                      dark: "",
-                      height: "200",
-                      type: "area",
-                      options: _vm.chartOptions,
-                      series: _vm.series,
-                    },
-                  }),
-                ],
-                1
-              ),
+              _c("p", { staticClass: "title text-center" }, [
+                _vm._v("Vytížení sítě"),
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                ref: "chart",
+                staticClass: "info--text",
+                attrs: {
+                  dark: "",
+                  height: "200",
+                  type: "area",
+                  options: _vm.chartOptions,
+                  series: _vm.series,
+                },
+              }),
             ],
             1
           ),
@@ -706,42 +724,54 @@ var render = function () {
     "div",
     [
       _c(
-        "v-col",
+        "v-card",
         {
-          staticClass: "pt-6",
-          attrs: { cols: "12", sm: "12", md: "12", lg: "12" },
+          staticClass: "overflow-hidden rounded-lg blur shadow-blur",
+          attrs: { flat: "" },
         },
         [
           _c(
-            "v-card",
-            {
-              staticClass: "overflow-hidden rounded-lg blur shadow-blur",
-              attrs: { flat: "" },
-            },
+            "v-card-text",
             [
               _c(
-                "v-card-text",
+                "div",
+                { staticClass: "d-flex justify-space-between ml-6 mr-6" },
                 [
-                  _c("p", { staticClass: "title text-center" }, [
-                    _vm._v(
-                      "\n                    Historie počtu dohledovaných streamů\n                "
-                    ),
+                  _c("p", { staticClass: "title" }, [
+                    _vm._v("Historie počtu dohledovaných streamů"),
                   ]),
                   _vm._v(" "),
-                  _c("apexchart", {
-                    ref: "chart",
-                    staticClass: "info--text",
-                    attrs: {
-                      dark: "",
-                      height: "200",
-                      type: "area",
-                      options: _vm.chartOptions,
-                      series: _vm.series,
-                    },
-                  }),
-                ],
-                1
+                  _c("p", { staticClass: "body-1 font-weight-bold" }, [
+                    _c("span", { staticClass: "green--text" }, [
+                      _vm._v(_vm._s(_vm.current.active)),
+                    ]),
+                    _vm._v(" /\n                    "),
+                    _c("span", { staticClass: "blue--text" }, [
+                      _vm._v(_vm._s(_vm.current.stoped) + " "),
+                    ]),
+                    _vm._v("/\n                    "),
+                    _c("span", { staticClass: "red--text" }, [
+                      _vm._v(_vm._s(_vm.current.problem)),
+                    ]),
+                    _vm._v(" /\n                    "),
+                    _c("span", { staticClass: "orange--text" }, [
+                      _vm._v(_vm._s(_vm.current.waiting)),
+                    ]),
+                  ]),
+                ]
               ),
+              _vm._v(" "),
+              _c("apexchart", {
+                ref: "chart",
+                staticClass: "info--text",
+                attrs: {
+                  dark: "",
+                  height: "200",
+                  type: "area",
+                  options: _vm.chartOptions,
+                  series: _vm.series,
+                },
+              }),
             ],
             1
           ),

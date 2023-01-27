@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogOutController;
 use App\Http\Controllers\Search\SearchController;
 use App\Http\Controllers\Settings\Dashboard\Network\AvgNetworkSpeedController;
+use App\Http\Controllers\Settings\Dashboard\SystemInformation\SystemInformationController;
 use App\Http\Controllers\Settings\Notification\NotificationController;
 use App\Http\Controllers\Settings\Sreams\SettingsStreamController;
 use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Streams\ShowStreamImageController;
 use App\Http\Controllers\Streams\ShowStreamPidsController;
 use App\Http\Controllers\Streams\ShowVideoStreamPidsController;
 use App\Http\Controllers\Streams\StreamController;
+use App\Http\Controllers\Streams\StreamHistoryStatusController;
 use App\Http\Controllers\Streams\StreamPidChartController;
 use App\Http\Controllers\Streams\StreamPidDiscontinuityController;
 use App\Http\Controllers\Streams\StreamSettingsInformtionMozaikaController;
@@ -26,6 +28,7 @@ use App\Http\Controllers\StreamsHistoryStatusController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserGeneratePasswordController;
 use App\Http\Controllers\UserRoleController;
+use App\Http\Controllers\UserSlackController;
 use App\Http\Controllers\UserWebhookController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +53,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('static-mozaika', [UserController::class, 'update_static_mozaika']);
         Route::patch('password', [UserController::class, 'update_password']);
         Route::get('webhooks', [UserWebhookController::class, 'index']);
+        Route::prefix('slack')->group(function () {
+            Route::get('', [UserSlackController::class, 'show']);
+            Route::post('', [UserSlackController::class, 'store']);
+            Route::delete('{slackChannel}', [UserSlackController::class, 'destroy']);
+        });
     });
 
     Route::prefix('streams')->group(function () {
@@ -74,6 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{stream}', ShowStreamPidsController::class);
         });
         Route::get('charts/{stream}/{pid}', StreamPidChartController::class)->middleware('isView');
+        Route::get('history/{stream}', StreamHistoryStatusController::class)->middleware('isView');
         Route::get('{stream}', [StreamController::class, 'show'])->middleware('isView');
     });
 
@@ -82,6 +91,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('', \Spatie\Health\Http\Controllers\HealthCheckJsonResultsController::class);
             Route::get('streams/status-history', StreamsHistoryStatusController::class);
             Route::get('network-speed', AvgNetworkSpeedController::class);
+            Route::get('server-information', [SystemInformationController::class, 'ram']);
         });
         Route::prefix('streams')->group(function () {
             Route::get('', [SettingsStreamController::class, 'index']);

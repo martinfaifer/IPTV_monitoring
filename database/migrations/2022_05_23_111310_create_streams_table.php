@@ -15,10 +15,10 @@ return new class() extends Migration
     {
         Schema::create('streams', function (Blueprint $table) {
             $table->id();
-            $table->string('nazev');
+            $table->string('nazev')->index();
             $table->string('stream_url')->index();
-            $table->string('status')->default('waiting');
-            $table->timestamp('monitored_at')->nullable();
+            $table->string('status')->default('waiting')->index();
+            $table->timestamp('monitored_at')->nullable()->index();
             $table->timestamps();
         });
     }

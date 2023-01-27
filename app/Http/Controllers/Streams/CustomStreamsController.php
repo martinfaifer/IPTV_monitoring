@@ -9,6 +9,6 @@ class CustomStreamsController extends Controller
 {
     public function __invoke()
     {
-        return new ShowCustomStreamsResource([]);
+        return new ShowCustomStreamsResource(resource: []);
     }
 }

@@ -1,10 +1,12 @@
 <template>
-    <div class="pt-3">
+    <div class="mt-12">
         <ErrorStreamMozaika></ErrorStreamMozaika>
         <ProblemStreamMozaika></ProblemStreamMozaika>
         <CustomMozaika></CustomMozaika>
         <v-container fluid>
-            <p class="text-left caption text--disabled font-weight-medium">
+            <p
+                class="text-left subtitle-2 text--disabled font-weight-medium ml-3"
+            >
                 Dynamická mozaika
             </p>
 
@@ -14,11 +16,17 @@
                 </v-col>
             </v-row>
         </v-container>
-        <v-bottom-navigation fixed background-color="transparent">
+        <v-bottom-navigation
+            fixed
+            style="
+                background: rgba(13, 25, 44, 0.25);
+                box-shadow: 0 8px 32px 0 rgba(17, 27, 45, 0.37);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+            "
+        >
             <v-pagination
                 class="mx-auto"
-                color="#192B4A"
-                style="color: #192b4a"
                 v-model="pagination.current"
                 :length="pagination.total"
                 @input="onPageChange()"
@@ -31,7 +39,7 @@
 import CustomMozaika from "./CustomMozaika.vue";
 import ErrorStreamMozaika from "./ErrorStreamMozaika.vue";
 import ProblemStreamMozaika from "./ProblemStreamMozaika.vue";
-import ImageCard from "./ImageCards/ImageCard.vue"
+import ImageCard from "./ImageCards/ImageCard.vue";
 export default {
     metaInfo: {
         title: "IPTV Dohled - mozaika",
@@ -51,7 +59,7 @@ export default {
         CustomMozaika,
         ErrorStreamMozaika,
         ProblemStreamMozaika,
-        ImageCard
+        ImageCard,
     },
 
     created() {
@@ -78,7 +86,7 @@ export default {
             this.index();
         },
 
-         websocketData() {
+        websocketData() {
             Echo.channel("RunningStreams").listen(
                 "BroadcastMonitoredStreamsEvent",
                 (e) => {

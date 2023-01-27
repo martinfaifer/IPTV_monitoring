@@ -10,6 +10,6 @@ class ShowAudioStreamPidsController extends Controller
 {
     public function __invoke(Stream $stream)
     {
-        return new ShowAudioPidResource($stream);
+        return new ShowAudioPidResource(resource: $stream);
     }
 }

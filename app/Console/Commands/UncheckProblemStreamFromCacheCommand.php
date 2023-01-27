@@ -3,8 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\Stream;
+use App\Jobs\SendEmailJob;
+use App\Models\Notification;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use App\Jobs\SendSlackNotificationJob;
 
 class UncheckProblemStreamFromCacheCommand extends Command
 {
@@ -13,7 +16,7 @@ class UncheckProblemStreamFromCacheCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'cache:uncheck_sended_stream';
+    protected $signature = 'notification:send_ok_stream_notification_information';
 
     /**
      * The console command description.
@@ -33,8 +36,20 @@ class UncheckProblemStreamFromCacheCommand extends Command
 
         foreach ($streams as $stream) {
             if ($stream->status != Stream::STATUS_CAN_NOT_START) {
-                if (! Cache::has($stream->id.'_notificationSended')) {
-                    Cache::pull($stream->id.'_notificationSended');
+                if (Cache::has($stream->id . '_notificationSended')) {
+                    // send information about function stream
+
+                    // slack notification
+                    SendSlackNotificationJob::dispatch("Kanál  " . $stream->nazev . " v pořádku.");
+
+                    // send email notification
+                    if (Notification::count() > 0) {
+                        foreach (Notification::get() as $email) {
+                            SendEmailJob::dispatch($email->email, "Stream " . $stream->nazev . "je v pořádku.", $stream->nazev . " OK");
+                        }
+                    }
+                    // odebrání z cache
+                    Cache::pull($stream->id . '_notificationSended');
                 }
             }
         }

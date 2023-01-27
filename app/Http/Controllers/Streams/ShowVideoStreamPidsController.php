@@ -10,6 +10,6 @@ class ShowVideoStreamPidsController extends Controller
 {
     public function __invoke(Stream $stream)
     {
-        return new ShowVideoPidResource($stream);
+        return new ShowVideoPidResource(resource: $stream);
     }
 }

@@ -16,27 +16,27 @@ class SettingsStreamController extends Controller
 {
     public function index()
     {
-        return new SettingsStreamResource(Auth::user());
+        return new SettingsStreamResource(resource: Auth::user());
     }
 
     public function store(StoreStreamRequest $request, StoreStreamAction $storeStreamAction)
     {
-        $storeStreamAction->execute($request);
+        $storeStreamAction->execute(formData: $request);
 
-        return $this->success_response('Vytvořeno');
+        return $this->success_response(message: 'Vytvořeno');
     }
 
     public function update(UpdateStreamRequest $request, Stream $stream, UpdateStreamAction $updateStreamAction)
     {
-        return $updateStreamAction->execute($stream, $request) == true
-            ? $this->success_response('Upraveno')
+        return $updateStreamAction->execute($stream, formData: $request) == true
+            ? $this->success_response(message: 'Upraveno')
             : $this->error_response();
     }
 
     public function destroy(Stream $stream, DeleteStreamAction $deleteStreamAction)
     {
-        return $deleteStreamAction->execute($stream)
-            ? $this->success_response('Odebráno')
+        return $deleteStreamAction->execute(stream: $stream)
+            ? $this->success_response(message: 'Odebráno')
             : $this->error_response();
     }
 }

@@ -1,54 +1,64 @@
 <template>
     <div>
-        <div class="justify-start d-flex" style="position: fixed; z-index: 1">
-            <v-img
-                class="ml-6"
-                height="30"
-                width="130"
-                link
-                @click="returnToHome()"
-                src="http://93.91.154.55/storage//logos/png"
-                lazy-src="http://93.91.154.55/storage//logos/png"
-                style="cursor: pointer"
-            >
-            </v-img>
-        </div>
-        <div
-            class="justify-end mr-3 d-flex"
-            style="position: relative; z-index: 1"
+        <v-app-bar
+            style="
+                background: rgba(13, 25, 44, 0.25);
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+            "
+            fixed
+            flat
+            dense
         >
-            <div class="justify-end mr-3 d-flex" style="position: fixed">
-                <Search></Search>
-                <User></User>
-                <div class="mx-1">
-                    <v-tooltip bottom color="#192B4B">
-                        <template v-slot:activator="{ on }">
-                            <v-btn
-                                v-on="on"
-                                icon
-                                @click.stop="alertSideBar = !alertSideBar"
-                            >
-                                <v-icon> mdi-bell </v-icon>
-                            </v-btn>
-                        </template>
-                        <span>
-                            <v-container>
-                                <v-row> Notifikace </v-row>
-                            </v-container>
-                        </span>
-                    </v-tooltip>
-                </div>
+            <div
+                class="justify-start d-flex"
+                style="position: fixed; z-index: 1"
+            >
+                <v-img
+                    class="ml-6"
+                    height="30"
+                    width="130"
+                    link
+                    @click="returnToHome()"
+                    src="http://93.91.154.55/storage//logos/png"
+                    lazy-src="http://93.91.154.55/storage//logos/png"
+                    style="cursor: pointer"
+                >
+                </v-img>
             </div>
-        </div>
+
+            <v-spacer></v-spacer>
+
+            <Search></Search>
+            <User></User>
+            <div class="mx-1">
+                <v-tooltip bottom color="#192B4B">
+                    <template v-slot:activator="{ on }">
+                        <v-btn
+                            v-on="on"
+                            icon
+                            @click.stop="alertSideBar = !alertSideBar"
+                        >
+                            <v-icon> mdi-bell </v-icon>
+                        </v-btn>
+                    </template>
+                    <span>
+                        <v-container>
+                            <v-row> Notifikace </v-row>
+                        </v-container>
+                    </span>
+                </v-tooltip>
+            </div>
+        </v-app-bar>
         <v-navigation-drawer
             style="z-index: 100"
-            overlay-color="rgb(17, 27, 45)"
             v-model="alertSideBar"
             absolute
             temporary
             right
             color="#101B2D"
-            width="25%"
+            :width="screenWidth"
         >
             <p
                 class="mt-2 ml-3 text-left caption text--disabled font-weight-medium"
@@ -110,21 +120,33 @@ export default {
         return {
             alertSideBar: false,
             streamsHistory: [],
+            screenWidth: "25%",
         };
     },
     created() {
-        this.getHistory();
+        this.index();
     },
     methods: {
+        index() {
+            axios.get("streams/history").then((response) => {
+                this.streamsHistory = response.data;
+            });
+        },
+
+        websocketData() {
+            Echo.channel("StreamHistoryStatuses").listen(
+                "BroadcastStreamsHistoryStatusEvent",
+                (e) => {
+                    console.log(e);
+                    this.streamsHistory = e[0];
+                }
+            );
+        },
+
         returnToHome() {
             if (this.$route.path != "/") {
                 this.$router.push("/");
             }
-        },
-        getHistory() {
-            axios.get("streams/history").then((response) => {
-                this.streamsHistory = response.data;
-            });
         },
 
         getAlertColor(status) {
@@ -193,6 +215,24 @@ export default {
             if (status == "issue") {
                 return "shadow-blur-error-alert";
             }
+        },
+    },
+
+    mounted() {
+        this.websocketData();
+        window.addEventListener("resize", () => {
+            if (window.innerWidth >= "1024") {
+                this.screenWidth = "35%";
+            } else {
+                this.screenWidth = "100%";
+            }
+        });
+    },
+
+    watch: {
+        screenWidth() {
+            console.log(window.screen.width);
+            // this.sideBarWidth();
         },
     },
 };

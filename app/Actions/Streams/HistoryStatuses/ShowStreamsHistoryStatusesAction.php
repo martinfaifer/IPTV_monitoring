@@ -2,6 +2,7 @@
 
 namespace App\Actions\Streams\HistoryStatuses;
 
+use App\Models\Stream;
 use App\Models\StreamsHistoryStatus;
 
 class ShowStreamsHistoryStatusesAction
@@ -30,6 +31,12 @@ class ShowStreamsHistoryStatusesAction
                 ],
             ],
             'categories' => $this->get_list_from_array(StreamsHistoryStatus::latest()->take(self::DATA_FOR_TWO_HOURS)->get('created_at'), 'created_at', true),
+            'current' => [
+                'stoped' => Stream::where('status', 'stoped')->count(),
+                'active' => Stream::where('status', 'active')->count(),
+                'waiting' => Stream::where('status', 'waiting')->count(),
+                'problem' => Stream::where('status', 'problem')->count()
+            ]
         ];
     }
 

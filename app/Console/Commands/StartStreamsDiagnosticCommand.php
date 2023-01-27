@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\StartStreamDiagnosticJob;
 use App\Models\Stream;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
+use App\Jobs\StartStreamDiagnosticJob;
+use Illuminate\Support\Facades\Artisan;
 
 class StartStreamsDiagnosticCommand extends Command
 {
@@ -29,10 +31,13 @@ class StartStreamsDiagnosticCommand extends Command
      */
     public function handle()
     {
-        Stream::where('status', Stream::STATUS_WAITING)->orWhere('status', Stream::STATUS_CRASH)->chunk(20, function ($streams) {
-            $streams->each(function ($stream) {
-                StartStreamDiagnosticJob::dispatch($stream);
-            });
-        });
+        // označení všech streamu jako waiting pro spuštění
+        $streams = Stream::where('status', Stream::STATUS_WAITING)->orWhere('status', Stream::STATUS_CRASH)->cursor();
+        foreach ($streams as $stream) {
+            Cache::forget('stream_' . $stream->id);
+            Cache::put('stream_' . $stream->id, $stream);
+            StartStreamDiagnosticJob::dispatch($stream);
+            usleep(500000); // sleep for 0,5s
+        }
     }
 }

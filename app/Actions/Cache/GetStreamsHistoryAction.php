@@ -11,7 +11,7 @@ class GetStreamsHistoryAction
         if (Cache::has('streamsErrorHistory')) {
             $history = Cache::get('streamsErrorHistory');
 
-            return array_reverse($history);
+            return array_reverse((array) $history);
         }
 
         return [];

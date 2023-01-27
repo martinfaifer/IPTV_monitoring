@@ -2,7 +2,7 @@
     <div>
         <!-- sidebar -->
         <v-navigation-drawer
-            style="background: linear-gradient(#192b4b, #000000)"
+            style="background: linear-gradient(#0e192c, #000000)"
             v-model="drawer"
             fixed
             app
@@ -54,9 +54,14 @@ export default {
                     route: "/user/edit",
                 },
                 {
-                    title: "Upozornění",
-                    icon: "mdi-bell-ring",
+                    title: "Webhook",
+                    icon: "mdi-webhook",
                     route: "/user/notifications",
+                },
+                {
+                    title: "Slack",
+                    icon: "mdi-slack",
+                    route: "/user/slack",
                 },
             ],
         };

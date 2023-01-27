@@ -12,6 +12,6 @@ class ShowStreamPidsController extends Controller
 
     public function __invoke(Stream $stream, GetItemsFromCache $getItemsFromCache)
     {
-        return $getItemsFromCache->execute($this->streamPidKey.$stream->id);
+        return $getItemsFromCache->execute(cacheKey: $this->streamPidKey . $stream->id);
     }
 }

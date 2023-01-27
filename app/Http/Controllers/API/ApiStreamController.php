@@ -22,7 +22,7 @@ class ApiStreamController extends Controller
         return [
             'status' => 'success',
             'streamData' => [
-                'img' => config('app.url').(new GetStreamVideoImageAction())->execute($stream, true),
+                'img' => config('app.url') . (new GetStreamVideoImageAction())->execute($stream, true),
                 'name' => $stream->nazev,
                 'streamStatus' => $stream->status,
                 'streamId' => $stream->id,
@@ -38,11 +38,11 @@ class ApiStreamController extends Controller
 
     public function store(StreamStoreApiRequest $request, StoreStreamAction $storeStreamAction)
     {
-        return $storeStreamAction->execute($request);
+        return $storeStreamAction->execute(formData: $request);
     }
 
     public function destroy(Stream $stream, DeleteStreamAction $deleteStreamAction)
     {
-        return $deleteStreamAction->execute($stream);
+        return $deleteStreamAction->execute(stream: $stream);
     }
 }

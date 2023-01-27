@@ -19,8 +19,8 @@ class NotificationController extends Controller
 
     public function store(StoreNotificationRequest $request, StoreNotificationAction $storeNotificationAction)
     {
-        return $storeNotificationAction->execute($request, Auth::user()) != false
-            ? $this->success_response('Vytvořeno')
+        return $storeNotificationAction->execute(formData: $request, user: Auth::user()) != false
+            ? $this->success_response(message: 'Vytvořeno')
             : $this->error_response();
     }
 

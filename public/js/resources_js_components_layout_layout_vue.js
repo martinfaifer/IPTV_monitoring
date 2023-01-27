@@ -27,6 +27,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -156,6 +157,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -453,6 +478,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -463,24 +498,33 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       alertSideBar: false,
-      streamsHistory: []
+      streamsHistory: [],
+      screenWidth: "25%"
     };
   },
   created: function created() {
-    this.getHistory();
+    this.index();
   },
   methods: {
-    returnToHome: function returnToHome() {
-      if (this.$route.path != "/") {
-        this.$router.push("/");
-      }
-    },
-    getHistory: function getHistory() {
+    index: function index() {
       var _this = this;
 
       axios.get("streams/history").then(function (response) {
         _this.streamsHistory = response.data;
       });
+    },
+    websocketData: function websocketData() {
+      var _this2 = this;
+
+      Echo.channel("StreamHistoryStatuses").listen("BroadcastStreamsHistoryStatusEvent", function (e) {
+        console.log(e);
+        _this2.streamsHistory = e[0];
+      });
+    },
+    returnToHome: function returnToHome() {
+      if (this.$route.path != "/") {
+        this.$router.push("/");
+      }
     },
     getAlertColor: function getAlertColor(status) {
       if (status == "starting") {
@@ -547,6 +591,23 @@ __webpack_require__.r(__webpack_exports__);
       if (status == "issue") {
         return "shadow-blur-error-alert";
       }
+    }
+  },
+  mounted: function mounted() {
+    var _this3 = this;
+
+    this.websocketData();
+    window.addEventListener("resize", function () {
+      if (window.innerWidth >= "1024") {
+        _this3.screenWidth = "35%";
+      } else {
+        _this3.screenWidth = "100%";
+      }
+    });
+  },
+  watch: {
+    screenWidth: function screenWidth() {
+      console.log(window.screen.width); // this.sideBarWidth();
     }
   }
 });
@@ -923,7 +984,6 @@ var render = function () {
         _vm._v(" "),
         _c(
           "v-main",
-          { attrs: { app: "" } },
           [
             _c(
               "v-container",
@@ -1094,8 +1154,38 @@ var render = function () {
         [
           _c(
             "v-card",
-            { attrs: { height: "400" } },
+            {
+              staticStyle: {
+                background: "rgba(13, 25, 44)",
+                "<!-- box-shadow": "0 8px 32px 0 rgba(17, 27, 45, 0.37)",
+                "backdrop-filter": "blur(4px)",
+                "-webkit-backdrop-filter": "blur(4px)",
+              },
+              attrs: { height: "400" },
+            },
             [
+              _c(
+                "v-card-title",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.closeDialog()
+                        },
+                      },
+                    },
+                    [_c("v-icon", [_vm._v("mdi-close")])],
+                    1
+                  ),
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c(
                 "v-card-text",
                 { staticClass: "pt-2" },
@@ -1110,6 +1200,7 @@ var render = function () {
                           autofocus: "",
                           loading: _vm.loading,
                           color: "#328AF1",
+                          outlined: "",
                           placeholder:
                             "Pro otevření vyhledávání stiskněte crtl + mezerník",
                         },
@@ -1121,6 +1212,18 @@ var render = function () {
                           expression: "searchData",
                         },
                       }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    [
+                      _vm.loading == true
+                        ? _c("v-progress-linear", {
+                            attrs: { indeterminate: "" },
+                          })
+                        : _vm._e(),
                     ],
                     1
                   ),
@@ -1170,6 +1273,8 @@ var render = function () {
                                             "v-list-item-content",
                                             [
                                               _c("v-list-item-title", {
+                                                staticClass:
+                                                  "font-weight-medium subtitle-1",
                                                 domProps: {
                                                   innerHTML: _vm._s(item.nazev),
                                                 },
@@ -1196,7 +1301,7 @@ var render = function () {
                               ],
                               null,
                               false,
-                              622892697
+                              1989582703
                             ),
                           }),
                         ],
@@ -1374,108 +1479,106 @@ var render = function () {
     "div",
     [
       _c(
-        "div",
+        "v-app-bar",
         {
-          staticClass: "justify-start d-flex",
-          staticStyle: { position: "fixed", "z-index": "1" },
-        },
-        [
-          _c("v-img", {
-            staticClass: "ml-6",
-            staticStyle: { cursor: "pointer" },
-            attrs: {
-              height: "30",
-              width: "130",
-              link: "",
-              src: "http://93.91.154.55/storage//logos/png",
-              "lazy-src": "http://93.91.154.55/storage//logos/png",
-            },
-            on: {
-              click: function ($event) {
-                return _vm.returnToHome()
-              },
-            },
-          }),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "justify-end mr-3 d-flex",
-          staticStyle: { position: "relative", "z-index": "1" },
+          staticStyle: {
+            background: "rgba(13, 25, 44, 0.25)",
+            "box-shadow": "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+            "backdrop-filter": "blur(4px)",
+            "-webkit-backdrop-filter": "blur(4px)",
+          },
+          attrs: { fixed: "", flat: "", dense: "" },
         },
         [
           _c(
             "div",
             {
-              staticClass: "justify-end mr-3 d-flex",
-              staticStyle: { position: "fixed" },
+              staticClass: "justify-start d-flex",
+              staticStyle: { position: "fixed", "z-index": "1" },
             },
             [
-              _c("Search"),
-              _vm._v(" "),
-              _c("User"),
-              _vm._v(" "),
+              _c("v-img", {
+                staticClass: "ml-6",
+                staticStyle: { cursor: "pointer" },
+                attrs: {
+                  height: "30",
+                  width: "130",
+                  link: "",
+                  src: "http://93.91.154.55/storage//logos/png",
+                  "lazy-src": "http://93.91.154.55/storage//logos/png",
+                },
+                on: {
+                  click: function ($event) {
+                    return _vm.returnToHome()
+                  },
+                },
+              }),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("Search"),
+          _vm._v(" "),
+          _c("User"),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "mx-1" },
+            [
               _c(
-                "div",
-                { staticClass: "mx-1" },
-                [
-                  _c(
-                    "v-tooltip",
+                "v-tooltip",
+                {
+                  attrs: { bottom: "", color: "#192B4B" },
+                  scopedSlots: _vm._u([
                     {
-                      attrs: { bottom: "", color: "#192B4B" },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "activator",
-                          fn: function (ref) {
-                            var on = ref.on
-                            return [
-                              _c(
-                                "v-btn",
-                                _vm._g(
-                                  {
-                                    attrs: { icon: "" },
-                                    on: {
-                                      click: function ($event) {
-                                        $event.stopPropagation()
-                                        _vm.alertSideBar = !_vm.alertSideBar
-                                      },
-                                    },
-                                  },
-                                  on
-                                ),
-                                [_c("v-icon", [_vm._v(" mdi-bell ")])],
-                                1
-                              ),
-                            ]
-                          },
-                        },
-                      ]),
-                    },
-                    [
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        [
+                      key: "activator",
+                      fn: function (ref) {
+                        var on = ref.on
+                        return [
                           _c(
-                            "v-container",
-                            [_c("v-row", [_vm._v(" Notifikace ")])],
+                            "v-btn",
+                            _vm._g(
+                              {
+                                attrs: { icon: "" },
+                                on: {
+                                  click: function ($event) {
+                                    $event.stopPropagation()
+                                    _vm.alertSideBar = !_vm.alertSideBar
+                                  },
+                                },
+                              },
+                              on
+                            ),
+                            [_c("v-icon", [_vm._v(" mdi-bell ")])],
                             1
                           ),
-                        ],
+                        ]
+                      },
+                    },
+                  ]),
+                },
+                [
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    [
+                      _c(
+                        "v-container",
+                        [_c("v-row", [_vm._v(" Notifikace ")])],
                         1
                       ),
-                    ]
+                    ],
+                    1
                   ),
-                ],
-                1
+                ]
               ),
             ],
             1
           ),
-        ]
+        ],
+        1
       ),
       _vm._v(" "),
       _c(
@@ -1483,12 +1586,11 @@ var render = function () {
         {
           staticStyle: { "z-index": "100" },
           attrs: {
-            "overlay-color": "rgb(17, 27, 45)",
             absolute: "",
             temporary: "",
             right: "",
             color: "#101B2D",
-            width: "25%",
+            width: _vm.screenWidth,
           },
           model: {
             value: _vm.alertSideBar,

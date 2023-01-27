@@ -22,7 +22,7 @@ class StoreStreamPidDataFroChartToCache
                 array_shift($originalContent);
             }
 
-            Cache::put($key, $originalContent, now()->addMinutes(5));
+            Cache::put($key, $originalContent,  now()->addMinutes(5));
         } else {
             Cache::put($key, [
                 $newdata,

@@ -50,7 +50,11 @@ class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
         $this->stream->update([
             'status' => Stream::STATUS_WAITING,
         ]);
+        // vyčištění cache
+        Cache::pull($this->stream->id . "_" . Stream::STATUS_CAN_NOT_START);
+
         $processPid = shell_exec("nohup php artisan stream:diagnostic {$this->stream->id}" . ' > /dev/null 2>&1 & echo $!; ');
+
         Cache::put('streamIsMonitoring_' . $this->stream->id, [
             'processPid' => $processPid,
         ]);

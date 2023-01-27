@@ -83,7 +83,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -228,7 +227,7 @@ var render = function () {
             [
               _c(
                 "v-col",
-                { attrs: { cols: "12", sm: "12", md: "5", lg: "5" } },
+                { attrs: { cols: "12", sm: "12", md: "5", lg: "6" } },
                 [
                   _c(
                     "v-form",
@@ -245,7 +244,7 @@ var render = function () {
                         "v-card",
                         {
                           staticClass:
-                            "overflow-hidden rounded-xl blur shadow-blur",
+                            "overflow-hidden rounded-lg shadow-blur-card",
                         },
                         [
                           _c(
@@ -312,17 +311,17 @@ var render = function () {
                           _vm._v(" "),
                           _c(
                             "v-card-actions",
+                            { staticClass: "my-6" },
                             [
-                              _c("v-spacer"),
-                              _vm._v(" "),
                               _c(
                                 "v-btn",
                                 {
-                                  staticClass: "rounded-lg",
+                                  staticClass:
+                                    "rounded-lg shadow-blur-submit-btn",
                                   attrs: {
-                                    text: "",
+                                    color: "green darken-1",
+                                    block: "",
                                     type: "submit",
-                                    color: "#328AF1",
                                     outlined: "",
                                   },
                                 },

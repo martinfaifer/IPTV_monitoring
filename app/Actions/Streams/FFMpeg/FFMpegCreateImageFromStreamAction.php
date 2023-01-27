@@ -14,24 +14,25 @@ class FFMpegCreateImageFromStreamAction
 
     public function execute(object $stream)
     {
-        $this->imageName = Str::slug($stream->nazev) . '.jpg';
-        $this->filePath = public_path("storage/streamImages/{$this->imageName}");
-
-        if (file_exists($this->filePath)) {
-            $this->remove_file($this->filePath);
-        }
-
-        $isNvidiaGpu = shell_exec('nvidia-smi');
-
-        if (str_contains($isNvidiaGpu, "failed")) {
-            $this->create_image_via_cpu($stream);
-        } else {
-            $this->create_image_via_nvidia_gpu($stream);
-        }
         try {
+            $this->imageName = Str::slug($stream->nazev) . '.jpg';
+            $this->filePath = public_path("storage/streamImages/{$this->imageName}");
+
+            if (file_exists($this->filePath)) {
+                $this->remove_file($this->filePath);
+            }
+
+            $isNvidiaGpu = shell_exec('nvidia-smi');
+
+            if (str_contains($isNvidiaGpu, "failed")) {
+                $this->create_image_via_cpu($stream);
+            } else {
+                $this->create_image_via_nvidia_gpu($stream);
+            }
+
             $this->resize_image($this->filePath);
             event(new BroadcastStreamImageEvent($stream));
-            $this->cache_image($this->filePath);
+            // $this->cache_image($this->filePath);
         } catch (\Throwable $th) {
         }
     }
@@ -39,18 +40,18 @@ class FFMpegCreateImageFromStreamAction
     public function create_image_via_cpu(object $stream)
     {
         if (str_contains($stream->stream_url, 'http')) {
-            shell_exec("ffmpeg -ss 3 -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}"));
+            shell_exec("timeout " . config('app.process_ffmpeg_timeout') . "s ffmpeg -ss 2 -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") . " -timeout 3");
         } else {
-            shell_exec("ffmpeg -ss 3 -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}"));
+            shell_exec("timeout " . config('app.process_ffmpeg_timeout') . "s ffmpeg -ss 2 -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}" . " -timeout 3"));
         }
     }
 
     public function create_image_via_nvidia_gpu(object $stream)
     {
         if (str_contains($stream->stream_url, 'http')) {
-            shell_exec("ffmpeg -hwaccel cuda -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}"));
+            shell_exec("timeout " . config('app.process_ffmpeg_timeout') . "s ffmpeg -hwaccel cuda -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") .  " -timeout 3");
         } else {
-            shell_exec("ffmpeg -hwaccel cuda -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}"));
+            shell_exec("timeout " . config('app.process_ffmpeg_timeout') . "s ffmpeg -hwaccel cuda -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") .  " -timeout 3");
         }
     }
 
@@ -63,11 +64,15 @@ class FFMpegCreateImageFromStreamAction
         }
     }
 
-    public function cache_image(string $imagePath)
+    public function cache_image(string $imagePath): string|bool
     {
-        return Image::cache(function ($image) use ($imagePath) {
-            $image->make($imagePath);
-        });
+        try {
+            return Image::cache(function ($image) use ($imagePath) {
+                $image->make($imagePath);
+            });
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     public function resize_image($imagePath)

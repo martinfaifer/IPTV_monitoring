@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\Cache\Locks\CheckIfIsLockAction;
 use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 use App\Jobs\StartStreamDiagnosticJob;
 use App\Models\Stream;
@@ -31,18 +32,22 @@ class CheckIfStreamsRunningCommand extends Command
      */
     public function handle()
     {
-        $cmds = [];
-
         Stream::where('status', Stream::STATUS_MONITORING)
-            ->chunk(10, function ($streams) {
+            ->chunk(100, function ($streams) {
                 $streams->each(function ($stream) {
-                    $cachedLastDiagnosticTime = Cache::get('lastDiagnosticTime_'.$stream->id);
-                    if (! is_null($cachedLastDiagnosticTime)) {
-                        if ($cachedLastDiagnosticTime['time'] <= strtotime('-1 minute')) {
-                            (new UnlockStreamUrlAction($stream))->handle();
-                            StartStreamDiagnosticJob::dispatch($stream);
-                        }
+
+                    if ((new CheckIfIsLockAction())->execute($stream) === false) {
+                        (new UnlockStreamUrlAction($stream))->handle();
+                        StartStreamDiagnosticJob::dispatch($stream);
                     }
+
+                    // $cachedLastDiagnosticTime = Cache::get('lastDiagnosticTime_'.$stream->id);
+                    // if (! is_null($cachedLastDiagnosticTime)) {
+                    //     if ($cachedLastDiagnosticTime['time'] <= strtotime('-1 minute')) {
+                    //         (new UnlockStreamUrlAction($stream))->handle();
+                    //         StartStreamDiagnosticJob::dispatch($stream);
+                    //     }
+                    // }
                 });
             });
     }

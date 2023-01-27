@@ -1,22 +1,20 @@
 <template>
     <div>
-        <v-col cols="12" sm="12" md="12" lg="12" class="pt-6">
-            <v-card class="overflow-hidden rounded-lg blur shadow-blur" flat>
-                <v-card-text>
-                    <p class="title text-center">Vytížení sítě</p>
-                    <apexchart
-                        dark
-                        class="info--text"
-                        v-cloak
-                        height="200"
-                        type="area"
-                        :options="chartOptions"
-                        :series="series"
-                        ref="chart"
-                    ></apexchart>
-                </v-card-text>
-            </v-card>
-        </v-col>
+        <v-card class="overflow-hidden rounded-lg blur shadow-blur" flat>
+            <v-card-text>
+                <p class="title text-center">Vytížení sítě</p>
+                <apexchart
+                    dark
+                    class="info--text"
+                    v-cloak
+                    height="200"
+                    type="area"
+                    :options="chartOptions"
+                    :series="series"
+                    ref="chart"
+                ></apexchart>
+            </v-card-text>
+        </v-card>
     </div>
 </template>
 <script>

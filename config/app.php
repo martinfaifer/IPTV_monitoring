@@ -140,6 +140,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Process timeouts for diagnostic and creating images
+    |--------------------------------------------------------------------------
+    |
+    | This key is used for killing long running processes, which can create memory leaks
+    |
+    */
+
+    'process_ffmpeg_timeout' => env('PROCESS_FFMPEG_TIMEOUT', 7),
+    'process_tsduck_timeout' => env('PROCESS_TSDUCK_TIMEOUT', 3),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Email address
+    |--------------------------------------------------------------------------
+    |
+    | This key is used for show default email address
+    |
+    */
+
+    'email' => env('MAIL_FROM_ADDRESS', 'monitoring@iptv.test'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Maintenance Mode Driver
     |--------------------------------------------------------------------------
     |

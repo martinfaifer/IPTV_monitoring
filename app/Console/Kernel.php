@@ -16,16 +16,16 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('streams:start_diagnostic')->everyMinute()->withoutOverlapping()->runInBackground();
-        $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute()->runInBackground();
+        $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute()->withoutOverlapping()->runInBackground();
         $schedule->command('system:take_network_data')->everyMinute()->runInBackground();
 
-        $schedule->command('email:send_problem_stream_information')->everyMinute()->runInBackground();
-        $schedule->command('cache:uncheck_sended_stream')->everyFiveMinutes()->runInBackground();
+        $schedule->command('notification:send_problem_stream_notification_information')->everyMinute()->runInBackground();
+        $schedule->command('notification:send_ok_stream_notification_information')->everyFiveMinutes()->runInBackground();
 
         // $schedule->command('streams:start_issue')->everyMinute();
         $schedule->command('streams:check_if_running')->everyTwoMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command('streams:check_if_stream_is_freeze_in_starting')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command('streams:create_image')->everyFiveMinutes()->runInBackground()->withoutOverlapping();
+        // $schedule->command('streams:check_if_stream_is_freeze_in_starting')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        $schedule->command('streams:create_image')->everyTenMinutes()->runInBackground()->withoutOverlapping();
     }
 
     /**

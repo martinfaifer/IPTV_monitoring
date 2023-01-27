@@ -47,7 +47,7 @@
                                         class="d-flex justify-space-between"
                                         :error-messages="errors.customData"
                                         v-model="user.customData"
-                                        label="Statické streamy"
+                                        label="Streamy, které budete mít připnuté ve Vaší mozaice"
                                         :items="streams"
                                         item-text="nazev"
                                         item-value="id"

@@ -23,7 +23,21 @@
             width="800"
             overlay-color="rgb(17, 27, 45)"
         >
-            <v-card height="400">
+            <v-card
+                height="400"
+                style="
+                    background: rgba(13, 25, 44);
+                    <!-- box-shadow: 0 8px 32px 0 rgba(17, 27, 45, 0.37);
+                    backdrop-filter: blur(4px);
+                    -webkit-backdrop-filter: blur(4px); -->
+                "
+            >
+                <v-card-title>
+                    <v-spacer></v-spacer>
+                    <v-btn icon @click="closeDialog()">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                </v-card-title>
                 <v-card-text class="pt-2">
                     <v-col cols="12" sm="12" md="12" lg="12">
                         <v-text-field
@@ -32,8 +46,15 @@
                             :loading="loading"
                             v-model.lazy="searchData"
                             color="#328AF1"
+                            outlined
                             placeholder="Pro otevření vyhledávání stiskněte crtl + mezerník"
                         ></v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-progress-linear
+                            v-if="loading == true"
+                            indeterminate
+                        ></v-progress-linear>
                     </v-col>
                     <v-col
                         cols="12"
@@ -59,7 +80,10 @@
                                         <v-img :src="item.logo"></v-img>
                                     </v-list-item-avatar>
                                     <v-list-item-content>
-                                        <v-list-item-title v-html="item.nazev">
+                                        <v-list-item-title
+                                            class="font-weight-medium subtitle-1"
+                                            v-html="item.nazev"
+                                        >
                                         </v-list-item-title>
                                         <v-list-item-subtitle
                                             v-html="item.description"

@@ -27,7 +27,7 @@ class SendProblemStreamMail extends Mailable
      */
     public function build()
     {
-        return $this->from('iptvdohled@grapesc.cz')
+        return $this->from(config('app.email'))
         ->markdown('SendProblemStreams')
         ->subject('Streamy ve výpadku');
     }

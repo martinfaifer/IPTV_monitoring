@@ -10,6 +10,6 @@ class ApiStreamImageController extends Controller
 {
     public function __invoke(Stream $stream, GetStreamVideoImageAction $getStreamVideoImageAction)
     {
-        return $getStreamVideoImageAction->execute($stream);
+        return $getStreamVideoImageAction->execute(stream: $stream);
     }
 }

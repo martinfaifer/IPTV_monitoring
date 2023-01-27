@@ -10,6 +10,6 @@ class RunningStreamsController extends Controller
 {
     public function __invoke()
     {
-        return new RunningStreamsPaginationResource(Auth::user());
+        return new RunningStreamsPaginationResource(resource: Auth::user());
     }
 }

@@ -11,20 +11,32 @@ class SendStreamCrashWebhookAction
 {
     public function execute(object $stream, string $status)
     {
-        if ($status == Stream::STATUS_CAN_NOT_START) {
-            $webhooks = Webhook::where('webhook_send_option_id', WebhookSendOption::where('type', 'alerts')->first()->id)->get();
+        try {
+            if ($status == Stream::STATUS_CAN_NOT_START) {
+                $webhooks = Webhook::where('webhook_send_option_id', WebhookSendOption::where('type', 'alerts')->first()->id)->get();
 
-            if (count($webhooks) > 0) {
-                foreach ($webhooks as $webhook) {
-                    WebhookCall::create()
-                        ->url($webhook->uri)
-                        ->payload([
-                            'error' => $stream->nazev,
-                        ])
-                        ->useSecret($webhook->secret)
-                        ->dispatch();
+                if (count($webhooks) > 0) {
+                    foreach ($webhooks as $webhook) {
+                        if (is_null($webhook->secret)) {
+                            WebhookCall::create()
+                                ->url($webhook->uri)
+                                ->payload([
+                                    'error' => $stream->nazev,
+                                ])
+                                ->dispatch();
+                        } else {
+                            WebhookCall::create()
+                                ->url($webhook->uri)
+                                ->payload([
+                                    'error' => $stream->nazev,
+                                ])
+                                ->useSecret($webhook->secret)
+                                ->dispatch();
+                        }
+                    }
                 }
             }
+        } catch (\Throwable $th) {
         }
     }
 }

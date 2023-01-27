@@ -6,6 +6,7 @@ enum CacheKeyEnum: string
 {
     case STREAMS = 'streams';
     case STREAM_TS = 'streamTS_';
+    case STREAM_STATUS = 'streams_status';
 
     case SHOW_STREAM_INVALID_SYNC = 'showStreamInvalidSync_';
     case ERROR_STREAM_INVALID_SYNC = 'streamInvalidSync_';

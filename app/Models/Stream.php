@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Stream extends Model
 {
@@ -32,4 +33,9 @@ class Stream extends Model
     protected $casts = [
         'monitored_at' => 'datetime',
     ];
+
+    public function history(): HasMany
+    {
+        return $this->hasMany(StreamHistoryStatus::class, 'stream_id', 'id')->select(['id', 'status', 'created_at'])->take(10);
+    }
 }

@@ -5,7 +5,7 @@ $line-height-base: 1.6;
 
 // custom props
 .theme--dark.v-application {
-    background: linear-gradient(#192B4B,#000000);
+    background: linear-gradient(#0e192c,#000000);
 }
 
 .v-data-table__wrapper > table > tbody > tr:hover {
@@ -18,7 +18,7 @@ $line-height-base: 1.6;
 }
 
 .theme--dark.v-navigation {
-    color: linear-gradient(#192B4B,#000000);
+    color: linear-gradient(#0e192c,#000000);
 }
 
 .theme--dark.v-card {
@@ -37,12 +37,12 @@ $line-height-base: 1.6;
 
 .theme--dark.shadow-blur-error {
     box-shadow: inset 0 0 1px 1px rgba(239, 82, 80, 0.9),
-        0 10px 14px 0 rgba(239, 82, 80, 0.3) !important;
+        0 8px 14px 0 rgba(239, 82, 80, 0.3) !important;
 }
 
 .theme--dark.shadow-blur-warning {
     box-shadow: inset 0 0 1px 1px rgba(251, 140, 0, 0.9),
-        0 10px 14px 0 rgba(251, 140, 0, 0.1) !important;
+        0 8px 14px 0 rgba(251, 140, 0, 0.1) !important;
 }
 
 .theme--dark.shadow-blur-error-alert {
@@ -63,6 +63,22 @@ $line-height-base: 1.6;
 .theme--dark.shadow-blur-warning-green-alert {
     box-shadow: inset 0 0 1px 1px rgba(30, 135, 74, 0.9),
         0 20px 16px 0 rgba(48, 164, 96, 0.2) !important;
+}
+
+.theme--dark.shadow-blur-close-btn {
+    box-shadow: inset 0 0 0px 0px rgba(239, 83, 80, 0.9),
+        0 4px 4px 0 rgba(255, 50, 47, 0.2) !important;
+}
+
+.theme--dark.shadow-blur-submit-btn {
+    box-shadow: inset 0 0 0px 0px rgba(30, 135, 74, 0.9),
+        0 4px 4px 0 rgba(48, 164, 96, 0.2) !important;
+}
+
+
+.theme--dark.shadow-blur-card {
+    box-shadow: inset 0 0 0px 0px rgba(25, 43, 75, 0.9),
+        0 20px 14px 0 rgba(25, 42, 75, 0.2) !important;
 }
 
 .theme--dark.v-data-table {

@@ -2,10 +2,10 @@
     <v-main>
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
-                <v-col cols="12" sm="12" md="5" lg="5">
+                <v-col cols="12" sm="12" md="5" lg="6">
                     <v-form @submit.prevent="login()">
                         <v-card
-                            class="overflow-hidden rounded-xl blur shadow-blur"
+                            class="overflow-hidden rounded-lg shadow-blur-card"
                         >
                             <v-card-text>
                                 <h1 class="mt-4 mb-4 text-center">
@@ -36,13 +36,12 @@
                                     color="#328AF1"
                                 ></v-text-field>
                             </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
+                            <v-card-actions class="my-6">
                                 <v-btn
-                                    text
+                                    color="green darken-1"
+                                    block
                                     type="submit"
-                                    color="#328AF1"
-                                    class="rounded-lg"
+                                    class="rounded-lg shadow-blur-submit-btn"
                                     outlined
                                     >Přihlášení</v-btn
                                 >

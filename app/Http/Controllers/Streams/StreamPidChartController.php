@@ -10,6 +10,6 @@ class StreamPidChartController extends Controller
 {
     public function __invoke(Stream $stream, int $pid, GetStreamPidChartAction $getStreamPidChartAction)
     {
-        return $getStreamPidChartAction->execute($stream, $pid);
+        return $getStreamPidChartAction->execute(stream: $stream, pid: $pid);
     }
 }

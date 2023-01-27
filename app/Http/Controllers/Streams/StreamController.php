@@ -12,11 +12,11 @@ class StreamController extends Controller
 {
     public function index()
     {
-        return new StreamsResource(Auth::user());
+        return new StreamsResource(resource: Auth::user());
     }
 
     public function show(Stream $stream)
     {
-        return new StreamResource($stream);
+        return new StreamResource(resource: $stream);
     }
 }

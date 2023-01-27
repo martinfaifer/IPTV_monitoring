@@ -21,12 +21,18 @@
                     </v-card>
                 </v-col>
             </v-row>
-            <!-- vytížení sítě -->
-            <SettingsDashboardNetwork></SettingsDashboardNetwork>
-            <!-- prehled zatížení RAM -->
 
-            <!-- prehled poctu aktivních streamů v čase -->
-            <SettingsDashboardStreamsStatuses></SettingsDashboardStreamsStatuses>
+            <v-row class="mx-auto pt-6">
+                <v-col cols="12" sm="12" md="6" lg="6">
+                    <!-- vytížení sítě -->
+                    <SettingsDashboardNetwork></SettingsDashboardNetwork>
+                </v-col>
+                <v-col cols="12" sm="12" md="6" lg="6">
+                    <!-- prehled poctu aktivních streamů v čase -->
+                    <SettingsDashboardStreamsStatuses></SettingsDashboardStreamsStatuses>
+                </v-col>
+                <!-- prehled zatížení RAM -->
+            </v-row>
         </v-container>
     </div>
 </template>

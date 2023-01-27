@@ -10,6 +10,6 @@ class ApiStreamStartController extends Controller
 {
     public function __invoke(Stream $stream, StartStreamAction $startStreamAction)
     {
-        return $startStreamAction->execute($stream);
+        return $startStreamAction->execute(stream: $stream);
     }
 }

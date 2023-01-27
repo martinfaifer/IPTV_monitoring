@@ -64,6 +64,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -220,6 +224,9 @@ var render = function () {
                                       "prepend-icon": "mdi-lock",
                                       type: "password",
                                       color: "#328AF1",
+                                      autofocus: "",
+                                      outlined: "",
+                                      clearable: "",
                                     },
                                     model: {
                                       value: _vm.formData.password,
@@ -241,7 +248,8 @@ var render = function () {
                                       "prepend-icon": "mdi-lock",
                                       type: "password",
                                       color: "#328AF1",
-                                      autofocus: "",
+                                      outlined: "",
+                                      clearable: "",
                                     },
                                     model: {
                                       value: _vm.formData.password_confirm,

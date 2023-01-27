@@ -2248,6 +2248,10 @@ var userNotification = function userNotification() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_User_userNotification_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/userNotification.vue */ "./resources/js/components/User/userNotification.vue"));
 };
 
+var userSlack = function userSlack() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_User_userSlack_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/userSlack.vue */ "./resources/js/components/User/userSlack.vue"));
+};
+
 var SettingsLayout = function SettingsLayout() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Settings_settingsLayout_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Settings/settingsLayout.vue */ "./resources/js/components/Settings/settingsLayout.vue"));
 };
@@ -2300,6 +2304,9 @@ var routes = [{
     }, {
       path: "/user/notifications",
       component: userNotification
+    }, {
+      path: "/user/slack",
+      component: userSlack
     }]
   }, {
     path: "/settings",
@@ -74225,7 +74232,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_layout_layout_vue":1,"resources_js_components_mozaika_mozaika_vue":1,"resources_js_components_Stream_streamLayout_vue":1,"resources_js_components_User_UserLayout_vue":1,"resources_js_components_User_userDashboard_vue":1,"resources_js_components_User_userMozaika_vue":1,"resources_js_components_User_userEdit_vue":1,"resources_js_components_User_userNotification_vue":1,"resources_js_components_Settings_settingsLayout_vue":1,"resources_js_components_Settings_Dashboard_settingsDashboard_vue":1,"resources_js_components_Settings_Streams_settingsStreams_vue":1,"resources_js_components_Settings_Users_settingsUsers_vue":1,"resources_js_components_Settings_Notifications_settingsNotifications_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_PageNotFound_PageNotFound_vue":1,"resources_js_components_Stream_streamAllDiscontinutiesErrors_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_layout_layout_vue":1,"resources_js_components_mozaika_mozaika_vue":1,"resources_js_components_Stream_streamLayout_vue":1,"resources_js_components_User_UserLayout_vue":1,"resources_js_components_User_userDashboard_vue":1,"resources_js_components_User_userMozaika_vue":1,"resources_js_components_User_userEdit_vue":1,"resources_js_components_User_userNotification_vue":1,"resources_js_components_User_userSlack_vue":1,"resources_js_components_Settings_settingsLayout_vue":1,"resources_js_components_Settings_Dashboard_settingsDashboard_vue":1,"resources_js_components_Settings_Streams_settingsStreams_vue":1,"resources_js_components_Settings_Users_settingsUsers_vue":1,"resources_js_components_Settings_Notifications_settingsNotifications_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_PageNotFound_PageNotFound_vue":1,"resources_js_components_Stream_streamAllDiscontinutiesErrors_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

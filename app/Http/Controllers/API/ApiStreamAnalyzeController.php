@@ -10,6 +10,6 @@ class ApiStreamAnalyzeController extends Controller
 {
     public function __invoke(StreamAnalyzeApiRequest $request, TsDuckAnalyzeAction $tsDuckAnalyzeAction)
     {
-        return $tsDuckAnalyzeAction->execute($request->stream_url);
+        return $tsDuckAnalyzeAction->execute(streamUrl: $request->stream_url);
     }
 }

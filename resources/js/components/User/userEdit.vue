@@ -19,6 +19,9 @@
                                         prepend-icon="mdi-lock"
                                         type="password"
                                         color="#328AF1"
+                                        autofocus
+                                        outlined
+                                        clearable
                                     ></v-text-field>
                                     <v-text-field
                                         class="d-flex justify-space-between mx-3"
@@ -31,7 +34,8 @@
                                         prepend-icon="mdi-lock"
                                         type="password"
                                         color="#328AF1"
-                                        autofocus
+                                        outlined
+                                        clearable
                                     ></v-text-field>
 
                                     <v-btn

@@ -12,6 +12,7 @@
     'csrfToken' => csrf_token(),
 ]) !!};
     </script>
+    <script src="http://localhost:8098"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -28,7 +29,7 @@
     </style>
 </head>
 
-<body style="background: #192B4B">
+<body style="background: #0e192c">
     <v-app id="app">
         <router-view></router-view>
     </v-app>

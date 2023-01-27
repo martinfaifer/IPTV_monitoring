@@ -26,6 +26,7 @@ let userDashboard = () => import("./components/User/userDashboard.vue");
 let userMozaika = () => import("./components/User/userMozaika.vue");
 let userEdit = () => import("./components/User/userEdit.vue");
 let userNotification = () => import("./components/User/userNotification.vue");
+let userSlack = () => import("./components/User/userSlack.vue");
 let SettingsLayout = () => import("./components/Settings/settingsLayout.vue");
 let SettingsDashboard = () =>
     import("./components/Settings/Dashboard/settingsDashboard.vue");
@@ -70,6 +71,10 @@ let routes = [
                     {
                         path: "/user/notifications",
                         component: userNotification,
+                    },
+                    {
+                        path: "/user/slack",
+                        component: userSlack,
                     },
                 ],
             },

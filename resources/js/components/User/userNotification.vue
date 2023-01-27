@@ -43,7 +43,9 @@
                             <template v-slot:item.secret="{ item }">
                                 {{ item.webhooks[0].secret }}
                             </template>
-                            <template v-slot:item.webhook_send_option="{ item }">
+                            <template
+                                v-slot:item.webhook_send_option="{ item }"
+                            >
                                 {{ item.webhooks[0].webhook_send_option.type }}
                             </template>
                         </v-data-table>

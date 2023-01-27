@@ -10,6 +10,6 @@ class ProblemStreamsController extends Controller
 {
     public function __invoke()
     {
-        return new ShowProblemStreamsResource(Stream::where('status', Stream::STATUS_MONITORING)->get());
+        return new ShowProblemStreamsResource(resource: Stream::where('status', Stream::STATUS_MONITORING)->get());
     }
 }

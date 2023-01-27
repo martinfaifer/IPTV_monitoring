@@ -10,6 +10,6 @@ class NotRunningStreamsController extends Controller
 {
     public function __invoke()
     {
-        return new NotRunningStreamsResource(Auth::user());
+        return new NotRunningStreamsResource(resource: Auth::user());
     }
 }

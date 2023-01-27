@@ -10,7 +10,9 @@
                     class="mb-3"
                     :streamImageUrl="stream.image"
                 ></StreamImage>
-                <StreamPids></StreamPids>
+                <StreamPids class="mb-3"></StreamPids>
+                <!-- stream history -->
+                <StreamHistory :history="stream.history"></StreamHistory>
             </v-col>
             <v-col class="mt-n3" cols="12" sm="12" md="9" lg="9">
                 <StreamService class="mb-3"></StreamService>
@@ -27,6 +29,7 @@
 <script>
 import StreamNameAndStatus from "./StreamNameAndStatus.vue";
 import StreamImage from "./streamImage.vue";
+import StreamHistory from "./StreamHistory.vue";
 import StreamAudioVideoPidDetail from "./StreamAudiVideoPidDetail.vue";
 import StreamPids from "./StreamPids.vue";
 import StreamService from "./StreamServices.vue";
@@ -45,6 +48,7 @@ export default {
     components: {
         StreamImage,
         StreamNameAndStatus,
+        StreamHistory,
         StreamAlertDialog,
         StreamPids,
         StreamAudioVideoPidDetail,

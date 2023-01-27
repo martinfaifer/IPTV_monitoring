@@ -338,7 +338,8 @@ var render = function () {
                                     staticClass: "d-flex justify-space-between",
                                     attrs: {
                                       "error-messages": _vm.errors.customData,
-                                      label: "Statické streamy",
+                                      label:
+                                        "Streamy, které budete mít připnuté ve Vaší mozaice",
                                       items: _vm.streams,
                                       "item-text": "nazev",
                                       "item-value": "id",

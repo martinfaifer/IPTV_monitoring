@@ -10,6 +10,6 @@ class ApiStreamStopController extends Controller
 {
     public function __invoke(Stream $stream, StopStreamAction $stopStreamAction)
     {
-        return $stopStreamAction->execute($stream);
+        return $stopStreamAction->execute(stream: $stream);
     }
 }

@@ -12,13 +12,13 @@ class StreamSettingsInformtionMozaikaController extends Controller
 {
     public function show(Stream $stream)
     {
-        return new StreamSettingsInformtionMozaikaResource($stream);
+        return new StreamSettingsInformtionMozaikaResource(resource: $stream);
     }
 
     public function update(UpdateStreamSettingsInformationMozaikaRequest $request, Stream $stream, UpdateStreamSettingsInformationMozaikaAction $updateStreamSettingsInformationMozaikaAction)
     {
-        $updateStreamSettingsInformationMozaikaAction->execute($stream, $request);
+        $updateStreamSettingsInformationMozaikaAction->execute(stream: $stream, formData: $request);
 
-        return $this->success_response('Upraveno');
+        return $this->success_response(message: 'Upraveno');
     }
 }

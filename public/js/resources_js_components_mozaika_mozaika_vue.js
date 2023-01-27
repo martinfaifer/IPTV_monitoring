@@ -135,6 +135,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.websocketData();
+    setInterval(function () {
+      try {
+        this.index();
+      } catch (error) {}
+    }.bind(this), 5000);
   }
 });
 
@@ -454,6 +459,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ErrorStreamMozaika_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ErrorStreamMozaika.vue */ "./resources/js/components/mozaika/ErrorStreamMozaika.vue");
 /* harmony import */ var _ProblemStreamMozaika_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProblemStreamMozaika.vue */ "./resources/js/components/mozaika/ProblemStreamMozaika.vue");
 /* harmony import */ var _ImageCards_ImageCard_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ImageCards/ImageCard.vue */ "./resources/js/components/mozaika/ImageCards/ImageCard.vue");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1134,13 +1147,18 @@ var render = function () {
                 "p",
                 {
                   staticClass:
-                    "text-left caption text--disabled font-weight-medium",
+                    "text-left subtitle-2 text--disabled font-weight-medium ml-3",
                 },
                 [
                   _vm._v("\n            Nefunkční kanály\n            "),
-                  _c("span", { staticClass: "red--text" }, [
-                    _vm._v(_vm._s(_vm.count)),
-                  ]),
+                  _c(
+                    "span",
+                    {
+                      staticClass:
+                        "red--text subtitle-1 font-weight-black mx-3",
+                    },
+                    [_vm._v(_vm._s(_vm.count))]
+                  ),
                 ]
               ),
               _vm._v(" "),
@@ -1467,13 +1485,18 @@ var render = function () {
                 "p",
                 {
                   staticClass:
-                    "text-left caption text--disabled font-weight-medium",
+                    "text-left subtitle-2 text--disabled font-weight-medium ml-3",
                 },
                 [
                   _vm._v("\n            Problémové kanály\n            "),
-                  _c("span", { staticClass: "red--text" }, [
-                    _vm._v(_vm._s(_vm.count)),
-                  ]),
+                  _c(
+                    "span",
+                    {
+                      staticClass:
+                        "orange--text subtitle-1 font-weight-black mx-3",
+                    },
+                    [_vm._v(_vm._s(_vm.count))]
+                  ),
                 ]
               ),
               _vm._v(" "),
@@ -1522,7 +1545,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "pt-3" },
+    { staticClass: "mt-12" },
     [
       _c("ErrorStreamMozaika"),
       _vm._v(" "),
@@ -1538,7 +1561,7 @@ var render = function () {
             "p",
             {
               staticClass:
-                "text-left caption text--disabled font-weight-medium",
+                "text-left subtitle-2 text--disabled font-weight-medium ml-3",
             },
             [_vm._v("\n            Dynamická mozaika\n        ")]
           ),
@@ -1562,12 +1585,19 @@ var render = function () {
       _vm._v(" "),
       _c(
         "v-bottom-navigation",
-        { attrs: { fixed: "", "background-color": "transparent" } },
+        {
+          staticStyle: {
+            background: "rgba(13, 25, 44, 0.25)",
+            "box-shadow": "0 8px 32px 0 rgba(17, 27, 45, 0.37)",
+            "backdrop-filter": "blur(4px)",
+            "-webkit-backdrop-filter": "blur(4px)",
+          },
+          attrs: { fixed: "" },
+        },
         [
           _c("v-pagination", {
             staticClass: "mx-auto",
-            staticStyle: { color: "#192b4a" },
-            attrs: { color: "#192B4A", length: _vm.pagination.total },
+            attrs: { length: _vm.pagination.total },
             on: {
               input: function ($event) {
                 return _vm.onPageChange()

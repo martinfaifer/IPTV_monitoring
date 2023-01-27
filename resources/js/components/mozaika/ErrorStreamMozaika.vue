@@ -1,9 +1,9 @@
 <template>
     <div>
         <v-container fluid v-if="count != 0">
-            <p class="text-left caption text--disabled font-weight-medium">
+            <p class="text-left subtitle-2 text--disabled font-weight-medium ml-3">
                 Nefunkční kanály
-                <span class="red--text">{{ count }}</span>
+                <span class="red--text subtitle-1 font-weight-black mx-3">{{ count }}</span>
             </p>
             <v-row class="mx-auto mt-1">
                 <v-col
@@ -66,6 +66,14 @@ export default {
 
     mounted() {
         this.websocketData();
+        setInterval(
+            function () {
+                try {
+                    this.index();
+                } catch (error) {}
+            }.bind(this),
+            5000
+        );
     },
 };
 </script>

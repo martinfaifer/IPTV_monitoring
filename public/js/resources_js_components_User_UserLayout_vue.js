@@ -62,9 +62,13 @@ __webpack_require__.r(__webpack_exports__);
         icon: "mdi-pencil",
         route: "/user/edit"
       }, {
-        title: "Upozornění",
-        icon: "mdi-bell-ring",
+        title: "Webhook",
+        icon: "mdi-webhook",
         route: "/user/notifications"
+      }, {
+        title: "Slack",
+        icon: "mdi-slack",
+        route: "/user/slack"
       }]
     };
   },
@@ -165,7 +169,7 @@ var render = function () {
         "v-navigation-drawer",
         {
           staticClass: "mt-8",
-          staticStyle: { background: "linear-gradient(#192b4b, #000000)" },
+          staticStyle: { background: "linear-gradient(#0e192c, #000000)" },
           attrs: { fixed: "", app: "" },
           model: {
             value: _vm.drawer,

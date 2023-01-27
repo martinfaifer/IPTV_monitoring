@@ -10,6 +10,6 @@ class ShowServiceStreamPidsController extends Controller
 {
     public function __invoke(Stream $stream)
     {
-        return new ShowServicePidResource($stream);
+        return new ShowServicePidResource(resource: $stream);
     }
 }

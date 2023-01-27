@@ -1,30 +1,36 @@
 <template>
     <div>
-        <v-col cols="12" sm="12" md="12" lg="12" class="pt-6">
-            <v-card class="overflow-hidden rounded-lg blur shadow-blur" flat>
-                <v-card-text>
-                    <p class="title text-center">
-                        Historie počtu dohledovaných streamů
+        <v-card class="overflow-hidden rounded-lg blur shadow-blur" flat>
+            <v-card-text>
+                <div class="d-flex justify-space-between ml-6 mr-6">
+                    <p class="title">Historie počtu dohledovaných streamů</p>
+                    <p class="body-1 font-weight-bold">
+                        <span class="green--text">{{ current.active }}</span> /
+                        <span class="blue--text">{{ current.stoped }} </span>/
+                        <span class="red--text">{{ current.problem }}</span> /
+                        <span class="orange--text">{{ current.waiting }}</span>
                     </p>
-                    <apexchart
-                        dark
-                        class="info--text"
-                        v-cloak
-                        height="200"
-                        type="area"
-                        :options="chartOptions"
-                        :series="series"
-                        ref="chart"
-                    ></apexchart>
-                </v-card-text>
-            </v-card>
-        </v-col>
+                </div>
+
+                <apexchart
+                    dark
+                    class="info--text"
+                    v-cloak
+                    height="200"
+                    type="area"
+                    :options="chartOptions"
+                    :series="series"
+                    ref="chart"
+                ></apexchart>
+            </v-card-text>
+        </v-card>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
+            current: [],
             chartOptions: {
                 legend: {
                     show: false,
@@ -68,6 +74,7 @@ export default {
                     this.chartOptions.xaxis.categories =
                         response.data.categories;
                     this.series = response.data.series;
+                    this.current = response.data.current;
                 });
         },
         async websocketData() {

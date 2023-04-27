@@ -1,12 +1,9 @@
 <template>
-    <div>
-        <p :class="checkNumberOfDiscontinuites()">
-            Celkový počet Discontinuity Errorů u Pidu {{ pid }}:
-            <span v-cloak>{{ discontinuityErros }}</span>
-            <v-btn small icon color="#328AF1" @click="resetErrors()"
-                ><v-icon small> mdi-restore </v-icon></v-btn
-            >
-        </p>
+    <div v-cloak :class="checkNumberOfDiscontinuites()">
+        {{ discontinuityErros }}
+        <v-btn x-small icon color="#328AF1" @click="resetErrors()"
+            ><v-icon x-small> mdi-restore </v-icon></v-btn
+        >
     </div>
 </template>
 <script>

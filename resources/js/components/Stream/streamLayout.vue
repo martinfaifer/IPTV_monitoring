@@ -10,12 +10,17 @@
                     class="mb-3"
                     :streamImageUrl="stream.image"
                 ></StreamImage>
-                <StreamPids class="mb-3"></StreamPids>
                 <!-- stream history -->
-                <StreamHistory :history="stream.history"></StreamHistory>
+                <StreamHistory
+                    class="mb-3"
+                    :history="stream.history"
+                ></StreamHistory>
+                <!-- <StreamPids></StreamPids> -->
+                <FfprobeStream></FfprobeStream>
             </v-col>
             <v-col class="mt-n3" cols="12" sm="12" md="9" lg="9">
                 <StreamService class="mb-3"></StreamService>
+
                 <StreamAudioVideoPidDetail></StreamAudioVideoPidDetail>
             </v-col>
         </v-row>
@@ -34,6 +39,7 @@ import StreamAudioVideoPidDetail from "./StreamAudiVideoPidDetail.vue";
 import StreamPids from "./StreamPids.vue";
 import StreamService from "./StreamServices.vue";
 import StreamAlertDialog from "./StreamAlertDialog.vue";
+import FfprobeStream from "./StreamFfrobe.vue";
 export default {
     metaInfo: {
         title: "IPTV Dohled - informace o streamu",
@@ -53,6 +59,7 @@ export default {
         StreamPids,
         StreamAudioVideoPidDetail,
         StreamService,
+        FfprobeStream,
     },
 
     created() {

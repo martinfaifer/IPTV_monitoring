@@ -33,16 +33,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["pidsData"],
   data: function data() {
     return {
       chartOptions: {
         dataLabels: {
-          enabled: true
+          enabled: false
         },
-        colors: ["#3490dc"],
+        grid: {
+          show: true
+        },
+        noData: {
+          text: "Načítání dat..."
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.1,
+            opacityTo: 0.4,
+            stops: [0, 90, 100]
+          }
+        },
         chart: {
           toolbar: {
             show: false
@@ -64,9 +77,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         },
         yaxis: {
-          show: false,
+          show: true,
           labels: {
-            show: false
+            show: true
           }
         }
       },
@@ -190,19 +203,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -446,6 +446,62 @@ var StreamAllDiscontinutiesErrors = function StreamAllDiscontinutiesErrors() {
   },
   beforeDestroy: function beforeDestroy() {
     window.Echo.leave("StreamAudioVideoPids" + this.$route.params.streamId);
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamFfrobe.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamFfrobe.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      ffprobe: []
+    };
+  },
+  components: {},
+  created: function created() {
+    this.index();
+  },
+  methods: {
+    index: function index() {
+      var _this = this;
+
+      if (this.$route.params.streamId) {
+        axios.get("streams/pids/ffprobe/" + this.$route.params.streamId).then(function (response) {
+          _this.ffprobe = response.data;
+        });
+      }
+    }
+  },
+  mounted: function mounted() {},
+  watch: {
+    $route: function $route(to, from) {
+      this.index();
+    }
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.index();
   }
 });
 
@@ -1006,6 +1062,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1133,6 +1194,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _StreamPids_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./StreamPids.vue */ "./resources/js/components/Stream/StreamPids.vue");
 /* harmony import */ var _StreamServices_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./StreamServices.vue */ "./resources/js/components/Stream/StreamServices.vue");
 /* harmony import */ var _StreamAlertDialog_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./StreamAlertDialog.vue */ "./resources/js/components/Stream/StreamAlertDialog.vue");
+/* harmony import */ var _StreamFfrobe_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./StreamFfrobe.vue */ "./resources/js/components/Stream/StreamFfrobe.vue");
 //
 //
 //
@@ -1161,6 +1223,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
@@ -1185,7 +1253,8 @@ __webpack_require__.r(__webpack_exports__);
     StreamAlertDialog: _StreamAlertDialog_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
     StreamPids: _StreamPids_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     StreamAudioVideoPidDetail: _StreamAudiVideoPidDetail_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    StreamService: _StreamServices_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    StreamService: _StreamServices_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    FfprobeStream: _StreamFfrobe_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   created: function created() {
     this.index();
@@ -1350,6 +1419,44 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/Stream/StreamAudiVideoPidDetail.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Stream/StreamFfrobe.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Stream/StreamFfrobe.vue ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StreamFfrobe_vue_vue_type_template_id_b9460758___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StreamFfrobe.vue?vue&type=template&id=b9460758& */ "./resources/js/components/Stream/StreamFfrobe.vue?vue&type=template&id=b9460758&");
+/* harmony import */ var _StreamFfrobe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StreamFfrobe.vue?vue&type=script&lang=js& */ "./resources/js/components/Stream/StreamFfrobe.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StreamFfrobe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StreamFfrobe_vue_vue_type_template_id_b9460758___WEBPACK_IMPORTED_MODULE_0__.render,
+  _StreamFfrobe_vue_vue_type_template_id_b9460758___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Stream/StreamFfrobe.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -1627,6 +1734,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Stream/StreamFfrobe.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Stream/StreamFfrobe.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamFfrobe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StreamFfrobe.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamFfrobe.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamFfrobe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Stream/StreamHistory.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/Stream/StreamHistory.vue?vue&type=script&lang=js& ***!
@@ -1765,6 +1887,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Stream/StreamFfrobe.vue?vue&type=template&id=b9460758&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/Stream/StreamFfrobe.vue?vue&type=template&id=b9460758& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamFfrobe_vue_vue_type_template_id_b9460758___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamFfrobe_vue_vue_type_template_id_b9460758___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamFfrobe_vue_vue_type_template_id_b9460758___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StreamFfrobe.vue?vue&type=template&id=b9460758& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamFfrobe.vue?vue&type=template&id=b9460758&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Stream/StreamHistory.vue?vue&type=template&id=3472c6f0&":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/Stream/StreamHistory.vue?vue&type=template&id=3472c6f0& ***!
@@ -1879,19 +2017,15 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("p", { staticClass: "caption font-weight-bold" }, [
-        _vm._v("Datový tok u Pidu " + _vm._s(_vm.pidsData)),
-      ]),
-      _vm._v(" "),
       _c("apexchart", {
         ref: "chart",
         staticClass: "info--text",
         attrs: {
           dark: "",
-          height: "200",
           type: "area",
           options: _vm.chartOptions,
           series: _vm.series,
+          height: "180",
         },
       }),
     ],
@@ -2022,9 +2156,7 @@ var render = function () {
         { staticClass: "overflow-hidden rounded-lg blur shadow-blur" },
         [
           _c("p", { staticClass: "text-center mt-3" }, [
-            _vm._v(
-              "\n            Informace o audio / video pidech\n            "
-            ),
+            _vm._v("Informace o audio / video pidech"),
           ]),
           _vm._v(" "),
           _c(
@@ -2034,102 +2166,141 @@ var render = function () {
                 "v-container",
                 { attrs: { fluid: "" } },
                 [
-                  _c("p", { staticClass: "subtitle-1" }, [
-                    _vm._v("Audio pidy"),
-                  ]),
-                  _vm._v(" "),
                   _c(
                     "v-row",
-                    { staticClass: "caption" },
                     [
+                      _c("v-col", { attrs: { cols: "12" } }, [
+                        _c(
+                          "p",
+                          { staticClass: "subtitle-1 font-weight-bold" },
+                          [
+                            _vm._v(
+                              "\n                            Audio pidy\n                        "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
                       _vm._l(_vm.audioPids, function (audioPid) {
                         return _c(
                           "v-col",
                           {
-                            key: audioPid,
-                            staticClass: "white--text",
-                            attrs: {
-                              cols: "12",
-                              sm: "12",
-                              md: _vm.countGrid(_vm.audioPids),
-                              lg: _vm.countGrid(_vm.audioPids),
-                            },
+                            key: audioPid.pid,
+                            attrs: { cols: "12", sm: "12", md: "12", lg: "12" },
                           },
                           [
-                            _vm._l(
-                              _vm.lisFfprobeAudioPids[audioPid.pid],
-                              function (ffprobeAudio, ffprobeAudioKey) {
-                                return _c("span", { key: ffprobeAudio }, [
-                                  ffprobeAudioKey != "disposition" &&
-                                  ffprobeAudioKey != "tags"
-                                    ? _c("p", [
-                                        _vm.showFfmpegDetail == true
-                                          ? _c("span", [
-                                              _vm._v(
-                                                "\n                                    " +
-                                                  _vm._s(ffprobeAudioKey) +
-                                                  ":\n                                    " +
-                                                  _vm._s(ffprobeAudio) +
-                                                  "\n                                "
-                                              ),
-                                            ])
-                                          : _vm._e(),
-                                      ])
-                                    : _vm._e(),
-                                ])
-                              }
-                            ),
-                            _vm._v(" "),
-                            _vm._l(audioPid, function (audio, audioPidKey) {
-                              return _c("span", { key: audioPidKey }, [
-                                _c("p", [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(audioPidKey) +
-                                      ":\n                                "
-                                  ),
-                                  _c(
-                                    "span",
-                                    {
-                                      class: _vm.checkIfIsProblem(
-                                        audio,
-                                        audioPidKey
-                                      ),
+                            _c(
+                              "v-row",
+                              [
+                                _c(
+                                  "v-col",
+                                  {
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "12",
+                                      md: "3",
+                                      lg: "3",
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(audio) +
-                                          "\n                                "
-                                      ),
-                                    ]
-                                  ),
-                                ]),
-                              ])
-                            }),
-                          ],
-                          2
-                        )
-                      }),
-                      _vm._v(" "),
-                      _vm._l(_vm.listAudioPids, function (audioPid) {
-                        return _c(
-                          "v-col",
-                          {
-                            key: audioPid,
-                            attrs: {
-                              cols: "12",
-                              sm: "12",
-                              md: _vm.countGrid(_vm.audioPids),
-                              lg: _vm.countGrid(_vm.audioPids),
-                            },
-                          },
-                          [
-                            _c("StreamAllDiscontinutiesErrors", {
-                              attrs: { pid: audioPid },
-                            }),
-                            _vm._v(" "),
-                            _c("AreaChart", { attrs: { pidsData: audioPid } }),
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Pid:\n                                "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-weight-bold mx-2" },
+                                      [_vm._v(_vm._s(audioPid.pid))]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  {
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "12",
+                                      md: "3",
+                                      lg: "3",
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Jazyková stopa:\n                                "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-weight-bold mx-2" },
+                                      [_vm._v(_vm._s(audioPid.language))]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  {
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "12",
+                                      md: "4",
+                                      lg: "6",
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Popis:\n                                "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-weight-bold mx-2" },
+                                      [_vm._v(_vm._s(audioPid.description))]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  {
+                                    staticClass: "d-inline-flex",
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "12",
+                                      md: "3",
+                                      lg: "3",
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Chyby:\n                                "
+                                    ),
+                                    _c("StreamAllDiscontinutiesErrors", {
+                                      staticClass: "mx-3",
+                                      attrs: { pid: audioPid.pid },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  {
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "12",
+                                      md: "12",
+                                      lg: "12",
+                                    },
+                                  },
+                                  [
+                                    _c("AreaChart", {
+                                      attrs: { pidsData: audioPid.pid },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                              ],
+                              1
+                            ),
                           ],
                           1
                         )
@@ -2138,78 +2309,119 @@ var render = function () {
                     2
                   ),
                   _vm._v(" "),
-                  _c("v-divider", { staticClass: "py-3 ml-3 mr-3" }),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "subtitle-1" }, [
-                    _vm._v("Video pidy"),
-                  ]),
-                  _vm._v(" "),
                   _c(
                     "v-row",
-                    { staticClass: "caption" },
                     [
+                      _c("v-col", { attrs: { cols: "12" } }, [
+                        _c(
+                          "p",
+                          { staticClass: "subtitle-1 font-weight-bold" },
+                          [
+                            _vm._v(
+                              "\n                            Video pidy\n                        "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
                       _vm._l(_vm.videoPids, function (videoPid) {
                         return _c(
                           "v-col",
                           {
-                            key: videoPid,
-                            staticClass: "white--text",
-                            attrs: {
-                              cols: "12",
-                              sm: "12",
-                              md: _vm.countGrid(_vm.videoPids),
-                              lg: _vm.countGrid(_vm.videoPids),
-                            },
+                            key: videoPid.pid,
+                            attrs: { cols: "12", sm: "12", md: "12", lg: "12" },
                           },
-                          _vm._l(videoPid, function (video, videoPidKey) {
-                            return _c("span", { key: videoPidKey }, [
-                              _c("p", [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(videoPidKey) +
-                                    ":\n                                "
-                                ),
+                          [
+                            _c(
+                              "v-row",
+                              [
                                 _c(
-                                  "span",
+                                  "v-col",
                                   {
-                                    class: _vm.checkIfIsProblem(
-                                      video,
-                                      videoPidKey
-                                    ),
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "12",
+                                      md: "3",
+                                      lg: "3",
+                                    },
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(video) +
-                                        "\n                                "
+                                      "\n                                Pid:\n                                "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-weight-bold mx-2" },
+                                      [_vm._v(_vm._s(videoPid.pid))]
                                     ),
                                   ]
                                 ),
-                              ]),
-                            ])
-                          }),
-                          0
-                        )
-                      }),
-                      _vm._v(" "),
-                      _vm._l(_vm.listVideoPids, function (videoPid) {
-                        return _c(
-                          "v-col",
-                          {
-                            key: videoPid,
-                            attrs: {
-                              cols: "12",
-                              sm: "12",
-                              md: _vm.countGrid(_vm.videoPids),
-                              lg: _vm.countGrid(_vm.videoPids),
-                            },
-                          },
-                          [
-                            _c("StreamAllDiscontinutiesErrors", {
-                              attrs: { pid: videoPid },
-                            }),
-                            _vm._v(" "),
-                            _c("AreaChart", { attrs: { pidsData: videoPid } }),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  {
+                                    staticClass: "d-inline-flex",
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "12",
+                                      md: "3",
+                                      lg: "3",
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Chyby:\n                                "
+                                    ),
+                                    _c("StreamAllDiscontinutiesErrors", {
+                                      staticClass: "mx-3",
+                                      attrs: { pid: videoPid.pid },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  {
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "12",
+                                      md: "4",
+                                      lg: "6",
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Popis:\n                                "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-weight-bold mx-2" },
+                                      [_vm._v(_vm._s(videoPid.description))]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  {
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "12",
+                                      md: "12",
+                                      lg: "12",
+                                    },
+                                  },
+                                  [
+                                    _c("AreaChart", {
+                                      attrs: { pidsData: videoPid.pid },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                              ],
+                              1
+                            ),
                           ],
                           1
                         )
@@ -2223,6 +2435,69 @@ var render = function () {
             ],
             1
           ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamFfrobe.vue?vue&type=template&id=b9460758&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamFfrobe.vue?vue&type=template&id=b9460758& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-card",
+    { staticClass: "overflow-hidden rounded-lg blur shadow-blur" },
+    [
+      _c("p", { staticClass: "text-center mt-3" }, [
+        _vm._v("Detail streamu ( ffprobe )"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "v-card-text",
+        [
+          _c("v-treeview", {
+            attrs: {
+              "open-all": "",
+              "open-on-click": "",
+              dense: "",
+              hoverable: "",
+              items: _vm.ffprobe,
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "prepend",
+                fn: function (ref) {
+                  var item = ref.item
+                  var open = ref.open
+                  return [
+                    _c("v-icon", { attrs: { small: "" } }, [
+                      _vm._v(_vm._s(item.file)),
+                    ]),
+                  ]
+                },
+              },
+            ]),
+          }),
         ],
         1
       ),
@@ -3128,27 +3403,36 @@ var render = function () {
         "v-card-text",
         [
           _c(
-            "v-row",
-            { staticClass: "caption" },
-            _vm._l(_vm.streamPids, function (service, serviceKey) {
-              return _c(
-                "v-col",
-                {
-                  key: serviceKey,
-                  staticClass: "mt-n5 d-flex justify-space-between",
-                  attrs: { cols: "12", sm: "12", md: "2", lg: "2" },
-                },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(serviceKey) +
-                      ": " +
-                      _vm._s(service) +
-                      "\n            "
-                  ),
-                ]
-              )
-            }),
+            "v-container",
+            { attrs: { fluid: "" } },
+            [
+              _c(
+                "v-row",
+                _vm._l(_vm.streamPids, function (service, serviceKey) {
+                  return _c(
+                    "v-col",
+                    {
+                      key: serviceKey,
+                      staticClass: "mt-n5 d-flex justify-space-between",
+                      attrs: { cols: "12", sm: "12", md: "2", lg: "2" },
+                    },
+                    [
+                      _c("span", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(serviceKey) +
+                            ":\n                        "
+                        ),
+                        _c("span", { staticClass: "font-weight-bold mx-2" }, [
+                          _vm._v(_vm._s(service)),
+                        ]),
+                      ]),
+                    ]
+                  )
+                }),
+                1
+              ),
+            ],
             1
           ),
         ],
@@ -3243,9 +3527,12 @@ var render = function () {
                 attrs: { streamImageUrl: _vm.stream.image },
               }),
               _vm._v(" "),
-              _c("StreamPids", { staticClass: "mb-3" }),
+              _c("StreamHistory", {
+                staticClass: "mb-3",
+                attrs: { history: _vm.stream.history },
+              }),
               _vm._v(" "),
-              _c("StreamHistory", { attrs: { history: _vm.stream.history } }),
+              _c("FfprobeStream"),
             ],
             1
           ),

@@ -19,9 +19,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["pid"],
   data: function data() {
@@ -162,35 +159,27 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "p",
-      { class: _vm.checkNumberOfDiscontinuites() },
-      [
-        _vm._v(
-          "\n        Celkový počet Discontinuity Errorů u Pidu " +
-            _vm._s(_vm.pid) +
-            ":\n        "
-        ),
-        _c("span", {}, [_vm._v(_vm._s(_vm.discontinuityErros))]),
-        _vm._v(" "),
-        _c(
-          "v-btn",
-          {
-            attrs: { small: "", icon: "", color: "#328AF1" },
-            on: {
-              click: function ($event) {
-                return _vm.resetErrors()
-              },
+  return _c(
+    "div",
+    { class: _vm.checkNumberOfDiscontinuites() },
+    [
+      _vm._v("\n    " + _vm._s(_vm.discontinuityErros) + "\n    "),
+      _c(
+        "v-btn",
+        {
+          attrs: { "x-small": "", icon: "", color: "#328AF1" },
+          on: {
+            click: function ($event) {
+              return _vm.resetErrors()
             },
           },
-          [_c("v-icon", { attrs: { small: "" } }, [_vm._v(" mdi-restore ")])],
-          1
-        ),
-      ],
-      1
-    ),
-  ])
+        },
+        [_c("v-icon", { attrs: { "x-small": "" } }, [_vm._v(" mdi-restore ")])],
+        1
+      ),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

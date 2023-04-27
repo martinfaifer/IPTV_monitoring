@@ -2,19 +2,24 @@
     <v-card class="overflow-hidden rounded-lg blur shadow-blur">
         <p class="text-center mt-3">Informace o servisách ve streamu</p>
         <v-card-text>
-            <v-row class="caption">
-                <v-col
-                    cols="12"
-                    sm="12"
-                    md="2"
-                    lg="2"
-                    class="mt-n5 d-flex justify-space-between"
-                    v-for="(service, serviceKey) in streamPids"
-                    :key="serviceKey"
-                >
-                    {{ serviceKey }}: {{ service }}
-                </v-col>
-            </v-row>
+            <v-container fluid>
+                <v-row>
+                    <v-col
+                        cols="12"
+                        sm="12"
+                        md="2"
+                        lg="2"
+                        class="mt-n5 d-flex justify-space-between"
+                        v-for="(service, serviceKey) in streamPids"
+                        :key="serviceKey"
+                    >
+                        <span>
+                            {{ serviceKey }}:
+                            <span class="font-weight-bold mx-2">{{ service }}</span>
+                        </span>
+                    </v-col>
+                </v-row>
+            </v-container>
         </v-card-text>
     </v-card>
 </template>

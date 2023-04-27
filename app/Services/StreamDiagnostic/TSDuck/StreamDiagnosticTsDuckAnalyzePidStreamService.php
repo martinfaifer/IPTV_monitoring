@@ -99,7 +99,7 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                 $this->check_if_audio_bitrate_is_zero($audioPid['bitrate'], $audioPidId, $stream);
                 (new StoreStreamPidDataFroChartToCache())->execute(
                     key: 'streamPidBitrate_' . $audioPidId . '_' . $stream->id,
-                    value: $audioPid['bitrate'] / 1048576,
+                    value: round($audioPid['bitrate'] / 1048576, 2),
                     pid: $audioPid
                 );
             }
@@ -206,7 +206,7 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                 // store to cache for chart
                 (new StoreStreamPidDataFroChartToCache())->execute(
                     key: 'streamPidBitrate_' . $videoPidId . '_' . $stream->id,
-                    value: $videoPid['bitrate'] / 1048576,
+                    value: round($videoPid['bitrate'] / 1048576, 2),
                     pid: $videoPid
                 );
             }

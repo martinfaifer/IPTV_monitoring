@@ -1,126 +1,113 @@
 <template>
     <div>
         <v-card class="overflow-hidden rounded-lg blur shadow-blur">
-            <p class="text-center mt-3">
-                Informace o audio / video pidech
-                <!-- <v-btn
-                    @click="showFfmpegDetail = !showFfmpegDetail"
-                    x-small
-                    text
-                    plain
-                    outlined
-                    color="info"
-                    class="mx-12"
-                >
-                <span v-if="showFfmpegDetail == false">
-                    Zobrazit detail o pidech z ffmpeg
-                </span>
-                <span v-else>
-                    Zakrýt detail o pidech z ffmpegu
-                </span>
-                </v-btn> -->
-            </p>
+            <p class="text-center mt-3">Informace o audio / video pidech</p>
             <v-card-text>
                 <v-container fluid>
-                    <p class="subtitle-1">Audio pidy</p>
-                    <v-row class="caption">
+                    <v-row>
+                        <v-col cols="12">
+                            <p class="subtitle-1 font-weight-bold">
+                                Audio pidy
+                            </p>
+                        </v-col>
+                        <!-- audio content -->
+
                         <v-col
                             cols="12"
                             sm="12"
-                            :md="countGrid(audioPids)"
-                            :lg="countGrid(audioPids)"
-                            class="white--text"
+                            md="12"
+                            lg="12"
                             v-for="audioPid in audioPids"
-                            :key="audioPid"
+                            :key="audioPid.pid"
                         >
-                            <span
-                                v-for="(
-                                    ffprobeAudio, ffprobeAudioKey
-                                ) in lisFfprobeAudioPids[audioPid.pid]"
-                                :key="ffprobeAudio"
-                            >
-                                <p
-                                    v-if="
-                                        ffprobeAudioKey != 'disposition' &&
-                                        ffprobeAudioKey != 'tags'
-                                    "
+                            <v-row>
+                                <v-col cols="12" sm="12" md="3" lg="3">
+                                    Pid:
+                                    <span class="font-weight-bold mx-2">{{
+                                        audioPid.pid
+                                    }}</span>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="3" lg="3">
+                                    Jazyková stopa:
+                                    <span class="font-weight-bold mx-2">{{
+                                        audioPid.language
+                                    }}</span>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="6">
+                                    Popis:
+                                    <span class="font-weight-bold mx-2">{{
+                                        audioPid.description
+                                    }}</span>
+                                </v-col>
+                                <v-col
+                                    cols="12"
+                                    sm="12"
+                                    md="3"
+                                    lg="3"
+                                    class="d-inline-flex"
                                 >
-                                    <span v-if="showFfmpegDetail == true">
-                                        {{ ffprobeAudioKey }}:
-                                        {{ ffprobeAudio }}
-                                    </span>
-                                </p>
-                            </span>
-                            <span
-                                v-for="(audio, audioPidKey) in audioPid"
-                                :key="audioPidKey"
-                            >
-                                <p>
-                                    {{ audioPidKey }}:
-                                    <span
-                                        :class="
-                                            checkIfIsProblem(audio, audioPidKey)
-                                        "
-                                    >
-                                        {{ audio }}
-                                    </span>
-                                </p>
-                            </span>
+                                    Chyby:
+                                    <StreamAllDiscontinutiesErrors
+                                        class="mx-3"
+                                        :pid="audioPid.pid"
+                                    ></StreamAllDiscontinutiesErrors>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="12" lg="12">
+                                    <AreaChart
+                                        :pidsData="audioPid.pid"
+                                    ></AreaChart>
+                                </v-col>
+                            </v-row>
                         </v-col>
-                        <v-col
-                            cols="12"
-                            sm="12"
-                            :md="countGrid(audioPids)"
-                            :lg="countGrid(audioPids)"
-                            v-for="audioPid in listAudioPids"
-                            :key="audioPid"
-                        >
-                            <StreamAllDiscontinutiesErrors
-                                :pid="audioPid"
-                            ></StreamAllDiscontinutiesErrors>
-                            <AreaChart :pidsData="audioPid"></AreaChart>
-                        </v-col>
+                        <!-- end of audio content -->
                     </v-row>
-                    <v-divider class="py-3 ml-3 mr-3"></v-divider>
-                    <p class="subtitle-1">Video pidy</p>
-                    <v-row class="caption">
-                        <v-col
-                            cols="12"
-                            sm="12"
-                            :md="countGrid(videoPids)"
-                            :lg="countGrid(videoPids)"
-                            class="white--text"
-                            v-for="videoPid in videoPids"
-                            :key="videoPid"
-                        >
-                            <span
-                                v-for="(video, videoPidKey) in videoPid"
-                                :key="videoPidKey"
-                            >
-                                <p>
-                                    {{ videoPidKey }}:
-                                    <span
-                                        :class="
-                                            checkIfIsProblem(video, videoPidKey)
-                                        "
-                                    >
-                                        {{ video }}
-                                    </span>
-                                </p>
-                            </span>
+                    <!-- end of table -->
+                    <v-row>
+                        <v-col cols="12">
+                            <p class="subtitle-1 font-weight-bold">
+                                Video pidy
+                            </p>
                         </v-col>
                         <v-col
                             cols="12"
                             sm="12"
-                            :md="countGrid(videoPids)"
-                            :lg="countGrid(videoPids)"
-                            v-for="videoPid in listVideoPids"
-                            :key="videoPid"
+                            md="12"
+                            lg="12"
+                            v-for="videoPid in videoPids"
+                            :key="videoPid.pid"
                         >
-                            <StreamAllDiscontinutiesErrors
-                                :pid="videoPid"
-                            ></StreamAllDiscontinutiesErrors>
-                            <AreaChart :pidsData="videoPid"></AreaChart>
+                            <v-row>
+                                <v-col cols="12" sm="12" md="3" lg="3">
+                                    Pid:
+                                    <span class="font-weight-bold mx-2">{{
+                                        videoPid.pid
+                                    }}</span>
+                                </v-col>
+                                <v-col
+                                    cols="12"
+                                    sm="12"
+                                    md="3"
+                                    lg="3"
+                                    class="d-inline-flex"
+                                >
+                                    Chyby:
+                                    <StreamAllDiscontinutiesErrors
+                                        class="mx-3"
+                                        :pid="videoPid.pid"
+                                    ></StreamAllDiscontinutiesErrors>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="6">
+                                    Popis:
+                                    <span class="font-weight-bold mx-2">{{
+                                        videoPid.description
+                                    }}</span>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="12" lg="12">
+                                    <AreaChart
+                                        :pidsData="videoPid.pid"
+                                    ></AreaChart>
+                                </v-col>
+                            </v-row>
                         </v-col>
                     </v-row>
                 </v-container>

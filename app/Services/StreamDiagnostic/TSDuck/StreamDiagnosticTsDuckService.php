@@ -39,6 +39,8 @@ class StreamDiagnosticTsDuckService
             $analyzeResultInJson = (new TsDuckAnalyzeAction())->execute(streamUrl: $stream->stream_url);
             $analyzedResultInArray = json_decode(json: $analyzeResultInJson, associative: true);
 
+            dd($analyzedResultInArray);
+
             // kontrola výstupu
             if (is_null($analyzedResultInArray)) {
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_CAN_NOT_START);

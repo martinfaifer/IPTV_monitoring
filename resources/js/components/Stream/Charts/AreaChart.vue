@@ -1,15 +1,14 @@
 <template>
     <div>
-        <p class="caption font-weight-bold">Datový tok u Pidu {{ pidsData }}</p>
         <apexchart
             dark
             class="info--text"
             v-cloak
-            height="200"
             type="area"
             :options="chartOptions"
             :series="series"
             ref="chart"
+            height="180"
         ></apexchart>
     </div>
 </template>
@@ -20,9 +19,23 @@ export default {
         return {
             chartOptions: {
                 dataLabels: {
-                    enabled: true,
+                    enabled: false,
                 },
-                colors: ["#3490dc"],
+                grid: {
+                    show: true,
+                },
+                noData: {
+                    text: "Načítání dat...",
+                },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.1,
+                        opacityTo: 0.4,
+                        stops: [0, 90, 100],
+                    },
+                },
                 chart: {
                     toolbar: {
                         show: false,
@@ -44,9 +57,9 @@ export default {
                     },
                 },
                 yaxis: {
-                    show: false,
+                    show: true,
                     labels: {
-                        show: false,
+                        show: true,
                     },
                 },
             },

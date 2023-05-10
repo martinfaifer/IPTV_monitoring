@@ -7,8 +7,8 @@
                     <v-col
                         cols="12"
                         sm="12"
-                        md="2"
-                        lg="2"
+                        md="4"
+                        lg="4"
                         class="mt-n5 d-flex justify-space-between"
                         v-for="(service, serviceKey) in streamPids"
                         :key="serviceKey"

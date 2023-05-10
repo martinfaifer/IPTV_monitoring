@@ -250,14 +250,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -1142,7 +1134,7 @@ var render = function () {
       _c(
         "v-dialog",
         {
-          attrs: { width: "800", "overlay-color": "rgb(17, 27, 45)" },
+          attrs: { width: "800", "overlay-color": "rgb(12, 19, 35)" },
           model: {
             value: _vm.searchDialog,
             callback: function ($$v) {
@@ -1155,12 +1147,7 @@ var render = function () {
           _c(
             "v-card",
             {
-              staticStyle: {
-                background: "rgba(13, 25, 44)",
-                "<!-- box-shadow": "0 8px 32px 0 rgba(17, 27, 45, 0.37)",
-                "backdrop-filter": "blur(4px)",
-                "-webkit-backdrop-filter": "blur(4px)",
-              },
+              staticStyle: { background: "rgba(12, 19, 31)" },
               attrs: { height: "400" },
             },
             [
@@ -1589,7 +1576,7 @@ var render = function () {
             absolute: "",
             temporary: "",
             right: "",
-            color: "#101B2D",
+            color: "#0b131f",
             width: _vm.screenWidth,
           },
           model: {

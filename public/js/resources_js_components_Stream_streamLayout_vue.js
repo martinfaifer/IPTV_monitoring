@@ -3414,7 +3414,7 @@ var render = function () {
                     {
                       key: serviceKey,
                       staticClass: "mt-n5 d-flex justify-space-between",
-                      attrs: { cols: "12", sm: "12", md: "2", lg: "2" },
+                      attrs: { cols: "12", sm: "12", md: "4", lg: "4" },
                     },
                     [
                       _c("span", [

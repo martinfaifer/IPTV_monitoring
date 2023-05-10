@@ -22,7 +22,19 @@
                 </v-col>
             </v-row>
 
-            <v-row class="mx-auto pt-6">
+            <v-row class="mx-auto my-auto">
+                <v-col cols="12" sm="12" md="4" lg="4">
+                    <settingsHealthChart title="Využití Disku" name="UsedDiskSpace"></settingsHealthChart>
+                </v-col>
+                 <v-col cols="12" sm="12" md="4" lg="4">
+                    <settingsHealthChart title="Počet spojení do DB" name="DatabaseConnectionCount"></settingsHealthChart>
+                </v-col>
+                <v-col cols="12" sm="12" md="4" lg="4">
+                    <settingsHealthChart title="Vytížení CPU" name="CpuLoad"></settingsHealthChart>
+                </v-col>
+            </v-row>
+
+            <v-row class="mx-auto my-auto">
                 <v-col cols="12" sm="12" md="6" lg="6">
                     <!-- vytížení sítě -->
                     <SettingsDashboardNetwork></SettingsDashboardNetwork>
@@ -39,8 +51,9 @@
 <script>
 import SettingsDashboardStreamsStatuses from "./settingsDashboardStreamsStatuses.vue";
 import SettingsDashboardNetwork from "./settingsDashboardNetwork.vue";
+import settingsHealthChart from "./settingsHealthChart.vue";
 export default {
-    components: { SettingsDashboardStreamsStatuses, SettingsDashboardNetwork },
+    components: { SettingsDashboardStreamsStatuses, SettingsDashboardNetwork, settingsHealthChart },
     data() {
         return {
             items: [],

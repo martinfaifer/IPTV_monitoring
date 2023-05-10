@@ -1,18 +1,6 @@
 <template>
     <div class="mt-12">
-        <div v-if="streams.length == 0">
-            <v-container fluid class="fill-height" fluid>
-                <v-row align="center" justify="center">
-                    <div class="loader">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </v-row>
-            </v-container>
-        </div>
-        <div v-else>
+        <div>
             <ErrorStreamMozaika></ErrorStreamMozaika>
             <ProblemStreamMozaika></ProblemStreamMozaika>
             <CustomMozaika></CustomMozaika>

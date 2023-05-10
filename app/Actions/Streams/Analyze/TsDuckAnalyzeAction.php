@@ -2,38 +2,35 @@
 
 namespace App\Actions\Streams\Analyze;
 
-// use Illuminate\Support\Facades\Process;
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
+use Illuminate\Support\Facades\Process;
+// use Symfony\Component\Process\Process;
+// use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class TsDuckAnalyzeAction
 {
     public function execute(string $streamUrl)
     {
 
-        if (str_contains($streamUrl, 'http')) {
-            $command = "/usr/local/bin/tsp -I http {$streamUrl} -P until -s 2 -P analyze --json -O drop";
-        } else {
-            $command = "/usr/local/bin/tsp -I ip {$streamUrl} -P until -s 2 -P analyze --json -O drop";
+        try {
+            if (str_contains($streamUrl, 'http')) {
+                $command = "tsp -I http {$streamUrl} -P until -s 1 -P analyze --json -O drop";
+            } else {
+                $command = "tsp -I ip {$streamUrl} -P until -s 1 -P analyze --json -O drop";
+            }
+
+            // Create a new process instance and configure it
+            $result = Process::timeout(2)->run($command);
+
+            if ($result->failed()) {
+                return null;
+            }
+
+            return $result->output();
+        } catch (\Throwable $th) {
+            // timeout exceeded
+            echo "Timeout exceeded: " . PHP_EOL;
+            return null;
         }
-
-        // Create a new process instance and configure it
-        $process = new Process([$command]);
-        $process->setTimeout(6);
-
-        // Run the command and capture the output
-        $process->run();
-        $output = $process->getOutput();
-
-        // Check for errors
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-
-        // Parse the JSON output
-        $data = json_decode($output, true);
-
-        dd($data);
     }
 
     // spustení streamu ve vlc / mozna i v prohlížeči?

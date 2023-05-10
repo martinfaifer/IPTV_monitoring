@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Actions\Streams\UpdateStreamStatusAction;
 use App\Actions\Cache\DeleteStreamPidProcessAction;
 use App\Actions\Streams\Analyze\MarkStreamForKillAction;
+use App\Actions\Streams\UpdateStreamDiagnosticPidAction;
 use App\Actions\System\Process\KillAllProcessesByNameAction;
 use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 
@@ -43,6 +44,8 @@ class KillAllStreamsCommand extends Command
                 (new KillTsDuckStreamProcessAction())->execute($stream);
                 // remove process pid
                 (new DeleteStreamPidProcessAction())->execute($stream);
+
+                (new UpdateStreamDiagnosticPidAction())->execute($stream, null);
             }
         }
 

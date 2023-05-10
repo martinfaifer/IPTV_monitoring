@@ -21,17 +21,9 @@
         <v-dialog
             v-model="searchDialog"
             width="800"
-            overlay-color="rgb(17, 27, 45)"
+            overlay-color="rgb(12, 19, 35)"
         >
-            <v-card
-                height="400"
-                style="
-                    background: rgba(13, 25, 44);
-                    <!-- box-shadow: 0 8px 32px 0 rgba(17, 27, 45, 0.37);
-                    backdrop-filter: blur(4px);
-                    -webkit-backdrop-filter: blur(4px); -->
-                "
-            >
+            <v-card height="400" style="background: rgba(12, 19, 31)">
                 <v-card-title>
                     <v-spacer></v-spacer>
                     <v-btn icon @click="closeDialog()">

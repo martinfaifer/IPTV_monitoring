@@ -1,27 +1,24 @@
 <template>
     <div>
         <v-card class="overflow-hidden rounded-lg blur shadow-blur" flat>
+            <v-card-subtitle>
+                <p class="mt-3 text-center body-1 font-weight-bold">
+                    Historie počtu dohledovaných streamů
+                </p>
+            </v-card-subtitle>
             <v-card-text>
-                <div class="d-flex justify-space-between ml-6 mr-6">
-                    <p class="title">Historie počtu dohledovaných streamů</p>
-                    <p class="body-1 font-weight-bold">
-                        <span class="green--text">{{ current.active }}</span> /
-                        <span class="blue--text">{{ current.stoped }} </span>/
-                        <span class="red--text">{{ current.problem }}</span> /
-                        <span class="orange--text">{{ current.waiting }}</span>
-                    </p>
-                </div>
-
-                <apexchart
-                    dark
-                    class="info--text"
-                    v-cloak
-                    height="200"
-                    type="area"
-                    :options="chartOptions"
-                    :series="series"
-                    ref="chart"
-                ></apexchart>
+                <v-container fluid>
+                    <apexchart
+                        dark
+                        class="info--text"
+                        v-cloak
+                        height="200"
+                        type="area"
+                        :options="chartOptions"
+                        :series="series"
+                        ref="chart"
+                    ></apexchart>
+                </v-container>
             </v-card-text>
         </v-card>
     </div>

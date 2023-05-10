@@ -5,7 +5,7 @@ $line-height-base: 1.6;
 
 // custom props
 .theme--dark.v-application {
-    background: linear-gradient(#0e192c,#000000);
+    background: linear-gradient(#0b1424,#000000);
 }
 
 .v-data-table__wrapper > table > tbody > tr:hover {
@@ -22,7 +22,8 @@ $line-height-base: 1.6;
 }
 
 .theme--dark.v-card {
-    background-color: #101B2D;
+    // background-color: #101B2D;
+    background-color: #0b131f;
 }
 
 .theme--dark.v-pagination.button {
@@ -90,7 +91,8 @@ $line-height-base: 1.6;
 }
 
 .theme--dark.v-data-table {
-    background-color: #101B2D;
+    // background-color: #101B2D;
+    background-color: #0b131f;
 }
 
 .them--dark.v-autocomplete {

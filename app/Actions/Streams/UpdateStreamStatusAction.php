@@ -19,13 +19,6 @@ class UpdateStreamStatusAction
 
     public function execute(object $stream, string $status)
     {
-        // if ($status == Stream::STATUS_CAN_NOT_START) {
-
-        //     $this->check_stream_status_in_cache(stream: $stream, status: $status);
-        // } else {
-        //     Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
-        //     $this->update_stream_status_and_share_it(stream: $stream, status: $status);
-        // }
 
         if ($status != Stream::STATUS_CAN_NOT_START) {
             Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
@@ -65,7 +58,7 @@ class UpdateStreamStatusAction
             (new StoreStreamsErrorHistoryAction())->execute(stream: $stream, status: $status);
 
             // fire event for broacast information to notification
-            event(new BroadcastStreamsHistoryStatusEvent());
+            BroadcastStreamsHistoryStatusEvent::dispatch();
         }
     }
 

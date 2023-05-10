@@ -20,7 +20,7 @@ class TakeNetworkDataCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Command for taking network data for charts';
 
     /**
      * Execute the console command.

@@ -32,12 +32,14 @@ class StartStreamsDiagnosticCommand extends Command
     public function handle()
     {
         // označení všech streamu jako waiting pro spuštění
-        $streams = Stream::where('status', Stream::STATUS_WAITING)->orWhere('status', Stream::STATUS_CRASH)->cursor();
+        $streams = Stream::isNotMonitored()->get();
         foreach ($streams as $stream) {
-            Cache::forget('stream_' . $stream->id);
-            Cache::put('stream_' . $stream->id, $stream);
-            StartStreamDiagnosticJob::dispatch($stream);
-            usleep(500000); // sleep for 0,5s
+            // Cache::forget('stream_' . $stream->id);
+            // Cache::put('stream_' . $stream->id, $stream);
+            if (is_null($stream->diagnostic_pid) || is_null($stream->diagnostic_pid->diagnostic_pid)) {
+                StartStreamDiagnosticJob::dispatch($stream);
+                usleep(500000); // sleep for 0,5s
+            }
         }
     }
 }

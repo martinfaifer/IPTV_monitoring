@@ -7,9 +7,9 @@ use Illuminate\Queue\SerializesModels;
 use App\Actions\Cache\GetStreamsHistoryAction;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class BroadcastStreamsHistoryStatusEvent implements ShouldBroadcastNow
+class BroadcastStreamsHistoryStatusEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

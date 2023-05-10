@@ -3,9 +3,13 @@
 namespace App\Actions\Network;
 
 use App\Models\AvgNetworkSpeed;
+use App\Traits\Charts\GetListFromArrayTrait;
 
 class ShowAvgNetworkSpeedAction
 {
+
+    use GetListFromArrayTrait;
+
     public function execute()
     {
         return [
@@ -21,25 +25,5 @@ class ShowAvgNetworkSpeedAction
             ],
             'categories' => $this->get_list_from_array(AvgNetworkSpeed::latest()->take(120)->get('created_at'), 'created_at', true),
         ];
-    }
-
-    protected function get_list_from_array($array, string $key, bool $isDate = false)
-    {
-        $collection = $array->sortBy('created_at');
-        $collection->values()->all();
-        $result = [];
-        if ($isDate == true) {
-            foreach ($collection as $val) {
-                $result[] = $val[$key]->format('H:i');
-            }
-
-            return $result;
-        }
-
-        foreach ($collection as $val) {
-            $result[] = $val[$key];
-        }
-
-        return $result;
     }
 }

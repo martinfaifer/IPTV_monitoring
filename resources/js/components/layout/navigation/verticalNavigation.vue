@@ -57,7 +57,7 @@
             absolute
             temporary
             right
-            color="#101B2D"
+            color="#0b131f"
             :width="screenWidth"
         >
             <p

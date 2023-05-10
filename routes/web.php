@@ -26,6 +26,7 @@ use App\Http\Controllers\Streams\StreamHistoryStatusController;
 use App\Http\Controllers\Streams\ShowServiceStreamPidsController;
 use App\Http\Controllers\Settings\Sreams\SettingsStreamController;
 use App\Http\Controllers\Streams\StreamPidDiscontinuityController;
+use App\Http\Controllers\Settings\Dashboard\Health\HealtController;
 use App\Http\Controllers\Settings\Notification\NotificationController;
 use App\Http\Controllers\Streams\StreamSettingsInformtionMozaikaController;
 use App\Http\Controllers\Streams\StreStreamPidDiscontinuityResetController;
@@ -94,6 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('streams/status-history', StreamsHistoryStatusController::class);
             Route::get('network-speed', AvgNetworkSpeedController::class);
             Route::get('server-information', [SystemInformationController::class, 'ram']);
+            Route::get('health/{check_name}', HealtController::class);
         });
         Route::prefix('streams')->group(function () {
             Route::get('', [SettingsStreamController::class, 'index']);

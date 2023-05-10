@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Stream extends Model
 {
@@ -28,6 +31,7 @@ class Stream extends Model
         'stream_url',
         'status',
         'monitored_at',
+        'diagnostic_pid'
     ];
 
     protected $casts = [
@@ -37,5 +41,18 @@ class Stream extends Model
     public function history(): HasMany
     {
         return $this->hasMany(StreamHistoryStatus::class, 'stream_id', 'id')->select(['id', 'status', 'created_at'])->take(10);
+    }
+
+    public function diagnostic_pid(): BelongsTo
+    {
+        return $this->belongsTo(StreamProcessPid::class, 'stream_id', 'id');
+    }
+
+    public static function scopeIsNotMonitored(Builder $query)
+    {
+        $query
+            ->where('status', Stream::STATUS_WAITING)
+            ->orWhere('status', Stream::STATUS_CRASH)
+            ->with('diagnostic_pid');
     }
 }

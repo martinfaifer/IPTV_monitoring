@@ -6,10 +6,12 @@ use App\Models\Stream;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
+use App\Actions\Streams\UpdateStreamDiagnosticPidAction;
 
 class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
 {
@@ -47,19 +49,14 @@ class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
      */
     public function handle()
     {
-        if ($this->stream->status != Stream::STATUS_WAITING) {
-            $this->stream->update([
-                'status' => Stream::STATUS_WAITING,
-            ]);
-        }
-
         // vyčištění cache
-        Cache::pull($this->stream->id . "_" . Stream::STATUS_CAN_NOT_START);
+        // Cache::pull($this->stream->id . "_" . Stream::STATUS_CAN_NOT_START);
 
         $processPid = shell_exec("nohup php artisan stream:diagnostic {$this->stream->id}" . ' > /dev/null 2>&1 & echo $!; ');
+        (new UpdateStreamDiagnosticPidAction())->execute($this->stream, $processPid);
 
-        Cache::put('streamIsMonitoring_' . $this->stream->id, [
-            'processPid' => $processPid,
-        ]);
+        // Cache::put('streamIsMonitoring_' . $this->stream->id, [
+        //     'processPid' => $processPid,
+        // ]);
     }
 }

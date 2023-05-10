@@ -502,18 +502,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1565,104 +1553,79 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "mt-12" }, [
-    _vm.streams.length == 0
-      ? _c(
-          "div",
+    _c(
+      "div",
+      [
+        _c("ErrorStreamMozaika"),
+        _vm._v(" "),
+        _c("ProblemStreamMozaika"),
+        _vm._v(" "),
+        _c("CustomMozaika"),
+        _vm._v(" "),
+        _c(
+          "v-container",
+          { attrs: { fluid: "" } },
           [
             _c(
-              "v-container",
-              { staticClass: "fill-height", attrs: { fluid: "", fluid: "" } },
-              [
-                _c("v-row", { attrs: { align: "center", justify: "center" } }, [
-                  _c("div", { staticClass: "loader" }, [
-                    _c("span"),
-                    _vm._v(" "),
-                    _c("span"),
-                    _vm._v(" "),
-                    _c("span"),
-                    _vm._v(" "),
-                    _c("span"),
-                  ]),
-                ]),
-              ],
-              1
-            ),
-          ],
-          1
-        )
-      : _c(
-          "div",
-          [
-            _c("ErrorStreamMozaika"),
-            _vm._v(" "),
-            _c("ProblemStreamMozaika"),
-            _vm._v(" "),
-            _c("CustomMozaika"),
-            _vm._v(" "),
-            _c(
-              "v-container",
-              { attrs: { fluid: "" } },
-              [
-                _c(
-                  "p",
-                  {
-                    staticClass:
-                      "text-left subtitle-2 text--disabled font-weight-medium ml-3",
-                  },
-                  [_vm._v("\n                Dynamická mozaika\n            ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-row",
-                  { staticClass: "mx-auto mt-1" },
-                  _vm._l(_vm.streams, function (stream) {
-                    return _c(
-                      "v-col",
-                      { key: stream.id, staticClass: "my-2" },
-                      [_c("ImageCard", { attrs: { stream: stream } })],
-                      1
-                    )
-                  }),
-                  1
-                ),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "v-bottom-navigation",
+              "p",
               {
-                staticStyle: {
-                  background: "rgba(13, 25, 44, 0.25)",
-                  "box-shadow": "0 8px 32px 0 rgba(17, 27, 45, 0.37)",
-                  "backdrop-filter": "blur(4px)",
-                  "-webkit-backdrop-filter": "blur(4px)",
-                },
-                attrs: { fixed: "" },
+                staticClass:
+                  "text-left subtitle-2 text--disabled font-weight-medium ml-3",
               },
-              [
-                _c("v-pagination", {
-                  staticClass: "mx-auto",
-                  attrs: { length: _vm.pagination.total },
-                  on: {
-                    input: function ($event) {
-                      return _vm.onPageChange()
-                    },
-                  },
-                  model: {
-                    value: _vm.pagination.current,
-                    callback: function ($$v) {
-                      _vm.$set(_vm.pagination, "current", $$v)
-                    },
-                    expression: "pagination.current",
-                  },
-                }),
-              ],
+              [_vm._v("\n                Dynamická mozaika\n            ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "v-row",
+              { staticClass: "mx-auto mt-1" },
+              _vm._l(_vm.streams, function (stream) {
+                return _c(
+                  "v-col",
+                  { key: stream.id, staticClass: "my-2" },
+                  [_c("ImageCard", { attrs: { stream: stream } })],
+                  1
+                )
+              }),
               1
             ),
           ],
           1
         ),
+        _vm._v(" "),
+        _c(
+          "v-bottom-navigation",
+          {
+            staticStyle: {
+              background: "rgba(13, 25, 44, 0.25)",
+              "box-shadow": "0 8px 32px 0 rgba(17, 27, 45, 0.37)",
+              "backdrop-filter": "blur(4px)",
+              "-webkit-backdrop-filter": "blur(4px)",
+            },
+            attrs: { fixed: "" },
+          },
+          [
+            _c("v-pagination", {
+              staticClass: "mx-auto",
+              attrs: { length: _vm.pagination.total },
+              on: {
+                input: function ($event) {
+                  return _vm.onPageChange()
+                },
+              },
+              model: {
+                value: _vm.pagination.current,
+                callback: function ($$v) {
+                  _vm.$set(_vm.pagination, "current", $$v)
+                },
+                expression: "pagination.current",
+              },
+            }),
+          ],
+          1
+        ),
+      ],
+      1
+    ),
   ])
 }
 var staticRenderFns = []

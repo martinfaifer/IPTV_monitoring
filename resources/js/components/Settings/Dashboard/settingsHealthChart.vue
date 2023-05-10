@@ -3,7 +3,7 @@
         <v-card class="overflow-hidden rounded-lg blur shadow-blur" flat>
             <v-card-subtitle>
                 <p class="mt-3 text-center body-1 font-weight-bold">
-                    Vytížení sítě
+                    {{ title }}
                 </p>
             </v-card-subtitle>
             <v-card-text>
@@ -25,6 +25,7 @@
 </template>
 <script>
 export default {
+    props: ["title", "name"],
     data() {
         return {
             chartOptions: {
@@ -66,10 +67,13 @@ export default {
     },
     methods: {
         index() {
-            axios.get("settings/dashboard/network-speed").then((response) => {
-                this.chartOptions.xaxis.categories = response.data.categories;
-                this.series = response.data.series;
-            });
+            axios
+                .get("settings/dashboard/health/" + this.name)
+                .then((response) => {
+                    this.chartOptions.xaxis.categories =
+                        response.data.categories;
+                    this.series = response.data.series;
+                });
         },
     },
 

@@ -9,11 +9,7 @@ class KillTsDuckStreamProcessAction
     public function execute(object $stream)
     {
         try {
-            if (Cache::has('streamIsMonitoring_' . $stream->id)) {
-                $processPid = Cache::get('streamIsMonitoring_' . $stream->id);
-                shell_exec("kill -9 {$processPid['processPid']}");
-                Cache::pull('streamIsMonitoring_' . $stream->id);
-            }
+            posix_kill($stream->processes->diagnostic_pid, SIGTERM);
         } catch (\Throwable $th) {
             //throw $th;
         }

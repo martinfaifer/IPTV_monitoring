@@ -12,6 +12,7 @@ use App\Actions\Streams\Analyze\TsDuckAnalyzeAction;
 use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 use App\Actions\Cache\StoreStreamDiagnosticTimeStampAction;
 use App\Actions\Streams\Analyze\CheckIfStreamCanBeKillAction;
+use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 
 class StreamDiagnosticTsDuckService
 {
@@ -25,10 +26,12 @@ class StreamDiagnosticTsDuckService
     public function monitoring(object $stream)
     {
         $loop = Loop::get();
-        $loop->addPeriodicTimer(3.0, function () use ($stream, $loop) {
+        $loop->addPeriodicTimer(4.0, function () use ($stream, $loop) {
             // kontrola zda stream má být dohledován
             if ($this->check_if_stream_can_be_kill(stream: $stream) == true) {
                 $this->change_stream_status_and_release_them(stream: $stream);
+                // kill process
+                (new KillTsDuckStreamProcessAction())->execute($stream);
                 $loop->stop();
                 exit();
             }
@@ -56,7 +59,7 @@ class StreamDiagnosticTsDuckService
 
     protected function check_if_stream_can_be_kill(object $stream): bool
     {
-        // toto prenest do cache, pokud stream je v cache, tak existuje, pokud ne kill => snizeni narocnosti na pocet spojeni do db
+        // kontrola existence streamu
         if (Cache::has('stream_' . $stream->id)) {
             return false;
         }
@@ -68,7 +71,7 @@ class StreamDiagnosticTsDuckService
 
     protected function change_stream_status_and_release_them(object $stream)
     {
-        (new UnlockStreamUrlAction(stream: $stream))->handle();
+        (new UnlockStreamUrlAction(stream: $stream))->execute();
         (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_STOPPED);
         // remove stored pid
         (new DeleteStreamPidProcessAction())->execute(stream: $stream);

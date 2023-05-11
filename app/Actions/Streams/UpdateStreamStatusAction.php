@@ -19,7 +19,6 @@ class UpdateStreamStatusAction
 
     public function execute(object $stream, string $status)
     {
-
         if ($status != Stream::STATUS_CAN_NOT_START) {
             Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
         }

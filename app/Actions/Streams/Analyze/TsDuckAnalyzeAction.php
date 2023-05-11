@@ -3,8 +3,6 @@
 namespace App\Actions\Streams\Analyze;
 
 use Illuminate\Support\Facades\Process;
-// use Symfony\Component\Process\Process;
-// use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class TsDuckAnalyzeAction
 {
@@ -13,13 +11,13 @@ class TsDuckAnalyzeAction
 
         try {
             if (str_contains($streamUrl, 'http')) {
-                $command = "tsp -I http {$streamUrl} -P until -s 1 -P analyze --json -O drop";
+                $command = "tsp -I http {$streamUrl} -P until -s 2 -P analyze --json -O drop";
             } else {
-                $command = "tsp -I ip {$streamUrl} -P until -s 1 -P analyze --json -O drop";
+                $command = "tsp -I ip {$streamUrl} -P until -s 2 -P analyze --json -O drop";
             }
 
             // Create a new process instance and configure it
-            $result = Process::timeout(2)->run($command);
+            $result = Process::timeout(4)->run($command);
 
             if ($result->failed()) {
                 return null;

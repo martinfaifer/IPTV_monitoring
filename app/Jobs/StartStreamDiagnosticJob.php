@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
-use App\Actions\Streams\UpdateStreamDiagnosticPidAction;
+use App\Actions\Streams\StoreStreamDiagnosticPidAction;
 
 class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
 {
@@ -33,16 +33,6 @@ class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
     }
 
     /**
-     * The unique ID of the job.
-     *
-     * @return string
-     */
-    public function uniqueId()
-    {
-        return 'tsduck_streamId_' . $this->stream->id;
-    }
-
-    /**
      * Execute the job.
      *
      * @return void
@@ -52,11 +42,8 @@ class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
         // vyčištění cache
         // Cache::pull($this->stream->id . "_" . Stream::STATUS_CAN_NOT_START);
 
-        $processPid = shell_exec("nohup php artisan stream:diagnostic {$this->stream->id}" . ' > /dev/null 2>&1 & echo $!; ');
-        (new UpdateStreamDiagnosticPidAction())->execute($this->stream, $processPid);
-
-        // Cache::put('streamIsMonitoring_' . $this->stream->id, [
-        //     'processPid' => $processPid,
-        // ]);
+        $processPid = exec("nohup php artisan stream:diagnostic {$this->stream->id}" . ' > /dev/null 2>&1 & echo $!');
+        echo $this->stream->id . " ProcessPID:" . $processPid . PHP_EOL;
+        (new StoreStreamDiagnosticPidAction())->execute($this->stream->id, $processPid);
     }
 }

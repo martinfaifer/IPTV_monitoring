@@ -31,7 +31,6 @@ class Stream extends Model
         'stream_url',
         'status',
         'monitored_at',
-        'diagnostic_pid'
     ];
 
     protected $casts = [
@@ -43,7 +42,7 @@ class Stream extends Model
         return $this->hasMany(StreamHistoryStatus::class, 'stream_id', 'id')->select(['id', 'status', 'created_at'])->take(10);
     }
 
-    public function diagnostic_pid(): BelongsTo
+    public function processes(): BelongsTo
     {
         return $this->belongsTo(StreamProcessPid::class, 'stream_id', 'id');
     }
@@ -53,6 +52,6 @@ class Stream extends Model
         $query
             ->where('status', Stream::STATUS_WAITING)
             ->orWhere('status', Stream::STATUS_CRASH)
-            ->with('diagnostic_pid');
+            ->with('processes');
     }
 }

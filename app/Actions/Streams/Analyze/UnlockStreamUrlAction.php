@@ -11,7 +11,7 @@ class UnlockStreamUrlAction
     {
     }
 
-    public function handle()
+    public function execute()
     {
         Cache::pull('streamIsMonitoring_' . $this->stream->id);
         Cache::pull($this->stream->stream_url . '_stop');

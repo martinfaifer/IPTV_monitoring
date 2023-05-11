@@ -22,8 +22,6 @@ class StreamObserver
      */
     public function created(Stream $stream)
     {
-        Cache::forget('streams');
-        Cache::put('streams', Stream::all());
         Cache::put('stream_' . $stream->id, $stream);
     }
 
@@ -35,26 +33,23 @@ class StreamObserver
      */
     public function updated(Stream $stream)
     {
-        Cache::forget('streams');
         Cache::forget('stream_' . $stream->id);
-        Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
-        Cache::put('streams', Stream::all());
         if ($stream->status == Stream::STATUS_WAITING) {
             (new DeleteAllStreamCacheDataAction())->execute(stream: $stream);
         }
 
         $notRunnngStreams = new NotRunningStreamsResource([]);
         if (is_array($notRunnngStreams)) {
-            event(new BroadcastErrorStreamsEvent(notRunnngStreams: $notRunnngStreams));
+            BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
         }
 
         $problemStreams = new ShowProblemStreamsResource(Stream::where('status', Stream::STATUS_MONITORING)->get());
         if (is_array($problemStreams)) {
-            event(new BroadcastProblemStreamsEvent(problemStreams: $problemStreams));
+            BroadcastProblemStreamsEvent::dispatch($problemStreams);
         }
 
         Cache::put('stream_' . $stream->id, $stream);
-        event(new BroadcastMonitoredStreamsEvent());
+        BroadcastMonitoredStreamsEvent::dispatch();
     }
 
     /**
@@ -68,21 +63,19 @@ class StreamObserver
         (new KillTsDuckStreamProcessAction())->execute($stream);
         (new DeleteAllStreamCacheDataAction())->execute($stream);
         Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
-        Cache::forget('streams');
-        Cache::put('streams', Stream::all());
 
         $notRunnngStreams = new NotRunningStreamsResource([]);
         if (is_array($notRunnngStreams) > 0) {
-            event(new BroadcastErrorStreamsEvent($notRunnngStreams));
+            BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
         }
 
         $problemStreams = new ShowProblemStreamsResource(resource: Stream::where('status', Stream::STATUS_MONITORING)->get());
         if (is_array($problemStreams)) {
-            event(new BroadcastProblemStreamsEvent($problemStreams));
+            BroadcastProblemStreamsEvent::dispatch($problemStreams);
         }
 
         Cache::forget('stream_' . $stream->id);
-        event(new BroadcastMonitoredStreamsEvent());
+        BroadcastMonitoredStreamsEvent::dispatch();
     }
 
     /**

@@ -3,6 +3,9 @@
 namespace App\Actions\Streams;
 
 use App\Actions\Streams\Analyze\MarkStreamForKillAction;
+use App\Actions\System\Process\KillTsDuckStreamProcessAction;
+use App\Models\StreamHistoryStatus;
+use App\Models\StreamProcessPid;
 
 class DeleteStreamAction
 {
@@ -11,6 +14,9 @@ class DeleteStreamAction
         // stop monitoring stream
         (new MarkStreamForKillAction($stream->stream_url))->execution();
 
+        (new KillTsDuckStreamProcessAction())->execute($stream);
+        StreamProcessPid::where('stream_id', $stream->id)->delete();
+        StreamHistoryStatus::where('stream_id', $stream->id)->delete();
         return $stream->delete();
     }
 }

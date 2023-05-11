@@ -12,7 +12,6 @@ class MarkStreamForKillAction
 
     public function execution()
     {
-        Cache::put($this->streamUrl.'_stop', []);
-        // grep -w grep command
+        Cache::put($this->streamUrl . '_stop', []);
     }
 }

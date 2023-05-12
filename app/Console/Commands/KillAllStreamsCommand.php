@@ -35,7 +35,7 @@ class KillAllStreamsCommand extends Command
      */
     public function handle()
     {
-        $streams = Stream::get();
+        $streams = Stream::with('processes')->get();
         if (count($streams) != 0) {
             foreach ($streams as $stream) {
                 Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
@@ -45,13 +45,13 @@ class KillAllStreamsCommand extends Command
                 // remove process pid
                 (new DeleteStreamPidProcessAction())->execute($stream);
 
-                (new UpdateStreamDiagnosticPidAction())->execute($stream, null);
+                // (new UpdateStreamDiagnosticPidAction())->execute($stream, null);
             }
         }
 
         // kill all running process for tsduck and ffmpeg
-        (new KillAllProcessesByNameAction())->execute('tsp');
-        (new KillAllProcessesByNameAction())->execute('ffmpeg');
-        (new KillAllProcessesByNameAction())->execute('ffprobe');
+        // (new KillAllProcessesByNameAction())->execute('tsp');
+        // (new KillAllProcessesByNameAction())->execute('ffmpeg');
+        // (new KillAllProcessesByNameAction())->execute('ffprobe');
     }
 }

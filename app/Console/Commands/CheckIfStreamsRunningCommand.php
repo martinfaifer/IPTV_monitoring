@@ -36,6 +36,7 @@ class CheckIfStreamsRunningCommand extends Command
 
         foreach ($streams as $stream) {
             if (!is_null($stream->processes) || !is_null($stream->processes->diagnotic_pid)) {
+                echo $stream->nazev. PHP_EOL;
                 // kontrola existence pidu
                 if (posix_kill($stream->processes->diagnostic_pid, 0)) {
                     // pid nenalezen

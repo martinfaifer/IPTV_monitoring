@@ -8,9 +8,14 @@ class StoreStreamDiagnosticPidAction
 {
     public function execute(int $streamId, int|null $diagnosticPid = null): void
     {
-        if (!StreamProcessPid::where('stream_id', $streamId)->first()) {
+        $streamProcess = StreamProcessPid::where('stream_id', $streamId)->first();
+        if (!$streamProcess) {
             StreamProcessPid::create([
                 'stream_id' => $streamId,
+                'diagnostic_pid' => $diagnosticPid
+            ]);
+        } else {
+            $streamProcess->update([
                 'diagnostic_pid' => $diagnosticPid
             ]);
         }

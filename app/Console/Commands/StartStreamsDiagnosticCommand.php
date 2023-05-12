@@ -32,11 +32,10 @@ class StartStreamsDiagnosticCommand extends Command
     public function handle()
     {
         // označení všech streamu jako waiting pro spuštění
-        $streams = Stream::isNotMonitored()->get();
+        $streams = Stream::isNotMonitored()->with('processes')->get();
         foreach ($streams as $stream) {
-            if (is_null($stream->processes) || is_null($stream->processes->diagnotic_pid)) {
+            if (is_null($stream->processes)) {
                 StartStreamDiagnosticJob::dispatch($stream);
-                sleep(1); // sleep for 0,5s
             }
         }
     }

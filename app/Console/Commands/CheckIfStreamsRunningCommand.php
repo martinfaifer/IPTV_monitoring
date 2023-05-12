@@ -32,7 +32,7 @@ class CheckIfStreamsRunningCommand extends Command
      */
     public function handle()
     {
-        $streams = Stream::where('status', "!=", Stream::STATUS_WAITING)->with('processes')->get();
+        $streams = Stream::where('status', "!=", Stream::STATUS_WAITING)->get();
 
         foreach ($streams as $stream) {
             if (!is_null($stream->processes) || !is_null($stream->processes->diagnotic_pid)) {

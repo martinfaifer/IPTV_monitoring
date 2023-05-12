@@ -44,7 +44,7 @@ class Stream extends Model
 
     public function processes(): BelongsTo
     {
-        return $this->belongsTo(StreamProcessPid::class, 'stream_id', 'id');
+        return $this->belongsTo(StreamProcessPid::class, 'id', 'stream_id');
     }
 
     public static function scopeIsNotMonitored(Builder $query)

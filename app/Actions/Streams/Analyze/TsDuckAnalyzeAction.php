@@ -10,12 +10,12 @@ class TsDuckAnalyzeAction
     {
         try {
             if (str_contains($streamUrl, 'http')) {
-                $command = "tsp -I http {$streamUrl} -P until -s 2 -P analyze --json -O drop";
+                $command = "timeout 2 tsp -I http {$streamUrl} -P until -s 1 -P analyze --json -O drop";
             } else {
-                $command = "tsp -I ip {$streamUrl} -P until -s 2 -P analyze --json -O drop";
+                $command = "timeout 2 tsp -I ip {$streamUrl} -P until -s 1 -P analyze --json -O drop";
             }
 
-            $result = Process::timeout(3)->run($command);
+            $result = Process::run($command);
 
             if ($result->failed()) {
                 return null;

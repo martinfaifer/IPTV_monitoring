@@ -35,13 +35,17 @@ class CheckIfStreamsRunningCommand extends Command
         $streams = Stream::where('status', "!=", Stream::STATUS_WAITING)->orWhere('status', "!=", Stream::STATUS_STOPPED)->get();
 
         foreach ($streams as $stream) {
-            if (!is_null($stream->processes) || !is_null($stream->processes->diagnotic_pid)) {
-                // kontrola existence pidu
-                if (!posix_kill($stream->processes->diagnostic_pid, 0)) {
-                    // pid nenalezen
-                    // spuštění diagnostiky
-                    StartStreamDiagnosticJob::dispatch($stream);
+            try {
+                if (!is_null($stream->processes) || !is_null($stream->processes->diagnotic_pid)) {
+                    // kontrola existence pidu
+                    if (!posix_kill($stream->processes->diagnostic_pid, 0)) {
+                        // pid nenalezen
+                        // spuštění diagnostiky
+                        StartStreamDiagnosticJob::dispatch($stream);
+                    }
                 }
+            } catch (\Throwable $th) {
+                //throw $th;
             }
         }
     }

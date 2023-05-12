@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Stream;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class ChangeStreamsToWaitingCommand extends Command
 {
@@ -31,6 +32,7 @@ class ChangeStreamsToWaitingCommand extends Command
         $streams = Stream::where('status', Stream::STATUS_STOPPED)->get();
         if (count($streams) > 0) {
             foreach ($streams as $stream) {
+                Cache::pull($this->stream->stream_url . '_stop');
                 $stream->update([
                     'status' => Stream::STATUS_WAITING,
                 ]);

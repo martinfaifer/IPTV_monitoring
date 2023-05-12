@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use App\Jobs\StartStreamDiagnosticJob;
 use Illuminate\Support\Facades\Artisan;
+use App\Actions\Streams\Analyze\CheckIfStreamCanBeKillAction;
 
 class StartStreamsDiagnosticCommand extends Command
 {
@@ -34,8 +35,10 @@ class StartStreamsDiagnosticCommand extends Command
         // označení všech streamu jako waiting pro spuštění
         $streams = Stream::isNotMonitored()->with('processes')->get();
         foreach ($streams as $stream) {
-            if (is_null($stream->processes)) {
-                StartStreamDiagnosticJob::dispatch($stream);
+            if ((new CheckIfStreamCanBeKillAction(streamUrl: $stream->stream_url))->execution() != true) {
+                if (is_null($stream->processes)) {
+                    StartStreamDiagnosticJob::dispatch($stream);
+                }
             }
         }
     }

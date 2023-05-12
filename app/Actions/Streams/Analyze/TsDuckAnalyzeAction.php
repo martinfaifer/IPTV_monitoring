@@ -8,7 +8,6 @@ class TsDuckAnalyzeAction
 {
     public function execute(string $streamUrl)
     {
-
         try {
             if (str_contains($streamUrl, 'http')) {
                 $command = "tsp -I http {$streamUrl} -P until -s 2 -P analyze --json -O drop";
@@ -16,8 +15,7 @@ class TsDuckAnalyzeAction
                 $command = "tsp -I ip {$streamUrl} -P until -s 2 -P analyze --json -O drop";
             }
 
-            // Create a new process instance and configure it
-            $result = Process::timeout(4)->run($command);
+            $result = Process::timeout(3)->run($command);
 
             if ($result->failed()) {
                 return null;
@@ -25,8 +23,6 @@ class TsDuckAnalyzeAction
 
             return $result->output();
         } catch (\Throwable $th) {
-            // timeout exceeded
-            echo "Timeout exceeded: " . PHP_EOL;
             return null;
         }
     }

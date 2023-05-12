@@ -54,4 +54,9 @@ class Stream extends Model
             ->orWhere('status', Stream::STATUS_CRASH)
             ->with('processes');
     }
+
+    public static function scopeIsMonitoring(Builder $query)
+    {
+        $query->where('status', Stream::STATUS_MONITORING);
+    }
 }

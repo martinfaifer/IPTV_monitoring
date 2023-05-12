@@ -32,23 +32,17 @@ class CheckIfStreamsRunningCommand extends Command
      */
     public function handle()
     {
-        Stream::where('status', Stream::STATUS_MONITORING)
-            ->chunk(100, function ($streams) {
-                $streams->each(function ($stream) {
+        $streams = Stream::isMonitoring()->with('processes')->get();
 
-                    if ((new CheckIfIsLockAction())->execute($stream) === false) {
-                        (new UnlockStreamUrlAction($stream))->handle();
-                        StartStreamDiagnosticJob::dispatch($stream);
-                    }
-
-                    // $cachedLastDiagnosticTime = Cache::get('lastDiagnosticTime_'.$stream->id);
-                    // if (! is_null($cachedLastDiagnosticTime)) {
-                    //     if ($cachedLastDiagnosticTime['time'] <= strtotime('-1 minute')) {
-                    //         (new UnlockStreamUrlAction($stream))->handle();
-                    //         StartStreamDiagnosticJob::dispatch($stream);
-                    //     }
-                    // }
-                });
-            });
+        foreach ($streams as $stream) {
+            if (!is_null($stream->processes) || !is_null($stream->processes->diagnotic_pid)) {
+                // kontrola existence pidu
+                if(posix_kill($stream->processes->diagnostic_pid, 0)) {
+                    // pid nenalezen
+                    // spuštění diagnostiky
+                    StartStreamDiagnosticJob::dispatch($stream);
+                }
+            }
+        }
     }
 }

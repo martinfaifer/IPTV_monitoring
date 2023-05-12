@@ -29,7 +29,7 @@ class UpdateStreamAction
         }
 
         if ($stream->status == Stream::STATUS_STOPPED) {
-            (new UnlockStreamUrlAction($stream))->handle();
+            (new UnlockStreamUrlAction($stream))->execute();
 
             return Stream::STATUS_WAITING;
         } else {

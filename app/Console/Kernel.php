@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('streams:start_diagnostic')->everyMinute()->withoutOverlapping()->runInBackground();
+        $schedule->command('streams:start_diagnostic')->everyMinute()->runInBackground();
         // + $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute()->withoutOverlapping()->runInBackground();
         // + $schedule->command('system:take_network_data')->everyMinute()->runInBackground();
         // $schedule->command('ffprobe:analyze_streams')->everyMinute()->runInBackground()->withoutOverlapping(300);

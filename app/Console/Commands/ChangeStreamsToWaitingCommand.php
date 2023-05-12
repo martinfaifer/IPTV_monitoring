@@ -32,7 +32,7 @@ class ChangeStreamsToWaitingCommand extends Command
         $streams = Stream::where('status', Stream::STATUS_STOPPED)->get();
         if (count($streams) > 0) {
             foreach ($streams as $stream) {
-                Cache::pull($this->stream->stream_url . '_stop');
+                Cache::pull($stream->stream_url . '_stop');
                 $stream->update([
                     'status' => Stream::STATUS_WAITING,
                 ]);

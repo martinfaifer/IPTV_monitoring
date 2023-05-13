@@ -39,7 +39,7 @@ class StreamDiagnosticTsDuckService
             }
 
             // lock stream
-            (new LockStreamAction())->execute($stream);
+            // (new LockStreamAction())->execute($stream);
             // provedení analýzi streamu
             $analyzeResultInJson = (new TsDuckAnalyzeAction())->execute(streamUrl: $stream->stream_url);
 
@@ -54,6 +54,8 @@ class StreamDiagnosticTsDuckService
                 // (new StreamDiagnosticFfProbeService($stream));
                 (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
             }
+
+            unset($analyzeResultInJson, $analyzedResultInArray);
         });
 
         $loop->run();

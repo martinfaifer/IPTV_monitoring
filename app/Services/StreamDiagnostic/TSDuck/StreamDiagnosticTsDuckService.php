@@ -27,14 +27,16 @@ class StreamDiagnosticTsDuckService
 
     public function monitoring(object $stream)
     {
-        $loop = Loop::get();
-        $loop->addPeriodicTimer(4.0, function () use ($stream, $loop) {
+
+        while (true) {
+            // $loop = Loop::get();
+            // $loop->addPeriodicTimer(4.0, function () use ($stream, $loop) {
             // kontrola zda stream má být dohledován
             if ($this->check_if_stream_can_be_kill(stream: $stream) == true) {
                 $this->change_stream_status_and_release_them(stream: $stream);
                 // kill process
                 (new KillTsDuckStreamProcessAction())->execute($stream);
-                $loop->stop();
+                // $loop->stop();
                 exit();
             }
 
@@ -56,9 +58,11 @@ class StreamDiagnosticTsDuckService
             }
 
             unset($analyzeResultInJson, $analyzedResultInArray);
-        });
+            // });
 
-        $loop->run();
+            // $loop->run();
+            sleep(4);
+        }
     }
 
     protected function check_if_stream_can_be_kill(object $stream): bool

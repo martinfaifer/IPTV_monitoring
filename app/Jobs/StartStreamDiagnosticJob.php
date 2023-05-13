@@ -10,10 +10,9 @@ use Illuminate\Support\Facades\Process;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use App\Actions\Streams\StoreStreamDiagnosticPidAction;
 
-class StartStreamDiagnosticJob implements ShouldQueue, ShouldBeUnique
+class StartStreamDiagnosticJob implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;

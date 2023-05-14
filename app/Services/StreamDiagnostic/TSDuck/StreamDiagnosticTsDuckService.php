@@ -52,7 +52,7 @@ class StreamDiagnosticTsDuckService
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_CAN_NOT_START);
             } else {
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_MONITORING);
-                // (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
+                (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
                 // (new StreamDiagnosticFfProbeService($stream));
                 (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
             }

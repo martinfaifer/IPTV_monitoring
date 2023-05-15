@@ -28,7 +28,7 @@ class RunningStreamsPaginationResource extends JsonResource
                 'id' => $stream['id'],
                 'nazev' => $stream['nazev'],
                 'status' => $stream['status'],
-                'image' => config('app.url').'/streams/image/'.$stream['id'].'?'.rand(),
+                'image' => '/streams/image/'.$stream['id'].'?'.rand(),
                 'audio_pids_errors' => is_null(Cache::get('showStreamDiscontinuity_'.$stream['id'])) ? $this->count_errors('audio', $stream) : 0,
                 'video_pids_errors' => is_null(Cache::get('showStreamDiscontinuity_'.$stream['id'])) ? $this->count_errors('video', $stream) : 0,
                 'errors' => [

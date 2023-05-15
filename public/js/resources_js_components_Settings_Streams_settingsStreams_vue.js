@@ -294,6 +294,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -528,6 +533,7 @@ var render = function () {
                               label: "Hledání ...",
                               "single-line": "",
                               "hide-details": "",
+                              clearable: "",
                             },
                             model: {
                               value: _vm.search,
@@ -713,39 +719,55 @@ var render = function () {
         },
         [
           _c(
-            "v-card",
+            "v-form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.deleteStream()
+                },
+              },
+            },
             [
               _c(
-                "v-card-text",
+                "v-card",
                 [
                   _c(
-                    "v-container",
-                    { staticClass: "pt-3" },
+                    "v-card-text",
                     [
                       _c(
-                        "v-row",
+                        "v-container",
+                        { staticClass: "pt-3" },
                         [
                           _c(
-                            "v-col",
-                            {
-                              attrs: {
-                                cols: "12",
-                                sm: "12",
-                                md: "12",
-                                lg: "12",
-                              },
-                            },
+                            "v-row",
                             [
                               _c(
-                                "p",
-                                { staticClass: "mt-6 text-center headline" },
+                                "v-col",
+                                {
+                                  attrs: {
+                                    cols: "12",
+                                    sm: "12",
+                                    md: "12",
+                                    lg: "12",
+                                  },
+                                },
                                 [
-                                  _vm._v(
-                                    "\n                                Přejete si odebrat kanál?\n                            "
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "mt-6 text-center headline",
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Přejete si odebrat kanál?\n                                "
+                                      ),
+                                    ]
                                   ),
                                 ]
                               ),
-                            ]
+                            ],
+                            1
                           ),
                         ],
                         1
@@ -753,44 +775,52 @@ var render = function () {
                     ],
                     1
                   ),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                { attrs: { color: "#101B1D" } },
-                [
-                  _c("v-spacer"),
                   _vm._v(" "),
                   _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        color: "blue darken-1",
-                        plain: "",
-                        outlined: "",
-                      },
-                      on: {
-                        click: function ($event) {
-                          return _vm.closeDialog()
+                    "v-card-actions",
+                    { attrs: { color: "#101B1D" } },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            color: "blue darken-1",
+                            plain: "",
+                            outlined: "",
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.closeDialog()
+                            },
+                          },
                         },
-                      },
-                    },
-                    [_vm._v("\n                    Zavřít\n                ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { color: "red darken-1", plain: "", outlined: "" },
-                      on: {
-                        click: function ($event) {
-                          return _vm.deleteStream()
+                        [
+                          _vm._v(
+                            "\n                        Zavřít\n                    "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            color: "red darken-1",
+                            type: "submit",
+                            plain: "",
+                            outlined: "",
+                          },
                         },
-                      },
-                    },
-                    [_vm._v("\n                    Odebrat\n                ")]
+                        [
+                          _vm._v(
+                            "\n                        Odebrat\n                    "
+                          ),
+                        ]
+                      ),
+                    ],
+                    1
                   ),
                 ],
                 1
@@ -1001,124 +1031,154 @@ var render = function () {
         },
         [
           _c(
-            "v-card",
+            "v-form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.editStream()
+                },
+              },
+            },
             [
-              _c("p", { staticClass: "pt-3 text-center subtitle-1" }, [
-                _vm._v("Úprava streamu"),
-              ]),
-              _vm._v(" "),
               _c(
-                "v-card-text",
+                "v-card",
                 [
+                  _c("p", { staticClass: "pt-3 text-center subtitle-1" }, [
+                    _vm._v("Úprava streamu"),
+                  ]),
+                  _vm._v(" "),
                   _c(
-                    "v-container",
-                    { staticClass: "pt-3" },
+                    "v-card-text",
                     [
                       _c(
-                        "v-row",
+                        "v-container",
+                        { staticClass: "pt-3" },
                         [
                           _c(
-                            "v-col",
-                            {
-                              attrs: { cols: "12", sm: "12", md: "6", lg: "6" },
-                            },
+                            "v-row",
                             [
-                              _c("v-text-field", {
-                                attrs: {
-                                  dense: "",
-                                  outlined: "",
-                                  autofocus: "",
-                                  "error-messages": _vm.errors.nazev,
-                                  label: "Název sreamu",
-                                  type: "text",
-                                  color: "#0277BD",
-                                },
-                                model: {
-                                  value: _vm.stream.nazev,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.stream, "nazev", $$v)
+                              _c(
+                                "v-col",
+                                {
+                                  attrs: {
+                                    cols: "12",
+                                    sm: "12",
+                                    md: "6",
+                                    lg: "6",
                                   },
-                                  expression: "stream.nazev",
                                 },
-                              }),
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      dense: "",
+                                      outlined: "",
+                                      autofocus: "",
+                                      "error-messages": _vm.errors.nazev,
+                                      label: "Název sreamu",
+                                      type: "text",
+                                      color: "#0277BD",
+                                    },
+                                    model: {
+                                      value: _vm.stream.nazev,
+                                      callback: function ($$v) {
+                                        _vm.$set(_vm.stream, "nazev", $$v)
+                                      },
+                                      expression: "stream.nazev",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                {
+                                  attrs: {
+                                    cols: "12",
+                                    sm: "12",
+                                    md: "6",
+                                    lg: "6",
+                                  },
+                                },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      dense: "",
+                                      outlined: "",
+                                      readonly: "",
+                                      disabled: "",
+                                      "error-messages": _vm.errors.stream_url,
+                                      label: "dohledová adresa",
+                                      type: "text",
+                                      color: "#0277BD",
+                                    },
+                                    model: {
+                                      value: _vm.stream.stream_url,
+                                      callback: function ($$v) {
+                                        _vm.$set(_vm.stream, "stream_url", $$v)
+                                      },
+                                      expression: "stream.stream_url",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                {
+                                  attrs: {
+                                    cols: "12",
+                                    sm: "12",
+                                    md: "6",
+                                    lg: "6",
+                                  },
+                                },
+                                [
+                                  _vm.stream.status == "stopped"
+                                    ? _c(
+                                        "span",
+                                        [
+                                          _c("v-switch", {
+                                            attrs: {
+                                              label:
+                                                "Přidání streamu do fronty ke spuštění",
+                                            },
+                                            model: {
+                                              value: _vm.changeStreamStatus,
+                                              callback: function ($$v) {
+                                                _vm.changeStreamStatus = $$v
+                                              },
+                                              expression: "changeStreamStatus",
+                                            },
+                                          }),
+                                        ],
+                                        1
+                                      )
+                                    : _c(
+                                        "span",
+                                        [
+                                          _c("v-switch", {
+                                            attrs: {
+                                              label:
+                                                "Vypnutí dohledování streamu",
+                                            },
+                                            model: {
+                                              value: _vm.changeStreamStatus,
+                                              callback: function ($$v) {
+                                                _vm.changeStreamStatus = $$v
+                                              },
+                                              expression: "changeStreamStatus",
+                                            },
+                                          }),
+                                        ],
+                                        1
+                                      ),
+                                ]
+                              ),
                             ],
                             1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            {
-                              attrs: { cols: "12", sm: "12", md: "6", lg: "6" },
-                            },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  dense: "",
-                                  outlined: "",
-                                  readonly: "",
-                                  disabled: "",
-                                  "error-messages": _vm.errors.stream_url,
-                                  label: "dohledová adresa",
-                                  type: "text",
-                                  color: "#0277BD",
-                                },
-                                model: {
-                                  value: _vm.stream.stream_url,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.stream, "stream_url", $$v)
-                                  },
-                                  expression: "stream.stream_url",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            {
-                              attrs: { cols: "12", sm: "12", md: "6", lg: "6" },
-                            },
-                            [
-                              _vm.stream.status == "stopped"
-                                ? _c(
-                                    "span",
-                                    [
-                                      _c("v-switch", {
-                                        attrs: {
-                                          label:
-                                            "Přidání streamu do fronty ke spuštění",
-                                        },
-                                        model: {
-                                          value: _vm.changeStreamStatus,
-                                          callback: function ($$v) {
-                                            _vm.changeStreamStatus = $$v
-                                          },
-                                          expression: "changeStreamStatus",
-                                        },
-                                      }),
-                                    ],
-                                    1
-                                  )
-                                : _c(
-                                    "span",
-                                    [
-                                      _c("v-switch", {
-                                        attrs: {
-                                          label: "Vypnutí dohledování streamu",
-                                        },
-                                        model: {
-                                          value: _vm.changeStreamStatus,
-                                          callback: function ($$v) {
-                                            _vm.changeStreamStatus = $$v
-                                          },
-                                          expression: "changeStreamStatus",
-                                        },
-                                      }),
-                                    ],
-                                    1
-                                  ),
-                            ]
                           ),
                         ],
                         1
@@ -1126,48 +1186,52 @@ var render = function () {
                     ],
                     1
                   ),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                { attrs: { color: "#101B1D" } },
-                [
-                  _c("v-spacer"),
                   _vm._v(" "),
                   _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        color: "blue darken-1",
-                        plain: "",
-                        outlined: "",
-                      },
-                      on: {
-                        click: function ($event) {
-                          return _vm.closeDialog()
+                    "v-card-actions",
+                    { attrs: { color: "#101B1D" } },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            color: "blue darken-1",
+                            plain: "",
+                            outlined: "",
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.closeDialog()
+                            },
+                          },
                         },
-                      },
-                    },
-                    [_vm._v("\n                    Zavřít\n                ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        color: "green darken-1",
-                        plain: "",
-                        outlined: "",
-                      },
-                      on: {
-                        click: function ($event) {
-                          return _vm.editStream()
+                        [
+                          _vm._v(
+                            "\n                        Zavřít\n                    "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            color: "green darken-1",
+                            type: "submit",
+                            plain: "",
+                            outlined: "",
+                          },
                         },
-                      },
-                    },
-                    [_vm._v("\n                    Uložit\n                ")]
+                        [
+                          _vm._v(
+                            "\n                        Uložit\n                    "
+                          ),
+                        ]
+                      ),
+                    ],
+                    1
                   ),
                 ],
                 1

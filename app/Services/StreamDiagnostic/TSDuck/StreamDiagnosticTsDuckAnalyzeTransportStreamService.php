@@ -22,28 +22,32 @@ class StreamDiagnosticTsDuckAnalyzeTransportStreamService implements DiagnosticA
 
     public function analyze(Collection $tsDuckCollection, object $stream): void
     {
-        foreach ($tsDuckCollection as $collection) {
-            if (array_key_exists('packets', (array) $collection)) {
-                if (array_key_exists('invalid-syncs', $collection['packets'])) {
-                    $this->check_invalid_sync_in_stream($collection['packets']['invalid-syncs'], $stream);
+        try {
+            foreach ($tsDuckCollection as $collection) {
+                if (array_key_exists('packets', (array) $collection)) {
+                    if (array_key_exists('invalid-syncs', $collection['packets'])) {
+                        $this->check_invalid_sync_in_stream($collection['packets']['invalid-syncs'], $stream);
+                    }
+
+                    // transport-errors
+                    if (array_key_exists('transport-errors', $collection['packets'])) {
+                        $this->check_transport_errors_in_stream($collection['packets']['transport-errors'], $stream);
+                    }
+
+                    if (array_key_exists('total', $collection['packets'])) {
+                        $this->packets = $collection['packets']['total'];
+                    }
                 }
 
-                // transport-errors
-                if (array_key_exists('transport-errors', $collection['packets'])) {
-                    $this->check_transport_errors_in_stream($collection['packets']['transport-errors'], $stream);
-                }
-
-                if (array_key_exists('total', $collection['packets'])) {
-                    $this->packets = $collection['packets']['total'];
+                if (array_key_exists('pcr-bitrate', (array) $collection)) {
+                    $this->pcrbitrate = $collection['pcr-bitrate'];
                 }
             }
 
-            if (array_key_exists('pcr-bitrate', (array) $collection)) {
-                $this->pcrbitrate = $collection['pcr-bitrate'];
-            }
+            $this->store_to_cache($stream, $this->country, $this->packets, $this->pcrbitrate);
+        } catch (\Throwable $th) {
+            info("Problem s TS diagnostikou streamu ". $stream->id , [$th]);
         }
-
-        $this->store_to_cache($stream, $this->country, $this->packets, $this->pcrbitrate);
     }
 
     /**

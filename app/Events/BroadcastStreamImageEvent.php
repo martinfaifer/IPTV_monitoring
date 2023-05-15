@@ -33,11 +33,11 @@ class BroadcastStreamImageEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('StreamImage'.$this->stream->id);
+        return new Channel('StreamImage' . $this->stream->id);
     }
 
     public function broadcastWith()
     {
-        return [config('app.url').'/streams/image/'.$this->stream->id.'?'.rand()];
+        return ['/streams/image/' . $this->stream->id . '?' . rand()];
     }
 }

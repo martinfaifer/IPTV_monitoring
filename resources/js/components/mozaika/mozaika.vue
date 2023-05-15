@@ -85,11 +85,11 @@ export default {
                 });
         },
 
-        getStreamImage(streamId) {
-            axios.get("streams/image/" + streamId).then((response) => {
-                return response.data;
-            });
-        },
+        // getStreamImage(streamId) {
+        //     axios.get("streams/image/" + streamId).then((response) => {
+        //         return response.data;
+        //     });
+        // },
 
         onPageChange() {
             this.index();

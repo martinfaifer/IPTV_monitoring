@@ -18,16 +18,14 @@ class SendSlackNotificationJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
 
-    protected $payload;
-
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $payload)
+    public function __construct(public string $payload)
     {
-        $this->payload = $payload;
+        //
     }
 
     /**

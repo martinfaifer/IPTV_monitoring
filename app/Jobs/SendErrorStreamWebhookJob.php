@@ -13,19 +13,15 @@ class SendErrorStreamWebhookJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $stream;
-
-    protected $status;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(object $stream, string $status)
+    public function __construct(public object $stream, public string $status)
     {
-        $this->stream = $stream;
-        $this->status = $status;
+        //
     }
 
     /**

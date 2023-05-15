@@ -14,19 +14,15 @@ class SendNewPasswordJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $email;
-
-    protected $password;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $email, string $password)
+    public function __construct(public string $email, public string $password)
     {
-        $this->email = $email;
-        $this->password = $password;
+        //
     }
 
     /**

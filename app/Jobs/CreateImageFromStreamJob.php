@@ -16,16 +16,15 @@ class CreateImageFromStreamJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    protected $stream;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(object $stream)
+    public function __construct(public object $stream)
     {
-        $this->stream = $stream;
+        //
     }
 
     /**

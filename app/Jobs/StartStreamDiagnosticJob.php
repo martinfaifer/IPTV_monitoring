@@ -19,16 +19,14 @@ class StartStreamDiagnosticJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    protected $stream;
-
     /**
      * create new job instance
      *
      * @param  object  $stream
      */
-    public function __construct(object $stream)
+    public function __construct(public object $stream)
     {
-        $this->stream = $stream;
+        //
     }
 
     /**

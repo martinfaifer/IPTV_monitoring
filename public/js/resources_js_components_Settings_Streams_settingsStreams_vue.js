@@ -292,6 +292,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -818,75 +821,103 @@ var render = function () {
         },
         [
           _c(
-            "v-card",
+            "v-form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.storeStream()
+                },
+              },
+            },
             [
-              _c("p", { staticClass: "pt-3 text-center subtitle-1" }, [
-                _vm._v(
-                  "\n                Založení nového streamu\n            "
-                ),
-              ]),
-              _vm._v(" "),
               _c(
-                "v-card-text",
+                "v-card",
                 [
+                  _c("p", { staticClass: "pt-3 text-center subtitle-1" }, [
+                    _vm._v(
+                      "\n                    Založení nového streamu\n                "
+                    ),
+                  ]),
+                  _vm._v(" "),
                   _c(
-                    "v-container",
-                    { staticClass: "pt-3" },
+                    "v-card-text",
                     [
                       _c(
-                        "v-row",
+                        "v-container",
+                        { staticClass: "pt-3" },
                         [
                           _c(
-                            "v-col",
-                            {
-                              attrs: { cols: "12", sm: "12", md: "6", lg: "6" },
-                            },
+                            "v-row",
                             [
-                              _c("v-text-field", {
-                                attrs: {
-                                  dense: "",
-                                  outlined: "",
-                                  autofocus: "",
-                                  "error-messages": _vm.errors.nazev,
-                                  label: "Název sreamu",
-                                  type: "text",
-                                  color: "#0277BD",
-                                },
-                                model: {
-                                  value: _vm.formData.nazev,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.formData, "nazev", $$v)
+                              _c(
+                                "v-col",
+                                {
+                                  attrs: {
+                                    cols: "12",
+                                    sm: "12",
+                                    md: "6",
+                                    lg: "6",
                                   },
-                                  expression: "formData.nazev",
                                 },
-                              }),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            {
-                              attrs: { cols: "12", sm: "12", md: "6", lg: "6" },
-                            },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  dense: "",
-                                  outlined: "",
-                                  "error-messages": _vm.errors.stream_url,
-                                  label: "dohledová adresa",
-                                  type: "text",
-                                  color: "#0277BD",
-                                },
-                                model: {
-                                  value: _vm.formData.stream_url,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.formData, "stream_url", $$v)
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      dense: "",
+                                      outlined: "",
+                                      autofocus: "",
+                                      "error-messages": _vm.errors.nazev,
+                                      label: "Název sreamu",
+                                      type: "text",
+                                      color: "#0277BD",
+                                    },
+                                    model: {
+                                      value: _vm.formData.nazev,
+                                      callback: function ($$v) {
+                                        _vm.$set(_vm.formData, "nazev", $$v)
+                                      },
+                                      expression: "formData.nazev",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                {
+                                  attrs: {
+                                    cols: "12",
+                                    sm: "12",
+                                    md: "6",
+                                    lg: "6",
                                   },
-                                  expression: "formData.stream_url",
                                 },
-                              }),
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      dense: "",
+                                      outlined: "",
+                                      "error-messages": _vm.errors.stream_url,
+                                      label: "dohledová adresa",
+                                      type: "text",
+                                      color: "#0277BD",
+                                    },
+                                    model: {
+                                      value: _vm.formData.stream_url,
+                                      callback: function ($$v) {
+                                        _vm.$set(
+                                          _vm.formData,
+                                          "stream_url",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "formData.stream_url",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
                             ],
                             1
                           ),
@@ -896,48 +927,54 @@ var render = function () {
                     ],
                     1
                   ),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                { attrs: { color: "#101B1D" } },
-                [
-                  _c("v-spacer"),
                   _vm._v(" "),
                   _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        color: "blue darken-1",
-                        plain: "",
-                        outlined: "",
-                      },
-                      on: {
-                        click: function ($event) {
-                          return _vm.closeDialog()
+                    "v-card-actions",
+                    { attrs: { color: "#101B1D" } },
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            color: "blue darken-1",
+                            plain: "",
+                            outlined: "",
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.closeDialog()
+                            },
+                          },
                         },
-                      },
-                    },
-                    [_vm._v("\n                    Zavřít\n                ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        color: "green darken-1",
-                        plain: "",
-                        outlined: "",
-                      },
-                      on: {
-                        click: function ($event) {
-                          return _vm.storeStream()
+                        [
+                          _vm._v(
+                            "\n                        Zavřít\n                    "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            color: "green darken-1",
+                            type: "submit",
+                            plain: "",
+                            outlined: "",
+                          },
                         },
-                      },
-                    },
-                    [_vm._v("\n                    Uložit\n                ")]
+                        [
+                          _vm._v(
+                            "\n                        Uložit\n                    "
+                          ),
+                        ]
+                      ),
+                    ],
+                    1
                   ),
                 ],
                 1

@@ -147,59 +147,62 @@
             max-width="800px"
             overlay-color="rgb(17, 27, 45)"
         >
-            <v-card>
-                <p class="pt-3 text-center subtitle-1">
-                    Založení nového streamu
-                </p>
-                <v-card-text>
-                    <v-container class="pt-3">
-                        <v-row>
-                            <v-col cols="12" sm="12" md="6" lg="6">
-                                <v-text-field
-                                    dense
-                                    outlined
-                                    autofocus
-                                    :error-messages="errors.nazev"
-                                    v-model="formData.nazev"
-                                    label="Název sreamu"
-                                    type="text"
-                                    color="#0277BD"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="12" md="6" lg="6">
-                                <v-text-field
-                                    dense
-                                    outlined
-                                    :error-messages="errors.stream_url"
-                                    v-model="formData.stream_url"
-                                    label="dohledová adresa"
-                                    type="text"
-                                    color="#0277BD"
-                                ></v-text-field>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-card-text>
-                <v-card-actions color="#101B1D">
-                    <v-spacer></v-spacer>
-                    <v-btn
-                        color="blue darken-1"
-                        @click="closeDialog()"
-                        plain
-                        outlined
-                    >
-                        Zavřít
-                    </v-btn>
-                    <v-btn
-                        color="green darken-1"
-                        @click="storeStream()"
-                        plain
-                        outlined
-                    >
-                        Uložit
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
+            <v-form @submit.prevent="storeStream()">
+                <v-card>
+                    <p class="pt-3 text-center subtitle-1">
+                        Založení nového streamu
+                    </p>
+                    <v-card-text>
+                        <v-container class="pt-3">
+                            <v-row>
+                                <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-text-field
+                                        dense
+                                        outlined
+                                        autofocus
+                                        :error-messages="errors.nazev"
+                                        v-model="formData.nazev"
+                                        label="Název sreamu"
+                                        type="text"
+                                        color="#0277BD"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-text-field
+                                        dense
+                                        outlined
+                                        :error-messages="errors.stream_url"
+                                        v-model="formData.stream_url"
+                                        label="dohledová adresa"
+                                        type="text"
+                                        color="#0277BD"
+                                    ></v-text-field>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions color="#101B1D">
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="blue darken-1"
+                            @click="closeDialog()"
+                            plain
+                            outlined
+                        >
+                            Zavřít
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="green darken-1"
+                            type="submit"
+                            plain
+                            outlined
+                        >
+                            Uložit
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-form>
         </v-dialog>
 
         <v-dialog

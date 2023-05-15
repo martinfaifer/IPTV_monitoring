@@ -182,7 +182,6 @@
                         </v-container>
                     </v-card-text>
                     <v-card-actions color="#101B1D">
-                        <v-spacer></v-spacer>
                         <v-btn
                             color="blue darken-1"
                             @click="closeDialog()"

@@ -3713,7 +3713,7 @@ var render = function () {
                             attrs: {
                               color: "#0E5089",
                               fab: "",
-                              medium: "",
+                              small: "",
                               dark: "",
                             },
                             on: {
@@ -3724,7 +3724,11 @@ var render = function () {
                           },
                           on
                         ),
-                        [_c("v-icon", [_vm._v("mdi-magnify")])],
+                        [
+                          _c("v-icon", { attrs: { small: "" } }, [
+                            _vm._v("mdi-television-play"),
+                          ]),
+                        ],
                         1
                       ),
                     ]

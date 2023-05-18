@@ -31,14 +31,14 @@
                     <v-btn
                         color="#0E5089"
                         fab
-                        medium
+                        small
                         dark
                         class="mr-3 mt-12"
                         style="position: fixed; right: 0"
                         @click="openIptvDokuDialog()"
                         v-on="on"
                     >
-                        <v-icon>mdi-magnify</v-icon>
+                        <v-icon small>mdi-television-play</v-icon>
                     </v-btn>
                 </template>
                 <v-container>

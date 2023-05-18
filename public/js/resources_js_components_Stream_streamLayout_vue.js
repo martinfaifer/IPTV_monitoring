@@ -1428,6 +1428,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -1446,7 +1447,8 @@ __webpack_require__.r(__webpack_exports__);
       stream: [],
       isActiveDialog: false,
       iptvDokuDialog: false,
-      iptvDokuData: []
+      iptvDokuData: [],
+      loading: false
     };
   },
   components: {
@@ -1479,7 +1481,9 @@ __webpack_require__.r(__webpack_exports__);
     openIptvDokuDialog: function openIptvDokuDialog() {
       var _this2 = this;
 
+      this.loading = true;
       axios.get("streams/iptvdoku/" + this.$route.params.streamId).then(function (response) {
+        _this2.loading = false;
         _this2.iptvDokuData = response.data.data;
         _this2.iptvDokuDialog = true;
       });
@@ -3711,6 +3715,7 @@ var render = function () {
                             staticClass: "mr-3 mt-12",
                             staticStyle: { position: "fixed", right: "0" },
                             attrs: {
+                              loading: _vm.loading,
                               color: "#0E5089",
                               fab: "",
                               small: "",

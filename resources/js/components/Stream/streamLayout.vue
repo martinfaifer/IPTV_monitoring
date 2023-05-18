@@ -29,6 +29,7 @@
             <v-tooltip bottom color="#0E5089">
                 <template v-slot:activator="{ on }">
                     <v-btn
+                        :loading="loading"
                         color="#0E5089"
                         fab
                         small
@@ -295,6 +296,7 @@ export default {
             isActiveDialog: false,
             iptvDokuDialog: false,
             iptvDokuData: [],
+            loading: false,
         };
     },
     components: {
@@ -330,9 +332,11 @@ export default {
         },
 
         openIptvDokuDialog() {
+            this.loading = true;
             axios
                 .get("streams/iptvdoku/" + this.$route.params.streamId)
                 .then((response) => {
+                    this.loading = false;
                     this.iptvDokuData = response.data.data;
                     this.iptvDokuDialog = true;
                 });

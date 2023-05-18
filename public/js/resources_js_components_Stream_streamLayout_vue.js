@@ -616,6 +616,82 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      iptvDokuData: []
+    };
+  },
+  components: {},
+  created: function created() {
+    this.index();
+  },
+  methods: {
+    index: function index() {
+      var _this = this;
+
+      if (this.$route.params.streamId) {
+        axios.get("streams/iptvdoku/" + this.$route.params.streamId).then(function (response) {
+          _this.iptvDokuData = response.data.data;
+        });
+      }
+    }
+  },
+  mounted: function mounted() {},
+  watch: {
+    $route: function $route(to, from) {
+      this.index();
+    }
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.index();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamNameAndStatus.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamNameAndStatus.vue?vue&type=script&lang=js& ***!
@@ -743,117 +819,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["stream"],
   data: function data() {
     return {
       streamStatusArray: [],
-      streamInformationDialog: false,
-      streamInformation: [],
       streamEditDialog: false,
       formData: [],
       error: []
@@ -862,29 +832,16 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   created: function created() {},
   methods: {
-    getInformationAboutStreamFromIptvDoku: function getInformationAboutStreamFromIptvDoku() {
+    openStreamEditDialog: function openStreamEditDialog() {
       var _this = this;
 
-      axios.get("streams/iptvdokumentace/" + this.$route.params.streamId).then(function (response) {
-        _this.streamInformation = response.data;
-        _this.streamInformationDialog = true;
-      })["catch"](function (error) {
-        if (error.response.status == 404) {
-          _this.streamInformation = [];
-          _this.streamInformationDialog = true;
-        }
-      });
-    },
-    openStreamEditDialog: function openStreamEditDialog() {
-      var _this2 = this;
-
       axios.get("streams/settings/" + this.$route.params.streamId).then(function (response) {
-        _this2.formData = response.data;
-        _this2.streamEditDialog = true;
+        _this.formData = response.data;
+        _this.streamEditDialog = true;
       });
     },
     updateStream: function updateStream() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios.patch("streams/settings/" + this.$route.params.streamId, {
         invalidSync: this.formData.invalidSync,
@@ -894,15 +851,14 @@ __webpack_require__.r(__webpack_exports__);
         audioVideoOutOfSync: this.formData.audioVideoOutOfSync,
         discontinuites: this.formData.discontinuites
       }).then(function (response) {
-        _this3.$store.state.alerts = response.data;
+        _this2.$store.state.alerts = response.data;
 
-        _this3.closeDialog();
+        _this2.closeDialog();
       })["catch"](function (error) {
-        _this3.errors = error.response.data.errors;
+        _this2.errors = error.response.data.errors;
       });
     },
     closeDialog: function closeDialog() {
-      this.streamInformationDialog = false;
       this.streamEditDialog = false;
     }
   },
@@ -1195,6 +1151,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _StreamServices_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./StreamServices.vue */ "./resources/js/components/Stream/StreamServices.vue");
 /* harmony import */ var _StreamAlertDialog_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./StreamAlertDialog.vue */ "./resources/js/components/Stream/StreamAlertDialog.vue");
 /* harmony import */ var _StreamFfrobe_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./StreamFfrobe.vue */ "./resources/js/components/Stream/StreamFfrobe.vue");
+/* harmony import */ var _StreamIptvDoku_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./StreamIptvDoku.vue */ "./resources/js/components/Stream/StreamIptvDoku.vue");
 //
 //
 //
@@ -1228,6 +1185,250 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -1243,7 +1444,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       stream: [],
-      isActiveDialog: false
+      isActiveDialog: false,
+      iptvDokuDialog: false,
+      iptvDokuData: []
     };
   },
   components: {
@@ -1254,7 +1457,8 @@ __webpack_require__.r(__webpack_exports__);
     StreamPids: _StreamPids_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     StreamAudioVideoPidDetail: _StreamAudiVideoPidDetail_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     StreamService: _StreamServices_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    FfprobeStream: _StreamFfrobe_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    FfprobeStream: _StreamFfrobe_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    StreamIptvDoku: _StreamIptvDoku_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
   created: function created() {
     this.index();
@@ -1271,6 +1475,17 @@ __webpack_require__.r(__webpack_exports__);
           _this.$router.push("/403");
         }
       });
+    },
+    openIptvDokuDialog: function openIptvDokuDialog() {
+      var _this2 = this;
+
+      axios.get("streams/iptvdoku/" + this.$route.params.streamId).then(function (response) {
+        _this2.iptvDokuData = response.data.data;
+        _this2.iptvDokuDialog = true;
+      });
+    },
+    closeDialog: function closeDialog() {
+      this.iptvDokuDialog = false;
     },
     checkStreamStatus: function checkStreamStatus(streamStatus) {
       if (streamStatus == "waiting") {
@@ -1495,6 +1710,44 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/Stream/StreamHistory.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Stream/StreamIptvDoku.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/Stream/StreamIptvDoku.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StreamIptvDoku_vue_vue_type_template_id_6b09ab12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StreamIptvDoku.vue?vue&type=template&id=6b09ab12& */ "./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=template&id=6b09ab12&");
+/* harmony import */ var _StreamIptvDoku_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StreamIptvDoku.vue?vue&type=script&lang=js& */ "./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StreamIptvDoku_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StreamIptvDoku_vue_vue_type_template_id_6b09ab12___WEBPACK_IMPORTED_MODULE_0__.render,
+  _StreamIptvDoku_vue_vue_type_template_id_6b09ab12___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Stream/StreamIptvDoku.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -1764,6 +2017,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamIptvDoku_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StreamIptvDoku.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamIptvDoku_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Stream/StreamNameAndStatus.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/Stream/StreamNameAndStatus.vue?vue&type=script&lang=js& ***!
@@ -1915,6 +2183,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamHistory_vue_vue_type_template_id_3472c6f0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamHistory_vue_vue_type_template_id_3472c6f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StreamHistory.vue?vue&type=template&id=3472c6f0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamHistory.vue?vue&type=template&id=3472c6f0&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=template&id=6b09ab12&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=template&id=6b09ab12& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamIptvDoku_vue_vue_type_template_id_6b09ab12___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamIptvDoku_vue_vue_type_template_id_6b09ab12___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamIptvDoku_vue_vue_type_template_id_6b09ab12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StreamIptvDoku.vue?vue&type=template&id=6b09ab12& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=template&id=6b09ab12&");
 
 
 /***/ }),
@@ -2611,6 +2895,110 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=template&id=6b09ab12&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamIptvDoku.vue?vue&type=template&id=6b09ab12& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-card",
+    { staticClass: "overflow-hidden rounded-lg blur shadow-blur" },
+    [
+      _c("p", { staticClass: "text-center mt-3" }, [
+        _vm._v("Informace z IPTV Dokumentace"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "v-card-text",
+        [
+          _c(
+            "v-container",
+            { attrs: { fluid: "" } },
+            [
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12" } },
+                    [
+                      _c("v-img", {
+                        attrs: {
+                          "lazy-src": _vm.iptvDokuData.logo,
+                          src: _vm.iptvDokuData.logo,
+                          "aspect-ratio": 16 / 9,
+                          width: "120",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-col", { attrs: { cols: "12" } }, [
+                    _c("span", [
+                      _vm._v(
+                        " Žánr: " + _vm._s(_vm.iptvDokuData.kategorie) + " "
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _vm.iptvDokuData.devices.source != null
+                    ? _c("v-col", { attrs: { cols: "" } }, [
+                        _c("p", { staticClass: "text-center caption" }, [
+                          _vm._v("Přijímač"),
+                        ]),
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.iptvDokuData.devices.source) +
+                            "\n                "
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.iptvDokuData.devices.multiplexor != null
+                    ? _c("v-col", [
+                        _c("p", { staticClass: "text-center caption" }, [
+                          _vm._v("Multiplexor"),
+                        ]),
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.iptvDokuData.devices.multiplexor) +
+                            "\n                "
+                        ),
+                      ])
+                    : _vm._e(),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamNameAndStatus.vue?vue&type=template&id=7fdf14ba&":
 /*!**************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamNameAndStatus.vue?vue&type=template&id=7fdf14ba& ***!
@@ -2651,19 +3039,6 @@ var render = function () {
         _c(
           "span",
           [
-            _c(
-              "v-btn",
-              {
-                attrs: { small: "", text: "", plain: "", outlined: "" },
-                on: {
-                  click: function ($event) {
-                    return _vm.getInformationAboutStreamFromIptvDoku()
-                  },
-                },
-              },
-              [_vm._v("Informace o streamu z dokumentace")]
-            ),
-            _vm._v(" "),
             _c(
               "v-tooltip",
               {
@@ -2718,238 +3093,6 @@ var render = function () {
           1
         ),
       ]),
-      _vm._v(" "),
-      _c(
-        "v-dialog",
-        {
-          attrs: {
-            persistent: "",
-            "max-width": "800px",
-            "overlay-color": "rgb(17, 27, 45)",
-          },
-          model: {
-            value: _vm.streamInformationDialog,
-            callback: function ($$v) {
-              _vm.streamInformationDialog = $$v
-            },
-            expression: "streamInformationDialog",
-          },
-        },
-        [
-          _c(
-            "v-card",
-            [
-              _c("p", { staticClass: "pt-3 text-center subtitle-1" }, [
-                _vm._v(
-                  "\n                Informace o streamu z IPTV Dokumentace\n            "
-                ),
-              ]),
-              _vm._v(" "),
-              _c(
-                "v-card-text",
-                [
-                  _vm.streamInformation.length != 0
-                    ? _c(
-                        "v-container",
-                        { staticClass: "pt-3" },
-                        [
-                          _c(
-                            "v-row",
-                            { staticClass: "d-flex" },
-                            [
-                              _c("v-img", {
-                                staticClass: "px-3",
-                                attrs: {
-                                  "lazy-src":
-                                    _vm.streamInformation.channel.logo,
-                                  "max-height": "64",
-                                  "max-width": "64",
-                                  src: _vm.streamInformation.channel.logo,
-                                },
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "h2",
-                                { staticClass: "py-3 px-6" },
-                                [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(
-                                        _vm.streamInformation.channel.nazev
-                                      ) +
-                                      "\n                            "
-                                  ),
-                                  _vm.streamInformation.channel.is_radio == true
-                                    ? _c(
-                                        "v-chip",
-                                        {
-                                          staticClass: "mx-6 white--text",
-                                          attrs: {
-                                            small: "",
-                                            label: "",
-                                            color: "indigo lighten-1",
-                                          },
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                Rádio\n                            "
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                ],
-                                1
-                              ),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-divider", { staticClass: "my-3" }),
-                          _vm._v(" "),
-                          _c(
-                            "v-row",
-                            [
-                              _vm.streamInformation.channel != null
-                                ? _c(
-                                    "v-col",
-                                    {
-                                      attrs: {
-                                        cols: "12",
-                                        sm: "12",
-                                        md: "12",
-                                        lg: "12",
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass:
-                                            "d-flex justify-space-between",
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                Kvalita ve které se kanál vysílá:\n                                "
-                                          ),
-                                          _c(
-                                            "span",
-                                            { staticClass: "font-weight-bold" },
-                                            [
-                                              _vm._v(
-                                                "\n                                    " +
-                                                  _vm._s(
-                                                    _vm.streamInformation
-                                                      .channel.kvalita
-                                                  ) +
-                                                  "\n                                "
-                                              ),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass:
-                                            "d-flex justify-space-between",
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                Kategorie do které kanál spadá:\n                                "
-                                          ),
-                                          _c(
-                                            "span",
-                                            { staticClass: "font-weight-bold" },
-                                            [
-                                              _vm._v(
-                                                "\n                                    " +
-                                                  _vm._s(
-                                                    _vm.streamInformation
-                                                      .channel.kategorie
-                                                  ) +
-                                                  "\n                                "
-                                              ),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass: "d-flex justify-center",
-                                          attrs: {
-                                            href: _vm.streamInformation
-                                              .iptvdokumentace_uri,
-                                            target: "_blank",
-                                          },
-                                        },
-                                        [_vm._v("Odkaz do dokumentace")]
-                                      ),
-                                    ]
-                                  )
-                                : _vm._e(),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      )
-                    : _c(
-                        "v-container",
-                        [
-                          _c(
-                            "v-alert",
-                            {
-                              staticClass:
-                                "overflow-hidden rounded-lg blur text-center my-3 shadow-blur-error-alert",
-                              attrs: { color: "red" },
-                            },
-                            [
-                              _vm._v(
-                                "\n                        Nepodařilo se vyhledat v dokumentaci\n                    "
-                              ),
-                            ]
-                          ),
-                        ],
-                        1
-                      ),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                { attrs: { color: "#101B1D" } },
-                [
-                  _c("v-spacer"),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        color: "blue darken-1",
-                        plain: "",
-                        outlined: "",
-                      },
-                      on: {
-                        click: function ($event) {
-                          return _vm.closeDialog()
-                        },
-                      },
-                    },
-                    [_vm._v("\n                    Zavřít\n                ")]
-                  ),
-                ],
-                1
-              ),
-            ],
-            1
-          ),
-        ],
-        1
-      ),
       _vm._v(" "),
       _c(
         "v-dialog",
@@ -3547,6 +3690,543 @@ var render = function () {
               _c("StreamService", { staticClass: "mb-3" }),
               _vm._v(" "),
               _c("StreamAudioVideoPidDetail"),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-tooltip",
+            {
+              attrs: { bottom: "", color: "#0E5089" },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function (ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-btn",
+                        _vm._g(
+                          {
+                            staticClass: "mr-3 mt-12",
+                            staticStyle: { position: "fixed", right: "0" },
+                            attrs: {
+                              color: "#0E5089",
+                              fab: "",
+                              medium: "",
+                              dark: "",
+                            },
+                            on: {
+                              click: function ($event) {
+                                return _vm.openIptvDokuDialog()
+                              },
+                            },
+                          },
+                          on
+                        ),
+                        [_c("v-icon", [_vm._v("mdi-magnify")])],
+                        1
+                      ),
+                    ]
+                  },
+                },
+              ]),
+            },
+            [
+              _vm._v(" "),
+              _c(
+                "v-container",
+                [
+                  _c("v-row", [
+                    _vm._v(" Zobrazení informací z IPTV dokumentace "),
+                  ]),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: {
+            persistent: "",
+            "max-width": "800px",
+            "overlay-color": "rgb(17, 27, 45)",
+          },
+          model: {
+            value: _vm.iptvDokuDialog,
+            callback: function ($$v) {
+              _vm.iptvDokuDialog = $$v
+            },
+            expression: "iptvDokuDialog",
+          },
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("p", { staticClass: "pt-3 text-center subtitle-1" }, [
+                _vm._v(
+                  "\n                Informace o streamu z IPTV dokumentace\n            "
+                ),
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _vm.iptvDokuData.length != 0
+                    ? _c(
+                        "v-container",
+                        { staticClass: "pt-3" },
+                        [
+                          _c(
+                            "v-row",
+                            [
+                              _c(
+                                "v-col",
+                                { attrs: { cols: "12" } },
+                                [
+                                  _c("v-img", {
+                                    attrs: {
+                                      "lazy-src": _vm.iptvDokuData.logo,
+                                      src: _vm.iptvDokuData.logo,
+                                      "aspect-ratio": 16 / 9,
+                                      width: "240",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-col", { attrs: { cols: "12" } }, [
+                                _c("span", { staticClass: "subtitle-2" }, [
+                                  _vm._v(
+                                    "\n                                Žánr: " +
+                                      _vm._s(_vm.iptvDokuData.kategorie) +
+                                      "\n                            "
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _vm.iptvDokuData.tags.length != 0
+                                  ? _c(
+                                      "span",
+                                      { staticClass: "subtitle-2 mx-3" },
+                                      [
+                                        _vm._v(
+                                          "\n                                Štítky:\n                                "
+                                        ),
+                                        _vm._l(
+                                          _vm.iptvDokuData.tags,
+                                          function (tag) {
+                                            return _c("span", { key: tag.id }, [
+                                              _c(
+                                                "span",
+                                                { staticClass: "mx-auto" },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        " +
+                                                      _vm._s(tag.tagName) +
+                                                      " ,\n                                    "
+                                                  ),
+                                                ]
+                                              ),
+                                            ])
+                                          }
+                                        ),
+                                      ],
+                                      2
+                                    )
+                                  : _vm._e(),
+                              ]),
+                              _vm._v(" "),
+                              _c("v-col", { attrs: { cols: "12" } }, [
+                                _vm.iptvDokuData.channel_packages.length != 0
+                                  ? _c(
+                                      "span",
+                                      { staticClass: "subtitle-2" },
+                                      [
+                                        _vm._v(
+                                          "\n                                Programové balíčky:\n                                "
+                                        ),
+                                        _vm._l(
+                                          _vm.iptvDokuData.channel_packages,
+                                          function (channelPackage) {
+                                            return _c(
+                                              "span",
+                                              { key: channelPackage.id },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "mx-auto" },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                        " +
+                                                        _vm._s(
+                                                          channelPackage.channel_package
+                                                        ) +
+                                                        "\n                                        ,\n                                    "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ]
+                                            )
+                                          }
+                                        ),
+                                      ],
+                                      2
+                                    )
+                                  : _vm._e(),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                { attrs: { cols: "12" } },
+                                [_c("v-divider", { attrs: { dark: "" } })],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _vm.iptvDokuData.devices.source != null
+                                ? _c(
+                                    "v-col",
+                                    { attrs: { cols: "" } },
+                                    [
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass: "text-center subtitle-1",
+                                        },
+                                        [_vm._v("Přijímač")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12" } },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "subtitle-2" },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        Název:\n                                        " +
+                                                      _vm._s(
+                                                        _vm.iptvDokuData.devices
+                                                          .source.name
+                                                      ) +
+                                                      "\n                                    "
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm.iptvDokuData.devices.source.ip !=
+                                          null
+                                            ? _c(
+                                                "v-col",
+                                                { attrs: { cols: "12" } },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass: "subtitle-2",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                        IP:\n                                        " +
+                                                          _vm._s(
+                                                            _vm.iptvDokuData
+                                                              .devices.source.ip
+                                                          ) +
+                                                          "\n                                    "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.iptvDokuData.devices.source
+                                            .status != null
+                                            ? _c(
+                                                "v-col",
+                                                { attrs: { cols: "12" } },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass: "subtitle-2",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                        Status ze zbx:\n                                        "
+                                                      ),
+                                                      _vm.iptvDokuData.devices
+                                                        .source.status ==
+                                                      "success"
+                                                        ? _c(
+                                                            "v-icon",
+                                                            {
+                                                              staticClass:
+                                                                "mx-3",
+                                                              attrs: {
+                                                                color: "green",
+                                                                small: "",
+                                                              },
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "mdi-check"
+                                                              ),
+                                                            ]
+                                                          )
+                                                        : _c(
+                                                            "v-icon",
+                                                            {
+                                                              staticClass:
+                                                                "mx-3",
+                                                              attrs: {
+                                                                color: "red",
+                                                                small: "",
+                                                              },
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "mdi-close"
+                                                              ),
+                                                            ]
+                                                          ),
+                                                    ],
+                                                    1
+                                                  ),
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12" } },
+                                            [
+                                              _c(
+                                                "a",
+                                                {
+                                                  attrs: {
+                                                    href: _vm.iptvDokuData
+                                                      .devices.source.url,
+                                                    target: "_blank",
+                                                  },
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        Proklik na do IPTV dokumentace:\n                                    "
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                        ],
+                                        1
+                                      ),
+                                    ],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.iptvDokuData.devices.multiplexor != null
+                                ? _c(
+                                    "v-col",
+                                    [
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass: "text-center subtitle-1",
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                Multiplexor\n                            "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12" } },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "subtitle-2" },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        Název:\n                                        " +
+                                                      _vm._s(
+                                                        _vm.iptvDokuData.devices
+                                                          .multiplexor.name
+                                                      ) +
+                                                      "\n                                    "
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm.iptvDokuData.devices.multiplexor
+                                            .ip != null
+                                            ? _c(
+                                                "v-col",
+                                                { attrs: { cols: "12" } },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass: "subtitle-2",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                        IP:\n                                        " +
+                                                          _vm._s(
+                                                            _vm.iptvDokuData
+                                                              .devices
+                                                              .multiplexor.ip
+                                                          ) +
+                                                          "\n                                    "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.iptvDokuData.devices.multiplexor
+                                            .status != null
+                                            ? _c(
+                                                "v-col",
+                                                { attrs: { cols: "12" } },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass: "subtitle-2",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                        Status ze zbx:\n                                        "
+                                                      ),
+                                                      _vm.iptvDokuData.devices
+                                                        .multiplexor.status ==
+                                                      "success"
+                                                        ? _c(
+                                                            "v-icon",
+                                                            {
+                                                              staticClass:
+                                                                "mx-3",
+                                                              attrs: {
+                                                                color: "green",
+                                                                small: "",
+                                                              },
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "mdi-check"
+                                                              ),
+                                                            ]
+                                                          )
+                                                        : _c(
+                                                            "v-icon",
+                                                            {
+                                                              staticClass:
+                                                                "mx-3",
+                                                              attrs: {
+                                                                color: "red",
+                                                                small: "",
+                                                              },
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "mdi-close"
+                                                              ),
+                                                            ]
+                                                          ),
+                                                    ],
+                                                    1
+                                                  ),
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12" } },
+                                            [
+                                              _c(
+                                                "a",
+                                                {
+                                                  attrs: {
+                                                    href: _vm.iptvDokuData
+                                                      .devices.multiplexor.url,
+                                                    target: "_blank",
+                                                  },
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        Proklik na do IPTV dokumentace:\n                                    "
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                        ],
+                                        1
+                                      ),
+                                    ],
+                                    1
+                                  )
+                                : _vm._e(),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                { attrs: { color: "#101B1D" } },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        color: "blue darken-1",
+                        plain: "",
+                        outlined: "",
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.closeDialog()
+                        },
+                      },
+                    },
+                    [_vm._v("\n                    Zavřít\n                ")]
+                  ),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                ],
+                1
+              ),
             ],
             1
           ),

@@ -137,6 +137,8 @@ return [
 
     'iptv_dokumentace' => env('IPTV_DOKUMENTACE', null),
     'iptv_dokumentace_token' => env('IPTV_DOKUMENTACE_TOKEN', null),
+    'iptv_dokumentace_username' => env('IPTV_DOKUMENTACE_USERNAME', null),
+    'iptv_dokumentace_password' => env('IPTV_DOKUMENTACE_PASSWORD', null),
 
     /*
     |--------------------------------------------------------------------------

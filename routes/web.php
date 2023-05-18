@@ -74,7 +74,10 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{stream}', [StreamSettingsInformtionMozaikaController::class, 'show']);
             Route::patch('{stream}', [StreamSettingsInformtionMozaikaController::class, 'update']);
         });
-        Route::get('iptvdokumentace/{stream}', GetStreamInformationFromIptvDokuController::class)->middleware('isView');
+
+        // Route::get('iptvdokumentace/{stream}', GetStreamInformationFromIptvDokuController::class)->middleware('isView');
+        Route::get('iptvdoku/{stream}', GetStreamInformationFromIptvDokuController::class);
+
         Route::middleware('isView')->prefix('pids')->group(function () {
             Route::get('audio/{stream}', ShowAudioStreamPidsController::class);
             Route::get('video/{stream}', ShowVideoStreamPidsController::class);

@@ -9,14 +9,6 @@
                 Stream se začal dohledovat {{ stream.monitored_at }}
             </p>
             <span>
-                <v-btn
-                    @click="getInformationAboutStreamFromIptvDoku()"
-                    small
-                    text
-                    plain
-                    outlined
-                    >Informace o streamu z dokumentace</v-btn
-                >
                 <v-tooltip bottom color="#192B4B">
                     <template v-slot:activator="{ on }">
                         <v-btn
@@ -36,102 +28,6 @@
                 </v-tooltip>
             </span>
         </div>
-
-        <v-dialog
-            v-model="streamInformationDialog"
-            persistent
-            max-width="800px"
-            overlay-color="rgb(17, 27, 45)"
-        >
-            <v-card>
-                <p class="pt-3 text-center subtitle-1">
-                    Informace o streamu z IPTV Dokumentace
-                </p>
-                <v-card-text>
-                    <v-container
-                        class="pt-3"
-                        v-if="streamInformation.length != 0"
-                    >
-                        <v-row class="d-flex">
-                            <v-img
-                                class="px-3"
-                                :lazy-src="streamInformation.channel.logo"
-                                max-height="64"
-                                max-width="64"
-                                :src="streamInformation.channel.logo"
-                            ></v-img>
-                            <h2 class="py-3 px-6">
-                                {{ streamInformation.channel.nazev }}
-                                <v-chip
-                                    v-if="
-                                        streamInformation.channel.is_radio ==
-                                        true
-                                    "
-                                    class="mx-6 white--text"
-                                    small
-                                    label
-                                    color="indigo lighten-1"
-                                >
-                                    Rádio
-                                </v-chip>
-                            </h2>
-                        </v-row>
-                        <v-divider class="my-3"> </v-divider>
-                        <v-row>
-                            <v-col
-                                v-if="streamInformation.channel != null"
-                                cols="12"
-                                sm="12"
-                                md="12"
-                                lg="12"
-                            >
-                                <p class="d-flex justify-space-between">
-                                    Kvalita ve které se kanál vysílá:
-                                    <span class="font-weight-bold">
-                                        {{ streamInformation.channel.kvalita }}
-                                    </span>
-                                </p>
-                                <p class="d-flex justify-space-between">
-                                    Kategorie do které kanál spadá:
-                                    <span class="font-weight-bold">
-                                        {{
-                                            streamInformation.channel.kategorie
-                                        }}
-                                    </span>
-                                </p>
-                                <a
-                                    class="d-flex justify-center"
-                                    :href="
-                                        streamInformation.iptvdokumentace_uri
-                                    "
-                                    target="_blank"
-                                    >Odkaz do dokumentace</a
-                                >
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                    <v-container v-else>
-                        <v-alert
-                            color="red"
-                            class="overflow-hidden rounded-lg blur text-center my-3 shadow-blur-error-alert"
-                        >
-                            Nepodařilo se vyhledat v dokumentaci
-                        </v-alert>
-                    </v-container>
-                </v-card-text>
-                <v-card-actions color="#101B1D">
-                    <v-spacer></v-spacer>
-                    <v-btn
-                        color="blue darken-1"
-                        @click="closeDialog()"
-                        plain
-                        outlined
-                    >
-                        Zavřít
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
 
         <v-dialog
             v-model="streamEditDialog"
@@ -225,8 +121,6 @@ export default {
     data() {
         return {
             streamStatusArray: [],
-            streamInformationDialog: false,
-            streamInformation: [],
             streamEditDialog: false,
             formData: [],
             error: [],
@@ -236,21 +130,6 @@ export default {
 
     created() {},
     methods: {
-        getInformationAboutStreamFromIptvDoku() {
-            axios
-                .get("streams/iptvdokumentace/" + this.$route.params.streamId)
-                .then((response) => {
-                    this.streamInformation = response.data;
-                    this.streamInformationDialog = true;
-                })
-                .catch((error) => {
-                    if (error.response.status == 404) {
-                        this.streamInformation = [];
-                        this.streamInformationDialog = true;
-                    }
-                });
-        },
-
         openStreamEditDialog() {
             axios
                 .get("streams/settings/" + this.$route.params.streamId)
@@ -280,7 +159,6 @@ export default {
         },
 
         closeDialog() {
-            this.streamInformationDialog = false;
             this.streamEditDialog = false;
         },
     },

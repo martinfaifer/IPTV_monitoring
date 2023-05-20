@@ -219,9 +219,9 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                 $this->videoPidsAgregated[$videoPidId]['is-scrambled'] = $videoPid['is-scrambled'];
             }
 
-            if (array_key_exists('packets', $videoPid)) {
-                $this->videoPidsAgregated[$videoPidId]['packets'] = $videoPid['packets'];
-            }
+            // if (array_key_exists('packets', $videoPid)) {
+            //     $this->videoPidsAgregated[$videoPidId]['packets'] = $videoPid['packets'];
+            // }
 
             if (array_key_exists('t2mi', $videoPid)) {
                 $this->videoPidsAgregated[$videoPidId]['t2mi'] = $videoPid['t2mi'];

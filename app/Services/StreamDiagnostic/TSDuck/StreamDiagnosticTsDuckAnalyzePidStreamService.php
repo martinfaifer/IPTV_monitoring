@@ -118,6 +118,10 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                 }
             }
 
+            if (array_key_exists('t2mi', $audioPid)) {
+                $this->audioPidsAgregated[$audioPidId]['t2mi'] = $audioPid['t2mi'];
+            }
+
             if (array_key_exists('description', $audioPid)) {
                 $this->audioPidsAgregated[$audioPidId]['description'] = $audioPid['description'];
             }
@@ -209,6 +213,18 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                     value: round($videoPid['bitrate'] / 1048576, 2),
                     pid: $videoPid
                 );
+            }
+
+            if (array_key_exists('is-scrambled', $videoPid)) {
+                $this->videoPidsAgregated[$videoPidId]['is-scrambled'] = $videoPid['is-scrambled'];
+            }
+
+            if (array_key_exists('packets', $videoPid)) {
+                $this->videoPidsAgregated[$videoPidId]['packets'] = $videoPid['packets'];
+            }
+
+            if (array_key_exists('t2mi', $videoPid)) {
+                $this->videoPidsAgregated[$videoPidId]['t2mi'] = $videoPid['t2mi'];
             }
 
             // if (str_contains($videoPid, 'access')) {

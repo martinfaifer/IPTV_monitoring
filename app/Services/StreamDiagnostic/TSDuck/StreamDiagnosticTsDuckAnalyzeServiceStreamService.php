@@ -18,6 +18,10 @@ class StreamDiagnosticTsDuckAnalyzeServiceStreamService implements DiagnosticAna
 
     public $name = null;
 
+    public $components = [];
+
+    public $packets = null;
+
     public function __construct(Collection $tsDuckCollection, object $stream)
     {
         $this->analyze(tsDuckCollection: $tsDuckCollection, stream: $stream);
@@ -45,6 +49,15 @@ class StreamDiagnosticTsDuckAnalyzeServiceStreamService implements DiagnosticAna
             if (array_key_exists('type-name', $collection[0])) {
                 $this->name = $collection[0]['type-name'];
             }
+
+            if (array_key_exists('components', $collection[0])) {
+                $this->components = $collection[0]['components'];
+            }
+
+            // packets
+            if (array_key_exists('packets', $collection[0])) {
+                $this->packets = $collection[0]['packets'];
+            }
         }
 
         $this->store_to_cache(
@@ -53,11 +66,13 @@ class StreamDiagnosticTsDuckAnalyzeServiceStreamService implements DiagnosticAna
             pmtpid: $this->pmtpid,
             pcrpid: $this->pcrpid,
             provider: $this->provider,
-            name: $this->name
+            name: $this->name,
+            components: $this->components,
+            packets: $this->packets
         );
     }
 
-    public function store_to_cache(object $stream, $tsid, $pmtpid, $pcrpid, $provider, $name): void
+    public function store_to_cache(object $stream, $tsid, $pmtpid, $pcrpid, $provider, $name, $components, $packets): void
     {
         (new StoreItemsToCache())->execute(key: 'streamService_' . $stream->id, value: [
             'tsid' => $tsid,
@@ -65,6 +80,8 @@ class StreamDiagnosticTsDuckAnalyzeServiceStreamService implements DiagnosticAna
             'pcrpid' => $pcrpid,
             'provider' => $provider,
             'name' => $name,
+            'components' => $components,
+            'packets' => $packets
         ]);
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Actions\Streams;
 
-use App\Actions\Streams\Analyze\MarkStreamForKillAction;
-use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 use App\Models\Stream;
+use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
+use App\Actions\Streams\Analyze\MarkStreamForKillAction;
+use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 
 class UpdateStreamAction
 {
@@ -31,6 +32,8 @@ class UpdateStreamAction
         if ($stream->status == Stream::STATUS_STOPPED) {
             (new UnlockStreamUrlAction($stream))->execute();
 
+            // kill stream
+            (new KillTsDuckStreamProcessAction())->execute($stream);
             return Stream::STATUS_WAITING;
         } else {
             (new MarkStreamForKillAction($stream->stream_url))->execution();

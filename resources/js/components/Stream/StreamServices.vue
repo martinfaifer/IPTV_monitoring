@@ -15,7 +15,19 @@
                     >
                         <span>
                             {{ serviceKey }}:
-                            <span class="font-weight-bold mx-2">{{ service }}</span>
+                            <span
+                                v-if="serviceKey != 'components'"
+                                class="font-weight-bold mx-2"
+                                >{{ service }}</span
+                            >
+                            <span v-else class="font-weight-bold mx-2">
+                                <div
+                                    v-for="serviceItem in service"
+                                    :key="serviceItem"
+                                >
+                                    {{ serviceItem }}
+                                </div>
+                            </span>
                         </span>
                     </v-col>
                 </v-row>

@@ -1023,6 +1023,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3570,9 +3582,26 @@ var render = function () {
                             _vm._s(serviceKey) +
                             ":\n                        "
                         ),
-                        _c("span", { staticClass: "font-weight-bold mx-2" }, [
-                          _vm._v(_vm._s(service)),
-                        ]),
+                        serviceKey != "components"
+                          ? _c(
+                              "span",
+                              { staticClass: "font-weight-bold mx-2" },
+                              [_vm._v(_vm._s(service))]
+                            )
+                          : _c(
+                              "span",
+                              { staticClass: "font-weight-bold mx-2" },
+                              _vm._l(service, function (serviceItem) {
+                                return _c("div", { key: serviceItem }, [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(serviceItem) +
+                                      "\n                            "
+                                  ),
+                                ])
+                              }),
+                              0
+                            ),
                       ]),
                     ]
                   )

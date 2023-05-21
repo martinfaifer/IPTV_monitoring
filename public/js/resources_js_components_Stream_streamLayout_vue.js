@@ -3595,7 +3595,7 @@ var render = function () {
                             )
                           : _c(
                               "span",
-                              { staticClass: "font-weight-bold ml-6" },
+                              { staticClass: "font-weight-bold mr-6" },
                               _vm._l(
                                 service,
                                 function (serviceItem, serviceItemKey) {

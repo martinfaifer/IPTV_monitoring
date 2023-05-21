@@ -26,6 +26,8 @@
                                         serviceItem, serviceItemKey
                                     ) in service"
                                     :key="serviceItemKey"
+
+                                    class="mt-n3"
                                 >
                                     {{ serviceItemKey }}:
                                     <span class="font-weight-bold mx-2">

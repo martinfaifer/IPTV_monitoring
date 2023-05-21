@@ -28,8 +28,8 @@
                             bottom
                             right
                             fab
-                            small
-                            color="blue"
+                            x-small
+                            color="#0D1423"
                             v-on="on"
                         >
                             <v-icon v-if="hideCards == false">mdi-eye</v-icon>

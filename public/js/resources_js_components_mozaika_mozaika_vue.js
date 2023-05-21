@@ -1237,8 +1237,8 @@ var render = function () {
                                         bottom: "",
                                         right: "",
                                         fab: "",
-                                        small: "",
-                                        color: "blue",
+                                        "x-small": "",
+                                        color: "#0D1423",
                                       },
                                       on: {
                                         click: function ($event) {
@@ -1261,7 +1261,7 @@ var render = function () {
                         ],
                         null,
                         false,
-                        600720587
+                        2615357619
                       ),
                     },
                     [

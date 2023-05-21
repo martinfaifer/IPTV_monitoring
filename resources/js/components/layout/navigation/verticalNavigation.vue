@@ -2,7 +2,7 @@
     <div>
         <v-app-bar
             style="
-                background: rgba(13, 25, 44, 0.25);
+                background: rgba(13, 20, 38, 0.25);
                 box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
                 backdrop-filter: blur(4px);
                 -webkit-backdrop-filter: blur(4px);

@@ -1346,8 +1346,8 @@ var render = function () {
       attrs: {
         link: "",
         to: "stream/" + _vm.stream.id,
-        height: "100",
-        width: "210",
+        height: "120",
+        width: "220",
         color: "#EF5350",
       },
     },

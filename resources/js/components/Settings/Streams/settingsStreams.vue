@@ -25,6 +25,7 @@
                                 plain
                                 outlined
                                 color="#0277BD"
+                                v-shortkey="['n', 'ctrl']"
                                 @click="openNewStreamDialog()"
                             >
                                 Nový stream

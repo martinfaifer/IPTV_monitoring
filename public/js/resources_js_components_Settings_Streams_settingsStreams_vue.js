@@ -299,6 +299,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -549,6 +550,14 @@ var render = function () {
                           _c(
                             "v-btn",
                             {
+                              directives: [
+                                {
+                                  name: "shortkey",
+                                  rawName: "v-shortkey",
+                                  value: ["n", "ctrl"],
+                                  expression: "['n', 'ctrl']",
+                                },
+                              ],
                               attrs: {
                                 plain: "",
                                 outlined: "",

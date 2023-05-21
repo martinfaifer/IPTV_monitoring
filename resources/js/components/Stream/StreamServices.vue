@@ -20,7 +20,7 @@
                                 class="font-weight-bold mx-2"
                                 >{{ service }}</span
                             >
-                            <span v-else class="font-weight-bold mx-2">
+                            <span v-else class="font-weight-bold ml-6">
                                 <div
                                     v-for="(
                                         serviceItem, serviceItemKey

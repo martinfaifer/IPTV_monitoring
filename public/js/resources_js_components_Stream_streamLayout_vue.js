@@ -3595,11 +3595,11 @@ var render = function () {
                             )
                           : _c(
                               "span",
-                              { staticClass: "font-weight-bold mx-6" },
+                              { staticClass: "font-weight-bold" },
                               _vm._l(
                                 service,
                                 function (serviceItem, serviceItemKey) {
-                                  return _c("div", { key: serviceItemKey }, [
+                                  return _c("v-col", { key: serviceItemKey }, [
                                     _vm._v(
                                       "\n                                " +
                                         _vm._s(serviceItemKey) +
@@ -3618,7 +3618,7 @@ var render = function () {
                                   ])
                                 }
                               ),
-                              0
+                              1
                             ),
                       ]),
                     ]

@@ -20,8 +20,8 @@
                                 class="font-weight-bold mx-2"
                                 >{{ service }}</span
                             >
-                            <span v-else class="font-weight-bold mx-6">
-                                <div
+                            <span v-else class="font-weight-bold">
+                                <v-col
                                     v-for="(
                                         serviceItem, serviceItemKey
                                     ) in service"
@@ -31,7 +31,7 @@
                                     <span class="font-weight-bold mx-2">
                                         {{ serviceItem }}</span
                                     >
-                                </div>
+                                </v-col>
                             </span>
                         </span>
                     </v-col>

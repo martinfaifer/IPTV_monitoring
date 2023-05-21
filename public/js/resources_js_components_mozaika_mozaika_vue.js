@@ -91,12 +91,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       count: 0,
-      errorStreams: null
+      errorStreams: null,
+      hideCards: false
     };
   },
   created: function created() {
@@ -118,6 +144,9 @@ __webpack_require__.r(__webpack_exports__);
           _this.count = 0;
         }
       });
+    },
+    changeVisibility: function changeVisibility() {
+      this.hideCards = !this.hideCards;
     },
     websocketData: function websocketData() {
       var _this2 = this;
@@ -1174,15 +1203,76 @@ var render = function () {
               _c(
                 "v-row",
                 { staticClass: "mx-auto mt-1" },
-                _vm._l(_vm.errorStreams, function (stream) {
-                  return _c(
-                    "v-col",
-                    { key: stream.id, staticClass: "my-2" },
-                    [_c("ErrorImageCard", { attrs: { stream: stream } })],
-                    1
-                  )
-                }),
-                1
+                [
+                  _vm._l(_vm.errorStreams, function (stream) {
+                    return _c(
+                      "v-col",
+                      { key: stream.id, staticClass: "my-2" },
+                      [
+                        _vm.hideCards == false
+                          ? _c("ErrorImageCard", { attrs: { stream: stream } })
+                          : _vm._e(),
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "v-tooltip",
+                    {
+                      attrs: { bottom: "" },
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "activator",
+                            fn: function (ref) {
+                              var on = ref.on
+                              var attrs = ref.attrs
+                              return [
+                                _c(
+                                  "v-btn",
+                                  _vm._g(
+                                    {
+                                      attrs: {
+                                        bottom: "",
+                                        right: "",
+                                        fab: "",
+                                        small: "",
+                                        color: "blue",
+                                      },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.changeVisibility()
+                                        },
+                                      },
+                                    },
+                                    on
+                                  ),
+                                  [
+                                    _vm.hideCards == false
+                                      ? _c("v-icon", [_vm._v("mdi-eye")])
+                                      : _c("v-icon", [_vm._v("mdi-eye-off")]),
+                                  ],
+                                  1
+                                ),
+                              ]
+                            },
+                          },
+                        ],
+                        null,
+                        false,
+                        600720587
+                      ),
+                    },
+                    [
+                      _vm._v(" "),
+                      _c("span", [
+                        _vm._v("Schovat nebo zviditelnit padlé streamy"),
+                      ]),
+                    ]
+                  ),
+                ],
+                2
               ),
             ],
             1

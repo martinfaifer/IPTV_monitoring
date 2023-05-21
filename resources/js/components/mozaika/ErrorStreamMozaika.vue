@@ -1,9 +1,13 @@
 <template>
     <div>
         <v-container fluid v-if="count != 0">
-            <p class="text-left subtitle-2 text--disabled font-weight-medium ml-3">
+            <p
+                class="text-left subtitle-2 text--disabled font-weight-medium ml-3"
+            >
                 Nefunkční kanály
-                <span class="red--text subtitle-1 font-weight-black mx-3">{{ count }}</span>
+                <span class="red--text subtitle-1 font-weight-black mx-3">{{
+                    count
+                }}</span>
             </p>
             <v-row class="mx-auto mt-1">
                 <v-col
@@ -11,8 +15,29 @@
                     :key="stream.id"
                     class="my-2"
                 >
-                    <ErrorImageCard :stream="stream"></ErrorImageCard>
+                    <ErrorImageCard
+                        v-if="hideCards == false"
+                        :stream="stream"
+                    ></ErrorImageCard>
                 </v-col>
+
+                <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            @click="changeVisibility()"
+                            bottom
+                            right
+                            fab
+                            small
+                            color="blue"
+                            v-on="on"
+                        >
+                            <v-icon v-if="hideCards == false">mdi-eye</v-icon>
+                            <v-icon v-else>mdi-eye-off</v-icon>
+                        </v-btn>
+                    </template>
+                    <span>Schovat nebo zviditelnit padlé streamy</span>
+                </v-tooltip>
             </v-row>
         </v-container>
     </div>
@@ -24,6 +49,7 @@ export default {
         return {
             count: 0,
             errorStreams: null,
+            hideCards: false,
         };
     },
 
@@ -46,6 +72,10 @@ export default {
                     this.count = 0;
                 }
             });
+        },
+
+        changeVisibility() {
+            this.hideCards = !this.hideCards;
         },
 
         websocketData() {

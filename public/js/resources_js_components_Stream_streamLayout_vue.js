@@ -1035,6 +1035,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3591,15 +3596,28 @@ var render = function () {
                           : _c(
                               "span",
                               { staticClass: "font-weight-bold mx-2" },
-                              _vm._l(service, function (serviceItem) {
-                                return _c("div", { key: serviceItem }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(serviceItem) +
-                                      "\n                            "
-                                  ),
-                                ])
-                              }),
+                              _vm._l(
+                                service,
+                                function (serviceItem, serviceItemKey) {
+                                  return _c("div", { key: serviceItemKey }, [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(serviceItemKey) +
+                                        ":\n                                "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-weight-bold mx-2" },
+                                      [
+                                        _vm._v(
+                                          "\n                                    " +
+                                            _vm._s(serviceItem)
+                                        ),
+                                      ]
+                                    ),
+                                  ])
+                                }
+                              ),
                               0
                             ),
                       ]),

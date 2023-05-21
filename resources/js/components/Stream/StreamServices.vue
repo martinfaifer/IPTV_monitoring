@@ -22,10 +22,15 @@
                             >
                             <span v-else class="font-weight-bold mx-2">
                                 <div
-                                    v-for="serviceItem in service"
-                                    :key="serviceItem"
+                                    v-for="(
+                                        serviceItem, serviceItemKey
+                                    ) in service"
+                                    :key="serviceItemKey"
                                 >
-                                    {{ serviceItem }}
+                                    {{ serviceItemKey }}:
+                                    <span class="font-weight-bold mx-2">
+                                        {{ serviceItem }}</span
+                                    >
                                 </div>
                             </span>
                         </span>

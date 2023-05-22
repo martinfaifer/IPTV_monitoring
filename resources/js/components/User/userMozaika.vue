@@ -3,74 +3,78 @@
         <v-container fluid>
             <v-row>
                 <v-col cols="12" sm="12" md="12" lg="12">
-                    <v-card
-                        class="overflow-hidden rounded-xl blur shadow-blur"
-                        flat
-                    >
-                        <v-card-text>
-                            <v-container fluid>
-                                <v-row>
-                                    <v-text-field
-                                        class="d-flex justify-space-between"
-                                        :error-messages="errors.pagination"
-                                        v-model="user.pagination"
-                                        label="Počet streamů na stránce"
-                                        name="username"
-                                        prepend-icon="mdi-television-guide"
-                                        type="number"
-                                        color="#328AF1"
-                                        autofocus
-                                    ></v-text-field>
+                    <v-form @submit.prevent="UpdatePagination()">
+                        <v-card
+                            class="overflow-hidden rounded-xl blur shadow-blur"
+                            flat
+                        >
+                            <v-card-text>
+                                <v-container fluid>
+                                    <v-row>
+                                        <v-text-field
+                                            class="d-flex justify-space-between"
+                                            :error-messages="errors.pagination"
+                                            v-model="user.pagination"
+                                            label="Počet streamů na stránce"
+                                            name="username"
+                                            prepend-icon="mdi-television-guide"
+                                            type="number"
+                                            color="#328AF1"
+                                            autofocus
+                                        ></v-text-field>
 
-                                    <v-btn
-                                        plain
-                                        color="#328AF1"
-                                        class="rounded-lg d-flex justify-space-between my-auto mx-3"
-                                        outlined
-                                        @click="UpdatePagination()"
-                                        >Upravit</v-btn
-                                    >
-                                </v-row>
-                            </v-container>
-                        </v-card-text>
-                    </v-card>
+                                        <v-btn
+                                            plain
+                                            color="#328AF1"
+                                            class="rounded-lg d-flex justify-space-between my-auto mx-3"
+                                            outlined
+                                            type="submit"
+                                            >Upravit</v-btn
+                                        >
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+                        </v-card>
+                    </v-form>
                 </v-col>
                 <v-col cols="12" sm="12" md="12" lg="12">
-                    <v-card
-                        class="overflow-hidden rounded-xl blur shadow-blur"
-                        flat
-                    >
-                        <v-card-text>
-                            <v-container fluid>
-                                <v-row>
-                                    <v-autocomplete
-                                        class="d-flex justify-space-between"
-                                        :error-messages="errors.customData"
-                                        v-model="user.customData"
-                                        label="Streamy, které budete mít připnuté ve Vaší mozaice"
-                                        :items="streams"
-                                        item-text="nazev"
-                                        item-value="id"
-                                        name="username"
-                                        prepend-icon="mdi-television"
-                                        type="text"
-                                        color="#328AF1"
-                                        multiple
-                                        clearable
-                                        chips
-                                    ></v-autocomplete>
-                                    <v-btn
-                                        plain
-                                        color="#328AF1"
-                                        class="rounded-lg d-flex justify-space-between my-auto mx-3"
-                                        outlined
-                                        @click="UpdateStaticMozaika()"
-                                        >Upravit</v-btn
-                                    >
-                                </v-row>
-                            </v-container>
-                        </v-card-text>
-                    </v-card>
+                    <v-form @submit.prevent="UpdateStaticMozaika()">
+                        <v-card
+                            class="overflow-hidden rounded-xl blur shadow-blur"
+                            flat
+                        >
+                            <v-card-text>
+                                <v-container fluid>
+                                    <v-row>
+                                        <v-autocomplete
+                                            class="d-flex justify-space-between"
+                                            :error-messages="errors.customData"
+                                            v-model="user.customData"
+                                            label="Streamy, které budete mít připnuté ve Vaší mozaice"
+                                            :items="streams"
+                                            item-text="nazev"
+                                            item-value="id"
+                                            name="username"
+                                            prepend-icon="mdi-television"
+                                            type="text"
+                                            color="#328AF1"
+                                            multiple
+                                            clearable
+                                            chips
+                                        ></v-autocomplete>
+                                        <v-btn
+                                            plain
+                                            color="#328AF1"
+                                            class="rounded-lg d-flex justify-space-between my-auto mx-3"
+                                            outlined
+                                            type="submit"
+                                            >Upravit</v-btn
+                                        >
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+                        </v-card>
+                    </v-form>
                 </v-col>
             </v-row>
         </v-container>

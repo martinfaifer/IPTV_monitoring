@@ -68,6 +68,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -198,89 +200,105 @@ var render = function () {
                 { attrs: { cols: "12", sm: "12", md: "12", lg: "12" } },
                 [
                   _c(
-                    "v-card",
+                    "v-form",
                     {
-                      staticClass:
-                        "overflow-hidden rounded-xl blur shadow-blur",
-                      attrs: { flat: "" },
+                      on: {
+                        submit: function ($event) {
+                          $event.preventDefault()
+                          return _vm.UpdatePassword()
+                        },
+                      },
                     },
                     [
                       _c(
-                        "v-card-text",
+                        "v-card",
+                        {
+                          staticClass:
+                            "overflow-hidden rounded-xl blur shadow-blur",
+                          attrs: { flat: "" },
+                        },
                         [
                           _c(
-                            "v-container",
-                            { attrs: { fluid: "" } },
+                            "v-card-text",
                             [
                               _c(
-                                "v-row",
+                                "v-container",
+                                { attrs: { fluid: "" } },
                                 [
-                                  _c("v-text-field", {
-                                    staticClass: "d-flex justify-space-between",
-                                    attrs: {
-                                      "error-messages": _vm.errors.password,
-                                      label: "Nové heslo",
-                                      name: "password",
-                                      "prepend-icon": "mdi-lock",
-                                      type: "password",
-                                      color: "#328AF1",
-                                      autofocus: "",
-                                      outlined: "",
-                                      clearable: "",
-                                    },
-                                    model: {
-                                      value: _vm.formData.password,
-                                      callback: function ($$v) {
-                                        _vm.$set(_vm.formData, "password", $$v)
-                                      },
-                                      expression: "formData.password",
-                                    },
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-text-field", {
-                                    staticClass:
-                                      "d-flex justify-space-between mx-3",
-                                    attrs: {
-                                      "error-messages":
-                                        _vm.errors.password_confirm,
-                                      label: "Heslo pro kontrolu",
-                                      name: "password_confirm",
-                                      "prepend-icon": "mdi-lock",
-                                      type: "password",
-                                      color: "#328AF1",
-                                      outlined: "",
-                                      clearable: "",
-                                    },
-                                    model: {
-                                      value: _vm.formData.password_confirm,
-                                      callback: function ($$v) {
-                                        _vm.$set(
-                                          _vm.formData,
-                                          "password_confirm",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "formData.password_confirm",
-                                    },
-                                  }),
-                                  _vm._v(" "),
                                   _c(
-                                    "v-btn",
-                                    {
-                                      staticClass:
-                                        "rounded-lg d-flex justify-space-between my-auto mx-3",
-                                      attrs: {
-                                        plain: "",
-                                        color: "#328AF1",
-                                        outlined: "",
-                                      },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.UpdatePassword()
+                                    "v-row",
+                                    [
+                                      _c("v-text-field", {
+                                        staticClass:
+                                          "d-flex justify-space-between",
+                                        attrs: {
+                                          "error-messages": _vm.errors.password,
+                                          label: "Nové heslo",
+                                          name: "password",
+                                          "prepend-icon": "mdi-lock",
+                                          type: "password",
+                                          color: "#328AF1",
+                                          autofocus: "",
+                                          outlined: "",
+                                          clearable: "",
                                         },
-                                      },
-                                    },
-                                    [_vm._v("Upravit")]
+                                        model: {
+                                          value: _vm.formData.password,
+                                          callback: function ($$v) {
+                                            _vm.$set(
+                                              _vm.formData,
+                                              "password",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "formData.password",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-text-field", {
+                                        staticClass:
+                                          "d-flex justify-space-between mx-3",
+                                        attrs: {
+                                          "error-messages":
+                                            _vm.errors.password_confirm,
+                                          label: "Heslo pro kontrolu",
+                                          name: "password_confirm",
+                                          "prepend-icon": "mdi-lock",
+                                          type: "password",
+                                          color: "#328AF1",
+                                          outlined: "",
+                                          clearable: "",
+                                        },
+                                        model: {
+                                          value: _vm.formData.password_confirm,
+                                          callback: function ($$v) {
+                                            _vm.$set(
+                                              _vm.formData,
+                                              "password_confirm",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "formData.password_confirm",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          staticClass:
+                                            "rounded-lg d-flex justify-space-between mt-2 mx-3",
+                                          attrs: {
+                                            plain: "",
+                                            color: "#328AF1",
+                                            outlined: "",
+                                            type: "submit",
+                                          },
+                                        },
+                                        [_vm._v("Upravit")]
+                                      ),
+                                    ],
+                                    1
                                   ),
                                 ],
                                 1

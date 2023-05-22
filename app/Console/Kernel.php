@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('webscoket:restart')->daily();
         $schedule->command('streams:start_diagnostic')->everyMinute()->runInBackground();
         + $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute()->withoutOverlapping()->runInBackground();
-        // + $schedule->command('system:take_network_data')->everyMinute()->runInBackground();
+        + $schedule->command('system:take_network_data')->everyMinute()->runInBackground();
         // $schedule->command('ffprobe:analyze_streams')->everyMinute()->runInBackground()->withoutOverlapping(300);
 
         // + $schedule->command('notification:send_problem_stream_notification_information')->everyMinute()->runInBackground();

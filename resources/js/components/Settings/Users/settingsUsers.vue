@@ -49,7 +49,9 @@
                                 >
                                     mdi-close
                                 </v-icon>
-                                <v-icon v-else color="green" small> mdi-check </v-icon>
+                                <v-icon v-else color="green" small>
+                                    mdi-check
+                                </v-icon>
                             </template>
                             <template v-slot:item.actions="{ item }">
                                 <v-icon
@@ -83,38 +85,40 @@
             max-width="400px"
             overlay-color="rgb(17, 27, 45)"
         >
-            <v-card>
-                <v-card-text>
-                    <v-container class="pt-3">
-                        <v-row>
-                            <v-col cols="12" sm="12" md="12" lg="12">
-                                <p class="mt-6 text-center headline">
-                                    Přejete si odebrat uživatele?
-                                </p>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-card-text>
-                <v-card-actions color="#101B1D">
-                    <v-spacer></v-spacer>
-                    <v-btn
-                        color="blue darken-1"
-                        @click="closeDialog()"
-                        plain
-                        outlined
-                    >
-                        Zavřít
-                    </v-btn>
-                    <v-btn
-                        color="red darken-1"
-                        @click="deleteUser()"
-                        plain
-                        outlined
-                    >
-                        Odebrat
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
+            <v-form @submit.prevent="deleteUser()">
+                <v-card>
+                    <v-card-text>
+                        <v-container class="pt-3">
+                            <v-row>
+                                <v-col cols="12" sm="12" md="12" lg="12">
+                                    <p class="mt-6 text-center headline">
+                                        Přejete si odebrat uživatele?
+                                    </p>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions color="#101B1D">
+                        <v-btn
+                            color="blue darken-1"
+                            @click="closeDialog()"
+                            plain
+                            outlined
+                        >
+                            Zavřít
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="red darken-1"
+                            type="submit"
+                            plain
+                            outlined
+                        >
+                            Odebrat
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-form>
         </v-dialog>
         <v-dialog
             v-model="generatePasswordDialog"
@@ -122,38 +126,41 @@
             max-width="400px"
             overlay-color="rgb(17, 27, 45)"
         >
-            <v-card>
-                <v-card-text>
-                    <v-container class="pt-3">
-                        <v-row>
-                            <v-col cols="12" sm="12" md="12" lg="12">
-                                <p class="mt-6 text-center headline">
-                                    Přejete si vygenerovat nové heslo uživatele?
-                                </p>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-card-text>
-                <v-card-actions color="#101B1D">
-                    <v-spacer></v-spacer>
-                    <v-btn
-                        color="blue darken-1"
-                        @click="closeDialog()"
-                        plain
-                        outlined
-                    >
-                        Zavřít
-                    </v-btn>
-                    <v-btn
-                        color="red darken-1"
-                        @click="generatePassword()"
-                        plain
-                        outlined
-                    >
-                        Generovat
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
+            <v-form @submit.prevent="generatePassword()">
+                <v-card>
+                    <v-card-text>
+                        <v-container class="pt-3">
+                            <v-row>
+                                <v-col cols="12" sm="12" md="12" lg="12">
+                                    <p class="mt-6 text-center headline">
+                                        Přejete si vygenerovat nové heslo
+                                        uživatele?
+                                    </p>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions color="#101B1D">
+                        <v-btn
+                            color="blue darken-1"
+                            @click="closeDialog()"
+                            plain
+                            outlined
+                        >
+                            Zavřít
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="green darken-1"
+                            type="submit"
+                            plain
+                            outlined
+                        >
+                            Generovat
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-form>
         </v-dialog>
         <v-dialog
             v-model="createDialog"
@@ -161,157 +168,162 @@
             max-width="800px"
             overlay-color="rgb(17, 27, 45)"
         >
-            <v-card>
-                <p class="pt-3 text-center subtitle-1">
-                    Založení nového uživatele
-                </p>
-                <v-card-text>
-                    <v-container class="pt-3">
-                        <v-row>
-                            <v-col cols="12" sm="12" md="6" lg="6">
-                                <v-text-field
-                                    dense
-                                    outlined
-                                    autofocus
-                                    :error-messages="errors.name"
-                                    v-model="formData.name"
-                                    label="Jméno"
-                                    type="text"
-                                    color="#0277BD"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="12" md="6" lg="6">
-                                <v-text-field
-                                    dense
-                                    outlined
-                                    :error-messages="errors.email"
-                                    v-model="formData.email"
-                                    label="E-mail"
-                                    type="text"
-                                    color="#0277BD"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="12" md="6" lg="6">
-                                <v-text-field
-                                    dense
-                                    outlined
-                                    :error-messages="errors.password"
-                                    v-model="formData.password"
-                                    label="Heslo"
-                                    type="password"
-                                    color="#0277BD"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="12" md="6" lg="6">
-                                <v-text-field
-                                    dense
-                                    outlined
-                                    :error-messages="errors.password_confirmed"
-                                    v-model="formData.password_confirmed"
-                                    label="Potvrďte heslo"
-                                    type="password"
-                                    color="#0277BD"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="12" md="6" lg="6">
-                                <v-autocomplete
-                                    dense
-                                    outlined
-                                    :error-messages="errors.role"
-                                    v-model="formData.role"
-                                    item-text="role_name"
-                                    item-value="id"
-                                    label="Uživatelská role"
-                                    :items="userRoles"
-                                    type="text"
-                                    color="#0277BD"
-                                ></v-autocomplete>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-card-text>
-                <v-card-actions color="#101B1D">
-                    <v-spacer></v-spacer>
-                    <v-btn
-                        color="blue darken-1"
-                        @click="closeDialog()"
-                        plain
-                        outlined
-                    >
-                        Zavřít
-                    </v-btn>
-                    <v-btn
-                        color="green darken-1"
-                        @click="storeUser()"
-                        plain
-                        outlined
-                    >
-                        Uložit
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
+            <v-form @submit.prevent="storeUser()">
+                <v-card>
+                    <p class="pt-3 text-center subtitle-1">
+                        Založení nového uživatele
+                    </p>
+                    <v-card-text>
+                        <v-container class="pt-3">
+                            <v-row>
+                                <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-text-field
+                                        dense
+                                        outlined
+                                        autofocus
+                                        :error-messages="errors.name"
+                                        v-model="formData.name"
+                                        label="Jméno"
+                                        type="text"
+                                        color="#0277BD"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-text-field
+                                        dense
+                                        outlined
+                                        :error-messages="errors.email"
+                                        v-model="formData.email"
+                                        label="E-mail"
+                                        type="text"
+                                        color="#0277BD"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-text-field
+                                        dense
+                                        outlined
+                                        :error-messages="errors.password"
+                                        v-model="formData.password"
+                                        label="Heslo"
+                                        type="password"
+                                        color="#0277BD"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-text-field
+                                        dense
+                                        outlined
+                                        :error-messages="
+                                            errors.password_confirmed
+                                        "
+                                        v-model="formData.password_confirmed"
+                                        label="Potvrďte heslo"
+                                        type="password"
+                                        color="#0277BD"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-autocomplete
+                                        dense
+                                        outlined
+                                        :error-messages="errors.role"
+                                        v-model="formData.role"
+                                        item-text="role_name"
+                                        item-value="id"
+                                        label="Uživatelská role"
+                                        :items="userRoles"
+                                        type="text"
+                                        color="#0277BD"
+                                    ></v-autocomplete>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions color="#101B1D">
+                        <v-btn
+                            color="blue darken-1"
+                            @click="closeDialog()"
+                            plain
+                            outlined
+                        >
+                            Zavřít
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="green darken-1"
+                            type="submit"
+                            plain
+                            outlined
+                        >
+                            Uložit
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-form>
         </v-dialog>
-
         <v-dialog
             v-model="editDialog"
             persistent
             max-width="800px"
             overlay-color="rgb(17, 27, 45)"
         >
-            <v-card>
-                <p class="pt-3 text-center subtitle-1">Úprava uživatele</p>
-                <v-card-text>
-                    <v-container class="pt-3">
-                        <v-row>
-                            <v-col cols="12" sm="12" md="6" lg="6">
-                                <v-text-field
-                                    dense
-                                    outlined
-                                    autofocus
-                                    :error-messages="errors.name"
-                                    v-model="user.name"
-                                    label="Jméno"
-                                    type="text"
-                                    color="#0277BD"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="12" md="6" lg="6">
-                                <v-autocomplete
-                                    dense
-                                    outlined
-                                    :error-messages="errors.role"
-                                    v-model="user.role"
-                                    item-text="role_name"
-                                    item-value="id"
-                                    label="Uživatelská role"
-                                    :items="userRoles"
-                                    type="text"
-                                    color="#0277BD"
-                                ></v-autocomplete>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-card-text>
-                <v-card-actions color="#101B1D">
-                    <v-spacer></v-spacer>
-                    <v-btn
-                        color="blue darken-1"
-                        @click="closeDialog()"
-                        plain
-                        outlined
-                    >
-                        Zavřít
-                    </v-btn>
-                    <v-btn
-                        color="green darken-1"
-                        @click="editUser()"
-                        plain
-                        outlined
-                    >
-                        Uložit
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
+            <v-form @submit.prevent="editUser()">
+                <v-card>
+                    <p class="pt-3 text-center subtitle-1">Úprava uživatele</p>
+                    <v-card-text>
+                        <v-container class="pt-3">
+                            <v-row>
+                                <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-text-field
+                                        dense
+                                        outlined
+                                        autofocus
+                                        :error-messages="errors.name"
+                                        v-model="user.name"
+                                        label="Jméno"
+                                        type="text"
+                                        color="#0277BD"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-autocomplete
+                                        dense
+                                        outlined
+                                        :error-messages="errors.role"
+                                        v-model="user.role"
+                                        item-text="role_name"
+                                        item-value="id"
+                                        label="Uživatelská role"
+                                        :items="userRoles"
+                                        type="text"
+                                        color="#0277BD"
+                                    ></v-autocomplete>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions color="#101B1D">
+                        <v-btn
+                            color="blue darken-1"
+                            @click="closeDialog()"
+                            plain
+                            outlined
+                        >
+                            Zavřít
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="green darken-1"
+                            type="submit"
+                            plain
+                            outlined
+                        >
+                            Uložit
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-form>
         </v-dialog>
     </div>
 </template>

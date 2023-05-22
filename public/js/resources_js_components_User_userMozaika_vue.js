@@ -89,6 +89,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -241,60 +245,77 @@ var render = function () {
                 { attrs: { cols: "12", sm: "12", md: "12", lg: "12" } },
                 [
                   _c(
-                    "v-card",
+                    "v-form",
                     {
-                      staticClass:
-                        "overflow-hidden rounded-xl blur shadow-blur",
-                      attrs: { flat: "" },
+                      on: {
+                        submit: function ($event) {
+                          $event.preventDefault()
+                          return _vm.UpdatePagination()
+                        },
+                      },
                     },
                     [
                       _c(
-                        "v-card-text",
+                        "v-card",
+                        {
+                          staticClass:
+                            "overflow-hidden rounded-xl blur shadow-blur",
+                          attrs: { flat: "" },
+                        },
                         [
                           _c(
-                            "v-container",
-                            { attrs: { fluid: "" } },
+                            "v-card-text",
                             [
                               _c(
-                                "v-row",
+                                "v-container",
+                                { attrs: { fluid: "" } },
                                 [
-                                  _c("v-text-field", {
-                                    staticClass: "d-flex justify-space-between",
-                                    attrs: {
-                                      "error-messages": _vm.errors.pagination,
-                                      label: "Počet streamů na stránce",
-                                      name: "username",
-                                      "prepend-icon": "mdi-television-guide",
-                                      type: "number",
-                                      color: "#328AF1",
-                                      autofocus: "",
-                                    },
-                                    model: {
-                                      value: _vm.user.pagination,
-                                      callback: function ($$v) {
-                                        _vm.$set(_vm.user, "pagination", $$v)
-                                      },
-                                      expression: "user.pagination",
-                                    },
-                                  }),
-                                  _vm._v(" "),
                                   _c(
-                                    "v-btn",
-                                    {
-                                      staticClass:
-                                        "rounded-lg d-flex justify-space-between my-auto mx-3",
-                                      attrs: {
-                                        plain: "",
-                                        color: "#328AF1",
-                                        outlined: "",
-                                      },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.UpdatePagination()
+                                    "v-row",
+                                    [
+                                      _c("v-text-field", {
+                                        staticClass:
+                                          "d-flex justify-space-between",
+                                        attrs: {
+                                          "error-messages":
+                                            _vm.errors.pagination,
+                                          label: "Počet streamů na stránce",
+                                          name: "username",
+                                          "prepend-icon":
+                                            "mdi-television-guide",
+                                          type: "number",
+                                          color: "#328AF1",
+                                          autofocus: "",
                                         },
-                                      },
-                                    },
-                                    [_vm._v("Upravit")]
+                                        model: {
+                                          value: _vm.user.pagination,
+                                          callback: function ($$v) {
+                                            _vm.$set(
+                                              _vm.user,
+                                              "pagination",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "user.pagination",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          staticClass:
+                                            "rounded-lg d-flex justify-space-between my-auto mx-3",
+                                          attrs: {
+                                            plain: "",
+                                            color: "#328AF1",
+                                            outlined: "",
+                                            type: "submit",
+                                          },
+                                        },
+                                        [_vm._v("Upravit")]
+                                      ),
+                                    ],
+                                    1
                                   ),
                                 ],
                                 1
@@ -317,66 +338,82 @@ var render = function () {
                 { attrs: { cols: "12", sm: "12", md: "12", lg: "12" } },
                 [
                   _c(
-                    "v-card",
+                    "v-form",
                     {
-                      staticClass:
-                        "overflow-hidden rounded-xl blur shadow-blur",
-                      attrs: { flat: "" },
+                      on: {
+                        submit: function ($event) {
+                          $event.preventDefault()
+                          return _vm.UpdateStaticMozaika()
+                        },
+                      },
                     },
                     [
                       _c(
-                        "v-card-text",
+                        "v-card",
+                        {
+                          staticClass:
+                            "overflow-hidden rounded-xl blur shadow-blur",
+                          attrs: { flat: "" },
+                        },
                         [
                           _c(
-                            "v-container",
-                            { attrs: { fluid: "" } },
+                            "v-card-text",
                             [
                               _c(
-                                "v-row",
+                                "v-container",
+                                { attrs: { fluid: "" } },
                                 [
-                                  _c("v-autocomplete", {
-                                    staticClass: "d-flex justify-space-between",
-                                    attrs: {
-                                      "error-messages": _vm.errors.customData,
-                                      label:
-                                        "Streamy, které budete mít připnuté ve Vaší mozaice",
-                                      items: _vm.streams,
-                                      "item-text": "nazev",
-                                      "item-value": "id",
-                                      name: "username",
-                                      "prepend-icon": "mdi-television",
-                                      type: "text",
-                                      color: "#328AF1",
-                                      multiple: "",
-                                      clearable: "",
-                                      chips: "",
-                                    },
-                                    model: {
-                                      value: _vm.user.customData,
-                                      callback: function ($$v) {
-                                        _vm.$set(_vm.user, "customData", $$v)
-                                      },
-                                      expression: "user.customData",
-                                    },
-                                  }),
-                                  _vm._v(" "),
                                   _c(
-                                    "v-btn",
-                                    {
-                                      staticClass:
-                                        "rounded-lg d-flex justify-space-between my-auto mx-3",
-                                      attrs: {
-                                        plain: "",
-                                        color: "#328AF1",
-                                        outlined: "",
-                                      },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.UpdateStaticMozaika()
+                                    "v-row",
+                                    [
+                                      _c("v-autocomplete", {
+                                        staticClass:
+                                          "d-flex justify-space-between",
+                                        attrs: {
+                                          "error-messages":
+                                            _vm.errors.customData,
+                                          label:
+                                            "Streamy, které budete mít připnuté ve Vaší mozaice",
+                                          items: _vm.streams,
+                                          "item-text": "nazev",
+                                          "item-value": "id",
+                                          name: "username",
+                                          "prepend-icon": "mdi-television",
+                                          type: "text",
+                                          color: "#328AF1",
+                                          multiple: "",
+                                          clearable: "",
+                                          chips: "",
                                         },
-                                      },
-                                    },
-                                    [_vm._v("Upravit")]
+                                        model: {
+                                          value: _vm.user.customData,
+                                          callback: function ($$v) {
+                                            _vm.$set(
+                                              _vm.user,
+                                              "customData",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "user.customData",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          staticClass:
+                                            "rounded-lg d-flex justify-space-between my-auto mx-3",
+                                          attrs: {
+                                            plain: "",
+                                            color: "#328AF1",
+                                            outlined: "",
+                                            type: "submit",
+                                          },
+                                        },
+                                        [_vm._v("Upravit")]
+                                      ),
+                                    ],
+                                    1
                                   ),
                                 ],
                                 1

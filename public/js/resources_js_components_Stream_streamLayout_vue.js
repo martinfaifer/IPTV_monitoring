@@ -1448,6 +1448,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3949,6 +3965,77 @@ var render = function () {
                                     )
                                   : _vm._e(),
                               ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                { attrs: { cols: "12" } },
+                                [
+                                  _c(
+                                    "v-row",
+                                    [
+                                      _c(
+                                        "v-col",
+                                        {
+                                          attrs: {
+                                            cols: "12",
+                                            sm: "12",
+                                            md: "6",
+                                            lg: "6",
+                                          },
+                                        },
+                                        [
+                                          _c(
+                                            "span",
+                                            { staticClass: "subtitle-2" },
+                                            [
+                                              _vm._v(
+                                                "\n                                        Nangu chunkStoreId:\n                                        " +
+                                                  _vm._s(
+                                                    _vm.iptvDokuData
+                                                      .chunkStoreId
+                                                  ) +
+                                                  "\n                                    "
+                                              ),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        {
+                                          attrs: {
+                                            cols: "12",
+                                            sm: "12",
+                                            md: "6",
+                                            lg: "6",
+                                          },
+                                        },
+                                        [
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass: "subtitle-2 mx-auto",
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                        Nangu channelName:\n                                        " +
+                                                  _vm._s(
+                                                    _vm.iptvDokuData
+                                                      .nanguChannel
+                                                  ) +
+                                                  "\n                                    "
+                                              ),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                ],
+                                1
+                              ),
                               _vm._v(" "),
                               _c(
                                 "v-col",

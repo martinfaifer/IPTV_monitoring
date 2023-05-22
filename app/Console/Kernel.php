@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('system:data_command')->dailyAt('01:00');
         $schedule->command('streams:start_diagnostic')->everyMinute()->runInBackground();
-        $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute()->withoutOverlapping()->runInBackground();
+        $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute()->runInBackground();
         $schedule->command('system:take_network_data')->everyMinute()->runInBackground();
         // $schedule->command('ffprobe:analyze_streams')->everyMinute()->runInBackground()->withoutOverlapping(300);
 

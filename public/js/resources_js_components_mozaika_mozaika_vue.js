@@ -1197,25 +1197,6 @@ var render = function () {
                     },
                     [_vm._v(_vm._s(_vm.count))]
                   ),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "v-row",
-                { staticClass: "mx-auto mt-1" },
-                [
-                  _vm._l(_vm.errorStreams, function (stream) {
-                    return _c(
-                      "v-col",
-                      { key: stream.id, staticClass: "my-2" },
-                      [
-                        _vm.hideCards == false
-                          ? _c("ErrorImageCard", { attrs: { stream: stream } })
-                          : _vm._e(),
-                      ],
-                      1
-                    )
-                  }),
                   _vm._v(" "),
                   _c(
                     "v-tooltip",
@@ -1272,7 +1253,25 @@ var render = function () {
                     ]
                   ),
                 ],
-                2
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-row",
+                { staticClass: "mx-auto mt-1" },
+                _vm._l(_vm.errorStreams, function (stream) {
+                  return _c(
+                    "v-col",
+                    { key: stream.id, staticClass: "my-2" },
+                    [
+                      _vm.hideCards == false
+                        ? _c("ErrorImageCard", { attrs: { stream: stream } })
+                        : _vm._e(),
+                    ],
+                    1
+                  )
+                }),
+                1
               ),
             ],
             1

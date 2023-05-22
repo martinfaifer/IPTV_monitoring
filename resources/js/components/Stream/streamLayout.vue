@@ -110,13 +110,13 @@
                             </v-col>
                             <v-col cols="12">
                                 <v-row>
-                                    <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-col v-if="iptvDokuData.chunkStoreId" cols="12" sm="12" md="6" lg="6">
                                         <span class="subtitle-2">
                                             Nangu chunkStoreId:
                                             {{ iptvDokuData.chunkStoreId }}
                                         </span>
                                     </v-col>
-                                    <v-col cols="12" sm="12" md="6" lg="6">
+                                    <v-col v-if="iptvDokuData.nanguChannel" cols="12" sm="12" md="6" lg="6">
                                         <span class="subtitle-2 mx-auto">
                                             Nangu channelName:
                                             {{ iptvDokuData.nanguChannel }}

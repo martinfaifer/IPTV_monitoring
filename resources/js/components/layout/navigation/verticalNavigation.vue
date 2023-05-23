@@ -29,8 +29,8 @@
             </div>
 
             <v-spacer></v-spacer>
-
             <Search></Search>
+            <Weather></Weather>
             <User></User>
             <div class="mx-1">
                 <v-tooltip bottom color="#192B4B">
@@ -111,10 +111,12 @@
 <script>
 import Search from "./Search/search.vue";
 import User from "./User/user.vue";
+import Weather from "./Weather/Weather.vue";
 export default {
     components: {
         Search,
         User,
+        Weather
     },
     data() {
         return {

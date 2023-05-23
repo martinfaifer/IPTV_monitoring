@@ -49,8 +49,9 @@
         </v-row>
         <v-dialog
             v-model="iptvDokuDialog"
+            scrollable
             persistent
-            max-width="800px"
+            max-width="100%"
             overlay-color="rgb(17, 27, 45)"
         >
             <v-card>
@@ -110,13 +111,25 @@
                             </v-col>
                             <v-col cols="12">
                                 <v-row>
-                                    <v-col v-if="iptvDokuData.chunkStoreId" cols="12" sm="12" md="6" lg="6">
+                                    <v-col
+                                        v-if="iptvDokuData.chunkStoreId"
+                                        cols="12"
+                                        sm="12"
+                                        md="6"
+                                        lg="6"
+                                    >
                                         <span class="subtitle-2">
                                             Nangu chunkStoreId:
                                             {{ iptvDokuData.chunkStoreId }}
                                         </span>
                                     </v-col>
-                                    <v-col v-if="iptvDokuData.nanguChannel" cols="12" sm="12" md="6" lg="6">
+                                    <v-col
+                                        v-if="iptvDokuData.nanguChannel"
+                                        cols="12"
+                                        sm="12"
+                                        md="6"
+                                        lg="6"
+                                    >
                                         <span class="subtitle-2 mx-auto">
                                             Nangu channelName:
                                             {{ iptvDokuData.nanguChannel }}
@@ -129,7 +142,10 @@
                             </v-col>
                             <v-col
                                 v-if="iptvDokuData.devices.source != null"
-                                cols=""
+                                cols="12"
+                                sm="12"
+                                md="7"
+                                lg="7"
                             >
                                 <p class="text-center subtitle-1">Přijímač</p>
                                 <v-row>
@@ -192,10 +208,27 @@
                                             Proklik na do IPTV dokumentace:
                                         </a>
                                     </v-col>
+                                    <v-col cols="12">
+                                        <DeviceTemplate
+                                            v-if="
+                                                iptvDokuData.devices.source
+                                                    .template != null
+                                            "
+                                            :deviceTemplate="
+                                                JSON.parse(
+                                                    iptvDokuData.devices.source
+                                                        .template
+                                                )
+                                            "
+                                        ></DeviceTemplate>
+                                    </v-col>
                                 </v-row>
                             </v-col>
                             <v-col
-                                v-if="iptvDokuData.devices.multiplexor != null"
+                                v-if="
+                                    iptvDokuData.devices.multiplexor.name !=
+                                    null
+                                "
                             >
                                 <p class="text-center subtitle-1">
                                     Multiplexor
@@ -272,6 +305,7 @@
                     </v-container>
                 </v-card-text>
                 <v-card-actions color="#101B1D">
+                    <v-spacer></v-spacer>
                     <v-btn
                         color="blue darken-1"
                         @click="closeDialog()"
@@ -280,7 +314,6 @@
                     >
                         Zavřít
                     </v-btn>
-                    <v-spacer></v-spacer>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -301,6 +334,7 @@ import StreamService from "./StreamServices.vue";
 import StreamAlertDialog from "./StreamAlertDialog.vue";
 import FfprobeStream from "./StreamFfrobe.vue";
 import StreamIptvDoku from "./StreamIptvDoku.vue";
+import DeviceTemplate from "./devicetemplate.vue";
 export default {
     metaInfo: {
         title: "IPTV Dohled - informace o streamu",
@@ -325,6 +359,7 @@ export default {
         StreamService,
         FfprobeStream,
         StreamIptvDoku,
+        DeviceTemplate,
     },
 
     created() {

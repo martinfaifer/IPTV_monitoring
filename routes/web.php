@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Weather\ApiWeatherController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
@@ -48,6 +49,7 @@ Route::prefix('auth')->group(function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('search', SearchController::class);
+    Route::get('weather', ApiWeatherController::class);
 
     Route::prefix('users')->group(function () {
         Route::get('user', [UserController::class, 'show']);

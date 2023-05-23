@@ -1076,6 +1076,428 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/devicetemplate.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/devicetemplate.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {//
+  },
+  props: ["deviceTemplate"],
+  data: function data() {
+    return {//
+    };
+  },
+  created: function created() {},
+  methods: {
+    checkIfInterfaceIsUp: function checkIfInterfaceIsUp(interfaceKey, interfaceValue) {
+      console.log(interfaceKey);
+
+      if (interfaceKey == "speed") {
+        return interfaceValue == 0 ? "red--text" : "green--text";
+      }
+
+      return "";
+    },
+    chooseColor: function chooseColor(vazba, interfaceBound) {
+      if (vazba != null) {
+        if (vazba != "") {
+          return "rgb(0, 191, 255, 0.3)";
+        }
+      }
+
+      if (interfaceBound.length != 0 || interfaceBound != "") {
+        return "rgb(60, 179, 113, 0.3)";
+      }
+
+      return "#5D6269";
+    },
+    fontNotificationFunction: function fontNotificationFunction(stringValue) {
+      if (stringValue == "LOCKED") {
+        return "green--text font-weight-bold";
+      }
+
+      if (stringValue == "OK") {
+        return "green--text font-weight-bold";
+      }
+
+      if (stringValue == "UNLOCKED") {
+        return "red--text font-weight-bold";
+      }
+    }
+  },
+  watch: {
+    $route: function $route(to, from) {}
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/streamImage.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/streamImage.vue?vue&type=script&lang=js& ***!
@@ -1171,6 +1593,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _StreamAlertDialog_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./StreamAlertDialog.vue */ "./resources/js/components/Stream/StreamAlertDialog.vue");
 /* harmony import */ var _StreamFfrobe_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./StreamFfrobe.vue */ "./resources/js/components/Stream/StreamFfrobe.vue");
 /* harmony import */ var _StreamIptvDoku_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./StreamIptvDoku.vue */ "./resources/js/components/Stream/StreamIptvDoku.vue");
+/* harmony import */ var _devicetemplate_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./devicetemplate.vue */ "./resources/js/components/Stream/devicetemplate.vue");
 //
 //
 //
@@ -1464,6 +1887,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -1495,7 +1952,8 @@ __webpack_require__.r(__webpack_exports__);
     StreamAudioVideoPidDetail: _StreamAudiVideoPidDetail_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     StreamService: _StreamServices_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     FfprobeStream: _StreamFfrobe_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    StreamIptvDoku: _StreamIptvDoku_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    StreamIptvDoku: _StreamIptvDoku_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    DeviceTemplate: _devicetemplate_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   created: function created() {
     this.index();
@@ -1905,6 +2363,44 @@ component.options.__file = "resources/js/components/Stream/StreamServices.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Stream/devicetemplate.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/Stream/devicetemplate.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _devicetemplate_vue_vue_type_template_id_1e967e64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./devicetemplate.vue?vue&type=template&id=1e967e64& */ "./resources/js/components/Stream/devicetemplate.vue?vue&type=template&id=1e967e64&");
+/* harmony import */ var _devicetemplate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./devicetemplate.vue?vue&type=script&lang=js& */ "./resources/js/components/Stream/devicetemplate.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _devicetemplate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _devicetemplate_vue_vue_type_template_id_1e967e64___WEBPACK_IMPORTED_MODULE_0__.render,
+  _devicetemplate_vue_vue_type_template_id_1e967e64___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Stream/devicetemplate.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Stream/streamImage.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/Stream/streamImage.vue ***!
@@ -2116,6 +2612,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Stream/devicetemplate.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/Stream/devicetemplate.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_devicetemplate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./devicetemplate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/devicetemplate.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_devicetemplate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Stream/streamImage.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/Stream/streamImage.vue?vue&type=script&lang=js& ***!
@@ -2286,6 +2797,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamServices_vue_vue_type_template_id_3009fa9c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamServices_vue_vue_type_template_id_3009fa9c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StreamServices.vue?vue&type=template&id=3009fa9c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/StreamServices.vue?vue&type=template&id=3009fa9c&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Stream/devicetemplate.vue?vue&type=template&id=1e967e64&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/Stream/devicetemplate.vue?vue&type=template&id=1e967e64& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_devicetemplate_vue_vue_type_template_id_1e967e64___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_devicetemplate_vue_vue_type_template_id_1e967e64___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_devicetemplate_vue_vue_type_template_id_1e967e64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./devicetemplate.vue?vue&type=template&id=1e967e64& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/devicetemplate.vue?vue&type=template&id=1e967e64&");
 
 
 /***/ }),
@@ -3670,6 +4197,786 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/devicetemplate.vue?vue&type=template&id=1e967e64&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/devicetemplate.vue?vue&type=template&id=1e967e64& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-card",
+        { staticClass: "overflow-hidden rounded-xl", attrs: { flat: "" } },
+        [
+          _c(
+            "v-card-subtitle",
+            [
+              _c("v-row", { staticClass: "justify-center" }, [
+                _c(
+                  "p",
+                  { staticClass: "mt-3 text-center overline font-weight-bold" },
+                  [
+                    _vm._v(
+                      "\n                    Šablona zařízení\n                "
+                    ),
+                  ]
+                ),
+              ]),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            { staticClass: "px-2 text--center" },
+            [
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _vm.deviceTemplate != null
+                    ? _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            {
+                              attrs: {
+                                cols: "12",
+                                sm: "12",
+                                md: "12",
+                                lg: "12",
+                              },
+                            },
+                            [
+                              _c(
+                                "v-row",
+                                [
+                                  _c("v-col", { attrs: { cols: "12" } }, [
+                                    _vm.deviceTemplate.input
+                                      ? _c(
+                                          "span",
+                                          [
+                                            _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "text-center font-weight-bold",
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        Vstupy\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-row",
+                                              {
+                                                staticClass:
+                                                  "justify-center mt-6",
+                                              },
+                                              _vm._l(
+                                                _vm.deviceTemplate.input.input,
+                                                function (input) {
+                                                  return _c(
+                                                    "v-col",
+                                                    { key: input.id },
+                                                    [
+                                                      _c(
+                                                        "v-card",
+                                                        {
+                                                          staticClass:
+                                                            "justify-center rounded-lg d-flex",
+                                                          attrs: {
+                                                            "min-height": "75",
+                                                            "min-width": "75",
+                                                            "max-width": "350",
+                                                            outlined: "",
+                                                            flat: "",
+                                                            color:
+                                                              _vm.chooseColor(
+                                                                input.vazba,
+                                                                input.interface
+                                                              ),
+                                                          },
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "v-container",
+                                                            {
+                                                              attrs: {
+                                                                fluid: "",
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("p", {
+                                                                staticClass:
+                                                                  "caption",
+                                                                domProps: {
+                                                                  innerHTML:
+                                                                    _vm._s(
+                                                                      input.name
+                                                                    ),
+                                                                },
+                                                              }),
+                                                              _vm._v(" "),
+                                                              input.snmp_settings
+                                                                ? _c(
+                                                                    "v-row",
+                                                                    {
+                                                                      staticClass:
+                                                                        "px-3",
+                                                                    },
+                                                                    _vm._l(
+                                                                      input.snmp_settings,
+                                                                      function (
+                                                                        inputSnmp,
+                                                                        inputSnmpIndex
+                                                                      ) {
+                                                                        return _c(
+                                                                          "v-col",
+                                                                          {
+                                                                            key: inputSnmp.id,
+                                                                            staticClass:
+                                                                              "d-flex justify-space-between",
+                                                                            attrs:
+                                                                              {
+                                                                                cols: "12",
+                                                                              },
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "font-weight-bold",
+                                                                                domProps:
+                                                                                  {
+                                                                                    innerHTML:
+                                                                                      _vm._s(
+                                                                                        inputSnmp
+                                                                                          .data
+                                                                                          .name +
+                                                                                          ":"
+                                                                                      ),
+                                                                                  },
+                                                                              }
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "px-2",
+                                                                                class:
+                                                                                  _vm.fontNotificationFunction(
+                                                                                    inputSnmp
+                                                                                      .data
+                                                                                      .value
+                                                                                  ),
+                                                                                domProps:
+                                                                                  {
+                                                                                    innerHTML:
+                                                                                      _vm._s(
+                                                                                        inputSnmp
+                                                                                          .data
+                                                                                          .value
+                                                                                      ),
+                                                                                  },
+                                                                              }
+                                                                            ),
+                                                                          ]
+                                                                        )
+                                                                      }
+                                                                    ),
+                                                                    1
+                                                                  )
+                                                                : _vm._e(),
+                                                              _vm._v(" "),
+                                                              input.settings
+                                                                ? _c(
+                                                                    "v-row",
+                                                                    {
+                                                                      staticClass:
+                                                                        "px-3",
+                                                                    },
+                                                                    _vm._l(
+                                                                      input.settings,
+                                                                      function (
+                                                                        inputItem,
+                                                                        index
+                                                                      ) {
+                                                                        return _c(
+                                                                          "v-col",
+                                                                          {
+                                                                            key: inputItem.id,
+                                                                            staticClass:
+                                                                              "d-flex justify-space-between",
+                                                                            attrs:
+                                                                              {
+                                                                                cols: "12",
+                                                                              },
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "font-weight-bold",
+                                                                                domProps:
+                                                                                  {
+                                                                                    innerHTML:
+                                                                                      _vm._s(
+                                                                                        inputItem.name +
+                                                                                          ":"
+                                                                                      ),
+                                                                                  },
+                                                                              }
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "px-2",
+                                                                                domProps:
+                                                                                  {
+                                                                                    innerHTML:
+                                                                                      _vm._s(
+                                                                                        inputItem.value
+                                                                                      ),
+                                                                                  },
+                                                                              }
+                                                                            ),
+                                                                          ]
+                                                                        )
+                                                                      }
+                                                                    ),
+                                                                    1
+                                                                  )
+                                                                : _vm._e(),
+                                                            ],
+                                                            1
+                                                          ),
+                                                        ],
+                                                        1
+                                                      ),
+                                                    ],
+                                                    1
+                                                  )
+                                                }
+                                              ),
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.deviceTemplate.output
+                                      ? _c(
+                                          "span",
+                                          [
+                                            _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "pt-6 text-center font-weight-bold",
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        Výstupy\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-row",
+                                              { staticClass: "mt-6" },
+                                              _vm._l(
+                                                _vm.deviceTemplate.output
+                                                  .output,
+                                                function (output) {
+                                                  return _c(
+                                                    "v-col",
+                                                    { key: output.id },
+                                                    [
+                                                      _c(
+                                                        "v-card",
+                                                        {
+                                                          staticClass:
+                                                            "rounded-lg",
+                                                          attrs: {
+                                                            outlined: "",
+                                                            color:
+                                                              _vm.chooseColor(
+                                                                output.vazba,
+                                                                output.interface
+                                                              ),
+                                                            "min-height": "75",
+                                                            "min-width": "75",
+                                                            "max-width": "350",
+                                                          },
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "v-container",
+                                                            [
+                                                              _c("p", {
+                                                                staticClass:
+                                                                  "caption",
+                                                                domProps: {
+                                                                  innerHTML:
+                                                                    _vm._s(
+                                                                      output.name
+                                                                    ),
+                                                                },
+                                                              }),
+                                                              _vm._v(" "),
+                                                              output.snmp_settings
+                                                                ? _c(
+                                                                    "v-row",
+                                                                    {
+                                                                      staticClass:
+                                                                        "px-3",
+                                                                    },
+                                                                    _vm._l(
+                                                                      output.snmp_settings,
+                                                                      function (
+                                                                        outputSnmp,
+                                                                        outputSnmpIndex
+                                                                      ) {
+                                                                        return _c(
+                                                                          "v-col",
+                                                                          {
+                                                                            key: outputSnmp.id,
+                                                                            staticClass:
+                                                                              "d-flex justify-space-between",
+                                                                            attrs:
+                                                                              {
+                                                                                cols: "12",
+                                                                              },
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "font-weight-bold",
+                                                                                domProps:
+                                                                                  {
+                                                                                    innerHTML:
+                                                                                      _vm._s(
+                                                                                        outputSnmp
+                                                                                          .data
+                                                                                          .name +
+                                                                                          ":"
+                                                                                      ),
+                                                                                  },
+                                                                              }
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "px-2",
+                                                                                class:
+                                                                                  _vm.fontNotificationFunction(
+                                                                                    outputSnmp
+                                                                                      .data
+                                                                                      .value
+                                                                                  ),
+                                                                                domProps:
+                                                                                  {
+                                                                                    innerHTML:
+                                                                                      _vm._s(
+                                                                                        outputSnmp
+                                                                                          .data
+                                                                                          .value
+                                                                                      ),
+                                                                                  },
+                                                                              }
+                                                                            ),
+                                                                          ]
+                                                                        )
+                                                                      }
+                                                                    ),
+                                                                    1
+                                                                  )
+                                                                : _vm._e(),
+                                                              _vm._v(" "),
+                                                              output.settings
+                                                                ? _c(
+                                                                    "v-row",
+                                                                    {
+                                                                      staticClass:
+                                                                        "px-3",
+                                                                    },
+                                                                    _vm._l(
+                                                                      output.settings,
+                                                                      function (
+                                                                        outputItem,
+                                                                        outputIndex
+                                                                      ) {
+                                                                        return _c(
+                                                                          "v-col",
+                                                                          {
+                                                                            key: outputItem.id,
+                                                                            staticClass:
+                                                                              "d-flex justify-space-between",
+                                                                            attrs:
+                                                                              {
+                                                                                cols: "12",
+                                                                              },
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "font-weight-bold",
+                                                                                domProps:
+                                                                                  {
+                                                                                    innerHTML:
+                                                                                      _vm._s(
+                                                                                        outputItem.name +
+                                                                                          ":"
+                                                                                      ),
+                                                                                  },
+                                                                              }
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "px-2",
+                                                                                domProps:
+                                                                                  {
+                                                                                    innerHTML:
+                                                                                      _vm._s(
+                                                                                        outputItem.value
+                                                                                      ),
+                                                                                  },
+                                                                              }
+                                                                            ),
+                                                                          ]
+                                                                        )
+                                                                      }
+                                                                    ),
+                                                                    1
+                                                                  )
+                                                                : _vm._e(),
+                                                            ],
+                                                            1
+                                                          ),
+                                                        ],
+                                                        1
+                                                      ),
+                                                    ],
+                                                    1
+                                                  )
+                                                }
+                                              ),
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.deviceTemplate.modules
+                                      ? _c(
+                                          "span",
+                                          [
+                                            _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "mt-3 text-center font-weight-bold",
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        Moduly\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-row",
+                                              {
+                                                staticClass:
+                                                  "justify-center mt-6",
+                                              },
+                                              _vm._l(
+                                                _vm.deviceTemplate.modules
+                                                  .modules,
+                                                function (module) {
+                                                  return _c(
+                                                    "v-col",
+                                                    { key: module.id },
+                                                    [
+                                                      _c(
+                                                        "v-card",
+                                                        {
+                                                          staticClass:
+                                                            "justify-center rounded-lg d-flex",
+                                                          attrs: {
+                                                            "min-height": "75",
+                                                            "min-width": "75",
+                                                            "max-width": "350",
+                                                            outlined: "",
+                                                            flat: "",
+                                                            color:
+                                                              _vm.chooseColor(
+                                                                module.vazba,
+                                                                module.interface
+                                                              ),
+                                                          },
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "v-container",
+                                                            {
+                                                              attrs: {
+                                                                fluid: "",
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("p", {
+                                                                staticClass:
+                                                                  "caption",
+                                                                domProps: {
+                                                                  innerHTML:
+                                                                    _vm._s(
+                                                                      module.human_name
+                                                                    ),
+                                                                },
+                                                              }),
+                                                              _vm._v(" "),
+                                                              module.snmp_settings
+                                                                ? _c("v-row", {
+                                                                    staticClass:
+                                                                      "px-3",
+                                                                  })
+                                                                : _vm._e(),
+                                                              _vm._v(" "),
+                                                              module.settings
+                                                                ? _c(
+                                                                    "v-row",
+                                                                    {
+                                                                      staticClass:
+                                                                        "px-3",
+                                                                    },
+                                                                    _vm._l(
+                                                                      module.settings,
+                                                                      function (
+                                                                        moduleItem,
+                                                                        index
+                                                                      ) {
+                                                                        return _c(
+                                                                          "v-col",
+                                                                          {
+                                                                            key: moduleItem.id,
+                                                                            attrs:
+                                                                              {
+                                                                                cols: "12",
+                                                                              },
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "font-weight-bold",
+                                                                                domProps:
+                                                                                  {
+                                                                                    innerHTML:
+                                                                                      _vm._s(
+                                                                                        moduleItem.name +
+                                                                                          ":"
+                                                                                      ),
+                                                                                  },
+                                                                              }
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "px-2",
+                                                                                domProps:
+                                                                                  {
+                                                                                    innerHTML:
+                                                                                      _vm._s(
+                                                                                        moduleItem.value
+                                                                                      ),
+                                                                                  },
+                                                                              }
+                                                                            ),
+                                                                          ]
+                                                                        )
+                                                                      }
+                                                                    ),
+                                                                    1
+                                                                  )
+                                                                : _vm._e(),
+                                                            ],
+                                                            1
+                                                          ),
+                                                        ],
+                                                        1
+                                                      ),
+                                                    ],
+                                                    1
+                                                  )
+                                                }
+                                              ),
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                  ]),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-row",
+                                { staticClass: "justify-end pl-3 mt-3" },
+                                [
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12" } },
+                                    [
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c("v-sheet", {
+                                            staticClass: "mt-1",
+                                            attrs: {
+                                              width: "15",
+                                              height: "15",
+                                              color: "#5D6269",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("small", { staticClass: "pl-6" }, [
+                                            _vm._v("Neaktivní"),
+                                          ]),
+                                        ],
+                                        1
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12" } },
+                                    [
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c("v-sheet", {
+                                            staticClass: "mt-1",
+                                            attrs: {
+                                              width: "15",
+                                              height: "15",
+                                              color: "rgb(60, 179, 113, 0.3)",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("small", { staticClass: "pl-6" }, [
+                                            _vm._v("Využitý"),
+                                          ]),
+                                        ],
+                                        1
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12" } },
+                                    [
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c("v-sheet", {
+                                            staticClass: "mt-1",
+                                            attrs: {
+                                              width: "15",
+                                              height: "15",
+                                              color: "rgb(0, 191, 255, 0.3)",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("small", { staticClass: "pl-6" }, [
+                                            _vm._v("Vazba na kanál"),
+                                          ]),
+                                        ],
+                                        1
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                ],
+                                1
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/streamImage.vue?vue&type=template&id=3e9e8d52&":
 /*!******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Stream/streamImage.vue?vue&type=template&id=3e9e8d52& ***!
@@ -3837,8 +5144,9 @@ var render = function () {
         "v-dialog",
         {
           attrs: {
+            scrollable: "",
             persistent: "",
-            "max-width": "800px",
+            "max-width": "100%",
             "overlay-color": "rgb(17, 27, 45)",
           },
           model: {
@@ -4052,7 +5360,14 @@ var render = function () {
                               _vm.iptvDokuData.devices.source != null
                                 ? _c(
                                     "v-col",
-                                    { attrs: { cols: "" } },
+                                    {
+                                      attrs: {
+                                        cols: "12",
+                                        sm: "12",
+                                        md: "7",
+                                        lg: "7",
+                                      },
+                                    },
                                     [
                                       _c(
                                         "p",
@@ -4190,6 +5505,27 @@ var render = function () {
                                               ),
                                             ]
                                           ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12" } },
+                                            [
+                                              _vm.iptvDokuData.devices.source
+                                                .template != null
+                                                ? _c("DeviceTemplate", {
+                                                    attrs: {
+                                                      deviceTemplate:
+                                                        JSON.parse(
+                                                          _vm.iptvDokuData
+                                                            .devices.source
+                                                            .template
+                                                        ),
+                                                    },
+                                                  })
+                                                : _vm._e(),
+                                            ],
+                                            1
+                                          ),
                                         ],
                                         1
                                       ),
@@ -4198,7 +5534,7 @@ var render = function () {
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.iptvDokuData.devices.multiplexor != null
+                              _vm.iptvDokuData.devices.multiplexor.name != null
                                 ? _c(
                                     "v-col",
                                     [
@@ -4365,6 +5701,8 @@ var render = function () {
                 "v-card-actions",
                 { attrs: { color: "#101B1D" } },
                 [
+                  _c("v-spacer"),
+                  _vm._v(" "),
                   _c(
                     "v-btn",
                     {
@@ -4381,8 +5719,6 @@ var render = function () {
                     },
                     [_vm._v("\n                    Zavřít\n                ")]
                   ),
-                  _vm._v(" "),
-                  _c("v-spacer"),
                 ],
                 1
               ),

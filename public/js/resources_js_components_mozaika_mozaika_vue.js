@@ -571,11 +571,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.pageLoading = false;
       });
     },
-    // getStreamImage(streamId) {
-    //     axios.get("streams/image/" + streamId).then((response) => {
-    //         return response.data;
-    //     });
-    // },
     onPageChange: function onPageChange() {
       this.index();
     },

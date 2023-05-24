@@ -4,7 +4,7 @@
         <v-btn x-small icon color="#328AF1" @click="resetErrors()"
             ><v-icon x-small> mdi-restore </v-icon></v-btn
         >
-        <span v-if="resetTime != null" class="caption">Chyby smazány: {{ resetTime[0] }}</span>
+        <span v-if="resetTime != ''" class="caption">Chyby smazány: {{ resetTime[0] }}</span>
     </div>
 </template>
 <script>
@@ -13,7 +13,7 @@ export default {
     data() {
         return {
             discontinuityErros: "",
-            resetTime: null,
+            resetTime: "",
         };
     },
     components: {},

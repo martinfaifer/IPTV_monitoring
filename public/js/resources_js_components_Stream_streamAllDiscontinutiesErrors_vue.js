@@ -25,7 +25,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       discontinuityErros: "",
-      resetTime: null
+      resetTime: ""
     };
   },
   components: {},
@@ -189,7 +189,7 @@ var render = function () {
         1
       ),
       _vm._v(" "),
-      _vm.resetTime != null
+      _vm.resetTime != ""
         ? _c("span", { staticClass: "caption" }, [
             _vm._v("Chyby smazány: " + _vm._s(_vm.resetTime[0])),
           ])

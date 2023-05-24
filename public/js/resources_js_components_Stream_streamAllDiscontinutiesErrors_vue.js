@@ -40,6 +40,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("streams/pids/discontinuity/" + this.$route.params.streamId + "/" + this.pid).then(function (response) {
         _this.discontinuityErros = response.data;
       });
+      this.getResetTime();
     },
     websocketData: function websocketData() {
       var _this2 = this;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Streams;
 
+use Carbon\Carbon;
 use App\Models\Stream;
 use App\Http\Controllers\Controller;
 use App\Actions\Cache\StoreItemsToCache;
@@ -14,7 +15,7 @@ class StreStreamPidDiscontinuityResetController extends Controller
     {
         $removeItemsFromCache->execute(key: 'streamDiscontinuityPidErrors_' . $pid . '_' . $stream->id);
         $removeItemsFromCache->execute(key: 'streamDiscontinuityPidErrors_' . $pid . '_' . $stream->id . "_started");
-        (new StoreItemsToCache())->execute(key: 'streamDiscontinuityPidErrors_' . $pid . '_' . $stream->id . "_started", value: [now()]);
+        (new StoreItemsToCache())->execute(key: 'streamDiscontinuityPidErrors_' . $pid . '_' . $stream->id . "_started", value: [Carbon::now()->format('Y-m-d H:i:s')]);
 
         return $getStreamPidDiscontinuityAction->execute(stream: $stream, pid: $pid);
     }

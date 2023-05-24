@@ -34,6 +34,8 @@ export default {
                 .then((response) => {
                     this.discontinuityErros = response.data;
                 });
+
+            this.getResetTime();
         },
         websocketData() {
             Echo.channel(

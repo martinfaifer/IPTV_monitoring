@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
+use Spatie\Health\Models\HealthCheckResultHistoryItem;
 use Spatie\Health\Commands\ScheduleCheckHeartbeatCommand;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -19,6 +20,11 @@ class Kernel extends ConsoleKernel
         $schedule->command(ScheduleCheckHeartbeatCommand::class)->everyMinute();
 
         $schedule->command('webscoket:restart')->daily();
+        $schedule->command('model:prune', [
+            '--model' => [
+                HealthCheckResultHistoryItem::class,
+            ],
+        ])->daily();
 
         $schedule->command('system:data_command')->dailyAt('01:00');
         $schedule->command('streams:start_diagnostic')->everyMinute()->runInBackground();

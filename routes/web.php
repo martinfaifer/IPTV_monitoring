@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\Weather\ApiWeatherController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
@@ -13,6 +12,7 @@ use App\Http\Controllers\Streams\StreamController;
 use App\Http\Controllers\StreamsHistoryStatusController;
 use App\Http\Controllers\UserGeneratePasswordController;
 use App\Http\Controllers\Streams\CustomStreamsController;
+use App\Http\Controllers\API\Weather\ApiWeatherController;
 use App\Http\Controllers\Streams\ProblemStreamsController;
 use App\Http\Controllers\Streams\RunningStreamsController;
 use App\Http\Controllers\Streams\ShowStreamPidsController;
@@ -29,6 +29,7 @@ use App\Http\Controllers\Settings\Sreams\SettingsStreamController;
 use App\Http\Controllers\Streams\StreamPidDiscontinuityController;
 use App\Http\Controllers\Settings\Dashboard\Health\HealtController;
 use App\Http\Controllers\Settings\Notification\NotificationController;
+use App\Http\Controllers\Settings\Dashboard\Health\SystemHealthController;
 use App\Http\Controllers\Streams\StreamSettingsInformtionMozaikaController;
 use App\Http\Controllers\Streams\StreStreamPidDiscontinuityResetController;
 use App\Http\Controllers\Settings\Dashboard\Network\AvgNetworkSpeedController;
@@ -96,7 +97,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::middleware('isView')->prefix('settings')->group(function () {
         Route::prefix('dashboard')->group(function () {
-            Route::get('', \Spatie\Health\Http\Controllers\HealthCheckJsonResultsController::class);
+            // Route::get('', \Spatie\Health\Http\Controllers\HealthCheckJsonResultsController::class);
+            Route::get('', SystemHealthController::class);
             Route::get('streams/status-history', StreamsHistoryStatusController::class);
             Route::get('network-speed', AvgNetworkSpeedController::class);
             Route::get('server-information', [SystemInformationController::class, 'ram']);

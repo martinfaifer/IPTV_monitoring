@@ -407,8 +407,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios.post("settings/users", {
         name: this.formData.name,
         email: this.formData.email,
-        password: this.formData.password,
-        password_confirmed: this.formData.password_confirmed,
+        // password: this.formData.password,
+        // password_confirmed: this.formData.password_confirmed,
         role: this.formData.role
       }).then(function (response) {
         _this2.$store.state.alerts = response.data;
@@ -1156,75 +1156,6 @@ var render = function () {
                                         _vm.$set(_vm.formData, "email", $$v)
                                       },
                                       expression: "formData.email",
-                                    },
-                                  }),
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-col",
-                                {
-                                  attrs: {
-                                    cols: "12",
-                                    sm: "12",
-                                    md: "6",
-                                    lg: "6",
-                                  },
-                                },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      dense: "",
-                                      outlined: "",
-                                      "error-messages": _vm.errors.password,
-                                      label: "Heslo",
-                                      type: "password",
-                                      color: "#0277BD",
-                                    },
-                                    model: {
-                                      value: _vm.formData.password,
-                                      callback: function ($$v) {
-                                        _vm.$set(_vm.formData, "password", $$v)
-                                      },
-                                      expression: "formData.password",
-                                    },
-                                  }),
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-col",
-                                {
-                                  attrs: {
-                                    cols: "12",
-                                    sm: "12",
-                                    md: "6",
-                                    lg: "6",
-                                  },
-                                },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      dense: "",
-                                      outlined: "",
-                                      "error-messages":
-                                        _vm.errors.password_confirmed,
-                                      label: "Potvrďte heslo",
-                                      type: "password",
-                                      color: "#0277BD",
-                                    },
-                                    model: {
-                                      value: _vm.formData.password_confirmed,
-                                      callback: function ($$v) {
-                                        _vm.$set(
-                                          _vm.formData,
-                                          "password_confirmed",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "formData.password_confirmed",
                                     },
                                   }),
                                 ],

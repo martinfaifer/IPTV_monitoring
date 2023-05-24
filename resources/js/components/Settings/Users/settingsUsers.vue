@@ -199,7 +199,7 @@
                                         color="#0277BD"
                                     ></v-text-field>
                                 </v-col>
-                                <v-col cols="12" sm="12" md="6" lg="6">
+                                <!-- <v-col cols="12" sm="12" md="6" lg="6">
                                     <v-text-field
                                         dense
                                         outlined
@@ -222,7 +222,7 @@
                                         type="password"
                                         color="#0277BD"
                                     ></v-text-field>
-                                </v-col>
+                                </v-col> -->
                                 <v-col cols="12" sm="12" md="6" lg="6">
                                     <v-autocomplete
                                         dense
@@ -376,8 +376,8 @@ export default {
                 .post("settings/users", {
                     name: this.formData.name,
                     email: this.formData.email,
-                    password: this.formData.password,
-                    password_confirmed: this.formData.password_confirmed,
+                    // password: this.formData.password,
+                    // password_confirmed: this.formData.password_confirmed,
                     role: this.formData.role,
                 })
                 .then((response) => {

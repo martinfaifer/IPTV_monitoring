@@ -26,8 +26,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required'],
-            'password_confirmed' => ['required', 'same:password'],
+            // 'password' => ['required'],
+            // 'password_confirmed' => ['required', 'same:password'],
             'role' => ['required', 'exists:user_roles,id'],
         ];
     }

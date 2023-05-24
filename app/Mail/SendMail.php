@@ -15,7 +15,7 @@ class SendMail extends Mailable
      *
      * @return void
      */
-    public function __construct(public string $text, public string $subject)
+    public function __construct(public string $text, public string $subjectText)
     {
         //
     }
@@ -29,6 +29,6 @@ class SendMail extends Mailable
     {
         return $this->from(config('app.email'))
             ->markdown('SendMail')
-            ->subject($this->subject);
+            ->subject($this->subjectText);
     }
 }

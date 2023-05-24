@@ -20,6 +20,7 @@ export default {
 
     created() {
         this.getDiscontinuity();
+        this.getResetTime();
     },
     methods: {
         resetErrors() {

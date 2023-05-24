@@ -31,6 +31,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   created: function created() {
     this.getDiscontinuity();
+    this.getResetTime();
   },
   methods: {
     resetErrors: function resetErrors() {

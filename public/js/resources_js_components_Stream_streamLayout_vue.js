@@ -5059,8 +5059,6 @@ var render = function () {
                 staticClass: "mb-3",
                 attrs: { history: _vm.stream.history },
               }),
-              _vm._v(" "),
-              _c("FfprobeStream"),
             ],
             1
           ),

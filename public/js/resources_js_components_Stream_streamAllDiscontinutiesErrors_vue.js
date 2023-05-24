@@ -19,11 +19,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["pid"],
   data: function data() {
     return {
-      discontinuityErros: ""
+      discontinuityErros: "",
+      resetTime: null
     };
   },
   components: {},
@@ -57,6 +59,13 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("streams/pids/discontinuity/" + this.$route.params.streamId + "/" + this.pid).then(function (response) {
         _this3.discontinuityErros = response.data;
+      });
+    },
+    getResetTime: function getResetTime() {
+      var _this4 = this;
+
+      axios.get("streams/pids/discontinuity/" + this.$route.params.streamId + "/" + this.pid + "/started_time").then(function (response) {
+        _this4.resetTime = response.data;
       });
     }
   },
@@ -177,6 +186,8 @@ var render = function () {
         [_c("v-icon", { attrs: { "x-small": "" } }, [_vm._v(" mdi-restore ")])],
         1
       ),
+      _vm._v(" "),
+      _c("span", [_vm._v(_vm._s(_vm.resetTime))]),
     ],
     1
   )

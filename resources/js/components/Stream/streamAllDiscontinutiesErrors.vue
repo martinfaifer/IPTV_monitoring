@@ -4,6 +4,7 @@
         <v-btn x-small icon color="#328AF1" @click="resetErrors()"
             ><v-icon x-small> mdi-restore </v-icon></v-btn
         >
+        <span>{{ resetTime }}</span>
     </div>
 </template>
 <script>
@@ -12,6 +13,7 @@ export default {
     data() {
         return {
             discontinuityErros: "",
+            resetTime: null,
         };
     },
     components: {},
@@ -60,6 +62,20 @@ export default {
                 )
                 .then((response) => {
                     this.discontinuityErros = response.data;
+                });
+        },
+
+        getResetTime() {
+            axios
+                .get(
+                    "streams/pids/discontinuity/" +
+                        this.$route.params.streamId +
+                        "/" +
+                        this.pid +
+                        "/started_time"
+                )
+                .then((response) => {
+                    this.resetTime = response.data;
                 });
         },
     },

@@ -16,7 +16,7 @@
                     :history="stream.history"
                 ></StreamHistory>
                 <!-- <StreamPids></StreamPids> -->
-                <FfprobeStream></FfprobeStream>
+                <!-- <FfprobeStream></FfprobeStream> -->
             </v-col>
             <v-col class="mt-n3" cols="12" sm="12" md="9" lg="9">
                 <StreamService class="mb-3"></StreamService>

@@ -32,6 +32,7 @@ use App\Http\Controllers\Settings\Notification\NotificationController;
 use App\Http\Controllers\Settings\Dashboard\Health\SystemHealthController;
 use App\Http\Controllers\Streams\StreamSettingsInformtionMozaikaController;
 use App\Http\Controllers\Streams\StreStreamPidDiscontinuityResetController;
+use App\Http\Controllers\Streams\StreamPidDiscontinuityStartedTimeController;
 use App\Http\Controllers\Settings\Dashboard\Network\AvgNetworkSpeedController;
 use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
 use App\Http\Controllers\Settings\Dashboard\SystemInformation\SystemInformationController;
@@ -86,6 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('video/{stream}', ShowVideoStreamPidsController::class);
             Route::get('service/{stream}', ShowServiceStreamPidsController::class);
             Route::get('discontinuity/{stream}/{pid}', StreamPidDiscontinuityController::class);
+            Route::get('discontinuity/{stream}/{pid}/started_time', StreamPidDiscontinuityStartedTimeController::class);
             Route::post('discontinuity/{stream}/{pid}', StreStreamPidDiscontinuityResetController::class);
             Route::get('ffprobe/{stream}', ShowFfprobeStreamController::class);
             Route::get('{stream}', ShowStreamPidsController::class);

@@ -191,9 +191,7 @@ var render = function () {
       _vm._v(" "),
       _vm.resetTime != null
         ? _c("span", { staticClass: "caption" }, [
-            _vm._v(
-              " Naposledy vyresetovány chyby: " + _vm._s(_vm.resetTime[0])
-            ),
+            _vm._v("Chyby smazány: " + _vm._s(_vm.resetTime[0])),
           ])
         : _vm._e(),
     ],

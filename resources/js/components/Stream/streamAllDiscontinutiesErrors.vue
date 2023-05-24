@@ -4,7 +4,7 @@
         <v-btn x-small icon color="#328AF1" @click="resetErrors()"
             ><v-icon x-small> mdi-restore </v-icon></v-btn
         >
-        <span>{{ resetTime }}</span>
+        <span v-if="resetTime != null" class="caption"> Naposledy vyresetovány chyby: {{ resetTime[0] }}</span>
     </div>
 </template>
 <script>

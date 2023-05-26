@@ -4,11 +4,16 @@ namespace App\Services\StreamDiagnostic\CheckPids;
 
 use Illuminate\Support\Facades\Cache;
 use App\Actions\Streams\ProblemPids\StoreProblemPidsAction;
+use App\Models\PidTreashold;
 
 class CheckNumberOfErrorsService
 {
     public function check(string $pid, null|int $pidErrors, int $streamId)
     {
+        if (!Cache::has('pidTreashold')) {
+            Cache::put('pidTreashold', PidTreashold::first()->count);
+        }
+
         $numberOfProblemPidErrors = Cache::get('pidTreashold');
 
         if (is_null($pidErrors)) {

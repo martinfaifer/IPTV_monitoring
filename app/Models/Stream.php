@@ -47,6 +47,11 @@ class Stream extends Model
         return $this->belongsTo(StreamProcessPid::class, 'id', 'stream_id');
     }
 
+    public function problemPids(): HasMany
+    {
+        return $this->hasMany(StreamProblemPid::class, 'id', 'stream_id');
+    }
+
     public static function scopeIsNotMonitored(Builder $query)
     {
         $query

@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(ScheduleCheckHeartbeatCommand::class)->everyMinute();
 
-        $schedule->command('webscoket:restart')->daily();
+        $schedule->command('websocket:restart')->daily();
         $schedule->command('model:prune', [
             '--model' => [
                 HealthCheckResultHistoryItem::class,

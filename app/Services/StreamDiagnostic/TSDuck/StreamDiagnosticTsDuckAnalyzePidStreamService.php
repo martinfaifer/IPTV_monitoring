@@ -202,7 +202,7 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                     );
 
                     (new CheckNumberOfErrorsService())->check(
-                        pid: $videoPid,
+                        pid: $videoPidId,
                         pidErrors: $videoPid['packets']['discontinuities'],
                         streamId: $stream->id
                     );

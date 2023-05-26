@@ -42,8 +42,8 @@
                                 <v-col
                                     cols="12"
                                     sm="12"
-                                    md="3"
-                                    lg="3"
+                                    md="5"
+                                    lg="5"
                                     class="d-inline-flex"
                                 >
                                     Chyby:

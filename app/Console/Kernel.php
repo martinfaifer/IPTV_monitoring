@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
             ],
         ])->daily();
 
-        $schedule->command('system:data_command')->dailyAt('01:00');
+        $schedule->command('system:prune')->dailyAt('01:00');
         $schedule->command('streams:start_diagnostic')->everyMinute()->runInBackground();
         $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute()->runInBackground();
         $schedule->command('system:take_network_data')->everyMinute()->runInBackground();

@@ -15,7 +15,7 @@ class PrunDataCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'system:data_command';
+    protected $signature = 'system:prune';
 
     /**
      * The console command description.

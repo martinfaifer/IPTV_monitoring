@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             // UserSeed::class
             WebhookSendOptionSeed::class,
             UserRoleSeeder::class,
+            PidTreasholdSeeder::class
         ]);
     }
 }

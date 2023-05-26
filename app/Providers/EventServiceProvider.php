@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\PidTreashold;
 use App\Models\Stream;
 use App\Observers\StreamObserver;
 use Illuminate\Auth\Events\Registered;
@@ -18,6 +19,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $observers = [
         Stream::class => [StreamObserver::class],
+        PidTreashold::class => [PidTreasholdObserver::class]
     ];
 
     /**

@@ -28,10 +28,8 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
 
     public $caPidsAgregated = [];
 
-    public $checkNumberOfErrorsService;
     public function __construct(Collection $tsDuckCollection, object $stream)
     {
-        $this->checkNumberOfErrorsService = new CheckNumberOfErrorsService();
         $this->analyze(tsDuckCollection: $tsDuckCollection, stream: $stream);
     }
 
@@ -119,7 +117,7 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                         dicontinuity: $audioPid['packets']['discontinuities']
                     );
 
-                    $this->checkNumberOfErrorsService->check(
+                    (new CheckNumberOfErrorsService())->check(
                         pid: $audioPidId,
                         pidErrors: $audioPid['packets']['discontinuities'],
                         streamId: $stream->id
@@ -203,7 +201,7 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                         dicontinuity: $videoPid['packets']['discontinuities']
                     );
 
-                    $this->checkNumberOfErrorsService->check(
+                    (new CheckNumberOfErrorsService())->check(
                         pid: $videoPid,
                         pidErrors: $videoPid['packets']['discontinuities'],
                         streamId: $stream->id

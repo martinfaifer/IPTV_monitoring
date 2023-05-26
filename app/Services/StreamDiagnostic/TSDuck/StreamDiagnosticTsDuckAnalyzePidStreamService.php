@@ -2,14 +2,15 @@
 
 namespace App\Services\StreamDiagnostic\TSDuck;
 
-use App\Actions\Cache\RemoveItemsFromCache;
-use App\Actions\Cache\StoreItemsToCache;
-use App\Actions\Cache\StoreStreamPidDataFroChartToCache;
-use App\Actions\Cache\StoreStreamPidDiscontinuityAction;
-use App\Events\BroadcastAudioVideoStreamPidsEvent;
-use App\Interfaces\DiagnosticAnalyzeInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use App\Actions\Cache\StoreItemsToCache;
+use App\Actions\Cache\RemoveItemsFromCache;
+use App\Interfaces\DiagnosticAnalyzeInterface;
+use App\Events\BroadcastAudioVideoStreamPidsEvent;
+use App\Actions\Cache\StoreStreamPidDataFroChartToCache;
+use App\Actions\Cache\StoreStreamPidDiscontinuityAction;
+use App\Services\StreamDiagnostic\CheckPids\CheckNumberOfErrorsService;
 
 class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyzeInterface
 {
@@ -27,8 +28,10 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
 
     public $caPidsAgregated = [];
 
+    public $checkNumberOfErrorsService;
     public function __construct(Collection $tsDuckCollection, object $stream)
     {
+        $this->checkNumberOfErrorsService = new CheckNumberOfErrorsService();
         $this->analyze(tsDuckCollection: $tsDuckCollection, stream: $stream);
     }
 
@@ -115,6 +118,12 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                         key: 'streamDiscontinuityPidErrors_' . $audioPidId . '_' . $stream->id,
                         dicontinuity: $audioPid['packets']['discontinuities']
                     );
+
+                    $this->checkNumberOfErrorsService->check(
+                        pid: $audioPidId,
+                        pidErrors: $audioPid['packets']['discontinuities'],
+                        streamId: $stream->id
+                    );
                 }
             }
 
@@ -192,6 +201,12 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                     (new StoreStreamPidDiscontinuityAction())->execute(
                         key: 'streamDiscontinuityPidErrors_' . $videoPidId . '_' . $stream->id,
                         dicontinuity: $videoPid['packets']['discontinuities']
+                    );
+
+                    $this->checkNumberOfErrorsService->check(
+                        pid: $videoPid,
+                        pidErrors: $videoPid['packets']['discontinuities'],
+                        streamId: $stream->id
                     );
                 }
 

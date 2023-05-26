@@ -15,7 +15,7 @@ class PidTreasholdSeeder extends Seeder
     {
         if (!PidTreashold::first()) {
             PidTreashold::create([
-                'count' => 50
+                'count' => 20
             ]);
         }
     }

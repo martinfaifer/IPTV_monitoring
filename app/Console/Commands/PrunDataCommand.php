@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
 use App\Models\NetworkStatistic;
 use App\Models\StreamHistoryStatus;
+use App\Models\StreamProblemPid;
 
 class PrunDataCommand extends Command
 {
@@ -32,5 +33,6 @@ class PrunDataCommand extends Command
         AvgNetworkSpeed::where('created_at', '<=', Carbon::now()->subDay()->toDateTimeString())->delete();
         NetworkStatistic::where('created_at', '<=', Carbon::now()->subDay()->toDateTimeString())->delete();
         StreamHistoryStatus::where('created_at', '<=', Carbon::now()->subDays(2)->toDateTimeString())->delete();
+        StreamProblemPid::where('created_at', '<=', Carbon::now()->subDay()->toDateTimeString())->delete();
     }
 }

@@ -15,6 +15,7 @@
                     class="mb-3"
                     :history="stream.history"
                 ></StreamHistory>
+                <StreamPidsErrors class="mb-3"></StreamPidsErrors>
                 <!-- <StreamPids></StreamPids> -->
                 <!-- <FfprobeStream></FfprobeStream> -->
             </v-col>
@@ -335,6 +336,7 @@ import StreamAlertDialog from "./StreamAlertDialog.vue";
 import FfprobeStream from "./StreamFfrobe.vue";
 import StreamIptvDoku from "./StreamIptvDoku.vue";
 import DeviceTemplate from "./devicetemplate.vue";
+import StreamPidsErrors from "./StreamPidsErrors.vue";
 export default {
     metaInfo: {
         title: "IPTV Dohled - informace o streamu",
@@ -360,6 +362,7 @@ export default {
         FfprobeStream,
         StreamIptvDoku,
         DeviceTemplate,
+        StreamPidsErrors,
     },
 
     created() {

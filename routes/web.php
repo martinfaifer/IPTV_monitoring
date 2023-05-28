@@ -19,6 +19,7 @@ use App\Http\Controllers\Streams\ShowStreamPidsController;
 use App\Http\Controllers\Streams\StreamPidChartController;
 use App\Http\Controllers\Streams\StreamsHistoryController;
 use App\Http\Controllers\Streams\ShowStreamImageController;
+use App\Http\Controllers\Streams\StreamProblemPidController;
 use App\Http\Controllers\Streams\NotRunningStreamsController;
 use App\Http\Controllers\Streams\ShowFfprobeStreamController;
 use App\Http\Controllers\Streams\ShowAudioStreamPidsController;
@@ -90,6 +91,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('discontinuity/{stream}/{pid}/started_time', StreamPidDiscontinuityStartedTimeController::class);
             Route::post('discontinuity/{stream}/{pid}', StreStreamPidDiscontinuityResetController::class);
             Route::get('ffprobe/{stream}', ShowFfprobeStreamController::class);
+            Route::get('problems/{stream}', [StreamProblemPidController::class, 'show']);
             Route::get('{stream}', ShowStreamPidsController::class);
         });
         Route::get('charts/{stream}/{pid}', StreamPidChartController::class)->middleware('isView');

@@ -35,6 +35,7 @@ class Stream extends Model
 
     protected $casts = [
         'monitored_at' => 'datetime',
+        'created_at' => 'datetime',
     ];
 
     public function history(): HasMany
@@ -49,7 +50,7 @@ class Stream extends Model
 
     public function problemPids(): HasMany
     {
-        return $this->hasMany(StreamProblemPid::class, 'id', 'stream_id');
+        return $this->hasMany(StreamProblemPid::class, 'stream_id', 'id');
     }
 
     public static function scopeIsNotMonitored(Builder $query)

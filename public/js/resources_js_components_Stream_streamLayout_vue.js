@@ -1052,6 +1052,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1092,6 +1095,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       return sumErrors;
+    },
+    colorOfErrors: function colorOfErrors(errors) {
+      if (errors.length > 0) {
+        return "red--text";
+      }
+
+      return "green--text";
     }
   },
   mounted: function mounted() {},
@@ -4299,7 +4309,10 @@ var render = function () {
                 _vm._v("\n            Historie chyb v pidech\n            "),
                 _c(
                   "span",
-                  { staticClass: "red--text font-weight-bold title mx-3" },
+                  {
+                    staticClass: "font-weight-bold title mx-3",
+                    class: _vm.colorOfErrors(_vm.errorPids.problem_pids),
+                  },
                   [
                     _vm._v(
                       "\n                " +

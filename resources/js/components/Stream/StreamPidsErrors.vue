@@ -7,7 +7,10 @@
         >
             <p class="text-center mt-3">
                 Historie chyb v pidech
-                <span class="red--text font-weight-bold title mx-3">
+                <span
+                    class="font-weight-bold title mx-3"
+                    :class="colorOfErrors(errorPids.problem_pids)"
+                >
                     {{ countErrors(errorPids.problem_pids) }}
                     <span class="font-weight-bold body-2"> / chyb celkem</span>
                 </span>
@@ -88,6 +91,14 @@ export default {
             }
 
             return sumErrors;
+        },
+
+        colorOfErrors(errors) {
+            if (errors.length > 0) {
+                return "red--text";
+            }
+
+            return "green--text";
         },
     },
 

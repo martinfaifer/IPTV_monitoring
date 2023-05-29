@@ -8,8 +8,8 @@
             <p class="text-center mt-3">
                 Historie chyb v pidech
                 <span class="red--text font-weight-bold title mx-3">
-                    {{ errorPids.problem_pids.length }}
-                    <span class="font-weight-bold body-2"> / chyb</span>
+                    {{ countErrors(errorPids.problem_pids) }}
+                    <span class="font-weight-bold body-2"> / chyb celkem</span>
                 </span>
             </p>
             <v-card-text>
@@ -79,6 +79,15 @@ export default {
                 ":" +
                 date.getMinutes()
             ); //prints expected format.
+        },
+
+        countErrors(errorsArr) {
+            let sumErrors = 0;
+            for (let error of errorsArr) {
+                sumErrors = sumErrors + error.errors;
+            }
+
+            return sumErrors;
         },
     },
 

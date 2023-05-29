@@ -4320,7 +4320,7 @@ var render = function () {
                         "\n                "
                     ),
                     _c("span", { staticClass: "font-weight-bold body-2" }, [
-                      _vm._v(" / chyb celkem"),
+                      _vm._v(" / chyb za 24h"),
                     ]),
                   ]
                 ),

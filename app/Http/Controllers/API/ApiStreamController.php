@@ -28,11 +28,11 @@ class ApiStreamController extends Controller
                 'streamStatus' => $stream->status,
                 'streamId' => $stream->id,
                 'monitored_at' => $stream->monitored_at,
-                'history' => [],
+                'history' => $stream->history,
                 'problems' => (new ShowProblemPidsAction())->execute($stream),
                 'streamTS' => new ShowServicePidResource($stream),
                 'audioPids' => new ShowAudioPidResource($stream),
-                'videpPids' => new ShowVideoPidResource($stream),
+                'videoPids' => new ShowVideoPidResource($stream),
                 'AVbitrate' => [],
             ],
         ];

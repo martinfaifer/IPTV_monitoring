@@ -107,6 +107,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('network-speed', AvgNetworkSpeedController::class);
             Route::get('server-information', [SystemInformationController::class, 'ram']);
             Route::get('health/{check_name}', HealtController::class);
+            Route::prefix('streams')->group(function () {
+                Route::get('with-problem-pids', [StreamProblemPidController::class, 'index']);
+            });
         });
         Route::prefix('streams')->group(function () {
             Route::get('', [SettingsStreamController::class, 'index']);

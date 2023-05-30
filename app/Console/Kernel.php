@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(ScheduleCheckHeartbeatCommand::class)->everyMinute();
+        $schedule->command('health:check')->everyMinute();
 
         $schedule->command('websocket:restart')->daily();
         $schedule->command('model:prune', [

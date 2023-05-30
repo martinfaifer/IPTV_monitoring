@@ -12,7 +12,7 @@
                     :class="colorOfErrors(errorPids.problem_pids)"
                 >
                     {{ countErrors(errorPids.problem_pids) }}
-                    <span class="font-weight-bold body-2"> / chyb za 24h</span>
+                    <span class="font-weight-bold body-2"> chyb za 24h</span>
                 </span>
             </p>
             <v-card-text>

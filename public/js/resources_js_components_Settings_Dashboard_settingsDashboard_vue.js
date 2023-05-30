@@ -1293,7 +1293,7 @@ var render = function () {
                       headers: _vm.headers,
                       items: _vm.problemStreams,
                       "items-per-page": 5,
-                      loading: _vm.problemStreams.lenght == 0,
+                      loading: _vm.problemStreams.length == 0,
                     },
                     scopedSlots: _vm._u([
                       {

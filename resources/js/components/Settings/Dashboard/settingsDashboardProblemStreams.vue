@@ -12,6 +12,7 @@
                         :headers="headers"
                         :items="problemStreams"
                         :items-per-page="5"
+                        :loading="problemStreams.lenght == 0"
                     >
                         <template v-slot:item.actions="{ item }">
                             <v-icon

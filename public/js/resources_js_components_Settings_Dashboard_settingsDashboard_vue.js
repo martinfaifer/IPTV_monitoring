@@ -14,6 +14,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _settingsDashboardStreamsStatuses_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./settingsDashboardStreamsStatuses.vue */ "./resources/js/components/Settings/Dashboard/settingsDashboardStreamsStatuses.vue");
 /* harmony import */ var _settingsDashboardNetwork_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./settingsDashboardNetwork.vue */ "./resources/js/components/Settings/Dashboard/settingsDashboardNetwork.vue");
 /* harmony import */ var _settingsHealthChart_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./settingsHealthChart.vue */ "./resources/js/components/Settings/Dashboard/settingsHealthChart.vue");
+/* harmony import */ var _settingsDashboardProblemStreams_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./settingsDashboardProblemStreams.vue */ "./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue");
 //
 //
 //
@@ -64,6 +65,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -71,7 +86,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     SettingsDashboardStreamsStatuses: _settingsDashboardStreamsStatuses_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     SettingsDashboardNetwork: _settingsDashboardNetwork_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    settingsHealthChart: _settingsHealthChart_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    settingsHealthChart: _settingsHealthChart_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    settingsDashboardProblemStrems: _settingsDashboardProblemStreams_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
@@ -220,6 +236,225 @@ __webpack_require__.r(__webpack_exports__);
         _this.chartOptions.xaxis.categories = response.data.categories;
         _this.series = response.data.series;
       });
+    }
+  },
+  mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      problemStreams: [],
+      headers: [{
+        text: "Název",
+        align: "start",
+        value: "nazev"
+      }, {
+        text: "Status",
+        value: "status"
+      }, {
+        text: "Počet problémů",
+        value: "problems.length"
+      }, {
+        text: "",
+        value: "actions"
+      }],
+      headersPids: [{
+        text: "Pid",
+        value: "pid"
+      }, {
+        text: "Počet chyb",
+        value: "errors"
+      }, {
+        text: "Čas vytvoření chyby",
+        value: "created_at"
+      }],
+      infoDialog: false,
+      formData: []
+    };
+  },
+  created: function created() {
+    this.index();
+  },
+  methods: {
+    index: function index() {
+      var _this = this;
+
+      axios.get("settings/dashboard/streams/with-problem-pids").then(function (response) {
+        _this.problemStreams = response.data;
+      });
+    },
+    translateStatus: function translateStatus(streamStatus) {
+      if (streamStatus == "waiting") {
+        return "Čeká na spuštění";
+      }
+
+      if (streamStatus == "monitoring") {
+        return "Dohleduje se";
+      }
+
+      if (streamStatus == "starting") {
+        return "Spouští se dohledování";
+      }
+
+      if (streamStatus == "stopped") {
+        return "Zastaveno dohledování";
+      }
+
+      if (streamStatus == "can_not_start") {
+        return "Výpadek";
+      }
+
+      if (streamStatus == "issue") {
+        return "Problém ve streamu";
+      }
+    },
+    convertIsoDatetime: function convertIsoDatetime(isoDate) {
+      var date = new Date(isoDate);
+      return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+    },
+    getColor: function getColor(streamStatus) {
+      if (streamStatus == "waiting") {
+        return "blue";
+      }
+
+      if (streamStatus == "monitoring") {
+        return "green";
+      }
+
+      if (streamStatus == "starting") {
+        return "green";
+      }
+
+      if (streamStatus == "stopped") {
+        return "blue";
+      }
+
+      if (streamStatus == "can_not_start") {
+        return "red";
+      }
+
+      if (streamStatus == "issue") {
+        return "orange";
+      }
+    },
+    openInfoDialog: function openInfoDialog(stream) {
+      this.formData.stream = stream;
+      this.infoDialog = true;
+    },
+    closeDialog: function closeDialog() {
+      this.infoDialog = false;
+      this.formData = [];
     }
   },
   mounted: function mounted() {}
@@ -514,6 +749,44 @@ component.options.__file = "resources/js/components/Settings/Dashboard/settingsD
 
 /***/ }),
 
+/***/ "./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _settingsDashboardProblemStreams_vue_vue_type_template_id_e9029cee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./settingsDashboardProblemStreams.vue?vue&type=template&id=e9029cee& */ "./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=template&id=e9029cee&");
+/* harmony import */ var _settingsDashboardProblemStreams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./settingsDashboardProblemStreams.vue?vue&type=script&lang=js& */ "./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _settingsDashboardProblemStreams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _settingsDashboardProblemStreams_vue_vue_type_template_id_e9029cee___WEBPACK_IMPORTED_MODULE_0__.render,
+  _settingsDashboardProblemStreams_vue_vue_type_template_id_e9029cee___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Settings/Dashboard/settingsDashboardStreamsStatuses.vue":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/Settings/Dashboard/settingsDashboardStreamsStatuses.vue ***!
@@ -620,6 +893,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_settingsDashboardProblemStreams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./settingsDashboardProblemStreams.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_settingsDashboardProblemStreams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Settings/Dashboard/settingsDashboardStreamsStatuses.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************!*\
   !*** ./resources/js/components/Settings/Dashboard/settingsDashboardStreamsStatuses.vue?vue&type=script&lang=js& ***!
@@ -678,6 +966,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_settingsDashboardNetwork_vue_vue_type_template_id_12d1b8c9___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_settingsDashboardNetwork_vue_vue_type_template_id_12d1b8c9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./settingsDashboardNetwork.vue?vue&type=template&id=12d1b8c9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Settings/Dashboard/settingsDashboardNetwork.vue?vue&type=template&id=12d1b8c9&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=template&id=e9029cee&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=template&id=e9029cee& ***!
+  \***********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_settingsDashboardProblemStreams_vue_vue_type_template_id_e9029cee___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_settingsDashboardProblemStreams_vue_vue_type_template_id_e9029cee___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_settingsDashboardProblemStreams_vue_vue_type_template_id_e9029cee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./settingsDashboardProblemStreams.vue?vue&type=template&id=e9029cee& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=template&id=e9029cee&");
 
 
 /***/ }),
@@ -848,6 +1152,13 @@ var render = function () {
                 [_c("SettingsDashboardStreamsStatuses")],
                 1
               ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12" } },
+                [_c("settingsDashboardProblemStrems")],
+                1
+              ),
             ],
             1
           ),
@@ -922,6 +1233,277 @@ var render = function () {
             ],
             1
           ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=template&id=e9029cee&":
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Settings/Dashboard/settingsDashboardProblemStreams.vue?vue&type=template&id=e9029cee& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-card",
+        {
+          staticClass: "overflow-hidden rounded-lg blur shadow-blur",
+          attrs: { flat: "" },
+        },
+        [
+          _c("v-card-subtitle", [
+            _c(
+              "p",
+              { staticClass: "mt-3 text-center body-1 font-weight-bold" },
+              [_vm._v("\n                Problémové streamy\n            ")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            [
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _c("v-data-table", {
+                    attrs: {
+                      headers: _vm.headers,
+                      items: _vm.problemStreams,
+                      "items-per-page": 5,
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "item.actions",
+                        fn: function (ref) {
+                          var item = ref.item
+                          return [
+                            _c(
+                              "v-icon",
+                              {
+                                attrs: { small: "", color: "info" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.openInfoDialog(item)
+                                  },
+                                },
+                              },
+                              [_vm._v("mdi-magnify")]
+                            ),
+                          ]
+                        },
+                      },
+                    ]),
+                  }),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: {
+            persistent: "",
+            scrollable: "",
+            "max-width": "800px",
+            "overlay-color": "rgb(17, 27, 45)",
+          },
+          model: {
+            value: _vm.infoDialog,
+            callback: function ($$v) {
+              _vm.infoDialog = $$v
+            },
+            expression: "infoDialog",
+          },
+        },
+        [
+          _vm.formData.stream
+            ? _c(
+                "v-card",
+                [
+                  _c("p", { staticClass: "pt-3 text-center subtitle-1" }, [
+                    _vm._v(
+                      "\n                Informace o problémovém streamu\n                "
+                    ),
+                    _c("span", { staticClass: "font-weight-bold" }, [
+                      _vm._v(_vm._s(_vm.formData.stream.nazev)),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-container",
+                        { staticClass: "pt-3" },
+                        [
+                          _c(
+                            "v-row",
+                            [
+                              _c(
+                                "v-col",
+                                {
+                                  attrs: {
+                                    cols: "12",
+                                    sm: "12",
+                                    md: "6",
+                                    lg: "6",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "p",
+                                    [
+                                      _vm._v(
+                                        "\n                                Status streamu:\n\n                                "
+                                      ),
+                                      _c(
+                                        "v-chip",
+                                        {
+                                          staticClass:
+                                            "mx-3 font-weight-medium",
+                                          attrs: {
+                                            label: "",
+                                            color: _vm.getColor(
+                                              _vm.formData.stream.status
+                                            ),
+                                            dark: "",
+                                            small: "",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    " +
+                                              _vm._s(
+                                                _vm.translateStatus(
+                                                  _vm.formData.stream.status
+                                                )
+                                              ) +
+                                              "\n                                "
+                                          ),
+                                        ]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                {
+                                  attrs: {
+                                    cols: "12",
+                                    sm: "12",
+                                    md: "12",
+                                    lg: "12",
+                                  },
+                                },
+                                [
+                                  _c("v-data-table", {
+                                    attrs: {
+                                      headers: _vm.headersPids,
+                                      items: _vm.formData.stream.problems,
+                                      "items-per-page": 5,
+                                    },
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "item.created_at",
+                                          fn: function (ref) {
+                                            var item = ref.item
+                                            return [
+                                              _c("span", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.convertIsoDatetime(
+                                                      item.created_at
+                                                    )
+                                                  )
+                                                ),
+                                              ]),
+                                            ]
+                                          },
+                                        },
+                                      ],
+                                      null,
+                                      false,
+                                      339275158
+                                    ),
+                                  }),
+                                ],
+                                1
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    { attrs: { color: "#101B1D" } },
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            color: "blue darken-1",
+                            plain: "",
+                            outlined: "",
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.closeDialog()
+                            },
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Zavřít\n                "
+                          ),
+                        ]
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              )
+            : _vm._e(),
         ],
         1
       ),

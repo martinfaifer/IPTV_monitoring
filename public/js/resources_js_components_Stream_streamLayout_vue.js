@@ -1075,7 +1075,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     convertIsoDatetime: function convertIsoDatetime(isoDate) {
       var date = new Date(isoDate);
-      return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes(); //prints expected format.
+      return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
     },
     countErrors: function countErrors(errorsArr) {
       var sumErrors = 0;

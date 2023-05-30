@@ -24,13 +24,22 @@
 
             <v-row class="mx-auto my-auto">
                 <v-col cols="12" sm="12" md="4" lg="4">
-                    <settingsHealthChart title="Využití Disku" name="UsedDiskSpace"></settingsHealthChart>
-                </v-col>
-                 <v-col cols="12" sm="12" md="4" lg="4">
-                    <settingsHealthChart title="Počet spojení do DB" name="DatabaseConnectionCount"></settingsHealthChart>
+                    <settingsHealthChart
+                        title="Využití Disku"
+                        name="UsedDiskSpace"
+                    ></settingsHealthChart>
                 </v-col>
                 <v-col cols="12" sm="12" md="4" lg="4">
-                    <settingsHealthChart title="Vytížení CPU" name="CpuLoad"></settingsHealthChart>
+                    <settingsHealthChart
+                        title="Počet spojení do DB"
+                        name="DatabaseConnectionCount"
+                    ></settingsHealthChart>
+                </v-col>
+                <v-col cols="12" sm="12" md="4" lg="4">
+                    <settingsHealthChart
+                        title="Vytížení CPU"
+                        name="CpuLoad"
+                    ></settingsHealthChart>
                 </v-col>
             </v-row>
 
@@ -43,7 +52,11 @@
                     <!-- prehled poctu aktivních streamů v čase -->
                     <SettingsDashboardStreamsStatuses></SettingsDashboardStreamsStatuses>
                 </v-col>
-                <!-- prehled zatížení RAM -->
+
+                <!-- prehed problémových streamů -->
+                <v-col cols="12">
+                    <settingsDashboardProblemStrems></settingsDashboardProblemStrems>
+                </v-col>
             </v-row>
         </v-container>
     </div>
@@ -52,8 +65,14 @@
 import SettingsDashboardStreamsStatuses from "./settingsDashboardStreamsStatuses.vue";
 import SettingsDashboardNetwork from "./settingsDashboardNetwork.vue";
 import settingsHealthChart from "./settingsHealthChart.vue";
+import settingsDashboardProblemStrems from "./settingsDashboardProblemStreams.vue";
 export default {
-    components: { SettingsDashboardStreamsStatuses, SettingsDashboardNetwork, settingsHealthChart },
+    components: {
+        SettingsDashboardStreamsStatuses,
+        SettingsDashboardNetwork,
+        settingsHealthChart,
+        settingsDashboardProblemStrems,
+    },
     data() {
         return {
             items: [],

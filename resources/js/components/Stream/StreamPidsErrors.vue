@@ -81,7 +81,7 @@ export default {
                 date.getHours() +
                 ":" +
                 date.getMinutes()
-            ); //prints expected format.
+            );
         },
 
         countErrors(errorsArr) {

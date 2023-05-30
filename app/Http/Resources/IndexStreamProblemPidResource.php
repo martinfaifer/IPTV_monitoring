@@ -25,7 +25,7 @@ class IndexStreamProblemPidResource extends JsonResource
             }
         }
 
-        return count($output);
+        return $output;
     }
 
     protected function countErrors(array $problems)

@@ -38,6 +38,7 @@ class ShowStreamInformationAction
     {
         // find charts for each pid
         foreach ($pids as &$pid) {
+            dd($pid);
             $pid['chart'] = (new GetStreamPidChartAction())->execute(stream: $stream, pid: $pid['pid']);
         }
 

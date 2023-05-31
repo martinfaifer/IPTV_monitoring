@@ -17,9 +17,9 @@ use App\Actions\Streams\ProblemPids\ShowProblemPidsAction;
 
 class ApiStreamController extends Controller
 {
-    public function show(StreamShowApiRequest $request)
+    public function show(Stream $stream)
     {
-       return (new ShowStreamInformationAction())->execute($request->streamId);
+       return (new ShowStreamInformationAction())->execute($stream->id);
 
     }
 

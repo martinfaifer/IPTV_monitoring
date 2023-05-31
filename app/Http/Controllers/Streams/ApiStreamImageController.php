@@ -8,8 +8,8 @@ use App\Models\Stream;
 
 class ApiStreamImageController extends Controller
 {
-    public function __invoke(Stream $stream, GetStreamVideoImageAction $getStreamVideoImageAction)
+    public function __invoke(Stream $stream)
     {
-        return $getStreamVideoImageAction->execute(stream: $stream);
+        return config('app.url') . (new GetStreamVideoImageAction())->execute($stream, true);
     }
 }

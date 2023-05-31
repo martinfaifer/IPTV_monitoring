@@ -10,12 +10,12 @@
                                     <v-col cols="12">
                                         <p
                                             class="mt-4 mb-4 text-center display-4"
-                                            style="color: #1f365d"
+                                            style="color: white"
                                         >
                                             404 | Stránka nenalezena
 
                                             <v-btn
-                                                color="#1f365d"
+                                                color="white"
                                                 class="ml-12"
                                                 plain
                                                 outlined

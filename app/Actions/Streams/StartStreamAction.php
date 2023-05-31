@@ -2,22 +2,26 @@
 
 namespace App\Actions\Streams;
 
-use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 use App\Models\Stream;
+use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
+use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 
 class StartStreamAction
 {
     public function execute(Stream $stream): bool
     {
-        return rescue(function () use ($stream) {
-            (new UnlockStreamUrlAction($stream))->handle();
+        try {
+            (new UnlockStreamUrlAction($stream))->execute();
 
+            // kill stream
+            (new KillTsDuckStreamProcessAction())->execute($stream);
             $stream->update([
-                'status' => Stream::STATUS_WAITING,
+                'status' => Stream::STATUS_WAITING
             ]);
 
             return true;
-        }, function () {
-        });
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 }

@@ -10,6 +10,8 @@ class ApiStreamStopController extends Controller
 {
     public function __invoke(Stream $stream, StopStreamAction $stopStreamAction)
     {
-        return $stopStreamAction->execute(stream: $stream);
+        return $stopStreamAction->execute(stream: $stream) == true
+            ? $this->success_response("Stream pozastaven")
+            : $this->error_response();
     }
 }

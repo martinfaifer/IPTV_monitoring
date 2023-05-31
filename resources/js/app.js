@@ -38,6 +38,7 @@ let SettingsNotifications = () =>
     import("./components/Settings/Notifications/settingsNotifications.vue");
 let Login = () => import("./components/Auth/Login.vue");
 let PageNotFound = () => import("./components/PageNotFound/PageNotFound.vue");
+let NotAuthorized = () => import("./components/403/NotAuthorized.vue");
 
 let routes = [
     {
@@ -109,10 +110,10 @@ let routes = [
         path: "/login",
         component: Login,
     },
-    // {
-    //     path: "/403",
-    //     component: NotAuthorized,
-    // },
+    {
+        path: "/403",
+        component: NotAuthorized,
+    },
     {
         path: "*",
         component: PageNotFound,

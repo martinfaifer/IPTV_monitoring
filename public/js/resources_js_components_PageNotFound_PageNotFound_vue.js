@@ -107,7 +107,7 @@ var render = function () {
                                       {
                                         staticClass:
                                           "mt-4 mb-4 text-center display-4",
-                                        staticStyle: { color: "#1f365d" },
+                                        staticStyle: { color: "white" },
                                       },
                                       [
                                         _vm._v(
@@ -118,7 +118,7 @@ var render = function () {
                                           {
                                             staticClass: "ml-12",
                                             attrs: {
-                                              color: "#1f365d",
+                                              color: "white",
                                               plain: "",
                                               outlined: "",
                                               link: "",

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Stream;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use App\Actions\Streams\StopStreamAction;
 use App\Actions\Streams\UpdateStreamStatusAction;
 use App\Actions\Cache\DeleteStreamPidProcessAction;
 use App\Actions\Streams\Analyze\MarkStreamForKillAction;
@@ -38,14 +39,7 @@ class KillAllStreamsCommand extends Command
         $streams = Stream::with('processes')->get();
         if (count($streams) != 0) {
             foreach ($streams as $stream) {
-                Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
-                (new MarkStreamForKillAction($stream->stream_url))->execution();
-                (new UpdateStreamStatusAction())->execute($stream, Stream::STATUS_STOPPED);
-                (new KillTsDuckStreamProcessAction())->execute($stream);
-                // remove process pid
-                (new DeleteStreamPidProcessAction())->execute($stream);
-
-                // (new UpdateStreamDiagnosticPidAction())->execute($stream, null);
+                (new StopStreamAction())->execute($stream);
             }
         }
 

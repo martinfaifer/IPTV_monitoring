@@ -2280,6 +2280,10 @@ var PageNotFound = function PageNotFound() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_PageNotFound_PageNotFound_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/PageNotFound/PageNotFound.vue */ "./resources/js/components/PageNotFound/PageNotFound.vue"));
 };
 
+var NotAuthorized = function NotAuthorized() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_403_NotAuthorized_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/403/NotAuthorized.vue */ "./resources/js/components/403/NotAuthorized.vue"));
+};
+
 var routes = [{
   path: "/",
   component: Layout,
@@ -2330,11 +2334,10 @@ var routes = [{
 }, {
   path: "/login",
   component: Login
-}, // {
-//     path: "/403",
-//     component: NotAuthorized,
-// },
-{
+}, {
+  path: "/403",
+  component: NotAuthorized
+}, {
   path: "*",
   component: PageNotFound
 }];
@@ -74338,7 +74341,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_layout_layout_vue":1,"resources_js_components_mozaika_mozaika_vue":1,"resources_js_components_Stream_streamLayout_vue":1,"resources_js_components_User_UserLayout_vue":1,"resources_js_components_User_userDashboard_vue":1,"resources_js_components_User_userMozaika_vue":1,"resources_js_components_User_userEdit_vue":1,"resources_js_components_User_userNotification_vue":1,"resources_js_components_User_userSlack_vue":1,"resources_js_components_Settings_settingsLayout_vue":1,"resources_js_components_Settings_Dashboard_settingsDashboard_vue":1,"resources_js_components_Settings_Streams_settingsStreams_vue":1,"resources_js_components_Settings_Users_settingsUsers_vue":1,"resources_js_components_Settings_Notifications_settingsNotifications_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_PageNotFound_PageNotFound_vue":1,"resources_js_components_Stream_streamAllDiscontinutiesErrors_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_layout_layout_vue":1,"resources_js_components_mozaika_mozaika_vue":1,"resources_js_components_Stream_streamLayout_vue":1,"resources_js_components_User_UserLayout_vue":1,"resources_js_components_User_userDashboard_vue":1,"resources_js_components_User_userMozaika_vue":1,"resources_js_components_User_userEdit_vue":1,"resources_js_components_User_userNotification_vue":1,"resources_js_components_User_userSlack_vue":1,"resources_js_components_Settings_settingsLayout_vue":1,"resources_js_components_Settings_Dashboard_settingsDashboard_vue":1,"resources_js_components_Settings_Streams_settingsStreams_vue":1,"resources_js_components_Settings_Users_settingsUsers_vue":1,"resources_js_components_Settings_Notifications_settingsNotifications_vue":1,"resources_js_components_Auth_Login_vue":1,"resources_js_components_PageNotFound_PageNotFound_vue":1,"resources_js_components_403_NotAuthorized_vue":1,"resources_js_components_Stream_streamAllDiscontinutiesErrors_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

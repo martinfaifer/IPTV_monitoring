@@ -2,21 +2,27 @@
 
 namespace App\Actions\Streams;
 
-use App\Actions\Streams\Analyze\MarkStreamForKillAction;
 use App\Models\Stream;
+use Illuminate\Support\Facades\Cache;
+use App\Actions\Cache\DeleteStreamPidProcessAction;
+use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
+use App\Actions\Streams\Analyze\MarkStreamForKillAction;
+use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 
 class StopStreamAction
 {
     public function execute(object $stream): bool
     {
-        return rescue(function () use ($stream) {
+        try {
+            Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
             (new MarkStreamForKillAction($stream->stream_url))->execution();
-            $stream->update([
-                'status' => Stream::STATUS_STOPPED,
-            ]);
-
+            (new UpdateStreamStatusAction())->execute($stream, Stream::STATUS_STOPPED);
+            (new KillTsDuckStreamProcessAction())->execute($stream);
+            // remove process pid
+            (new DeleteStreamPidProcessAction())->execute($stream);
             return true;
-        }, function () {
-        });
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 }

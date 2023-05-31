@@ -20,7 +20,7 @@ class ShowStreamInformationAction
         return [
             'status' => 'success',
             'data' => [
-                'img' => config('app.url') . (new GetStreamVideoImageAction())->execute($stream, true),
+                'img' => config('app.url') . "/".(new GetStreamVideoImageAction())->execute($stream, true),
                 'name' => $stream->nazev,
                 'streamStatus' => $stream->status,
                 'streamId' => $stream->id,

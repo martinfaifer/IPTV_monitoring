@@ -19,8 +19,7 @@ class ApiStreamController extends Controller
 {
     public function show(Stream $stream)
     {
-       return (new ShowStreamInformationAction())->execute($stream->id);
-
+        return (new ShowStreamInformationAction())->execute($stream->id);
     }
 
     public function store(StreamStoreApiRequest $request, StoreStreamAction $storeStreamAction)
@@ -30,6 +29,8 @@ class ApiStreamController extends Controller
 
     public function destroy(Stream $stream, DeleteStreamAction $deleteStreamAction)
     {
-        return $deleteStreamAction->execute(stream: $stream);
+        return $deleteStreamAction->execute(stream: $stream) == true
+            ? $this->success_response('Odebráno')
+            : $this->error_response();
     }
 }

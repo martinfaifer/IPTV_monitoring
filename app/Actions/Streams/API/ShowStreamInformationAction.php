@@ -38,6 +38,7 @@ class ShowStreamInformationAction
 
     protected function getPidsData(object $stream, string $pidType)
     {
+        $charts = [];
 
         if ($pidType == 'audio') {
             $pids = Cache::has('streamAudioPids_' . $stream->id)
@@ -49,10 +50,14 @@ class ShowStreamInformationAction
                 : [];
         }
 
-        foreach ($pids as $pid) {
-            return $pid['pid'];
+        if (empty($pids)) {
+            return $charts;
         }
 
-        // $pid['chart'] = (new GetStreamPidChartAction())->execute(stream: $stream, pid: $pid['pid']);
+        foreach ($pids as $pid) {
+            $charts[$pid['pid']] = (new GetStreamPidChartAction())->execute(stream: $stream, pid: $pid['pid']);
+        }
+
+        return $charts;
     }
 }

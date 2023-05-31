@@ -27,7 +27,7 @@ class ShowStreamInformationAction
                 'history' => $stream->history,
                 'problems' => (new ShowProblemPidsAction())->execute($stream),
                 'streamTS' => new ShowServicePidResource($stream),
-                'audioPids' => new ShowAudioPidResource($stream), //$this->getPidsData(new ShowAudioPidResource($stream), $stream),
+                'audioPids' => $this->getPidsData(new ShowAudioPidResource($stream), $stream),
                 // 'videoPids' => $this->getPidsData(new ShowVideoPidResource($stream), $stream),
                 'AVbitrate' => [],
             ],
@@ -36,6 +36,7 @@ class ShowStreamInformationAction
 
     protected function getPidsData($pids, object $stream)
     {
+        dd($pids);
         // find charts for each pid
         foreach ($pids as &$pid) {
             dd($pid);

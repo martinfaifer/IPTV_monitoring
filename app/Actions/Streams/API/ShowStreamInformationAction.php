@@ -31,6 +31,7 @@ class ShowStreamInformationAction
                 'audioPids' => new ShowAudioPidResource($stream),
                 'videoPids' => new ShowVideoPidResource($stream),
                 'audioCharts' => $this->getPidsData($stream, 'audio'),
+                'videoCharts' => $this->getPidsData($stream, 'video'),
                 'AVbitrate' => [],
             ],
         ];

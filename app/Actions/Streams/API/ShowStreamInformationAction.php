@@ -27,16 +27,20 @@ class ShowStreamInformationAction
                 'history' => $stream->history,
                 'problems' => (new ShowProblemPidsAction())->execute($stream),
                 'streamTS' => new ShowServicePidResource($stream),
-                'audioPids' => $this->getPidsData(new ShowAudioPidResource($stream), $stream),
+                'audioPids' => $this->getPidsData(stream: $stream, pidType: "audio"),
                 // 'videoPids' => $this->getPidsData(new ShowVideoPidResource($stream), $stream),
                 'AVbitrate' => [],
             ],
         ];
     }
 
-    protected function getPidsData($pids, object $stream)
+    protected function getPidsData(object $stream, string $pidType)
     {
-        dd($pids);
+        if ($pidType == "audio") {
+            $pids = new ShowAudioPidResource($stream);
+        } else {
+            $pids = new ShowVideoPidResource($stream);
+        }
         // find charts for each pid
         foreach ($pids as &$pid) {
             dd($pid);

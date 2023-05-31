@@ -41,8 +41,9 @@ class ShowStreamInformationAction
         } else {
             $pids = new ShowVideoPidResource($stream);
         }
-        // return $pids;
+        return $pids;
         // find charts for each pid
+
         foreach ($pids as $pid) {
             return $pid;
             $pid['chart'] = (new GetStreamPidChartAction())->execute(stream: $stream, pid: $pid['pid']);

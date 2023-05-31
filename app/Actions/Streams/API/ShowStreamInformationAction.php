@@ -27,8 +27,8 @@ class ShowStreamInformationAction
                 'history' => $stream->history,
                 'problems' => (new ShowProblemPidsAction())->execute($stream),
                 'streamTS' => new ShowServicePidResource($stream),
-                'audioPids' => $this->getPidsData(stream: $stream, pidType: "audio"),
-                // 'videoPids' => $this->getPidsData(new ShowVideoPidResource($stream), $stream),
+                'audioPids' => new ShowAudioPidResource($stream),
+                'videoPids' => new ShowVideoPidResource($stream),
                 'AVbitrate' => [],
             ],
         ];

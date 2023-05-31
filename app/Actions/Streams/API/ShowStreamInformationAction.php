@@ -41,6 +41,7 @@ class ShowStreamInformationAction
         } else {
             $pids = new ShowVideoPidResource($stream);
         }
+        return $pids;
         // find charts for each pid
         foreach ($pids as &$pid) {
             dd($pid);

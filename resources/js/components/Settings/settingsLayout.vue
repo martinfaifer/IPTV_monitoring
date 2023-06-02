@@ -53,16 +53,16 @@ export default {
                     icon: "mdi-account-group",
                     route: "/settings/users",
                 },
-                {
-                    title: "Upozornění",
-                    icon: "mdi-bell-ring",
-                    route: "/settings/notifications",
-                },
-                {
-                    title: "Webhook",
-                    icon: "mdi-webhook",
-                    route: "/settings/webhook",
-                },
+                // {
+                //     title: "Upozornění",
+                //     icon: "mdi-bell-ring",
+                //     route: "/settings/notifications",
+                // },
+                // {
+                //     title: "Webhook",
+                //     icon: "mdi-webhook",
+                //     route: "/settings/webhook",
+                // },
             ],
         };
     },

@@ -53,16 +53,16 @@ export default {
                     icon: "mdi-pencil",
                     route: "/user/edit",
                 },
-                {
-                    title: "Webhook",
-                    icon: "mdi-webhook",
-                    route: "/user/notifications",
-                },
-                {
-                    title: "Slack",
-                    icon: "mdi-slack",
-                    route: "/user/slack",
-                },
+                // {
+                //     title: "Webhook",
+                //     icon: "mdi-webhook",
+                //     route: "/user/notifications",
+                // },
+                // {
+                //     title: "Slack",
+                //     icon: "mdi-slack",
+                //     route: "/user/slack",
+                // },
             ],
         };
     },

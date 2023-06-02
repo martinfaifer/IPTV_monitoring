@@ -232,6 +232,7 @@ export default {
             this.websocketPidsData();
         },
     },
+
     beforeDestroy: function () {
         window.Echo.leave("StreamAudioVideoPids" + this.$route.params.streamId);
     },

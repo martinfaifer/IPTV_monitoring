@@ -300,6 +300,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -591,15 +594,26 @@ var render = function () {
                             fn: function (ref) {
                               var item = ref.item
                               return [
-                                _c("v-img", {
-                                  attrs: {
-                                    height: "25",
-                                    width: "45",
-                                    "lazy-src": item.image,
-                                    src: item.image,
-                                    "aspect-ratio": 16 / 9,
+                                _c(
+                                  "v-card",
+                                  {
+                                    staticClass: "rounded-md",
+                                    attrs: { flat: "" },
                                   },
-                                }),
+                                  [
+                                    _c("v-img", {
+                                      attrs: {
+                                        height: "25",
+                                        width: "45",
+                                        cover: "",
+                                        "lazy-src": item.image,
+                                        src: item.image,
+                                        "aspect-ratio": 16 / 9,
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
                               ]
                             },
                           },

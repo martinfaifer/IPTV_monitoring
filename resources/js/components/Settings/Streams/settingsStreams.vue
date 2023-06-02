@@ -37,14 +37,17 @@
                             :search="search"
                         >
                             <template v-slot:item.image="{ item }">
-                                <v-img
-                                    height="25"
-                                    width="45"
-                                    :lazy-src="item.image"
-                                    :src="item.image"
-                                    :aspect-ratio="16 / 9"
-                                >
-                                </v-img>
+                                <v-card flat class="rounded-md">
+                                    <v-img
+                                        height="25"
+                                        width="45"
+                                        cover
+                                        :lazy-src="item.image"
+                                        :src="item.image"
+                                        :aspect-ratio="16 / 9"
+                                    >
+                                    </v-img>
+                                </v-card>
                             </template>
                             <template v-slot:item.status="{ item }">
                                 <span

@@ -61,15 +61,17 @@ __webpack_require__.r(__webpack_exports__);
         title: "Editace",
         icon: "mdi-pencil",
         route: "/user/edit"
-      }, {
-        title: "Webhook",
-        icon: "mdi-webhook",
-        route: "/user/notifications"
-      }, {
-        title: "Slack",
-        icon: "mdi-slack",
-        route: "/user/slack"
-      }]
+      } // {
+      //     title: "Webhook",
+      //     icon: "mdi-webhook",
+      //     route: "/user/notifications",
+      // },
+      // {
+      //     title: "Slack",
+      //     icon: "mdi-slack",
+      //     route: "/user/slack",
+      // },
+      ]
     };
   },
   components: {},

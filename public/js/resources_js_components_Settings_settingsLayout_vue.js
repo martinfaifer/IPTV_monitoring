@@ -61,15 +61,17 @@ __webpack_require__.r(__webpack_exports__);
         title: "Uživatelé",
         icon: "mdi-account-group",
         route: "/settings/users"
-      }, {
-        title: "Upozornění",
-        icon: "mdi-bell-ring",
-        route: "/settings/notifications"
-      }, {
-        title: "Webhook",
-        icon: "mdi-webhook",
-        route: "/settings/webhook"
-      }]
+      } // {
+      //     title: "Upozornění",
+      //     icon: "mdi-bell-ring",
+      //     route: "/settings/notifications",
+      // },
+      // {
+      //     title: "Webhook",
+      //     icon: "mdi-webhook",
+      //     route: "/settings/webhook",
+      // },
+      ]
     };
   },
   components: {},

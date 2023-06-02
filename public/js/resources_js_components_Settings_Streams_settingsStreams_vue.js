@@ -303,6 +303,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -598,7 +626,7 @@ var render = function () {
                                   "v-card",
                                   {
                                     staticClass: "rounded-md",
-                                    attrs: { flat: "" },
+                                    attrs: { flat: "", color: "transparent" },
                                   },
                                   [
                                     _c("v-img", {
@@ -623,49 +651,117 @@ var render = function () {
                               var item = ref.item
                               return [
                                 item.status == "waiting"
-                                  ? _c("span", { staticClass: "blue--text" }, [
-                                      _vm._v(
-                                        "\n                                Čeká na spuštění\n                            "
-                                      ),
-                                    ])
+                                  ? _c(
+                                      "v-chip",
+                                      {
+                                        staticClass: "mx-auto",
+                                        attrs: {
+                                          "text-color": "blue",
+                                          color: "blue",
+                                          small: "",
+                                          outlined: "",
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                Čeká na spuštění\n                            "
+                                        ),
+                                      ]
+                                    )
                                   : _vm._e(),
                                 _vm._v(" "),
                                 item.status == "monitoring"
-                                  ? _c("span", { staticClass: "green--text" }, [
-                                      _vm._v(
-                                        "\n                                Dohleduje se\n                            "
-                                      ),
-                                    ])
+                                  ? _c(
+                                      "v-chip",
+                                      {
+                                        staticClass: "mx-auto",
+                                        attrs: {
+                                          "text-color": "green",
+                                          color: "green",
+                                          small: "",
+                                          outlined: "",
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                Dohleduje se\n                            "
+                                        ),
+                                      ]
+                                    )
                                   : _vm._e(),
                                 _vm._v(" "),
                                 item.status == "starting"
-                                  ? _c("span", { staticClass: "teal--text" }, [
-                                      _vm._v(
-                                        "\n                                Spouští se dohledování\n                            "
-                                      ),
-                                    ])
+                                  ? _c(
+                                      "v-chip",
+                                      {
+                                        staticClass: "mx-auto",
+                                        attrs: {
+                                          "text-color": "teal",
+                                          color: "teal",
+                                          small: "",
+                                          outlined: "",
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                Spouští se dohledování\n                            "
+                                        ),
+                                      ]
+                                    )
                                   : _vm._e(),
                                 _vm._v(" "),
                                 item.status == "stopped"
-                                  ? _c("span", { staticClass: "blue--text" }, [
-                                      _vm._v(
-                                        "\n                                Zastaveno dohledování\n                            "
-                                      ),
-                                    ])
+                                  ? _c(
+                                      "v-chip",
+                                      {
+                                        staticClass: "mx-auto",
+                                        attrs: {
+                                          "text-color": "blue",
+                                          color: "blue",
+                                          small: "",
+                                          outlined: "",
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                Zastaveno dohledování\n                            "
+                                        ),
+                                      ]
+                                    )
                                   : _vm._e(),
                                 _vm._v(" "),
                                 item.status == "can_not_start"
-                                  ? _c("span", { staticClass: "red--text" }, [
-                                      _vm._v(
-                                        "\n                                Výpadek\n                            "
-                                      ),
-                                    ])
+                                  ? _c(
+                                      "v-chip",
+                                      {
+                                        staticClass: "mx-auto",
+                                        attrs: {
+                                          "text-color": "red",
+                                          color: "red",
+                                          small: "",
+                                          outlined: "",
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                Výpadek\n                            "
+                                        ),
+                                      ]
+                                    )
                                   : _vm._e(),
                                 _vm._v(" "),
                                 item.status == "issue"
                                   ? _c(
-                                      "span",
-                                      { staticClass: "orange--text" },
+                                      "v-chip",
+                                      {
+                                        staticClass: "mx-auto",
+                                        attrs: {
+                                          "text-color": "orange",
+                                          color: "orange",
+                                          small: "",
+                                          outlined: "",
+                                        },
+                                      },
                                       [
                                         _vm._v(
                                           "\n                                Problém ve streamu\n                            "

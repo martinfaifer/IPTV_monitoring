@@ -37,7 +37,11 @@
                             :search="search"
                         >
                             <template v-slot:item.image="{ item }">
-                                <v-card flat class="rounded-md">
+                                <v-card
+                                    flat
+                                    class="rounded-md"
+                                    color="transparent"
+                                >
                                     <v-img
                                         height="25"
                                         width="45"
@@ -50,42 +54,66 @@
                                 </v-card>
                             </template>
                             <template v-slot:item.status="{ item }">
-                                <span
+                                <v-chip
                                     v-if="item.status == 'waiting'"
-                                    class="blue--text"
+                                    text-color="blue"
+                                    color="blue"
+                                    class="mx-auto"
+                                    small
+                                    outlined
                                 >
                                     Čeká na spuštění
-                                </span>
-                                <span
+                                </v-chip>
+                                <v-chip
                                     v-if="item.status == 'monitoring'"
-                                    class="green--text"
+                                    text-color="green"
+                                    color="green"
+                                    class="mx-auto"
+                                    small
+                                    outlined
                                 >
                                     Dohleduje se
-                                </span>
-                                <span
+                                </v-chip>
+                                <v-chip
                                     v-if="item.status == 'starting'"
-                                    class="teal--text"
+                                    text-color="teal"
+                                    color="teal"
+                                    class="mx-auto"
+                                    small
+                                    outlined
                                 >
                                     Spouští se dohledování
-                                </span>
-                                <span
+                                </v-chip>
+                                <v-chip
                                     v-if="item.status == 'stopped'"
-                                    class="blue--text"
+                                    text-color="blue"
+                                    color="blue"
+                                    class="mx-auto"
+                                    small
+                                    outlined
                                 >
                                     Zastaveno dohledování
-                                </span>
-                                <span
+                                </v-chip>
+                                <v-chip
                                     v-if="item.status == 'can_not_start'"
-                                    class="red--text"
+                                    text-color="red"
+                                    color="red"
+                                    class="mx-auto"
+                                    small
+                                    outlined
                                 >
                                     Výpadek
-                                </span>
-                                <span
+                                </v-chip>
+                                <v-chip
                                     v-if="item.status == 'issue'"
-                                    class="orange--text"
+                                    text-color="orange"
+                                    color="orange"
+                                    class="mx-auto"
+                                    small
+                                    outlined
                                 >
                                     Problém ve streamu
-                                </span>
+                                </v-chip>
                             </template>
                             <template v-slot:item.actions="{ item }">
                                 <v-icon

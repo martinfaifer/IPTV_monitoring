@@ -1992,8 +1992,8 @@ var render = function () {
                   height: "30",
                   width: "130",
                   link: "",
-                  src: "http://93.91.154.55/storage//logos/png",
-                  "lazy-src": "http://93.91.154.55/storage//logos/png",
+                  src: "storage/logo.png",
+                  "lazy-src": "storage/logo.png",
                 },
                 on: {
                   click: function ($event) {

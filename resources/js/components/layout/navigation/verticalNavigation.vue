@@ -21,8 +21,8 @@
                     width="130"
                     link
                     @click="returnToHome()"
-                    src="http://93.91.154.55/storage//logos/png"
-                    lazy-src="http://93.91.154.55/storage//logos/png"
+                    src="storage/logo.png"
+                    lazy-src="storage/logo.png"
                     style="cursor: pointer"
                 >
                 </v-img>

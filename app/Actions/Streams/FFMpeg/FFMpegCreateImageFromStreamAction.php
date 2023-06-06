@@ -24,7 +24,7 @@ class FFMpegCreateImageFromStreamAction
 
             $isNvidiaGpu = shell_exec('nvidia-smi');
 
-            if (str_contains($isNvidiaGpu, "failed")) {
+            if (str_contains($isNvidiaGpu, "failed") || str_contains($isNvidiaGpu, "not found")) {
                 $this->create_image_via_cpu($stream);
             } else {
                 $this->create_image_via_nvidia_gpu($stream);

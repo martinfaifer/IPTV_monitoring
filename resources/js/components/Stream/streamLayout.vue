@@ -225,82 +225,84 @@
                                     </v-col>
                                 </v-row>
                             </v-col>
-                            <v-col
-                                v-if="
-                                    iptvDokuData.devices.multiplexor.name !=
-                                    null
-                                "
-                            >
-                                <p class="text-center subtitle-1">
-                                    Multiplexor
-                                </p>
-                                <v-row>
-                                    <v-col cols="12">
-                                        <span class="subtitle-2">
-                                            Název:
-                                            {{
-                                                iptvDokuData.devices.multiplexor
-                                                    .name
-                                            }}
-                                        </span>
-                                    </v-col>
-                                    <v-col
-                                        cols="12"
-                                        v-if="
-                                            iptvDokuData.devices.multiplexor
-                                                .ip != null
-                                        "
-                                    >
-                                        <span class="subtitle-2">
-                                            IP:
-                                            {{
-                                                iptvDokuData.devices.multiplexor
-                                                    .ip
-                                            }}
-                                        </span>
-                                    </v-col>
-                                    <v-col
-                                        cols="12"
-                                        v-if="
-                                            iptvDokuData.devices.multiplexor
-                                                .status != null
-                                        "
-                                    >
-                                        <span class="subtitle-2">
-                                            Status ze zbx:
-                                            <v-icon
-                                                v-if="
+                            <v-col v-if="iptvDokuData.devices.multiplexor">
+                                <div
+                                    v-if="
+                                        iptvDokuData.devices.multiplexor.name !=
+                                        null
+                                    "
+                                >
+                                    <p class="text-center subtitle-1">
+                                        Multiplexor
+                                    </p>
+                                    <v-row>
+                                        <v-col cols="12">
+                                            <span class="subtitle-2">
+                                                Název:
+                                                {{
                                                     iptvDokuData.devices
-                                                        .multiplexor.status ==
-                                                    'success'
-                                                "
-                                                color="green"
-                                                small
-                                                class="mx-3"
-                                                >mdi-check</v-icon
-                                            >
-
-                                            <v-icon
-                                                v-else
-                                                color="red"
-                                                small
-                                                class="mx-3"
-                                                >mdi-close</v-icon
-                                            >
-                                        </span>
-                                    </v-col>
-                                    <v-col cols="12">
-                                        <a
-                                            :href="
+                                                        .multiplexor.name
+                                                }}
+                                            </span>
+                                        </v-col>
+                                        <v-col
+                                            cols="12"
+                                            v-if="
                                                 iptvDokuData.devices.multiplexor
-                                                    .url
+                                                    .ip != null
                                             "
-                                            target="_blank"
                                         >
-                                            Proklik na do IPTV dokumentace:
-                                        </a>
-                                    </v-col>
-                                </v-row>
+                                            <span class="subtitle-2">
+                                                IP:
+                                                {{
+                                                    iptvDokuData.devices
+                                                        .multiplexor.ip
+                                                }}
+                                            </span>
+                                        </v-col>
+                                        <v-col
+                                            cols="12"
+                                            v-if="
+                                                iptvDokuData.devices.multiplexor
+                                                    .status != null
+                                            "
+                                        >
+                                            <span class="subtitle-2">
+                                                Status ze zbx:
+                                                <v-icon
+                                                    v-if="
+                                                        iptvDokuData.devices
+                                                            .multiplexor
+                                                            .status == 'success'
+                                                    "
+                                                    color="green"
+                                                    small
+                                                    class="mx-3"
+                                                    >mdi-check</v-icon
+                                                >
+
+                                                <v-icon
+                                                    v-else
+                                                    color="red"
+                                                    small
+                                                    class="mx-3"
+                                                    >mdi-close</v-icon
+                                                >
+                                            </span>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <a
+                                                :href="
+                                                    iptvDokuData.devices
+                                                        .multiplexor.url
+                                                "
+                                                target="_blank"
+                                            >
+                                                Proklik na do IPTV dokumentace:
+                                            </a>
+                                        </v-col>
+                                    </v-row>
+                                </div>
                             </v-col>
                         </v-row>
                     </v-container>

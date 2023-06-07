@@ -2046,6 +2046,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -5858,157 +5860,177 @@ var render = function () {
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.iptvDokuData.devices.multiplexor.name != null
-                                ? _c(
-                                    "v-col",
-                                    [
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass: "text-center subtitle-1",
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                Multiplexor\n                            "
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-row",
-                                        [
-                                          _c(
-                                            "v-col",
-                                            { attrs: { cols: "12" } },
-                                            [
-                                              _c(
-                                                "span",
-                                                { staticClass: "subtitle-2" },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                        Název:\n                                        " +
-                                                      _vm._s(
-                                                        _vm.iptvDokuData.devices
-                                                          .multiplexor.name
-                                                      ) +
-                                                      "\n                                    "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _vm.iptvDokuData.devices.multiplexor
-                                            .ip != null
-                                            ? _c(
-                                                "v-col",
-                                                { attrs: { cols: "12" } },
-                                                [
-                                                  _c(
-                                                    "span",
-                                                    {
-                                                      staticClass: "subtitle-2",
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                        IP:\n                                        " +
-                                                          _vm._s(
+                              _vm.iptvDokuData.devices.multiplexor
+                                ? _c("v-col", [
+                                    _vm.iptvDokuData.devices.multiplexor.name !=
+                                    null
+                                      ? _c(
+                                          "div",
+                                          [
+                                            _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "text-center subtitle-1",
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                    Multiplexor\n                                "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-row",
+                                              [
+                                                _c(
+                                                  "v-col",
+                                                  { attrs: { cols: "12" } },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "subtitle-2",
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                            Název:\n                                            " +
+                                                            _vm._s(
+                                                              _vm.iptvDokuData
+                                                                .devices
+                                                                .multiplexor
+                                                                .name
+                                                            ) +
+                                                            "\n                                        "
+                                                        ),
+                                                      ]
+                                                    ),
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _vm.iptvDokuData.devices
+                                                  .multiplexor.ip != null
+                                                  ? _c(
+                                                      "v-col",
+                                                      { attrs: { cols: "12" } },
+                                                      [
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "subtitle-2",
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                            IP:\n                                            " +
+                                                                _vm._s(
+                                                                  _vm
+                                                                    .iptvDokuData
+                                                                    .devices
+                                                                    .multiplexor
+                                                                    .ip
+                                                                ) +
+                                                                "\n                                        "
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    )
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _vm.iptvDokuData.devices
+                                                  .multiplexor.status != null
+                                                  ? _c(
+                                                      "v-col",
+                                                      { attrs: { cols: "12" } },
+                                                      [
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "subtitle-2",
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                            Status ze zbx:\n                                            "
+                                                            ),
                                                             _vm.iptvDokuData
                                                               .devices
-                                                              .multiplexor.ip
-                                                          ) +
-                                                          "\n                                    "
-                                                      ),
-                                                    ]
-                                                  ),
-                                                ]
-                                              )
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          _vm.iptvDokuData.devices.multiplexor
-                                            .status != null
-                                            ? _c(
-                                                "v-col",
-                                                { attrs: { cols: "12" } },
-                                                [
-                                                  _c(
-                                                    "span",
-                                                    {
-                                                      staticClass: "subtitle-2",
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                        Status ze zbx:\n                                        "
-                                                      ),
-                                                      _vm.iptvDokuData.devices
-                                                        .multiplexor.status ==
-                                                      "success"
-                                                        ? _c(
-                                                            "v-icon",
-                                                            {
-                                                              staticClass:
-                                                                "mx-3",
-                                                              attrs: {
-                                                                color: "green",
-                                                                small: "",
-                                                              },
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "mdi-check"
-                                                              ),
-                                                            ]
-                                                          )
-                                                        : _c(
-                                                            "v-icon",
-                                                            {
-                                                              staticClass:
-                                                                "mx-3",
-                                                              attrs: {
-                                                                color: "red",
-                                                                small: "",
-                                                              },
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "mdi-close"
-                                                              ),
-                                                            ]
-                                                          ),
-                                                    ],
-                                                    1
-                                                  ),
-                                                ]
-                                              )
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            { attrs: { cols: "12" } },
-                                            [
-                                              _c(
-                                                "a",
-                                                {
-                                                  attrs: {
-                                                    href: _vm.iptvDokuData
-                                                      .devices.multiplexor.url,
-                                                    target: "_blank",
-                                                  },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                        Proklik na do IPTV dokumentace:\n                                    "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]
-                                          ),
-                                        ],
-                                        1
-                                      ),
-                                    ],
-                                    1
-                                  )
+                                                              .multiplexor
+                                                              .status ==
+                                                            "success"
+                                                              ? _c(
+                                                                  "v-icon",
+                                                                  {
+                                                                    staticClass:
+                                                                      "mx-3",
+                                                                    attrs: {
+                                                                      color:
+                                                                        "green",
+                                                                      small: "",
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "mdi-check"
+                                                                    ),
+                                                                  ]
+                                                                )
+                                                              : _c(
+                                                                  "v-icon",
+                                                                  {
+                                                                    staticClass:
+                                                                      "mx-3",
+                                                                    attrs: {
+                                                                      color:
+                                                                        "red",
+                                                                      small: "",
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "mdi-close"
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                          ],
+                                                          1
+                                                        ),
+                                                      ]
+                                                    )
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-col",
+                                                  { attrs: { cols: "12" } },
+                                                  [
+                                                    _c(
+                                                      "a",
+                                                      {
+                                                        attrs: {
+                                                          href: _vm.iptvDokuData
+                                                            .devices.multiplexor
+                                                            .url,
+                                                          target: "_blank",
+                                                        },
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                            Proklik na do IPTV dokumentace:\n                                        "
+                                                        ),
+                                                      ]
+                                                    ),
+                                                  ]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                  ])
                                 : _vm._e(),
                             ],
                             1

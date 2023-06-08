@@ -13,6 +13,7 @@ window.Echo = new Echo({
     key: "564879849846489",
     wsHost: window.location.hostname,
     wsPort: 6001,
-    forceTLS: false,
+    wssPort: 6001,
+    forceTLS: true,
     disableStats: true,
 });

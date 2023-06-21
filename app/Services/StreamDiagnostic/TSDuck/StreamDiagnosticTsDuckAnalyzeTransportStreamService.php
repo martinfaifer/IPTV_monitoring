@@ -46,7 +46,7 @@ class StreamDiagnosticTsDuckAnalyzeTransportStreamService implements DiagnosticA
 
             $this->store_to_cache($stream, $this->country, $this->packets, $this->pcrbitrate);
         } catch (\Throwable $th) {
-            info("Problem s TS diagnostikou streamu ". $stream->id , [$th]);
+            // info("Problem s TS diagnostikou streamu ". $stream->id , [$th]);
         }
     }
 

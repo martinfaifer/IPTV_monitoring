@@ -42,15 +42,20 @@ class UpdateStreamStatusAction
                 $this->monitored_at = now();
             }
 
-            $stream->update([
-                'status' => $status,
-                'monitored_at' => $this->monitored_at,
-            ]);
+            rescue(function() use ($stream, $status) {
+                $stream->update([
+                    'status' => $status,
+                    'monitored_at' => $this->monitored_at,
+                ]);
+            });
 
-            StreamHistoryStatus::create([
-                'stream_id' => $stream->id,
-                'status' => $status
-            ]);
+
+            rescue(function () use ($stream,$status) {
+                StreamHistoryStatus::create([
+                    'stream_id' => $stream->id,
+                    'status' => $status
+                ]);
+            });
 
             (new UpdateStreamCacheStatusAction())->execute(status: $status, streamId: $stream->id);
 

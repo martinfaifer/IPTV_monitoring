@@ -14,6 +14,7 @@ use App\Http\Requests\Api\StreamShowApiRequest;
 use App\Http\Requests\Api\StreamStoreApiRequest;
 use App\Actions\Streams\GetStreamVideoImageAction;
 use App\Actions\Streams\ProblemPids\ShowProblemPidsAction;
+use Illuminate\Support\Facades\Log;
 
 class ApiStreamController extends Controller
 {
@@ -24,7 +25,7 @@ class ApiStreamController extends Controller
 
     public function store(StreamStoreApiRequest $request, StoreStreamAction $storeStreamAction)
     {
-        info("REQUEST", [
+        Log::debug("REQUEST", [
             'formdata'  => $request->nazev . " / " . $request->stream_url,
         ]);
         return $storeStreamAction->execute(formData: $request);

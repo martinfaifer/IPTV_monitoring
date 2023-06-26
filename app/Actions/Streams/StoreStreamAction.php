@@ -3,6 +3,7 @@
 namespace App\Actions\Streams;
 
 use App\Models\Stream;
+use Illuminate\Support\Facades\Log;
 
 class StoreStreamAction
 {
@@ -15,7 +16,7 @@ class StoreStreamAction
         ]);
 
         // try {
-            info("STORE_REQ_RES", [
+            Log::debug("STORE_REQ_RES", [
                 'formData' => $formData->nazev ." / " . $formData->stream_url,
                 'response' => (array) $stream ?? [],
             ]);

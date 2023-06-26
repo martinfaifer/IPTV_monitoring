@@ -16,8 +16,8 @@ class StoreStreamAction
 
         try {
             info("STORE_REQ_RES", [
-                'formData' => $formData,
-                // 'response' => (array) $stream,
+                'formData' => $formData->nazev ." / " . $formData->$stream->url,
+                'response' => $stream,
             ]);
         } catch (\Throwable $th) {
             //throw $th;

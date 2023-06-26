@@ -17,7 +17,7 @@ class StoreStreamAction
         try {
             info("STORE_REQ_RES", [
                 'formData' => $formData,
-                'response = $stream',
+                'response' => (array) $stream,
             ]);
         } catch (\Throwable $th) {
             //throw $th;

@@ -38,7 +38,6 @@ class StartStreamsDiagnosticCommand extends Command
             try {
                 // if ((new CheckIfStreamCanBeKillAction(streamUrl: $stream->stream_url))->execution() != true) {
                 if (is_null($stream->processes)) {
-                    echo "srart stream" . $stream->nazev;
                     StartStreamDiagnosticJob::dispatch($stream);
                 }
                 // }

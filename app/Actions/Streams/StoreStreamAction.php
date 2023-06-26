@@ -15,15 +15,6 @@ class StoreStreamAction
             'stream_url' => $formData->stream_url,
         ]);
 
-        // try {
-            Log::debug("STORE_REQ_RES", [
-                'formData' => $formData->nazev ." / " . $formData->stream_url,
-                'response' => (array) $stream ?? [],
-            ]);
-        // } catch (\Throwable $th) {
-        //     //throw $th;
-        // }
-
         return $stream;
     }
 }

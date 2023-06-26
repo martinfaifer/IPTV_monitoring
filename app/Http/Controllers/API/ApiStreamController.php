@@ -25,9 +25,6 @@ class ApiStreamController extends Controller
 
     public function store(StreamStoreApiRequest $request, StoreStreamAction $storeStreamAction)
     {
-        Log::debug("REQUEST", [
-            'formdata'  => $request->nazev . " / " . $request->stream_url,
-        ]);
         return $storeStreamAction->execute(formData: $request);
     }
 

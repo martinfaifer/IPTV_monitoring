@@ -14,14 +14,14 @@ class StoreStreamAction
             'stream_url' => $formData->stream_url,
         ]);
 
-        try {
+        // try {
             info("STORE_REQ_RES", [
                 'formData' => $formData->nazev ." / " . $formData->$stream->url,
                 'response' => (array) $stream ?? [],
             ]);
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        // }
 
         return $stream;
     }

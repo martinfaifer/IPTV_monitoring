@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('streams:start_issue')->everyMinute();
         $schedule->command('streams:check_if_running')->everyTwoMinutes()->withoutOverlapping()->runInBackground();
         // $schedule->command('streams:check_if_stream_is_freeze_in_starting')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command('streams:create_image')->everyTenMinutes()->runInBackground()->withoutOverlapping();
+        $schedule->command('streams:create_image')->everyFifteenMinutes()->runInBackground()->withoutOverlapping();
     }
 
     /**

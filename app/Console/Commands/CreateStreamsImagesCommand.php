@@ -31,10 +31,10 @@ class CreateStreamsImagesCommand extends Command
     {
         shell_exec('chmod -R 1777 storage/app/public/streamImages/');
         sleep(1);
-        Stream::isMonitoring()->chunk(20, function ($streams) {
+        Stream::isMonitoring()->chunk(10, function ($streams) {
             $streams->each(function ($stream) {
                 CreateImageFromStreamJob::dispatch($stream);
-                sleep(5);
+                sleep(10);
             });
         });
     }

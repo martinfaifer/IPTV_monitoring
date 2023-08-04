@@ -76,10 +76,8 @@ class GetWeatherAction
         $weatherResponse = Http::withBasicAuth(config('app.iptv_dokumentace_username'), config('app.iptv_dokumentace_password'))
             ->get(config('app.iptv_dokumentace') . "/api/v2/weather")->json();
 
-        foreach ($weatherResponse as &$weatherData) {
-            $weatherData['weather']['description_cs'] = $this->translate($weatherData["weather"]['description']);
-            $weatherData['weather']['isAlert'] = $this->can_be_alert($weatherData["weather"]['main'],);
-        }
+        $weatherResponse["weather"]["description_cs"] = $this->translate($weatherResponse["weather"][0]['description']);
+        $weatherResponse['weather']['isAlert'] = $this->can_be_alert($weatherResponse["weather"][0]['main']);
 
         BroadcastWweatherAlertEvent::dispatch($weatherResponse);
         return $weatherResponse;

@@ -7,18 +7,19 @@
         >
             <template v-slot:activator="{ on }">
                 <v-btn v-on="on" icon :loading="loading">
-                    <div v-if="weathers[0].weather.isAlert == true">
+                    <div v-if="weathers.weather[0].isAlert == true">
                         <v-badge color="error" bottom overlap>
                             <v-icon>
-                                {{ getIcon(weathers[0].weather.main) }}
+                                {{ getIcon(weathers.weather[0].main) }}
                             </v-icon>
                         </v-badge>
                     </div>
                     <div v-else>
                         <v-icon>
-                            {{ getIcon(weathers[0].weather.main) }}
+                            {{ getIcon(weathers.weather[0].main) }}
                         </v-icon>
                     </div>
+                    {{ weathers.main.temp }} °C
                 </v-btn>
             </template>
 
@@ -29,36 +30,51 @@
                 max-height="800px"
                 color="#192B4B"
             >
-                <div v-for="weather in weathers" :key="weather">
+                <div>
                     <v-col cols="12" class="mx-4 my-4">
                         <v-row>
                             <v-col cols="12" sm="12" md="8" lg="8">
-                                <p class="display-1">{{ weather.city }}</p>
+                                <p class="headline">{{ weathers.name }} <span class="font-weight-bold">{{ weathers.main.temp }} °C</span></p>
                             </v-col>
                             <v-col cols="12" sm="12" md="4" lg="4">
                                 <v-row>
                                     <v-col cols="12">
                                         <v-icon x-large>{{
-                                            getIcon(weather.weather.main)
+                                            getIcon(weathers.weather[0].main)
                                         }}</v-icon>
                                     </v-col>
                                     <v-col cols="12">
                                         <p class="text--center mt-n3 ml-n3">
-                                            {{ weather.weather.description_cs }}
+                                            {{
+                                                weathers.weather[0]
+                                                    .description_cs
+                                            }}
                                         </p>
                                     </v-col>
                                 </v-row>
                             </v-col>
+                            <v-col cols="6">
+                                <p>Minimální teplota: {{ weathers.main.temp_min }}°C</p>
+                            </v-col>
+                            <v-col cols="6">
+                                <p>Maximální teplota: {{ weathers.main.temp_max }}°C</p>
+                            </v-col>
+                            <v-col cols="6">
+                                <p>Vlhkost vzduchu: {{ weathers.main.humidity }}%</p>
+                            </v-col>
+                            <v-col cols="6">
+                                <p>Tlak: {{ weathers.main.pressure }} hPa</p>
+                            </v-col>
                             <v-col>
                                 <v-alert
-                                    v-if="weather.weather.isAlert == false"
+                                    v-if="weathers.weather.isAlert == false"
                                     color="#182948"
                                     class="shadow-blur-warning-blue-alert overflow-hidden rounded-lg blur text-center my-3"
                                 >
                                     Nehrozí rozlazení satelitů
                                 </v-alert>
                                 <v-alert
-                                    v-if="weather.weather.isAlert == true"
+                                    v-if="weathers.weather.isAlert == true"
                                     color="orange"
                                     class="shadow-blur-error-alertoverflow-hidden rounded-lg blur text-center my-3"
                                 >

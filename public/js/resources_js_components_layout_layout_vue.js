@@ -442,6 +442,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -1723,7 +1739,7 @@ var render = function () {
                             on
                           ),
                           [
-                            _vm.weathers[0].weather.isAlert == true
+                            _vm.weathers.weather[0].isAlert == true
                               ? _c(
                                   "div",
                                   [
@@ -1742,7 +1758,7 @@ var render = function () {
                                             "\n                            " +
                                               _vm._s(
                                                 _vm.getIcon(
-                                                  _vm.weathers[0].weather.main
+                                                  _vm.weathers.weather[0].main
                                                 )
                                               ) +
                                               "\n                        "
@@ -1762,7 +1778,7 @@ var render = function () {
                                         "\n                        " +
                                           _vm._s(
                                             _vm.getIcon(
-                                              _vm.weathers[0].weather.main
+                                              _vm.weathers.weather[0].main
                                             )
                                           ) +
                                           "\n                    "
@@ -1771,6 +1787,11 @@ var render = function () {
                                   ],
                                   1
                                 ),
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(_vm.weathers.main.temp) +
+                                " °C\n            "
+                            ),
                           ]
                         ),
                       ]
@@ -1779,7 +1800,7 @@ var render = function () {
                 ],
                 null,
                 false,
-                1252769324
+                1178857850
               ),
             },
             [
@@ -1795,10 +1816,9 @@ var render = function () {
                     color: "#192B4B",
                   },
                 },
-                _vm._l(_vm.weathers, function (weather) {
-                  return _c(
+                [
+                  _c(
                     "div",
-                    { key: weather },
                     [
                       _c(
                         "v-col",
@@ -1818,8 +1838,17 @@ var render = function () {
                                   },
                                 },
                                 [
-                                  _c("p", { staticClass: "display-1" }, [
-                                    _vm._v(_vm._s(weather.city)),
+                                  _c("p", { staticClass: "headline" }, [
+                                    _vm._v(_vm._s(_vm.weathers.name) + " "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-weight-bold" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(_vm.weathers.main.temp) + " °C"
+                                        ),
+                                      ]
+                                    ),
                                   ]),
                                 ]
                               ),
@@ -1849,7 +1878,7 @@ var render = function () {
                                               _vm._v(
                                                 _vm._s(
                                                   _vm.getIcon(
-                                                    weather.weather.main
+                                                    _vm.weathers.weather[0].main
                                                   )
                                                 )
                                               ),
@@ -1870,7 +1899,8 @@ var render = function () {
                                             _vm._v(
                                               "\n                                        " +
                                                 _vm._s(
-                                                  weather.weather.description_cs
+                                                  _vm.weathers.weather[0]
+                                                    .description_cs
                                                 ) +
                                                 "\n                                    "
                                             ),
@@ -1884,10 +1914,50 @@ var render = function () {
                                 1
                               ),
                               _vm._v(" "),
+                              _c("v-col", { attrs: { cols: "6" } }, [
+                                _c("p", [
+                                  _vm._v(
+                                    "Minimální teplota: " +
+                                      _vm._s(_vm.weathers.main.temp_min) +
+                                      "°C"
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("v-col", { attrs: { cols: "6" } }, [
+                                _c("p", [
+                                  _vm._v(
+                                    "Maximální teplota: " +
+                                      _vm._s(_vm.weathers.main.temp_max) +
+                                      "°C"
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("v-col", { attrs: { cols: "6" } }, [
+                                _c("p", [
+                                  _vm._v(
+                                    "Vlhkost vzduchu: " +
+                                      _vm._s(_vm.weathers.main.humidity) +
+                                      "%"
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("v-col", { attrs: { cols: "6" } }, [
+                                _c("p", [
+                                  _vm._v(
+                                    "Tlak: " +
+                                      _vm._s(_vm.weathers.main.pressure) +
+                                      " hPa"
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
                               _c(
                                 "v-col",
                                 [
-                                  weather.weather.isAlert == false
+                                  _vm.weathers.weather.isAlert == false
                                     ? _c(
                                         "v-alert",
                                         {
@@ -1903,7 +1973,7 @@ var render = function () {
                                       )
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  weather.weather.isAlert == true
+                                  _vm.weathers.weather.isAlert == true
                                     ? _c(
                                         "v-alert",
                                         {
@@ -1929,9 +1999,8 @@ var render = function () {
                       ),
                     ],
                     1
-                  )
-                }),
-                0
+                  ),
+                ]
               ),
             ],
             1

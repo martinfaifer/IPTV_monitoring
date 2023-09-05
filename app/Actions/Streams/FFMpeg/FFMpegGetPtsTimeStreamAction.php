@@ -24,6 +24,8 @@ class FFMpegGetPtsTimeStreamAction
 
             $ptsDiff = $secondPts - $firstPts;
 
+            echo "DIFF ----> ".$ptsDiff . PHP_EOL;
+
             return (int) round($ptsDiff);
         } catch (\Throwable $th) {
             return (int) 0;

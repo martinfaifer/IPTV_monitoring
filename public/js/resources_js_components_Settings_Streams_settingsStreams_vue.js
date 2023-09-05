@@ -340,6 +340,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -396,7 +408,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post("settings/streams", {
         nazev: this.formData.nazev,
-        stream_url: this.formData.stream_url
+        stream_url: this.formData.stream_url,
+        check_pts: this.formData.check_pts
       }).then(function (response) {
         _this2.$store.state.alerts = response.data;
 
@@ -442,7 +455,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.patch("settings/streams/" + this.stream.id, {
         nazev: this.stream.nazev,
-        changeStreamStatus: this.changeStreamStatus
+        changeStreamStatus: this.changeStreamStatus,
+        check_pts: this.stream.check_pts
       }).then(function (response) {
         _this4.$store.state.alerts = response.data;
 
@@ -1099,6 +1113,24 @@ var render = function () {
                                 ],
                                 1
                               ),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                { attrs: { cols: "12" } },
+                                [
+                                  _c("v-checkbox", {
+                                    attrs: { label: "Kontrolovat PTS" },
+                                    model: {
+                                      value: _vm.formData.check_pts,
+                                      callback: function ($$v) {
+                                        _vm.$set(_vm.formData, "check_pts", $$v)
+                                      },
+                                      expression: "formData.check_pts",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
                             ],
                             1
                           ),
@@ -1328,6 +1360,24 @@ var render = function () {
                                         1
                                       ),
                                 ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                { attrs: { cols: "12" } },
+                                [
+                                  _c("v-checkbox", {
+                                    attrs: { label: "Kontrolovat PTS" },
+                                    model: {
+                                      value: _vm.stream.check_pts,
+                                      callback: function ($$v) {
+                                        _vm.$set(_vm.stream, "check_pts", $$v)
+                                      },
+                                      expression: "stream.check_pts",
+                                    },
+                                  }),
+                                ],
+                                1
                               ),
                             ],
                             1

@@ -12,10 +12,17 @@ class UpdateStreamAction
     public function execute(object $stream, $formData)
     {
         return rescue(function () use ($stream, $formData) {
+            $pts = false;
+
+            if (!is_null($formData->check_pts)) {
+                $pts = $formData->check_pts;
+            }
+
             $status = $this->pick_stream_status($stream, $formData->changeStreamStatus);
             $stream->update([
                 'nazev' => $formData->nazev,
                 'status' => $status,
+                'check_pts' => $pts
             ]);
 
             return true;

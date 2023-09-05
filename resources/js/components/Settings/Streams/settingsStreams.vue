@@ -222,6 +222,12 @@
                                         color="#0277BD"
                                     ></v-text-field>
                                 </v-col>
+                                <v-col cols="12">
+                                    <v-checkbox
+                                        v-model="formData.check_pts"
+                                        label="Kontrolovat PTS"
+                                    ></v-checkbox>
+                                </v-col>
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -300,6 +306,12 @@
                                         ></v-switch>
                                     </span>
                                 </v-col>
+                                <v-col cols="12">
+                                    <v-checkbox
+                                        v-model="stream.check_pts"
+                                        label="Kontrolovat PTS"
+                                    ></v-checkbox>
+                                </v-col>
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -374,6 +386,7 @@ export default {
                 .post("settings/streams", {
                     nazev: this.formData.nazev,
                     stream_url: this.formData.stream_url,
+                    check_pts: this.formData.check_pts,
                 })
                 .then((response) => {
                     this.$store.state.alerts = response.data;
@@ -418,6 +431,7 @@ export default {
                 .patch("settings/streams/" + this.stream.id, {
                     nazev: this.stream.nazev,
                     changeStreamStatus: this.changeStreamStatus,
+                    check_pts: this.stream.check_pts,
                 })
                 .then((response) => {
                     this.$store.state.alerts = response.data;

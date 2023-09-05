@@ -26,6 +26,7 @@ class StoreStreamRequest extends FormRequest
         return [
             'nazev' => ['required', 'string'],
             'stream_url' => ['required', 'unique:streams,stream_url'],
+            'check_pts' => ['nullable', 'boolean'],
         ];
     }
 
@@ -36,6 +37,7 @@ class StoreStreamRequest extends FormRequest
             'nazev.string' => 'Neplaný formát',
             'stream_url.required' => 'Pole nesmí být prázdné',
             'stream_url.unique' => 'Tato adresa již existuje u jiného streamu',
+            'check_pts.boolean' => "Neplatný formát"
         ];
     }
 }

@@ -331,6 +331,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -355,6 +364,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: "Status",
         value: "status"
+      }, {
+        text: "Kontrola PTS",
+        value: "check_pts"
       }, {
         text: "Dohleduje se",
         value: "monitored_at"
@@ -642,6 +654,27 @@ var render = function () {
                                   ],
                                   1
                                 ),
+                              ]
+                            },
+                          },
+                          {
+                            key: "item.check_pts",
+                            fn: function (ref) {
+                              var item = ref.item
+                              return [
+                                item.check_pts == true
+                                  ? _c(
+                                      "v-icon",
+                                      { attrs: { color: "green" } },
+                                      [
+                                        _vm._v(
+                                          "\n                                mdi-check\n                            "
+                                        ),
+                                      ]
+                                    )
+                                  : _c("v-icon", { attrs: { color: "red" } }, [
+                                      _vm._v(" mdi-close "),
+                                    ]),
                               ]
                             },
                           },

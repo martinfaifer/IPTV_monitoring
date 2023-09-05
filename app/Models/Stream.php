@@ -31,11 +31,13 @@ class Stream extends Model
         'stream_url',
         'status',
         'monitored_at',
+        'check_pts'
     ];
 
     protected $casts = [
         'monitored_at' => 'datetime',
         'created_at' => 'datetime',
+        'check_pts' => 'boolean',
     ];
 
     public function history(): HasMany
@@ -53,6 +55,11 @@ class Stream extends Model
         return $this->hasMany(StreamProblemPid::class, 'stream_id', 'id');
     }
 
+    public function problemPts(): HasOne
+    {
+        return $this->hasOne(ProblemPts::class, 'stream_id', 'id');
+    }
+
     public static function scopeIsNotMonitored(Builder $query)
     {
         $query
@@ -64,5 +71,10 @@ class Stream extends Model
     public static function scopeIsMonitoring(Builder $query)
     {
         $query->where('status', Stream::STATUS_MONITORING);
+    }
+
+    public function scopeCheckPts(Builder $query)
+    {
+        $query->where('status', Stream::STATUS_MONITORING)->where('check_pts', true);
     }
 }

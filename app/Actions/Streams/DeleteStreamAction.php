@@ -4,6 +4,7 @@ namespace App\Actions\Streams;
 
 use App\Actions\Streams\Analyze\MarkStreamForKillAction;
 use App\Actions\System\Process\KillTsDuckStreamProcessAction;
+use App\Models\ProblemPts;
 use App\Models\StreamHistoryStatus;
 use App\Models\StreamProblemPid;
 use App\Models\StreamProcessPid;
@@ -19,6 +20,7 @@ class DeleteStreamAction
         StreamProcessPid::where('stream_id', $stream->id)->delete();
         StreamHistoryStatus::where('stream_id', $stream->id)->delete();
         StreamProblemPid::where('stream_id', $stream->id)->delete();
+        ProblemPts::where('stream_id', $stream->id)->delete();
         return $stream->delete();
     }
 }

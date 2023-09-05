@@ -53,6 +53,15 @@
                                     </v-img>
                                 </v-card>
                             </template>
+                            <template v-slot:item.check_pts="{ item }">
+                                <v-icon
+                                    v-if="item.check_pts == true"
+                                    color="green"
+                                >
+                                    mdi-check
+                                </v-icon>
+                                <v-icon v-else color="red"> mdi-close </v-icon>
+                            </template>
                             <template v-slot:item.status="{ item }">
                                 <v-chip
                                     v-if="item.status == 'waiting'"
@@ -336,6 +345,7 @@ export default {
                 { text: "Stream", value: "nazev" },
                 { text: "Url", value: "stream_url" },
                 { text: "Status", value: "status" },
+                { text: "Kontrola PTS", value: "check_pts" },
                 { text: "Dohleduje se", value: "monitored_at" },
                 { text: "Akce", value: "actions" },
             ],

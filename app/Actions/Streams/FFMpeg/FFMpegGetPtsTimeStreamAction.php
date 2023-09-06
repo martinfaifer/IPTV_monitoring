@@ -10,6 +10,7 @@ class FFMpegGetPtsTimeStreamAction
 {
     public function execute(object $stream): mixed
     {
+        $ptsTimes = [];
 
         rescue(function () use ($stream) {
             unlink(public_path("storage/streamsPts/" . Str::slug($stream->nazev) . ".txt"));
@@ -26,8 +27,15 @@ class FFMpegGetPtsTimeStreamAction
         });
 sleep(5);
         $streamPtsFile = file_get_contents(public_path("storage/streamsPts/" . Str::slug($stream->nazev) . ".txt"));
-        dd(explode("pts_time", $streamPtsFile));
+        $explodedData = (explode("pts_time:", $streamPtsFile));
 
+        foreach($explodedData as $ptsData) {
+            if(is_numeric(substr($ptsData, 0,1))) {
+                array_push($ptsTimes, substr($ptsData, 0,1));
+            }
+        }
+
+        dd($ptsTimes);
         // $ffprobeAnalyzeAction = new FfProbeAnalyzeAction();
         // $firstOutput = $ffprobeAnalyzeAction->execute(stream: $stream);
 

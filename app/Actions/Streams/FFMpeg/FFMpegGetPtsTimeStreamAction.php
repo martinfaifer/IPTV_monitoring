@@ -11,6 +11,7 @@ class FFMpegGetPtsTimeStreamAction
     public function execute(object $stream): mixed
     {
         $ptsTimes = [];
+        $diffOfPtsTimes = [];
 
         rescue(function () use ($stream) {
             unlink(public_path("storage/streamsPts/" . Str::slug($stream->nazev) . ".txt"));
@@ -37,7 +38,14 @@ class FFMpegGetPtsTimeStreamAction
             }
         }
 
-        dd($ptsTimes);
+        for ($i = 1; $i < count($ptsTimes); $i++) {
+            $diff = $ptsTimes[$i] - $ptsTimes[$i - 1];
+            $diffOfPtsTimes[] = $diff;
+        }
+
+        print_r($diffOfPtsTimes);
+
+        //
         // $ffprobeAnalyzeAction = new FfProbeAnalyzeAction();
         // $firstOutput = $ffprobeAnalyzeAction->execute(stream: $stream);
 

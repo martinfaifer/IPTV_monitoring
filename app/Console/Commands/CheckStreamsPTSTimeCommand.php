@@ -31,21 +31,21 @@ class CheckStreamsPTSTimeCommand extends Command
     public function handle()
     {
         $streams = Stream::checkPts()->with('problemPts')->get();
-        // $getPtsTime = new FFMpegGetPtsTimeStreamAction();
+        $getPtsTime = new FFMpegGetPtsTimeStreamAction();
 
         foreach ($streams as $stream) {
-            CheckStreamPtsJob::dispatch($stream)->onQueue('ffprobe');
-            // $ptsTime = $getPtsTime->execute(stream: $stream);
+            // CheckStreamPtsJob::dispatch($stream)->onQueue('ffprobe');
+            $ptsTime = $getPtsTime->execute(stream: $stream);
 
-            // if ($ptsTime == 2) {
-            //     rescue(function () use ($stream) {
-            //         $stream->problemPts->delete();
-            //     });
-            // } else {
-            //     ProblemPts::firstOrCreate(
-            //         ['stream_id' => $stream->id]
-            //     );
-            // }
+            if ($ptsTime == 2) {
+                rescue(function () use ($stream) {
+                    $stream->problemPts->delete();
+                });
+            } else {
+                ProblemPts::firstOrCreate(
+                    ['stream_id' => $stream->id]
+                );
+            }
         }
     }
 }

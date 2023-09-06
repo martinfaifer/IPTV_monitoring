@@ -36,11 +36,11 @@ class CheckProblemedPTSStreansCommand extends Command
             foreach ($problemedStreams as $problemedStream) {
                 $ptsTime = $getPtsTime->execute(stream: $problemedStream->stream);
 
-                match ($ptsTime) {
-                    config('services.pts.time') => $problemedStream->delete(),
-                    0 => $problemedStream->delete(), // in stream is not find pts time
-                    default => ''
-                };
+                if ($ptsTime == 2) {
+                    rescue(function () use ($problemedStream) {
+                        $problemedStream->delete();
+                    });
+                }
             }
         } catch (\Throwable $th) {
             //throw $th;

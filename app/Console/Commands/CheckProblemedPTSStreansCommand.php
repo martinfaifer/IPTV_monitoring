@@ -36,6 +36,8 @@ class CheckProblemedPTSStreansCommand extends Command
             foreach ($problemedStreams as $problemedStream) {
                 $ptsTime = $getPtsTime->execute(stream: $problemedStream->stream);
 
+                echo "KONTROLA " . $problemedStream->stream_id . " PTS " . $ptsTime . PHP_EOL;
+
                 if ($ptsTime == 2) {
                     rescue(function () use ($problemedStream) {
                         $problemedStream->delete();

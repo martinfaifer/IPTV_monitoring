@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Models\Stream;
 use App\Models\ProblemPts;
-use App\Jobs\CheckStreamPtsJob;
 use Illuminate\Console\Command;
 use App\Actions\Streams\FFMpeg\FFMpegGetPtsTimeStreamAction;
 
@@ -34,7 +33,6 @@ class CheckStreamsPTSTimeCommand extends Command
         $getPtsTime = new FFMpegGetPtsTimeStreamAction();
 
         foreach ($streams as $stream) {
-            // CheckStreamPtsJob::dispatch($stream)->onQueue('ffprobe');
             $ptsTime = $getPtsTime->execute(stream: $stream);
 
             if ($ptsTime == 2) {

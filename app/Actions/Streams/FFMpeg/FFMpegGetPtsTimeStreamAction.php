@@ -25,7 +25,6 @@ class FFMpegGetPtsTimeStreamAction
             Process::timeout(5)->run($command);
         });
 
-        sleep(15);
         $streamPtsFile = file_get_contents(public_path("storage/streamsPts/" . Str::slug($stream->nazev) . ".txt"));
         dd($streamPtsFile);
         dd(explode("pts_time", $streamPtsFile));

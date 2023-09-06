@@ -43,7 +43,7 @@ class FFMpegGetPtsTimeStreamAction
             $diffOfPtsTimes[] = $diff;
         }
 
-        print_r($diffOfPtsTimes);
+        dd($diffOfPtsTimes);
 
         //
         // $ffprobeAnalyzeAction = new FfProbeAnalyzeAction();

@@ -43,6 +43,7 @@ class FFMpegGetPtsTimeStreamAction
         $allKeysCount = count($ptsTimes) - 1;
         $diffOfPtsTimes = $ptsTimes[$allKeysCount] - $ptsTimes[$allKeysCount - 1];
 
-        return $diffOfPtsTimes;
+        echo $stream->nazev . " ----> " . $diffOfPtsTimes;
+        return (int) $diffOfPtsTimes;
     }
 }

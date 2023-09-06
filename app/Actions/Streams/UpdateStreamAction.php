@@ -2,6 +2,7 @@
 
 namespace App\Actions\Streams;
 
+use App\Models\ProblemPts;
 use App\Models\Stream;
 use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 use App\Actions\Streams\Analyze\MarkStreamForKillAction;
@@ -24,6 +25,11 @@ class UpdateStreamAction
                 'status' => $status,
                 'check_pts' => $pts
             ]);
+
+            if ($pts == false) {
+                // delete from table
+                ProblemPts::where('stream_id', $stream->id)->delete();
+            }
 
             return true;
         }, function () {

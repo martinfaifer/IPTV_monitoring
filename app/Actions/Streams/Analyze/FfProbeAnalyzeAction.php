@@ -8,9 +8,9 @@ class FfProbeAnalyzeAction
     {
 
         if (str_contains($stream->stream_url, 'http')) {
-            $ffprobeResult = shell_exec("ffprobe -v quiet -print_format json -show_programs {$stream->stream_url} -timeout 2");
+            $ffprobeResult = shell_exec("ffprobe -v quiet -print_format json -show_programs -show_format -show_streams {$stream->stream_url} -timeout 2");
         } else {
-            $ffprobeResult = shell_exec("ffprobe -v quiet -print_format json -show_programs udp://{$stream->stream_url} -timeout 2");
+            $ffprobeResult = shell_exec("ffprobe -v quiet -print_format json -show_programs -show_format -show_streams udp://{$stream->stream_url} -timeout 2");
         }
 
         return match ($ffprobeResult) {

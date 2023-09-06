@@ -2,6 +2,7 @@
 
 namespace App\Actions\Streams\FFMpeg;
 
+use App\Models\ProblemPts;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Process;
 use App\Actions\Streams\Analyze\FfProbeAnalyzeAction;
@@ -42,30 +43,6 @@ class FFMpegGetPtsTimeStreamAction
         $allKeysCount = count($ptsTimes) - 1;
         $diffOfPtsTimes = $ptsTimes[$allKeysCount] - $ptsTimes[$allKeysCount - 1];
 
-        dd($diffOfPtsTimes);
-
-        //
-        // $ffprobeAnalyzeAction = new FfProbeAnalyzeAction();
-        // $firstOutput = $ffprobeAnalyzeAction->execute(stream: $stream);
-
-        // try {
-        //     if (array_key_exists('programs', $firstOutput)) {
-        //         $firstPts = ($firstOutput['programs'][0]['streams'][0]['start_time']);
-        //     }
-
-        //     $secondOutput = $ffprobeAnalyzeAction->execute(stream: $stream);
-
-        //     if (array_key_exists('programs', $secondOutput)) {
-        //         $secondPts = ($secondOutput['programs'][0]['streams'][0]['start_time']);
-        //     }
-
-        //     $ptsDiff = $secondPts - $firstPts;
-
-        //     echo "DIFF ----> " . $ptsDiff . PHP_EOL;
-
-        //     return (int) round($ptsDiff);
-        // } catch (\Throwable $th) {
-        //     return (int) 0;
-        // }
+        return $diffOfPtsTimes;
     }
 }

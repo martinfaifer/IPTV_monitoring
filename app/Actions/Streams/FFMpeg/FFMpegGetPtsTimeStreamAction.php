@@ -25,13 +25,15 @@ class FFMpegGetPtsTimeStreamAction
         rescue(function () use ($command) {
             Process::timeout(5)->run($command);
         });
-sleep(5);
+        sleep(5);
         $streamPtsFile = file_get_contents(public_path("storage/streamsPts/" . Str::slug($stream->nazev) . ".txt"));
         $explodedData = (explode("pts_time:", $streamPtsFile));
 
-        foreach($explodedData as $ptsData) {
-            if(is_numeric(substr($ptsData, 0,1))) {
-                array_push($ptsTimes, substr($ptsData, 0,1));
+        foreach ($explodedData as $ptsData) {
+            if (is_numeric(substr($ptsData, 0, 1))) {
+                if (!in_array(substr($ptsData, 0, 1), $ptsTimes)) {
+                    array_push($ptsTimes, substr($ptsData, 0, 1));
+                };
             }
         }
 

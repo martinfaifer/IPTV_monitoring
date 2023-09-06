@@ -36,7 +36,9 @@ class CheckStreamsPTSTimeCommand extends Command
             $ptsTime = $getPtsTime->execute(stream: $stream);
 
             if ($ptsTime == 2) {
-                $stream->problemPts->delete();
+                rescue(function () use ($stream) {
+                    $stream->problemPts->delete();
+                });
             } else {
                 ProblemPts::firstOrCreate(
                     ['stream_id' => $stream->id]

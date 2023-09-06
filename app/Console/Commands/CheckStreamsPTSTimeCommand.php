@@ -35,13 +35,13 @@ class CheckStreamsPTSTimeCommand extends Command
         foreach ($streams as $stream) {
             $ptsTime = $getPtsTime->execute(stream: $stream);
 
-            match ($ptsTime) {
-                config('services.pts.time') => $stream->problemPts->delete(),
-                0 => $stream->problemPts->delete(), // in stream is not find pts time
-                default => ProblemPts::firstOrCreate(
+            if ($ptsTime == 2) {
+                $stream->problemPts->delete();
+            } else {
+                ProblemPts::firstOrCreate(
                     ['stream_id' => $stream->id]
-                )
-            };
+                );
+            }
         }
     }
 }

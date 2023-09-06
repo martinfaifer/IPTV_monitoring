@@ -39,9 +39,7 @@ class CheckProblemedPTSStreansCommand extends Command
                 echo "KONTROLA " . $problemedStream->stream_id . " PTS " . $ptsTime . PHP_EOL;
 
                 if ($ptsTime == 2) {
-                    rescue(function () use ($problemedStream) {
-                        $problemedStream->delete();
-                    });
+                    $problemedStream->delete();
                 }
             }
         } catch (\Throwable $th) {

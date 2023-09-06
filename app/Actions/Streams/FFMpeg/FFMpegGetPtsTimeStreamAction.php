@@ -38,10 +38,9 @@ class FFMpegGetPtsTimeStreamAction
             }
         }
 
-        for ($i = 1; $i < count($ptsTimes); $i++) {
-            $diff = $ptsTimes[$i] - $ptsTimes[$i - 1];
-            $diffOfPtsTimes[] = $diff;
-        }
+        // take diff from last two
+        $allKeysCount = count($ptsTimes) - 1;
+        $diffOfPtsTimes = $ptsTimes[$allKeysCount] - $ptsTimes[$allKeysCount - 1];
 
         dd($diffOfPtsTimes);
 

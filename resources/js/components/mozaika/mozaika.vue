@@ -3,6 +3,7 @@
         <div>
             <ErrorStreamMozaika></ErrorStreamMozaika>
             <ProblemStreamMozaika></ProblemStreamMozaika>
+            <PtsProblemMozaika></PtsProblemMozaika>
             <CustomMozaika></CustomMozaika>
             <v-container fluid>
                 <p
@@ -45,6 +46,7 @@
 import CustomMozaika from "./CustomMozaika.vue";
 import ErrorStreamMozaika from "./ErrorStreamMozaika.vue";
 import ProblemStreamMozaika from "./ProblemStreamMozaika.vue";
+import PtsProblemMozaika from "./PtsProblemMozaika.vue";
 import ImageCard from "./ImageCards/ImageCard.vue";
 export default {
     metaInfo: {
@@ -67,6 +69,7 @@ export default {
         ErrorStreamMozaika,
         ProblemStreamMozaika,
         ImageCard,
+        PtsProblemMozaika
     },
 
     created() {

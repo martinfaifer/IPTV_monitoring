@@ -21,6 +21,7 @@ use App\Http\Controllers\Streams\StreamsHistoryController;
 use App\Http\Controllers\Streams\ShowStreamImageController;
 use App\Http\Controllers\Streams\StreamProblemPidController;
 use App\Http\Controllers\Streams\NotRunningStreamsController;
+use App\Http\Controllers\Streams\PtsProblemStreamsController;
 use App\Http\Controllers\Streams\ShowFfprobeStreamController;
 use App\Http\Controllers\Streams\ShowAudioStreamPidsController;
 use App\Http\Controllers\Streams\ShowVideoStreamPidsController;
@@ -72,6 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('history', StreamsHistoryController::class);
         Route::get('running', RunningStreamsController::class);
         Route::get('problems', ProblemStreamsController::class);
+        Route::get('pts-problems', PtsProblemStreamsController::class);
         Route::get('custom', CustomStreamsController::class);
         Route::get('not-running', NotRunningStreamsController::class);
         Route::get('image/{stream}', ShowStreamImageController::class);

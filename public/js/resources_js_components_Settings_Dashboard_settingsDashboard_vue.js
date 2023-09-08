@@ -78,6 +78,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -111,11 +163,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     translateName: function translateName(name) {
       if (name == "UsedDiskSpace") {
-        return "Využité místo HDD";
+        return "HDD";
       }
 
       if (name == "Database") {
-        return "Databáze";
+        return "Vytížení Databáze";
       }
 
       if (name == "DatabaseConnectionCount") {
@@ -129,6 +181,8 @@ __webpack_require__.r(__webpack_exports__);
       if (name == "CpuLoad") {
         return "Zatížení CPU";
       }
+
+      return name;
     },
     textColor: function textColor(result) {
       if (result == "Ok") {
@@ -141,6 +195,19 @@ __webpack_require__.r(__webpack_exports__);
 
       return "blue--text";
     },
+    pickBgColor: function pickBgColor(value) {
+      if (value <= 50) {
+        return "green";
+      }
+
+      if (value > 50 && value <= 75) {
+        return "orange";
+      }
+
+      if (value > 75) {
+        return "red";
+      }
+    },
     explodeTextAndTakeFirst: function explodeTextAndTakeFirst(data) {
       if (typeof data == "number") {
         return parseFloat(data).toFixed(1);
@@ -149,6 +216,13 @@ __webpack_require__.r(__webpack_exports__);
       var splitedData = data.split(" ");
       return splitedData[0];
     }
+  },
+  mounted: function mounted() {
+    setInterval(function () {
+      try {
+        this.index();
+      } catch (error) {}
+    }.bind(this), 6000);
   }
 });
 
@@ -1049,43 +1123,158 @@ var render = function () {
                 "v-col",
                 { key: item.id },
                 [
-                  _c(
-                    "v-card",
-                    {
-                      staticClass:
-                        "overflow-hidden rounded-lg blur shadow-blur",
-                      attrs: { flat: "" },
-                    },
-                    [
-                      _c("v-card-text", [
-                        _c("p", { staticClass: "headline text-center" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(_vm.translateName(item.name)) +
-                              "\n                        "
+                  item.label != "network"
+                    ? _c(
+                        "v-card",
+                        {
+                          staticClass:
+                            "overflow-hidden rounded-lg blur shadow-blur",
+                          attrs: { flat: "" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            [
+                              _c("p", { staticClass: "headline text-center" }, [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(_vm.translateName(item.name)) +
+                                    "\n                        "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-row",
+                                { staticClass: "justify-center my-2" },
+                                [
+                                  _c(
+                                    "v-progress-circular",
+                                    {
+                                      attrs: {
+                                        rotate: 360,
+                                        size: 140,
+                                        width: 10,
+                                        value: _vm.explodeTextAndTakeFirst(
+                                          item.shortSummary
+                                        ),
+                                        color: _vm.pickBgColor(
+                                          item.shortSummary
+                                        ),
+                                      },
+                                    },
+                                    [
+                                      _c(
+                                        "span",
+                                        { staticClass: "font-weight-bold" },
+                                        [
+                                          _vm._v(
+                                            "\n                                    " +
+                                              _vm._s(
+                                                _vm.explodeTextAndTakeFirst(
+                                                  item.shortSummary
+                                                )
+                                              ) +
+                                              "\n                                    %\n                                "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                ],
+                                1
+                              ),
+                            ],
+                            1
                           ),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            staticClass: "text-right title font-weight-bold",
-                            class: _vm.textColor(item.shortSummary),
-                          },
-                          [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(
-                                  _vm.explodeTextAndTakeFirst(item.shortSummary)
-                                ) +
-                                "\n                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                    ],
-                    1
-                  ),
+                        ],
+                        1
+                      )
+                    : _c(
+                        "v-card",
+                        {
+                          staticClass:
+                            "overflow-hidden rounded-lg blur shadow-blur",
+                          attrs: { flat: "" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            [
+                              _c("p", { staticClass: "headline text-center" }, [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(item.name) +
+                                    "\n                        "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-row",
+                                { staticClass: "justify-center my-2" },
+                                _vm._l(
+                                  item.shortSummary,
+                                  function (item, index) {
+                                    return _c(
+                                      "div",
+                                      { key: item, staticClass: "mx-auto" },
+                                      [
+                                        _c(
+                                          "v-progress-circular",
+                                          {
+                                            attrs: {
+                                              rotate: 360,
+                                              size: 140,
+                                              width: 10,
+                                              value: (item / 10000) * 100,
+                                              color: _vm.pickBgColor(
+                                                (item / 10000) * 100
+                                              ),
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "d-flex flex-column",
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "font-weight-bold",
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                            " +
+                                                        _vm._s(index) +
+                                                        "\n                                        "
+                                                    ),
+                                                  ]
+                                                ),
+                                                _vm._v(
+                                                  "\n                                        " +
+                                                    _vm._s(item) +
+                                                    " Mbps\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ],
+                                      1
+                                    )
+                                  }
+                                ),
+                                0
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
                 ],
                 1
               )
@@ -1100,11 +1289,7 @@ var render = function () {
               _c(
                 "v-col",
                 { attrs: { cols: "12", sm: "12", md: "4", lg: "4" } },
-                [
-                  _c("settingsHealthChart", {
-                    attrs: { title: "Využití Disku", name: "UsedDiskSpace" },
-                  }),
-                ],
+                [_c("SettingsDashboardNetwork")],
                 1
               ),
               _vm._v(" "),
@@ -1142,21 +1327,14 @@ var render = function () {
             [
               _c(
                 "v-col",
-                { attrs: { cols: "12", sm: "12", md: "6", lg: "6" } },
-                [_c("SettingsDashboardNetwork")],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { attrs: { cols: "12", sm: "12", md: "6", lg: "6" } },
+                { attrs: { cols: "12", sm: "12", md: "8", lg: "8" } },
                 [_c("SettingsDashboardStreamsStatuses")],
                 1
               ),
               _vm._v(" "),
               _c(
                 "v-col",
-                { attrs: { cols: "12" } },
+                { attrs: { cols: "12", sm: "12", md: "4", lg: "4" } },
                 [_c("settingsDashboardProblemStrems")],
                 1
               ),
@@ -1569,7 +1747,7 @@ var render = function () {
                     staticClass: "info--text",
                     attrs: {
                       dark: "",
-                      height: "200",
+                      height: "333",
                       type: "area",
                       options: _vm.chartOptions,
                       series: _vm.series,

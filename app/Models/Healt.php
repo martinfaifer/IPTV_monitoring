@@ -12,7 +12,7 @@ class Healt extends Model
 
     public static function scopeByName(Builder $query, string $checkName)
     {
-        $query->where('check_name', $checkName)->limit('60')->select('id', 'short_summary', 'created_at')
+        $query->where('check_name', $checkName)->limit('30')->select('id', 'short_summary', 'created_at')
             ->orderByDesc('id');
     }
 

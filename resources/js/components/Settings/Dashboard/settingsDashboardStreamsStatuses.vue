@@ -12,7 +12,7 @@
                         dark
                         class="info--text"
                         v-cloak
-                        height="200"
+                        height="333"
                         type="area"
                         :options="chartOptions"
                         :series="series"

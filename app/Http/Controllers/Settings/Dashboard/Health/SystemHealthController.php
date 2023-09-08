@@ -21,17 +21,15 @@ class SystemHealthController extends Controller
                     'label' => $usedDiskSpace->check_label,
                     'shortSummary' => str_replace("%", "", $usedDiskSpace->short_summary),
                     'status' => $usedDiskSpace->status,
-                    'meta' =>
-                    json_decode($usedDiskSpace->meta, true)
+                    'meta' => json_decode($usedDiskSpace->meta, true)
 
                 ],
                 [
                     'name' => $databaseConnectionCount->check_name,
                     'label' => $databaseConnectionCount->check_label,
-                    'shortSummary' => (int) substr($databaseConnectionCount->short_summary, 0, 1) / 1000,
+                    'shortSummary' => (int) $databaseConnectionCount->short_summary / 1000,
                     'status' => $databaseConnectionCount->status,
-                    'meta' =>
-                    json_decode($databaseConnectionCount->meta, true)
+                    'meta' => json_decode($databaseConnectionCount->meta, true)
 
                 ],
                 [
@@ -39,8 +37,7 @@ class SystemHealthController extends Controller
                     'label' => $cpuLoad->check_label,
                     'shortSummary' => substr($cpuLoad->short_summary, 0, 1),
                     'status' => $cpuLoad->status,
-                    'meta' =>
-                    json_decode($cpuLoad->meta, true)
+                    'meta' => json_decode($cpuLoad->meta, true)
 
                 ],
                 [

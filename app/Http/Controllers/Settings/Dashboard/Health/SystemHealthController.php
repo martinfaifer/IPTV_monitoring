@@ -27,7 +27,7 @@ class SystemHealthController extends Controller
                 [
                     'name' => $databaseConnectionCount->check_name,
                     'label' => $databaseConnectionCount->check_label,
-                    'shortSummary' => (int) $databaseConnectionCount->short_summary / 1000,
+                    'shortSummary' => ((int) $databaseConnectionCount->short_summary / 1000) * 100,
                     'status' => $databaseConnectionCount->status,
                     'meta' => json_decode($databaseConnectionCount->meta, true)
 

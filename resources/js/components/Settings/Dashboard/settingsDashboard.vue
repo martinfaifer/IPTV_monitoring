@@ -153,12 +153,8 @@ export default {
                 return "HDD";
             }
 
-            if (name == "Database") {
-                return "Vytížení Databáze";
-            }
-
             if (name == "DatabaseConnectionCount") {
-                return "Počet spojení do DB";
+                return "Vytížení Databáze";
             }
 
             if (name == "Redis") {

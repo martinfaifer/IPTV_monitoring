@@ -2,7 +2,7 @@
     <div>
         <div class="d-flex justify-space-between mt-3">
             <p class="headline">
-                Přehled streamu {{ stream.nazev }}
+                Přehled streamu {{ stream.nazev }} <span class="subtitle-1 grey--text"> {{ stream.stream_url }}</span>
                 <v-img
                     class="px-3"
                     :lazy-src="channel.logo"

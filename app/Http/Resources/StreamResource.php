@@ -17,6 +17,7 @@ class StreamResource extends JsonResource
         return [
             'id' => $this->id,
             'nazev' => $this->nazev,
+            'stream_url' => $this->stream_url,
             'status' => $this->status,
             'monitored_at' => $this->monitored_at?->diffForHumans(),
             'image' => '/streams/image/' . $this->id . '?' . rand(),

@@ -3829,10 +3829,12 @@ var render = function () {
           { staticClass: "headline" },
           [
             _vm._v(
-              "\n            Přehled streamu " +
-                _vm._s(_vm.stream.nazev) +
-                "\n            "
+              "\n            Přehled streamu " + _vm._s(_vm.stream.nazev) + " "
             ),
+            _c("span", { staticClass: "subtitle-1 grey--text" }, [
+              _vm._v(" " + _vm._s(_vm.stream.stream_url)),
+            ]),
+            _vm._v(" "),
             _c("v-img", {
               staticClass: "px-3",
               attrs: {

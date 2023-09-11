@@ -1,7 +1,17 @@
 <template>
     <div>
         <div class="d-flex justify-space-between mt-3">
-            <p class="headline">Přehled streamu {{ stream.nazev }}</p>
+            <p class="headline">
+                Přehled streamu {{ stream.nazev }}
+                <v-img
+                    class="px-3"
+                    :lazy-src="channel.logo"
+                    max-height="96"
+                    max-width="96"
+                    contain
+                    :src="channel.logo"
+                ></v-img>
+            </p>
             <p
                 v-if="stream.status == 'monitoring'"
                 class="mx-12 body-1 info--text font-weight-bold"
@@ -117,7 +127,7 @@
 </template>
 <script>
 export default {
-    props: ["stream"],
+    props: ["stream", "channel"],
     data() {
         return {
             streamStatusArray: [],

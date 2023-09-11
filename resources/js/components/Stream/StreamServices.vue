@@ -7,34 +7,18 @@
                     <v-col
                         cols="12"
                         sm="12"
-                        md="4"
-                        lg="4"
+                        md="6"
+                        lg="6"
                         class="mt-n5 d-flex justify-space-between"
                         v-for="(service, serviceKey) in streamPids"
                         :key="serviceKey"
                     >
-                        <span>
+                        <span class="my-3"  v-show="serviceKey != 'components'">
                             {{ serviceKey }}:
                             <span
-                                v-if="serviceKey != 'components'"
                                 class="font-weight-bold mx-2"
                                 >{{ service }}</span
                             >
-                            <span v-else class="font-weight-bold">
-                                <v-col
-                                    v-for="(
-                                        serviceItem, serviceItemKey
-                                    ) in service"
-                                    :key="serviceItemKey"
-
-                                    class="mt-n3"
-                                >
-                                    {{ serviceItemKey }}:
-                                    <span class="font-weight-bold mx-2">
-                                        {{ serviceItem }}</span
-                                    >
-                                </v-col>
-                            </span>
                         </span>
                     </v-col>
                 </v-row>

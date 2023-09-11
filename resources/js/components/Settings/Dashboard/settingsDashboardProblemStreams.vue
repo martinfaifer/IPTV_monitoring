@@ -13,6 +13,8 @@
                         :items="problemStreams"
                         :items-per-page="5"
                         :loading="problemStreams.length == 0"
+                        :sort-by="['problems.length']"
+                        :sort-desc="[true]"
                     >
                         <template v-slot:item.actions="{ item }">
                             <v-icon

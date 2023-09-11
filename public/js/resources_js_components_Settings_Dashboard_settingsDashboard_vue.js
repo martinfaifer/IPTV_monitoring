@@ -166,12 +166,8 @@ __webpack_require__.r(__webpack_exports__);
         return "HDD";
       }
 
-      if (name == "Database") {
-        return "Vytížení Databáze";
-      }
-
       if (name == "DatabaseConnectionCount") {
-        return "Počet spojení do DB";
+        return "Vytížení Databáze";
       }
 
       if (name == "Redis") {
@@ -327,6 +323,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -1472,6 +1470,8 @@ var render = function () {
                       items: _vm.problemStreams,
                       "items-per-page": 5,
                       loading: _vm.problemStreams.length == 0,
+                      "sort-by": ["problems.length"],
+                      "sort-desc": [true],
                     },
                     scopedSlots: _vm._u([
                       {

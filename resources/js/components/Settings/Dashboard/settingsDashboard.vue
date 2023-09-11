@@ -19,15 +19,15 @@
                                     :width="10"
                                     :value="
                                         explodeTextAndTakeFirst(
-                                            item.shortSummary
+                                            item.value
                                         )
                                     "
-                                    :color="pickBgColor(item.shortSummary)"
+                                    :color="pickBgColor(item.value)"
                                 >
                                     <span class="font-weight-bold">
                                         {{
                                             explodeTextAndTakeFirst(
-                                                item.shortSummary
+                                                item.value
                                             )
                                         }}
                                         %

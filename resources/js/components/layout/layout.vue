@@ -4,10 +4,10 @@
             <VerticalMenu></VerticalMenu>
             <!-- notifikace pro uzivatele z rozhraní o provedení akcí -->
             <SnackBarNotification></SnackBarNotification>
-            <v-main >
+            <v-main>
                 <v-container fluid class="mx-auto">
                     <!-- <notification></notification> -->
-                    <router-view > </router-view>
+                    <router-view> </router-view>
                 </v-container>
             </v-main>
         </div>

@@ -663,6 +663,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -676,11 +688,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       alertSideBar: false,
       streamsHistory: [],
-      screenWidth: "25%"
+      screenWidth: "25%",
+      multiLine: true,
+      snackbar: false
     };
   },
   created: function created() {
     this.index();
+    this.checkNumberOfPtsProblemStreams();
   },
   methods: {
     index: function index() {
@@ -690,12 +705,23 @@ __webpack_require__.r(__webpack_exports__);
         _this.streamsHistory = response.data;
       });
     },
-    websocketData: function websocketData() {
+    checkNumberOfPtsProblemStreams: function checkNumberOfPtsProblemStreams() {
       var _this2 = this;
+
+      axios.get("streams/pts-problems").then(function (response) {
+        if (response.data.length > 10) {
+          _this2.snackbar = true;
+        } else {
+          _this2.snackbar = false;
+        }
+      });
+    },
+    websocketData: function websocketData() {
+      var _this3 = this;
 
       Echo.channel("StreamHistoryStatuses").listen("BroadcastStreamsHistoryStatusEvent", function (e) {
         console.log(e);
-        _this2.streamsHistory = e[0];
+        _this3.streamsHistory = e[0];
       });
     },
     returnToHome: function returnToHome() {
@@ -771,16 +797,21 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.websocketData();
     window.addEventListener("resize", function () {
       if (window.innerWidth >= "1024") {
-        _this3.screenWidth = "35%";
+        _this4.screenWidth = "35%";
       } else {
-        _this3.screenWidth = "100%";
+        _this4.screenWidth = "100%";
       }
     });
+    setInterval(function () {
+      try {
+        this.checkNumberOfPtsProblemStreams();
+      } catch (error) {}
+    }.bind(this), 6000);
   },
   watch: {
     screenWidth: function screenWidth() {
@@ -2135,6 +2166,33 @@ var render = function () {
               ),
             ],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-snackbar",
+            {
+              attrs: {
+                "multi-line": _vm.multiLine,
+                timeout: -1,
+                top: "",
+                centered: "",
+                color: "rgba(172, 76, 0, 0.9)",
+              },
+              model: {
+                value: _vm.snackbar,
+                callback: function ($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar",
+              },
+            },
+            [
+              _c("span", { staticClass: "font-weight-medium" }, [
+                _vm._v(
+                  "\n                Vysoké množství streamů s rozhozeným I frame!!!\n            "
+                ),
+              ]),
+            ]
           ),
         ],
         1

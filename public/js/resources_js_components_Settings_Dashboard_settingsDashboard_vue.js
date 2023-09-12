@@ -1153,11 +1153,9 @@ var render = function () {
                                         size: 140,
                                         width: 10,
                                         value: _vm.explodeTextAndTakeFirst(
-                                          item.shortSummary
+                                          item.value
                                         ),
-                                        color: _vm.pickBgColor(
-                                          item.shortSummary
-                                        ),
+                                        color: _vm.pickBgColor(item.value),
                                       },
                                     },
                                     [
@@ -1169,7 +1167,7 @@ var render = function () {
                                             "\n                                    " +
                                               _vm._s(
                                                 _vm.explodeTextAndTakeFirst(
-                                                  item.shortSummary
+                                                  item.value
                                                 )
                                               ) +
                                               "\n                                    %\n                                "

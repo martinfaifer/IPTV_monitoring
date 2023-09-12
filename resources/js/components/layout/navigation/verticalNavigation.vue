@@ -50,6 +50,18 @@
                     </span>
                 </v-tooltip>
             </div>
+            <v-snackbar
+                v-model="snackbar"
+                :multi-line="multiLine"
+                :timeout="-1"
+                top
+                centered
+                color="rgba(172, 76, 0, 0.9)"
+            >
+                <span class="font-weight-medium">
+                    Vysoké množství streamů s rozhozeným I frame!!!
+                </span>
+            </v-snackbar>
         </v-app-bar>
         <v-navigation-drawer
             style="z-index: 100"
@@ -116,22 +128,35 @@ export default {
     components: {
         Search,
         User,
-        Weather
+        Weather,
     },
     data() {
         return {
             alertSideBar: false,
             streamsHistory: [],
             screenWidth: "25%",
+            multiLine: true,
+            snackbar: false,
         };
     },
     created() {
         this.index();
+        this.checkNumberOfPtsProblemStreams();
     },
     methods: {
         index() {
             axios.get("streams/history").then((response) => {
                 this.streamsHistory = response.data;
+            });
+        },
+
+        checkNumberOfPtsProblemStreams() {
+            axios.get("streams/pts-problems").then((response) => {
+                if (response.data.length > 10) {
+                    this.snackbar = true;
+                } else {
+                    this.snackbar = false;
+                }
             });
         },
 
@@ -229,6 +254,15 @@ export default {
                 this.screenWidth = "100%";
             }
         });
+
+        setInterval(
+            function () {
+                try {
+                    this.checkNumberOfPtsProblemStreams();
+                } catch (error) {}
+            }.bind(this),
+            6000
+        );
     },
 
     watch: {

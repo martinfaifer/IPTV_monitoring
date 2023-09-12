@@ -135,7 +135,7 @@ export default {
             alertSideBar: false,
             streamsHistory: [],
             screenWidth: "25%",
-            multiLine: true,
+            multiLine: false,
             snackbar: false,
         };
     },

@@ -42,7 +42,7 @@ class Stream extends Model
 
     public function history(): HasMany
     {
-        return $this->hasMany(StreamHistoryStatus::class, 'stream_id', 'id')->select(['id', 'status', 'created_at'])->take(10);
+        return $this->hasMany(StreamHistoryStatus::class, 'stream_id', 'id')->select(['id', 'status', 'created_at'])->orderBy('created_at', 'DESC')->take(10);
     }
 
     public function processes(): BelongsTo

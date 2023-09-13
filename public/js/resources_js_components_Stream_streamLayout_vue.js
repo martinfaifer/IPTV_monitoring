@@ -2059,6 +2059,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5477,26 +5492,56 @@ var render = function () {
                                       _c(
                                         "v-row",
                                         [
-                                          _c(
-                                            "v-col",
-                                            {
-                                              attrs: {
-                                                cols: "12",
-                                                sm: "12",
-                                                md: "4",
-                                                lg: "4",
-                                              },
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                        Žánr: " +
-                                                  _vm._s(
-                                                    _vm.iptvDokuData.kategorie
-                                                  ) +
-                                                  "\n                                    "
-                                              ),
-                                            ]
-                                          ),
+                                          _vm.iptvDokuData.tags.length > 0
+                                            ? _c(
+                                                "v-col",
+                                                {
+                                                  attrs: {
+                                                    cols: "12",
+                                                    sm: "12",
+                                                    md: "4",
+                                                    lg: "4",
+                                                  },
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        Štítky: " +
+                                                      _vm._s(
+                                                        _vm.iptvDokuData.tags
+                                                      ) +
+                                                      "\n                                        "
+                                                  ),
+                                                  _vm._l(
+                                                    _vm.iptvDokuData.tags,
+                                                    function (tag) {
+                                                      return _c(
+                                                        "span",
+                                                        { key: tag.id },
+                                                        [
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "mx-auto",
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "\n                                                " +
+                                                                  _vm._s(
+                                                                    tag.tagName
+                                                                  ) +
+                                                                  "\n                                                ,\n                                            "
+                                                              ),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      )
+                                                    }
+                                                  ),
+                                                ],
+                                                2
+                                              )
+                                            : _vm._e(),
                                           _vm._v(" "),
                                           _c(
                                             "v-col",

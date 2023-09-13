@@ -40,8 +40,23 @@
                                     v-if="iptvDokuData.length != 0"
                                 >
                                     <v-row>
-                                        <v-col cols="12" sm="12" md="4" lg="4">
-                                            Žánr: {{ iptvDokuData.kategorie }}
+                                        <v-col
+                                            cols="12"
+                                            sm="12"
+                                            md="4"
+                                            lg="4"
+                                            v-if="iptvDokuData.tags.length > 0"
+                                        >
+                                            Štítky: {{ iptvDokuData.tags }}
+                                            <span
+                                                v-for="tag in iptvDokuData.tags"
+                                                :key="tag.id"
+                                            >
+                                                <span class="mx-auto">
+                                                    {{ tag.tagName }}
+                                                    ,
+                                                </span>
+                                            </span>
                                         </v-col>
                                         <v-col cols="12" sm="12" md="8" lg="8">
                                             <span

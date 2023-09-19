@@ -1740,10 +1740,9 @@ var render = function () {
           _vm._v(" "),
           _c("v-col", { attrs: { cols: "12", sm: "12", md: "12", lg: "12" } }, [
             _c("div", { staticClass: "ml-1" }, [
-              _c("strong", {
-                staticClass: "white--text",
-                domProps: { textContent: _vm._s(_vm.stream.msg) },
-              }),
+              _c("strong", { staticClass: "white--text" }, [
+                _vm._v(" Výpadek od " + _vm._s(_vm.stream.updated_at)),
+              ]),
             ]),
           ]),
         ],

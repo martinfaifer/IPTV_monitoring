@@ -11,7 +11,7 @@
             <p class="text-center title white--text" v-html="stream.nazev"></p>
             <v-col cols="12" sm="12" md="12" lg="12">
                 <div class="ml-1">
-                    <strong class="white--text" v-text="stream.msg"> </strong>
+                    <strong class="white--text"> Výpadek od {{ stream.updated_at }}</strong>
                 </div>
             </v-col>
         </v-card-text>

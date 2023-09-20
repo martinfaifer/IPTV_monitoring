@@ -45,6 +45,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -170,9 +178,9 @@ var render = function () {
       _c(
         "v-navigation-drawer",
         {
-          staticClass: "mt-8",
-          staticStyle: { background: "linear-gradient(#0D1426, #000000)" },
-          attrs: { fixed: "", app: "" },
+          staticClass: "mt-10",
+          staticStyle: { background: "linear-gradient(#0d1426, #000000)" },
+          attrs: { fixed: "", app: "", "mini-variant": "" },
           model: {
             value: _vm.drawer,
             callback: function ($$v) {
@@ -196,7 +204,38 @@ var render = function () {
                 [
                   _c(
                     "v-list-item-icon",
-                    [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
+                    [
+                      _c(
+                        "v-tooltip",
+                        {
+                          attrs: { right: "" },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "activator",
+                                fn: function (ref) {
+                                  var on = ref.on
+                                  var attrs = ref.attrs
+                                  return [
+                                    _c(
+                                      "v-icon",
+                                      _vm._g(
+                                        _vm._b({}, "v-icon", attrs, false),
+                                        on
+                                      ),
+                                      [_vm._v(_vm._s(item.icon))]
+                                    ),
+                                  ]
+                                },
+                              },
+                            ],
+                            null,
+                            true
+                          ),
+                        },
+                        [_vm._v(" "), _c("span", [_vm._v(_vm._s(item.title))])]
+                      ),
+                    ],
                     1
                   ),
                   _vm._v(" "),

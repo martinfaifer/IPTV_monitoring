@@ -2,11 +2,12 @@
     <div>
         <!-- sidebar -->
         <v-navigation-drawer
-            style="background: linear-gradient(#0D1426, #000000)"
+            style="background: linear-gradient(#0d1426, #000000)"
             v-model="drawer"
             fixed
             app
-            class="mt-8"
+            class="mt-10"
+            mini-variant
         >
             <v-list nav dense>
                 <v-list-item
@@ -17,7 +18,14 @@
                     :to="item.route"
                 >
                     <v-list-item-icon>
-                        <v-icon>{{ item.icon }}</v-icon>
+                        <v-tooltip right>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-icon v-bind="attrs" v-on="on">{{
+                                    item.icon
+                                }}</v-icon>
+                            </template>
+                            <span>{{ item.title }}</span>
+                        </v-tooltip>
                     </v-list-item-icon>
 
                     <v-list-item-content>

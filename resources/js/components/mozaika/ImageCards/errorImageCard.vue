@@ -8,7 +8,7 @@
         color="#EF5350"
     >
         <v-card-text>
-            <p class="text-center title white--text" v-html="stream.nazev"></p>
+            <p class="text-center subtitle-1 font-weight-bold white--text" v-html="stream.nazev"></p>
             <v-col cols="12" sm="12" md="12" lg="12">
                 <div class="ml-1">
                     <strong class="white--text"> Výpadek od {{ stream.updated_at }}</strong>

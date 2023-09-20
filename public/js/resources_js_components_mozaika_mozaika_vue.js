@@ -1734,7 +1734,7 @@ var render = function () {
         "v-card-text",
         [
           _c("p", {
-            staticClass: "text-center title white--text",
+            staticClass: "text-center subtitle-1 font-weight-bold white--text",
             domProps: { innerHTML: _vm._s(_vm.stream.nazev) },
           }),
           _vm._v(" "),

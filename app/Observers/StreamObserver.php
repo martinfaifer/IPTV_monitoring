@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Stream;
+use App\Models\SendedStreamEmail;
 use Illuminate\Support\Facades\Cache;
 use App\Events\BroadcastErrorStreamsEvent;
 use App\Events\BroadcastProblemStreamsEvent;
@@ -33,6 +34,11 @@ class StreamObserver
      */
     public function updated(Stream $stream)
     {
+
+        if ($stream->status != Stream::STATUS_CAN_NOT_START) {
+            SendedStreamEmail::where('stream_id', $stream->id)->delete();
+        }
+
         Cache::forget('stream_' . $stream->id);
         if ($stream->status == Stream::STATUS_WAITING) {
             (new DeleteAllStreamCacheDataAction())->execute(stream: $stream);
@@ -62,6 +68,9 @@ class StreamObserver
     {
         (new KillTsDuckStreamProcessAction())->execute($stream);
         (new DeleteAllStreamCacheDataAction())->execute($stream);
+
+        SendedStreamEmail::where('stream_id', $stream->id)->delete();
+
         Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
 
         $notRunnngStreams = new NotRunningStreamsResource([]);

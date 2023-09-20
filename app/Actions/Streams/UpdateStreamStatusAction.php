@@ -2,6 +2,7 @@
 
 namespace App\Actions\Streams;
 
+use App\Models\SendedStreamEmail;
 use App\Models\Stream;
 use App\Enums\CacheKeyEnum;
 use App\Models\StreamHistoryStatus;
@@ -42,7 +43,7 @@ class UpdateStreamStatusAction
                 $this->monitored_at = now();
             }
 
-            rescue(function() use ($stream, $status) {
+            rescue(function () use ($stream, $status) {
                 $stream->update([
                     'status' => $status,
                     'monitored_at' => $this->monitored_at,
@@ -50,7 +51,7 @@ class UpdateStreamStatusAction
             });
 
 
-            rescue(function () use ($stream,$status) {
+            rescue(function () use ($stream, $status) {
                 StreamHistoryStatus::create([
                     'stream_id' => $stream->id,
                     'status' => $status

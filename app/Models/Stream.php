@@ -37,7 +37,7 @@ class Stream extends Model
     protected $casts = [
         'monitored_at' => 'datetime',
         'created_at' => 'datetime',
-        'updated_at' => 'date:m.d. H:m',
+        'updated_at' => 'date:d.m. H:m',
         'check_pts' => 'boolean',
     ];
 

@@ -54,7 +54,7 @@ class ErrorStreamEmailNotificationCommand extends Command
                     // send email
                     SendEmailJob::dispatch(
                         $notification->email,
-                        "Nefunkční kanál " . $stream->nazev,
+                        "Nefunkční kanál déle jak 12h " . $stream->nazev,
                         'Nefunguje kanál ' . $stream->nazev
                     );
                 }

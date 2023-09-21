@@ -47,7 +47,7 @@
                                             lg="4"
                                             v-if="iptvDokuData.tags.length > 0"
                                         >
-                                            Štítky: {{ iptvDokuData.tags }}
+                                            Štítky:
                                             <span
                                                 v-for="tag in iptvDokuData.tags"
                                                 :key="tag.id"

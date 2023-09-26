@@ -38,6 +38,7 @@ use App\Http\Controllers\Streams\StreamPidDiscontinuityStartedTimeController;
 use App\Http\Controllers\Settings\Dashboard\Network\AvgNetworkSpeedController;
 use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
 use App\Http\Controllers\Settings\Dashboard\SystemInformation\SystemInformationController;
+use App\Http\Controllers\StreamShedulerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -118,6 +119,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('', [SettingsStreamController::class, 'store']);
             Route::patch('{stream}', [SettingsStreamController::class, 'update']);
             Route::delete('{stream}', [SettingsStreamController::class, 'destroy']);
+            Route::prefix('shedule')->group(function () {
+                Route::get('{stream}', [StreamShedulerController::class, 'show']);
+                Route::post('{stream}', [StreamShedulerController::class, 'store']);
+                Route::delete('{streamSheduler}', [StreamShedulerController::class, 'destroy']);
+            });
         });
 
         Route::middleware('isAdmin')->prefix('users')->group(function () {

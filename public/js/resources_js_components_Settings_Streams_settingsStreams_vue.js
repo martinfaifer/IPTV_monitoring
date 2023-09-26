@@ -352,6 +352,175 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -359,6 +528,8 @@ __webpack_require__.r(__webpack_exports__);
       warningDialog: false,
       editDialog: false,
       changeStreamStatus: false,
+      sheduleDialog: false,
+      newSheduleDialog: false,
       formData: [],
       errors: [],
       search: "",
@@ -382,6 +553,19 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: "Dohleduje se",
         value: "monitored_at"
+      }, {
+        text: "Akce",
+        value: "actions"
+      }],
+      headersSheduler: [{
+        text: "Denně",
+        value: "is_daily"
+      }, {
+        text: "Začátek",
+        value: "start_time"
+      }, {
+        text: "Konec",
+        value: "end_time"
       }, {
         text: "Akce",
         value: "actions"
@@ -425,21 +609,69 @@ __webpack_require__.r(__webpack_exports__);
       this.warningDialog = false;
       this.editDialog = false;
       this.changeStreamStatus = false;
+      this.sheduleDialog = false;
+      this.newSheduleDialog = false;
       this.formData = [];
       this.errors = [];
+    },
+    openSheduleDialog: function openSheduleDialog(streamId) {
+      this.loadEvents(streamId);
+      this.sheduleDialog = true;
+    },
+    loadEvents: function loadEvents(streamId) {
+      var _this3 = this;
+
+      axios.get("settings/streams/shedule/" + streamId).then(function (response) {
+        _this3.formData = response.data;
+        _this3.formData.streamId = streamId;
+      });
+    },
+    openNewSheduleDialog: function openNewSheduleDialog() {
+      this.newSheduleDialog = true;
+    },
+    storeNewShedule: function storeNewShedule() {
+      var _this4 = this;
+
+      var streamId = this.formData.streamId;
+      axios.post("settings/streams/shedule/" + streamId, {
+        start_time: this.formData.newStartTime,
+        start_date: this.formData.newStartDate,
+        end_time: this.formData.newEndTime,
+        end_date: this.formData.newEndDate,
+        is_daily: this.formData.isDaily
+      }).then(function (response) {
+        _this4.$store.state.alerts = response.data;
+        _this4.newSheduleDialog = false;
+        _this4.formData.newStartTime = "";
+        _this4.formData.newStartDate = "";
+        _this4.formData.newEndTime = "";
+        _this4.formData.newEndDate = "";
+        _this4.formData.isDaily = "";
+
+        _this4.loadEvents(streamId);
+      });
+    },
+    removeTime: function removeTime(eventId) {
+      var _this5 = this;
+
+      axios["delete"]("settings/streams/shedule/" + eventId).then(function (response) {
+        _this5.$store.state.alerts = response.data;
+
+        _this5.loadEvents(_this5.formData.streamId);
+      });
     },
     openNewStreamDialog: function openNewStreamDialog() {
       this.createDialog = true;
     },
     deleteStream: function deleteStream() {
-      var _this3 = this;
+      var _this6 = this;
 
       axios["delete"]("settings/streams/" + this.formData).then(function (response) {
-        _this3.$store.state.alerts = response.data;
+        _this6.$store.state.alerts = response.data;
 
-        _this3.closeDialog();
+        _this6.closeDialog();
 
-        _this3.index();
+        _this6.index();
       });
     },
     deleteItem: function deleteItem(streamId) {
@@ -451,20 +683,20 @@ __webpack_require__.r(__webpack_exports__);
       this.editDialog = true;
     },
     editStream: function editStream() {
-      var _this4 = this;
+      var _this7 = this;
 
       axios.patch("settings/streams/" + this.stream.id, {
         nazev: this.stream.nazev,
         changeStreamStatus: this.changeStreamStatus,
         check_pts: this.stream.check_pts
       }).then(function (response) {
-        _this4.$store.state.alerts = response.data;
+        _this7.$store.state.alerts = response.data;
 
-        _this4.closeDialog();
+        _this7.closeDialog();
 
-        _this4.index();
+        _this7.index();
       })["catch"](function (error) {
-        _this4.errors = error.response.data.errors;
+        _this7.errors = error.response.data.errors;
       });
     }
   }
@@ -848,6 +1080,24 @@ var render = function () {
                                     },
                                   },
                                   [_vm._v("mdi-delete")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-icon",
+                                  {
+                                    staticClass: "ml-6",
+                                    attrs: { color: "yellow", small: "" },
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.openSheduleDialog(item.id)
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                mdi-calendar\n                            "
+                                    ),
+                                  ]
                                 ),
                               ]
                             },
@@ -1434,6 +1684,480 @@ var render = function () {
                       ),
                     ],
                     1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: {
+            persistent: "",
+            "max-width": "800px",
+            "overlay-color": "rgb(17, 27, 45)",
+          },
+          model: {
+            value: _vm.sheduleDialog,
+            callback: function ($$v) {
+              _vm.sheduleDialog = $$v
+            },
+            expression: "sheduleDialog",
+          },
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("p", { staticClass: "pt-3 text-center subtitle-1" }, [
+                _vm._v(
+                  "\n                Automatické nedohledování streamu\n            "
+                ),
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    { staticClass: "pt-3" },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "d-flex flex-row-reverse" },
+                        [
+                          _c(
+                            "v-icon",
+                            {
+                              attrs: { color: "green" },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.openNewSheduleDialog()
+                                },
+                              },
+                            },
+                            [_vm._v("mdi-plus")]
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            {
+                              attrs: {
+                                cols: "12",
+                                sm: "12",
+                                md: "12",
+                                lg: "12",
+                              },
+                            },
+                            [
+                              _c("v-data-table", {
+                                attrs: {
+                                  headers: _vm.headersSheduler,
+                                  items: _vm.formData,
+                                },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "item.is_daily",
+                                    fn: function (ref) {
+                                      var item = ref.item
+                                      return [
+                                        item.is_daily == true
+                                          ? _c(
+                                              "v-icon",
+                                              {
+                                                attrs: {
+                                                  small: "",
+                                                  color: "green",
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        mdi-check\n                                    "
+                                                ),
+                                              ]
+                                            )
+                                          : _c(
+                                              "v-icon",
+                                              {
+                                                attrs: {
+                                                  small: "",
+                                                  color: "red",
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        mdi-close\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                      ]
+                                    },
+                                  },
+                                  {
+                                    key: "item.actions",
+                                    fn: function (ref) {
+                                      var item = ref.item
+                                      return [
+                                        _c(
+                                          "v-icon",
+                                          {
+                                            attrs: { small: "", color: "red" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.removeTime(item.id)
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                        mdi-delete\n                                    "
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    },
+                                  },
+                                ]),
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                { attrs: { color: "#101B1D" } },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        color: "blue darken-1",
+                        plain: "",
+                        outlined: "",
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.closeDialog()
+                        },
+                      },
+                    },
+                    [_vm._v("\n                    Zavřít\n                ")]
+                  ),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: {
+            persistent: "",
+            "max-width": "1600px",
+            "overlay-color": "rgb(17, 27, 45)",
+          },
+          model: {
+            value: _vm.newSheduleDialog,
+            callback: function ($$v) {
+              _vm.newSheduleDialog = $$v
+            },
+            expression: "newSheduleDialog",
+          },
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("p", { staticClass: "pt-3 text-center subtitle-1" }, [
+                _vm._v("Nové časové okno"),
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    { staticClass: "pt-3" },
+                    [
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c("v-checkbox", {
+                                attrs: { label: "Opakovat denně?" },
+                                model: {
+                                  value: _vm.formData.isDaily,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.formData, "isDaily", $$v)
+                                  },
+                                  expression: "formData.isDaily",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "body-2 text-center font-weight-medium",
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Začátek nedohledování streamu\n                            "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-col",
+                                    {
+                                      attrs: {
+                                        cols: "12",
+                                        sm: "12",
+                                        md: "6",
+                                        lg: "6",
+                                      },
+                                    },
+                                    [
+                                      _c("v-time-picker", {
+                                        attrs: {
+                                          color: "#0b131f",
+                                          format: "24hr",
+                                          landscape: "",
+                                        },
+                                        model: {
+                                          value: _vm.formData.newStartTime,
+                                          callback: function ($$v) {
+                                            _vm.$set(
+                                              _vm.formData,
+                                              "newStartTime",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "formData.newStartTime",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    {
+                                      attrs: {
+                                        cols: "12",
+                                        sm: "12",
+                                        md: "6",
+                                        lg: "6",
+                                      },
+                                    },
+                                    [
+                                      !_vm.formData.isDaily ||
+                                      _vm.formData.isDaily == false
+                                        ? _c("v-date-picker", {
+                                            attrs: { landscape: "" },
+                                            model: {
+                                              value: _vm.formData.newStartDate,
+                                              callback: function ($$v) {
+                                                _vm.$set(
+                                                  _vm.formData,
+                                                  "newStartDate",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "formData.newStartDate",
+                                            },
+                                          })
+                                        : _vm._e(),
+                                    ],
+                                    1
+                                  ),
+                                ],
+                                1
+                              ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "body-2 text-center font-weight-medium",
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Konec nedohledování streamu\n                            "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-col",
+                                    {
+                                      attrs: {
+                                        cols: "12",
+                                        sm: "12",
+                                        md: "6",
+                                        lg: "6",
+                                      },
+                                    },
+                                    [
+                                      _c("v-time-picker", {
+                                        attrs: {
+                                          color: "#0b131f",
+                                          format: "24hr",
+                                          landscape: "",
+                                        },
+                                        model: {
+                                          value: _vm.formData.newEndTime,
+                                          callback: function ($$v) {
+                                            _vm.$set(
+                                              _vm.formData,
+                                              "newEndTime",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "formData.newEndTime",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    {
+                                      attrs: {
+                                        cols: "12",
+                                        sm: "12",
+                                        md: "6",
+                                        lg: "6",
+                                      },
+                                    },
+                                    [
+                                      !_vm.formData.isDaily ||
+                                      _vm.formData.isDaily == false
+                                        ? _c("v-date-picker", {
+                                            attrs: { landscape: "" },
+                                            model: {
+                                              value: _vm.formData.newEndDate,
+                                              callback: function ($$v) {
+                                                _vm.$set(
+                                                  _vm.formData,
+                                                  "newEndDate",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "formData.newEndDate",
+                                            },
+                                          })
+                                        : _vm._e(),
+                                    ],
+                                    1
+                                  ),
+                                ],
+                                1
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                { attrs: { color: "#101B1D" } },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        color: "blue darken-1",
+                        plain: "",
+                        outlined: "",
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.closeDialog()
+                        },
+                      },
+                    },
+                    [_vm._v("\n                    Zavřít\n                ")]
+                  ),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        color: "green darken-1",
+                        plain: "",
+                        outlined: "",
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.storeNewShedule()
+                        },
+                      },
+                    },
+                    [_vm._v("\n                    Uložit\n                ")]
                   ),
                 ],
                 1

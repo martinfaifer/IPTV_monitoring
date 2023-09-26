@@ -27,21 +27,15 @@ class StreamDiagnosticTsDuckService
 
     public function monitoring(object $stream)
     {
-
         while (true) {
-            // $loop = Loop::get();
-            // $loop->addPeriodicTimer(4.0, function () use ($stream, $loop) {
             // kontrola zda stream má být dohledován
             if ($this->check_if_stream_can_be_kill(stream: $stream) == true) {
                 $this->change_stream_status_and_release_them(stream: $stream);
                 // kill process
                 (new KillTsDuckStreamProcessAction())->execute($stream);
-                // $loop->stop();
                 exit();
             }
 
-            // lock stream
-            // (new LockStreamAction())->execute($stream);
             // provedení analýzi streamu
             $analyzeResultInJson = (new TsDuckAnalyzeAction())->execute(streamUrl: $stream->stream_url);
 
@@ -58,9 +52,7 @@ class StreamDiagnosticTsDuckService
             }
 
             unset($analyzeResultInJson, $analyzedResultInArray);
-            // });
 
-            // $loop->run();
             sleep(4);
         }
     }

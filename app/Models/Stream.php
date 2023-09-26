@@ -66,6 +66,11 @@ class Stream extends Model
         return $this->hasOne(SendedStreamEmail::class, 'stream_id', 'id');
     }
 
+    public function sheduler(): HasMany
+    {
+        return $this->hasMany(StreamSheduler::class, 'stream_id', 'id');
+    }
+
     public static function scopeIsNotMonitored(Builder $query)
     {
         $query

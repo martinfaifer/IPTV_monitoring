@@ -137,6 +137,14 @@
                                     color="red"
                                     >mdi-delete</v-icon
                                 >
+                                <v-icon
+                                    color="yellow"
+                                    small
+                                    class="ml-6"
+                                    @click="openSheduleDialog(item.id)"
+                                >
+                                    mdi-calendar
+                                </v-icon>
                             </template>
                         </v-data-table>
                     </v-card>
@@ -337,6 +345,167 @@
                 </v-card>
             </v-form>
         </v-dialog>
+
+        <v-dialog
+            v-model="sheduleDialog"
+            persistent
+            max-width="800px"
+            overlay-color="rgb(17, 27, 45)"
+        >
+            <v-card>
+                <p class="pt-3 text-center subtitle-1">
+                    Automatické nedohledování streamu
+                </p>
+                <v-card-text>
+                    <v-container class="pt-3">
+                        <div class="d-flex flex-row-reverse">
+                            <v-icon
+                                @click="openNewSheduleDialog()"
+                                color="green"
+                                >mdi-plus</v-icon
+                            >
+                        </div>
+                        <v-row>
+                            <v-col cols="12" sm="12" md="12" lg="12">
+                                <v-data-table
+                                    :headers="headersSheduler"
+                                    :items="formData"
+                                >
+                                    <template v-slot:item.is_daily="{ item }">
+                                        <v-icon
+                                            v-if="item.is_daily == true"
+                                            small
+                                            color="green"
+                                        >
+                                            mdi-check
+                                        </v-icon>
+                                        <v-icon v-else small color="red">
+                                            mdi-close
+                                        </v-icon>
+                                    </template>
+                                    <template v-slot:item.actions="{ item }">
+                                        <v-icon
+                                            small
+                                            color="red"
+                                            @click="removeTime(item.id)"
+                                        >
+                                            mdi-delete
+                                        </v-icon>
+                                    </template>
+                                </v-data-table>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-card-text>
+                <v-card-actions color="#101B1D">
+                    <v-btn
+                        color="blue darken-1"
+                        @click="closeDialog()"
+                        plain
+                        outlined
+                    >
+                        Zavřít
+                    </v-btn>
+                    <v-spacer></v-spacer>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+        <v-dialog
+            v-model="newSheduleDialog"
+            persistent
+            max-width="1600px"
+            overlay-color="rgb(17, 27, 45)"
+        >
+            <v-card>
+                <p class="pt-3 text-center subtitle-1">Nové časové okno</p>
+                <v-card-text>
+                    <v-container class="pt-3">
+                        <v-row>
+                            <v-col cols="12">
+                                <v-checkbox
+                                    v-model="formData.isDaily"
+                                    label="Opakovat denně?"
+                                ></v-checkbox>
+                            </v-col>
+                            <v-col cols="12">
+                                <p
+                                    class="body-2 text-center font-weight-medium"
+                                >
+                                    Začátek nedohledování streamu
+                                </p>
+                                <v-row>
+                                    <v-col cols="12" sm="12" md="6" lg="6">
+                                        <v-time-picker
+                                            color="#0b131f"
+                                            format="24hr"
+                                            v-model="formData.newStartTime"
+                                            landscape
+                                        ></v-time-picker>
+                                    </v-col>
+                                    <v-col cols="12" sm="12" md="6" lg="6">
+                                        <v-date-picker
+                                            v-if="
+                                                !formData.isDaily ||
+                                                formData.isDaily == false
+                                            "
+                                            v-model="formData.newStartDate"
+                                            landscape
+                                        ></v-date-picker>
+                                    </v-col>
+                                </v-row>
+                            </v-col>
+                            <v-col cols="12">
+                                <p
+                                    class="body-2 text-center font-weight-medium"
+                                >
+                                    Konec nedohledování streamu
+                                </p>
+                                <v-row>
+                                    <v-col cols="12" sm="12" md="6" lg="6">
+                                        <v-time-picker
+                                            color="#0b131f"
+                                            format="24hr"
+                                            v-model="formData.newEndTime"
+                                            landscape
+                                        ></v-time-picker>
+                                    </v-col>
+                                    <v-col cols="12" sm="12" md="6" lg="6">
+                                        <v-date-picker
+                                            v-if="
+                                                !formData.isDaily ||
+                                                formData.isDaily == false
+                                            "
+                                            v-model="formData.newEndDate"
+                                            landscape
+                                        ></v-date-picker>
+                                    </v-col>
+                                </v-row>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-card-text>
+                <v-card-actions color="#101B1D">
+                    <v-btn
+                        color="blue darken-1"
+                        @click="closeDialog()"
+                        plain
+                        outlined
+                    >
+                        Zavřít
+                    </v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="green darken-1"
+                        @click="storeNewShedule()"
+                        plain
+                        outlined
+                    >
+                        Uložit
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 <script>
@@ -347,6 +516,8 @@ export default {
             warningDialog: false,
             editDialog: false,
             changeStreamStatus: false,
+            sheduleDialog: false,
+            newSheduleDialog: false,
             formData: [],
             errors: [],
             search: "",
@@ -359,6 +530,12 @@ export default {
                 { text: "Status", value: "status" },
                 { text: "Kontrola PTS", value: "check_pts" },
                 { text: "Dohleduje se", value: "monitored_at" },
+                { text: "Akce", value: "actions" },
+            ],
+            headersSheduler: [
+                { text: "Denně", value: "is_daily" },
+                { text: "Začátek", value: "start_time" },
+                { text: "Konec", value: "end_time" },
                 { text: "Akce", value: "actions" },
             ],
         };
@@ -402,9 +579,61 @@ export default {
             this.warningDialog = false;
             this.editDialog = false;
             this.changeStreamStatus = false;
+            this.sheduleDialog = false;
+            this.newSheduleDialog = false;
             this.formData = [];
             this.errors = [];
         },
+
+        openSheduleDialog(streamId) {
+            this.loadEvents(streamId);
+            this.sheduleDialog = true;
+        },
+
+        loadEvents(streamId) {
+            axios
+                .get("settings/streams/shedule/" + streamId)
+                .then((response) => {
+                    this.formData = response.data;
+                    this.formData.streamId = streamId;
+                });
+        },
+
+        openNewSheduleDialog() {
+            this.newSheduleDialog = true;
+        },
+
+        storeNewShedule() {
+            let streamId = this.formData.streamId;
+            axios
+                .post("settings/streams/shedule/" + streamId, {
+                    start_time: this.formData.newStartTime,
+                    start_date: this.formData.newStartDate,
+                    end_time: this.formData.newEndTime,
+                    end_date: this.formData.newEndDate,
+                    is_daily: this.formData.isDaily,
+                })
+                .then((response) => {
+                    this.$store.state.alerts = response.data;
+                    this.newSheduleDialog = false;
+                    this.formData.newStartTime = "";
+                    this.formData.newStartDate = "";
+                    this.formData.newEndTime = "";
+                    this.formData.newEndDate = "";
+                    this.formData.isDaily = "";
+                    this.loadEvents(streamId);
+                });
+        },
+
+        removeTime(eventId) {
+            axios
+                .delete("settings/streams/shedule/" + eventId)
+                .then((response) => {
+                    this.$store.state.alerts = response.data;
+                    this.loadEvents(this.formData.streamId);
+                });
+        },
+
         openNewStreamDialog() {
             this.createDialog = true;
         },

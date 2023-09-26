@@ -36,7 +36,7 @@ class UpdateStreamAction
         });
     }
 
-    protected function pick_stream_status(object $stream, bool $status)
+    protected function pick_stream_status(object $stream, bool $status): string
     {
         if ($status == false) {
             return $stream->status;

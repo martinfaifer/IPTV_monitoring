@@ -5505,11 +5505,7 @@ var render = function () {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                        Štítky: " +
-                                                      _vm._s(
-                                                        _vm.iptvDokuData.tags
-                                                      ) +
-                                                      "\n                                        "
+                                                    "\n                                        Štítky:\n                                        "
                                                   ),
                                                   _vm._l(
                                                     _vm.iptvDokuData.tags,

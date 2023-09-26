@@ -622,6 +622,9 @@ export default {
                     this.formData.newEndDate = "";
                     this.formData.isDaily = "";
                     this.loadEvents(streamId);
+                })
+                .catch((error) => {
+                    this.errors = error.response.data.errors;
                 });
         },
 

@@ -27,8 +27,9 @@ class SettingsStreamResource extends JsonResource
                 'stream_url' => $stream->stream_url,
                 'status' => $stream->status,
                 'monitored_at' => $stream->monitored_at?->diffForHumans(),
-                'image' => config('app.url').'/streams/image/'.$stream->id.'?'.rand(),
-                'check_pts' => $stream->check_pts
+                'image' => config('app.url') . '/streams/image/' . $stream->id . '?' . rand(),
+                'check_pts' => $stream->check_pts,
+                'play_video' => $stream->play_video,
             ];
         }
 

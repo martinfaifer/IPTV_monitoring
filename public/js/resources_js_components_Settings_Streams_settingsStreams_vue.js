@@ -521,6 +521,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -553,6 +568,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: "Dohleduje se",
         value: "monitored_at"
+      }, {
+        text: "Video v mozaice",
+        value: "play_video"
       }, {
         text: "Akce",
         value: "actions"
@@ -649,6 +667,8 @@ __webpack_require__.r(__webpack_exports__);
         _this4.formData.isDaily = "";
 
         _this4.loadEvents(streamId);
+      })["catch"](function (error) {
+        _this4.errors = error.response.data.errors;
       });
     },
     removeTime: function removeTime(eventId) {
@@ -688,7 +708,8 @@ __webpack_require__.r(__webpack_exports__);
       axios.patch("settings/streams/" + this.stream.id, {
         nazev: this.stream.nazev,
         changeStreamStatus: this.changeStreamStatus,
-        check_pts: this.stream.check_pts
+        check_pts: this.stream.check_pts,
+        play_video: this.stream.play_video
       }).then(function (response) {
         _this7.$store.state.alerts = response.data;
 
@@ -909,6 +930,27 @@ var render = function () {
                               var item = ref.item
                               return [
                                 item.check_pts == true
+                                  ? _c(
+                                      "v-icon",
+                                      { attrs: { color: "green" } },
+                                      [
+                                        _vm._v(
+                                          "\n                                mdi-check\n                            "
+                                        ),
+                                      ]
+                                    )
+                                  : _c("v-icon", { attrs: { color: "red" } }, [
+                                      _vm._v(" mdi-close "),
+                                    ]),
+                              ]
+                            },
+                          },
+                          {
+                            key: "item.play_video",
+                            fn: function (ref) {
+                              var item = ref.item
+                              return [
+                                item.play_video == true
                                   ? _c(
                                       "v-icon",
                                       { attrs: { color: "green" } },
@@ -1624,6 +1666,24 @@ var render = function () {
                                         _vm.$set(_vm.stream, "check_pts", $$v)
                                       },
                                       expression: "stream.check_pts",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                { attrs: { cols: "12" } },
+                                [
+                                  _c("v-checkbox", {
+                                    attrs: { label: "Přehrávat video" },
+                                    model: {
+                                      value: _vm.stream.play_video,
+                                      callback: function ($$v) {
+                                        _vm.$set(_vm.stream, "play_video", $$v)
+                                      },
+                                      expression: "stream.play_video",
                                     },
                                   }),
                                 ],

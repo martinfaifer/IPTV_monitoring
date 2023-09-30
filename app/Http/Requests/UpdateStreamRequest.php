@@ -27,6 +27,7 @@ class UpdateStreamRequest extends FormRequest
             'nazev' => ['required', 'string', 'max:255'],
             'changeStreamStatus' => ['required', 'boolean'],
             'check_pts' => ['nullable', 'boolean'],
+            'play_video' => ['nullable', 'boolean'],
         ];
     }
 
@@ -38,7 +39,8 @@ class UpdateStreamRequest extends FormRequest
             'nazev.max' => 'Maximální počet znaků je 255',
             'changeStreamStatus.required' => 'Chybí hodnota',
             'changeStreamStatus.boolean' => 'Neplatný formát',
-            'check_pts.boolean' => "Neplatný formát"
+            'check_pts.boolean' => "Neplatný formát",
+            'play_video.boolean' => "Neplatný formát"
         ];
     }
 }

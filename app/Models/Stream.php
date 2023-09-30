@@ -31,7 +31,8 @@ class Stream extends Model
         'stream_url',
         'status',
         'monitored_at',
-        'check_pts'
+        'check_pts',
+        'play_video'
     ];
 
     protected $casts = [
@@ -39,6 +40,7 @@ class Stream extends Model
         'created_at' => 'datetime',
         'updated_at' => 'date:d.m. H:m',
         'check_pts' => 'boolean',
+        'play_video' => 'boolean'
     ];
 
     public function history(): HasMany
@@ -71,6 +73,11 @@ class Stream extends Model
         return $this->hasMany(StreamSheduler::class, 'stream_id', 'id');
     }
 
+    public function videoPid(): HasOne
+    {
+        return $this->hasOne(VideoPid::class, 'stream_id', 'id');
+    }
+
     public static function scopeIsNotMonitored(Builder $query)
     {
         $query
@@ -87,5 +94,10 @@ class Stream extends Model
     public function scopeCheckPts(Builder $query)
     {
         $query->where('status', Stream::STATUS_MONITORING)->where('check_pts', true);
+    }
+
+    public function scopePlayVideo(Builder $query)
+    {
+        $query->where('play_video', true);
     }
 }

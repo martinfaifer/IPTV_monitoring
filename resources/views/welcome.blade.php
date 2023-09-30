@@ -14,6 +14,8 @@
     </script>
     <script src="http://localhost:8098"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script defer src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
+    <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -30,6 +32,10 @@
 </head>
 
 <body style="background: #0e192c">
+    {{-- <video id="video" controls preload="auto" width="300" height="140" class="video-js" data-setup="{}">
+        <source src="http://iptv_dohled.test/storage/videos/output.m3u8" type="application/x-mpegURL">
+        Your browser does not support the video tag.
+    </video> --}}
     <v-app id="app">
         <router-view></router-view>
     </v-app>

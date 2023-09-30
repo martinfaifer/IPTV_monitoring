@@ -62,6 +62,15 @@
                                 </v-icon>
                                 <v-icon v-else color="red"> mdi-close </v-icon>
                             </template>
+                            <template v-slot:item.play_video="{ item }">
+                                <v-icon
+                                    v-if="item.play_video == true"
+                                    color="green"
+                                >
+                                    mdi-check
+                                </v-icon>
+                                <v-icon v-else color="red"> mdi-close </v-icon>
+                            </template>
                             <template v-slot:item.status="{ item }">
                                 <v-chip
                                     v-if="item.status == 'waiting'"
@@ -320,6 +329,12 @@
                                         label="Kontrolovat PTS"
                                     ></v-checkbox>
                                 </v-col>
+                                <v-col cols="12">
+                                    <v-checkbox
+                                        v-model="stream.play_video"
+                                        label="Přehrávat video"
+                                    ></v-checkbox>
+                                </v-col>
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -530,6 +545,7 @@ export default {
                 { text: "Status", value: "status" },
                 { text: "Kontrola PTS", value: "check_pts" },
                 { text: "Dohleduje se", value: "monitored_at" },
+                { text: "Video v mozaice", value: "play_video" },
                 { text: "Akce", value: "actions" },
             ],
             headersSheduler: [
@@ -664,6 +680,7 @@ export default {
                     nazev: this.stream.nazev,
                     changeStreamStatus: this.changeStreamStatus,
                     check_pts: this.stream.check_pts,
+                    play_video: this.stream.play_video,
                 })
                 .then((response) => {
                     this.$store.state.alerts = response.data;

@@ -28,17 +28,19 @@ class RunningStreamsPaginationResource extends JsonResource
                 'id' => $stream['id'],
                 'nazev' => $stream['nazev'],
                 'status' => $stream['status'],
-                'image' => '/streams/image/'.$stream['id'].'?'.rand(),
-                'audio_pids_errors' => is_null(Cache::get('showStreamDiscontinuity_'.$stream['id'])) ? $this->count_errors('audio', $stream) : 0,
-                'video_pids_errors' => is_null(Cache::get('showStreamDiscontinuity_'.$stream['id'])) ? $this->count_errors('video', $stream) : 0,
+                'image' => '/streams/image/' . $stream['id'] . '?' . rand(),
+                'video' => $stream['play_video'] == true ? config('app.url').'/storage/videos/' . $stream['id'] . '.m3u8' : null,
+                'audio_pids_errors' => is_null(Cache::get('showStreamDiscontinuity_' . $stream['id'])) ? $this->count_errors('audio', $stream) : 0,
+                'video_pids_errors' => is_null(Cache::get('showStreamDiscontinuity_' . $stream['id'])) ? $this->count_errors('video', $stream) : 0,
                 'errors' => [
-                    'invalidSync' => is_null(Cache::get('showStreamInvalidSync_'.$stream['id'])) ? Cache::get('streamInvalidSync_'.$stream['id']) : null,
-                    'transportErrors' => is_null(Cache::get('showStreamTransportErrors_'.$stream['id'])) ? Cache::get('streamTransportErrors_'.$stream['id']) : null,
-                    'audioAccess' => is_null(Cache::get('showStreamAudioAccess_'.$stream['id'])) ? Cache::get('streamAudioAccess_'.$stream['id']) : null,
-                    'audioBitrate' => Cache::get('streamAudioBitrate_'.$stream['id']),
-                    'videoAccess' => is_null(Cache::get('showStreamVideoAccess_'.$stream['id'])) ? Cache::get('streamVideoAccess_'.$stream['id']) : null,
-                    'videoBitrate' => Cache::get('streamVideoBitrate_'.$stream['id']),
+                    'invalidSync' => is_null(Cache::get('showStreamInvalidSync_' . $stream['id'])) ? Cache::get('streamInvalidSync_' . $stream['id']) : null,
+                    'transportErrors' => is_null(Cache::get('showStreamTransportErrors_' . $stream['id'])) ? Cache::get('streamTransportErrors_' . $stream['id']) : null,
+                    'audioAccess' => is_null(Cache::get('showStreamAudioAccess_' . $stream['id'])) ? Cache::get('streamAudioAccess_' . $stream['id']) : null,
+                    'audioBitrate' => Cache::get('streamAudioBitrate_' . $stream['id']),
+                    'videoAccess' => is_null(Cache::get('showStreamVideoAccess_' . $stream['id'])) ? Cache::get('streamVideoAccess_' . $stream['id']) : null,
+                    'videoBitrate' => Cache::get('streamVideoBitrate_' . $stream['id']),
                 ],
+
             ];
         }
         if (isset($streams)) {

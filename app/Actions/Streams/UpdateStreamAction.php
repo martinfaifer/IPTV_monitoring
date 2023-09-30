@@ -7,6 +7,7 @@ use App\Models\Stream;
 use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 use App\Actions\Streams\Analyze\MarkStreamForKillAction;
 use App\Actions\System\Process\KillTsDuckStreamProcessAction;
+use App\Models\VideoPid;
 
 class UpdateStreamAction
 {
@@ -14,21 +15,38 @@ class UpdateStreamAction
     {
         return rescue(function () use ($stream, $formData) {
             $pts = false;
+            $playVideo = false;
 
             if (!is_null($formData->check_pts)) {
                 $pts = $formData->check_pts;
+            }
+
+            if (!is_null($formData->play_video)) {
+                $playVideo = $formData->play_video;
             }
 
             $status = $this->pick_stream_status($stream, $formData->changeStreamStatus);
             $stream->update([
                 'nazev' => $formData->nazev,
                 'status' => $status,
-                'check_pts' => $pts
+                'check_pts' => $pts,
+                'play_video' => $playVideo
             ]);
 
             if ($pts == false) {
                 // delete from table
                 ProblemPts::where('stream_id', $stream->id)->delete();
+            }
+
+            if ($playVideo == false) {
+                // delete from table and kill process
+                $videoPid = VideoPid::where('stream_id', $stream->id)->first();
+                if ($videoPid) {
+                    // kill process
+                    posix_kill($videoPid->pid, SIGTERM);
+                    // delete from table
+                    $videoPid->delete();
+                }
             }
 
             return true;

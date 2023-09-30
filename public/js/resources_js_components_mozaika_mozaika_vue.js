@@ -236,6 +236,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["stream"],
   data: function data() {
@@ -1604,93 +1637,157 @@ var render = function () {
       },
     },
     [
-      _c(
-        "v-img",
-        {
-          attrs: {
-            "lazy-src": _vm.stream.image,
-            src: _vm.stream.image,
-            "aspect-ratio": 16 / 9,
-          },
-        },
-        [
-          _c(
-            "v-container",
-            { attrs: { fluid: "" } },
+      _vm.stream.video == null
+        ? _c(
+            "v-img",
+            {
+              attrs: {
+                "lazy-src": _vm.stream.image,
+                src: _vm.stream.image,
+                "aspect-ratio": 16 / 9,
+              },
+            },
             [
-              _c("p", {
-                staticClass:
-                  "text-center text-secondary white--text font-weight-medium",
-                domProps: { innerHTML: _vm._s(_vm.stream.nazev) },
-              }),
-              _vm._v(" "),
-              _vm.stream.audio_pids_errors != 0 ||
-              _vm.stream.video_pids_errors != 0
-                ? _c(
-                    "v-bottom-navigation",
-                    {
-                      attrs: {
-                        absolute: "",
-                        "background-color": "rgba(12, 22, 38, 0.9)",
-                        dense: "",
-                      },
-                    },
-                    [
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "12", sm: "12", md: "6", lg: "6" } },
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _c("p", {
+                    staticClass:
+                      "text-center text-secondary white--text font-weight-medium",
+                    domProps: { innerHTML: _vm._s(_vm.stream.nazev) },
+                  }),
+                  _vm._v(" "),
+                  _vm.stream.audio_pids_errors != 0 ||
+                  _vm.stream.video_pids_errors != 0
+                    ? _c(
+                        "v-bottom-navigation",
+                        {
+                          attrs: {
+                            absolute: "",
+                            "background-color": "rgba(12, 22, 38, 0.9)",
+                            dense: "",
+                          },
+                        },
                         [
-                          _vm.stream.audio_pids_errors != 0
-                            ? _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "red--text caption font-weight-bold",
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        audio errors:\n\n                        " +
-                                      _vm._s(_vm.stream.audio_pids_errors) +
-                                      "\n                    "
-                                  ),
-                                ]
-                              )
-                            : _vm._e(),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "12", sm: "12", md: "6", lg: "6" } },
-                        [
-                          _vm.stream.video_pids_errors != 0
-                            ? _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "red--text caption font-weight-bold",
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        video erros:\n\n                        " +
-                                      _vm._s(_vm.stream.video_pids_errors) +
-                                      "\n                    "
-                                  ),
-                                ]
-                              )
-                            : _vm._e(),
-                        ]
-                      ),
-                    ],
-                    1
-                  )
-                : _vm._e(),
+                          _c(
+                            "v-col",
+                            {
+                              attrs: { cols: "12", sm: "12", md: "6", lg: "6" },
+                            },
+                            [
+                              _vm.stream.audio_pids_errors != 0
+                                ? _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "red--text caption font-weight-bold",
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                        audio errors:\n\n                        " +
+                                          _vm._s(_vm.stream.audio_pids_errors) +
+                                          "\n                    "
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            {
+                              attrs: { cols: "12", sm: "12", md: "6", lg: "6" },
+                            },
+                            [
+                              _vm.stream.video_pids_errors != 0
+                                ? _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "red--text caption font-weight-bold",
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                        video erros:\n\n                        " +
+                                          _vm._s(_vm.stream.video_pids_errors) +
+                                          "\n                    "
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                            ]
+                          ),
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                ],
+                1
+              ),
             ],
             1
-          ),
-        ],
-        1
-      ),
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.stream.video != null
+        ? _c(
+            "div",
+            [
+              _c(
+                "video",
+                {
+                  staticClass: "video-js",
+                  attrs: {
+                    id: "video",
+                    autoplay: "",
+                    muted: "",
+                    height: "80",
+                    width: "230",
+                    preload: "auto",
+                    "data-setup": "{}",
+                  },
+                  domProps: { muted: true },
+                },
+                [
+                  _c("source", {
+                    attrs: {
+                      src: _vm.stream.video,
+                      type: "application/x-mpegURL",
+                    },
+                  }),
+                  _vm._v("\n            Nepodporovaný prohlížeč\n        "),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _c("p", {
+                    staticClass:
+                      "text-center text-secondary white--text font-weight-medium",
+                    domProps: { innerHTML: _vm._s(_vm.stream.nazev) },
+                  }),
+                  _vm._v(" "),
+                  _vm.stream.audio_pids_errors != 0 ||
+                  _vm.stream.video_pids_errors != 0
+                    ? _c("v-bottom-navigation", {
+                        attrs: {
+                          absolute: "",
+                          "background-color": "rgba(12, 22, 38, 0.9)",
+                          dense: "",
+                        },
+                      })
+                    : _vm._e(),
+                ],
+                1
+              ),
+            ],
+            1
+          )
+        : _vm._e(),
     ],
     1
   )

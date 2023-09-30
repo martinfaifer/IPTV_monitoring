@@ -7,6 +7,7 @@
         width="230"
     >
         <v-img
+            v-if="stream.video == null"
             :lazy-src="stream.image"
             :src="stream.image"
             :aspect-ratio="16 / 9"
@@ -48,6 +49,38 @@
                 </v-bottom-navigation>
             </v-container>
         </v-img>
+
+        <div v-if="stream.video != null">
+            <video
+                id="video"
+                autoplay
+                muted
+                height="80"
+                width="230"
+                preload="auto"
+                class="video-js"
+                data-setup="{}"
+            >
+                <source :src="stream.video" type="application/x-mpegURL" />
+                Nepodporovaný prohlížeč
+            </video>
+            <v-container fluid>
+                <p
+                    class="text-center text-secondary white--text font-weight-medium"
+                    v-html="stream.nazev"
+                ></p>
+                <v-bottom-navigation
+                    v-if="
+                        stream.audio_pids_errors != 0 ||
+                        stream.video_pids_errors != 0
+                    "
+                    absolute
+                    background-color="rgba(12, 22, 38, 0.9)"
+                    dense
+                >
+                </v-bottom-navigation>
+            </v-container>
+        </div>
     </v-card>
 </template>
 <script>

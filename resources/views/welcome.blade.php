@@ -33,7 +33,7 @@
 
 <body style="background: #0e192c">
     {{-- <video id="video" controls preload="auto" width="300" height="140" class="video-js" data-setup="{}">
-        <source src="http://iptv_dohled.test/storage/videos/output.m3u8" type="application/x-mpegURL">
+        <source src="http://172.17.2.2/storage/videos/1.m3u8" type="application/x-mpegURL">
         Your browser does not support the video tag.
     </video> --}}
     <v-app id="app">

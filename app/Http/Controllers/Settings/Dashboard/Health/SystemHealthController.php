@@ -50,9 +50,9 @@ class SystemHealthController extends Controller
                 [
                     'name' => "Sít",
                     'label' => "network",
-                    'shortSummary' => ["upload" => AvgNetworkSpeed::orderBy('created_at', 'desc')->first()->tx, "download" => AvgNetworkSpeed::orderBy('created_at', 'desc')->first()->rx],
+                    'shortSummary' => ["upload" => AvgNetworkSpeed::orderBy('created_at', 'desc')->first()->tx ?? 0, "download" => AvgNetworkSpeed::orderBy('created_at', 'desc')->first()->rx] ?? 0,
                     'status' => "",
-                    'value' => ["upload" => AvgNetworkSpeed::orderBy('created_at', 'desc')->first()->tx, "download" => AvgNetworkSpeed::orderBy('created_at', 'desc')->first()->rx],
+                    'value' => ["upload" => AvgNetworkSpeed::orderBy('created_at', 'desc')->first()->tx ?? 0, "download" => AvgNetworkSpeed::orderBy('created_at', 'desc')->first()->rx ?? 0],
                 ],
             ]
         ];

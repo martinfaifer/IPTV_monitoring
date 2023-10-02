@@ -20,7 +20,7 @@ class StartPlayVideoForMozaicaCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Start playing video for';
+    protected $description = 'Start playing video for mozaica';
 
     /**
      * Execute the console command.

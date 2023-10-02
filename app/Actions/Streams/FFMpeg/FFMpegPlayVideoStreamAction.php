@@ -9,13 +9,11 @@ class FFMpegPlayVideoStreamAction
     public function execute(object $stream): void
     {
         if (str_contains($stream->stream_url, 'http')) {
-            $command = "ffmpeg -i {$stream->stream_url} -c:v libx264 -b:v 2000k -c:a aac -strict experimental -b:a 128k " . public_path("storage/videos/{$stream->id}.m3u8");
-            // ffmpeg -i {$stream->stream_url} -c:v h264_nvenc -b:v 2000k -c:a aac -strict experimental -b:a 128k public_path("storage/videos/{$stream->id}.m3u8")
-            // ffmpeg -i input_video.mp4 -c:v h264_qsv -b:v 2000k -c:a aac -strict experimental -b:a 128k output_video.mp4
+            $command = "ffmpeg -i {$stream->stream_url} -c:v libx264 -c:a aac -f hls -hls_time 5 -hls_list_size 5 -hls_flags delete_segments " . public_path("storage/videos/{$stream->id}.m3u8") . " > /dev/null 2>&1 & echo $!; ";
 
         } else {
-            $command = "ffmpeg -i udp://{$stream->stream_url} -c:v libx264 -b:v 2000k -c:a aac -strict experimental -b:a 128k " . public_path("storage/videos/{$stream->id}.m3u8");
-            // ffmpeg -i {$stream->stream_url} -c:v h264_nvenc -b:v 2000k -c:a aac -strict experimental -b:a 128k public_path("storage/videos/{$stream->id}.m3u8")
+            $command = "ffmpeg -i  udp://{$stream->stream_url} -c:v libx264 -c:a aac -f hls -hls_time 5 -hls_list_size 5 -hls_flags delete_segments " . public_path("storage/videos/{$stream->id}.m3u8") . " > /dev/null 2>&1 & echo $!; ";
+
         }
 
         $pid = shell_exec($command);

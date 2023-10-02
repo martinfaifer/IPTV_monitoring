@@ -35,11 +35,11 @@ class StartPlayVideoForMozaicaCommand extends Command
                 (new FFMpegPlayVideoStreamAction())->execute($stream);
             } else {
                 // check if pid exists
-                // if (posix_kill($stream->videoPid->pid, 0) == false) {
-                //     // pid not running => delete from table
-                //     $stream->videoPid->delete();
-                //     (new FFMpegPlayVideoStreamAction())->execute($stream);
-                // }
+                if (posix_kill($stream->videoPid->pid, 0) == false) {
+                    //     // pid not running => delete from table
+                    //     $stream->videoPid->delete();
+                    //     (new FFMpegPlayVideoStreamAction())->execute($stream);
+                }
             }
         }
     }

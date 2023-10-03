@@ -38,16 +38,16 @@ class UpdateStreamAction
                 ProblemPts::where('stream_id', $stream->id)->delete();
             }
 
-            if ($playVideo == false) {
-                // delete from table and kill process
-                $videoPid = VideoPid::where('stream_id', $stream->id)->first();
-                if ($videoPid) {
-                    // kill process
-                    posix_kill($videoPid->pid, SIGTERM);
-                    // delete from table
-                    $videoPid->delete();
-                }
-            }
+            // if ($playVideo == false) {
+            //     // delete from table and kill process
+            //     $videoPid = VideoPid::where('stream_id', $stream->id)->first();
+            //     if ($videoPid) {
+            //         // kill process
+            //         posix_kill($videoPid->pid, SIGTERM);
+            //         // delete from table
+            //         $videoPid->delete();
+            //     }
+            // }
 
             return true;
         }, function () {

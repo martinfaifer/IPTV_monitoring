@@ -47,11 +47,11 @@ class StreamDiagnosticTsDuckService
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_CAN_NOT_START);
             } else {
                 // store in to cache for showing in to frontend
-                try {
-                    (new StoreItemsToCache())->execute(key: 'streamData_' . $stream->id, value: $analyzedResultInArray);
-                } catch (\Throwable $th) {
-                    //throw $th;
-                }
+                // try {
+                //     (new StoreItemsToCache())->execute(key: 'streamData_' . $stream->id, value: $analyzedResultInArray);
+                // } catch (\Throwable $th) {
+                //     //throw $th;
+                // }
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_MONITORING);
                 (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
                 // (new StreamDiagnosticFfProbeService($stream));

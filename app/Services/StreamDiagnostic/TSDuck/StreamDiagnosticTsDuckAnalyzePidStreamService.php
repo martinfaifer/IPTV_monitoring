@@ -205,11 +205,15 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                         dicontinuity: $videoPid['packets']['discontinuities']
                     );
 
-                    (new CheckNumberOfErrorsService())->check(
-                        pid: $videoPidId,
-                        pidErrors: $videoPid['packets']['discontinuities'],
-                        streamId: $stream->id
-                    );
+                    try {
+                        (new CheckNumberOfErrorsService())->check(
+                            pid: $videoPidId,
+                            pidErrors: $videoPid['packets']['discontinuities'],
+                            streamId: $stream->id
+                        );
+                    } catch (\Throwable $th) {
+                        //throw $th;
+                    }
                 }
 
                 if (array_key_exists('scrambled', $videoPid)) {

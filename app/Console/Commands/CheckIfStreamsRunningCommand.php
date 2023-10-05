@@ -39,7 +39,6 @@ class CheckIfStreamsRunningCommand extends Command
                 if (!is_null($stream->processes) || !is_null($stream->processes->diagnotic_pid)) {
                     // kontrola existence pidu
                     if (!posix_kill($stream->processes->diagnostic_pid, 0)) {
-                        dd($stream->id);
                         // pid nenalezen
                         // spuštění diagnostiky
                         StartStreamDiagnosticJob::dispatch($stream);

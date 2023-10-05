@@ -117,11 +117,15 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                         dicontinuity: $audioPid['packets']['discontinuities']
                     );
 
-                    (new CheckNumberOfErrorsService())->check(
-                        pid: $audioPidId,
-                        pidErrors: $audioPid['packets']['discontinuities'],
-                        streamId: $stream->id
-                    );
+                    try {
+                        (new CheckNumberOfErrorsService())->check(
+                            pid: $audioPidId,
+                            pidErrors: $audioPid['packets']['discontinuities'],
+                            streamId: $stream->id
+                        );
+                    } catch (\Throwable $th) {
+                        //throw $th;
+                    }
                 }
             }
 

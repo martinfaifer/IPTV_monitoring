@@ -777,11 +777,11 @@ __webpack_require__.r(__webpack_exports__);
       try {
         if (this.pagination.current <= this.pagination.total - 1) {
           this.pagination.current = this.pagination.current + 1;
-          this.index();
         } else {
           this.pagination.current = 1;
-          this.index();
         }
+
+        this.index();
       } catch (error) {}
     }.bind(this), 30000);
   },

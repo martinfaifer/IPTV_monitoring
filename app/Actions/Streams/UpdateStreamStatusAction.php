@@ -62,7 +62,7 @@ class UpdateStreamStatusAction
 
             (new StoreStreamsErrorHistoryAction())->execute(stream: $stream, status: $status);
 
-            // fire event for broacast information to notification
+            // fire event for broadcast information to notification
             BroadcastStreamsHistoryStatusEvent::dispatch();
         }
     }

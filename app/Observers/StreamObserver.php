@@ -55,7 +55,7 @@ class StreamObserver
         }
 
         Cache::put('stream_' . $stream->id, $stream);
-        BroadcastMonitoredStreamsEvent::dispatch();
+        BroadcastMonitoredStreamsEvent::dispatch(); // cpu leak?
     }
 
     /**

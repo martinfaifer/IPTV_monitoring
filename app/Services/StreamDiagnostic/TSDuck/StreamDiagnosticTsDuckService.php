@@ -5,6 +5,7 @@ namespace App\Services\StreamDiagnostic\TSDuck;
 use App\Models\Stream;
 use React\EventLoop\Loop;
 use Illuminate\Support\Facades\Cache;
+use App\Actions\Cache\StoreItemsToCache;
 use App\Actions\Cache\Locks\LockStreamAction;
 use App\Actions\Streams\UpdateStreamStatusAction;
 use App\Actions\Cache\DeleteStreamPidProcessAction;
@@ -45,6 +46,12 @@ class StreamDiagnosticTsDuckService
             if (is_null($analyzedResultInArray)) {
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_CAN_NOT_START);
             } else {
+                // store in to cache for showing in to frontend
+                try {
+                    (new StoreItemsToCache())->execute(key: 'streamData_' . $stream->id, value: $analyzedResultInArray);
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_MONITORING);
                 (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
                 // (new StreamDiagnosticFfProbeService($stream));

@@ -1,6 +1,74 @@
 <template>
     <div>
         <v-container fluid>
+            <v-row class="mx-auto">
+                <v-col cols="12" sm="6" md="2" lg="2">
+                    <v-card
+                        class="overflow-hidden rounded-lg blur shadow-blur"
+                        flat
+                    >
+                        <v-card-text>
+                            <p class="headline text-center">Počet streamů</p>
+                            <p class="text-center title">{{ items.stats.sum }}</p>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+                <v-col cols="12" sm="6" md="2" lg="2">
+                    <v-card
+                        class="overflow-hidden rounded-lg blur shadow-blur"
+                        flat
+                    >
+                        <v-card-text>
+                            <p class="headline text-center">Dohledováno</p>
+                            <p class="text-center title">{{ items.stats.monitored }}</p>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+                <v-col cols="12" sm="6" md="2" lg="2">
+                    <v-card
+                        class="overflow-hidden rounded-lg blur shadow-blur"
+                        flat
+                    >
+                        <v-card-text>
+                            <p class="headline text-center">Výpadek</p>
+                            <p class="text-center title font-weight-bold" :class="{'red--text': items.stats.crashed > 0}">{{ items.stats.crashed }}</p>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+                <v-col cols="12" sm="6" md="2" lg="2">
+                    <v-card
+                        class="overflow-hidden rounded-lg blur shadow-blur"
+                        flat
+                    >
+                        <v-card-text>
+                            <p class="headline text-center">Pozastaveno</p>
+                            <p class="text-center title">{{ items.stats.stopped }}</p>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+                <v-col cols="12" sm="6" md="2" lg="2">
+                    <v-card
+                        class="overflow-hidden rounded-lg blur shadow-blur"
+                        flat
+                    >
+                        <v-card-text>
+                            <p class="headline text-center">Kontrola PTS</p>
+                            <p class="text-center title">{{ items.stats.check_pts }}</p>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+                <v-col cols="12" sm="6" md="2" lg="2">
+                    <v-card
+                        class="overflow-hidden rounded-lg blur shadow-blur"
+                        flat
+                    >
+                        <v-card-text>
+                            <p class="headline text-center">Přehrává video</p>
+                            <p class="text-center title">{{ items.stats.play_video }}</p>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+            </v-row>
             <v-row>
                 <v-col cols="12" sm="12" md="12" lg="12">
                     <v-card
@@ -33,7 +101,7 @@
                         </v-card-title>
                         <v-data-table
                             :headers="headers"
-                            :items="items"
+                            :items="items.streams"
                             :search="search"
                         >
                             <template v-slot:item.image="{ item }">

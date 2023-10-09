@@ -36,11 +36,11 @@ class StartStreamsDiagnosticCommand extends Command
         $streams = Stream::isNotMonitored()->with('processes')->get();
         foreach ($streams as $stream) {
             try {
-                // if ((new CheckIfStreamCanBeKillAction(streamUrl: $stream->stream_url))->execution() != true) {
-                if (is_null($stream->processes)) {
-                    StartStreamDiagnosticJob::dispatch($stream);
+                if ((new CheckIfStreamCanBeKillAction(streamUrl: $stream->stream_url))->execution() != true) {
+                    if (is_null($stream->processes)) {
+                        StartStreamDiagnosticJob::dispatch($stream);
+                    }
                 }
-                // }
             } catch (\Throwable $th) {
                 //throw $th;
             }

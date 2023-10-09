@@ -4,12 +4,13 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Cache;
 
-class BroadcastAudioVideoStreamPidsEvent implements ShouldBroadcastNow
+class BroadcastAudioVideoStreamPidsEvent implements ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;

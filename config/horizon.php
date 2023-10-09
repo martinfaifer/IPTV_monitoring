@@ -187,6 +187,7 @@ return [
                 'balanceMaxShift' => 10,
                 'balanceCooldown' => 10,
                 'tries' => 1,
+                'sleep' => 1
             ],
             'supervisor-balancer' => [
                 'connection' => 'redis',
@@ -197,6 +198,7 @@ return [
                 'balanceMaxShift' => 5,
                 'balanceCooldown' => 5,
                 'tries' => 1,
+                'sleep' => 1
             ],
             'supervisor-ffprobe' => [
                 'connection' => 'redis',
@@ -207,7 +209,7 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'tries' => 1,
-
+                'sleep' => 1
             ],
             'supervisor-ffmpeg' => [
                 'connection' => 'redis',
@@ -218,7 +220,7 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'tries' => 1,
-
+                'sleep' => 1
             ],
             'webhook' => [
                 'connection' => 'redis',
@@ -229,6 +231,7 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'tries' => 1,
+                'sleep' => 1
             ],
         ],
 

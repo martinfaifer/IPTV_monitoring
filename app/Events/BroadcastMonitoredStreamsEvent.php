@@ -9,7 +9,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BroadcastMonitoredStreamsEvent implements ShouldBroadcast
+class BroadcastMonitoredStreamsEvent implements ShouldBroadcastNow
 {
     use Dispatchable;
     use InteractsWithSockets;

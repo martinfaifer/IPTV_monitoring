@@ -9,7 +9,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-class BroadcastStreamImageEvent implements ShouldBroadcast
+class BroadcastStreamImageEvent implements ShouldBroadcastNow
 {
     use Dispatchable;
     use InteractsWithSockets;

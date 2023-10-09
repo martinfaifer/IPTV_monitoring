@@ -9,7 +9,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BroadcastErrorStreamsEvent implements ShouldBroadcastNow
+class BroadcastErrorStreamsEvent
 {
     use Dispatchable;
     use InteractsWithSockets;
@@ -27,18 +27,18 @@ class BroadcastErrorStreamsEvent implements ShouldBroadcastNow
         $this->notRunnngStreams = $notRunnngStreams;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn()
+    public function handle()
     {
-        return new Channel('ErrorStreams');
+        //
     }
 
-    public function broadcastWith()
-    {
-        return [$this->notRunnngStreams];
-    }
+    // public function broadcastOn()
+    // {
+    //     return new Channel('ErrorStreams');
+    // }
+
+    // public function broadcastWith()
+    // {
+    //     return [$this->notRunnngStreams];
+    // }
 }

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class StreamDiscontinuityPidErrorsEvent implements ShouldBroadcastNow
+class StreamDiscontinuityPidErrorsEvent
 {
     use Dispatchable;
     use InteractsWithSockets;
@@ -30,20 +30,20 @@ class StreamDiscontinuityPidErrorsEvent implements ShouldBroadcastNow
         $this->dicontinuity = $dicontinuity;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn()
+    public function handle()
     {
-        return new Channel($this->channel);
+        //
     }
 
-    public function broadcastWith()
-    {
-        return [
-            $this->dicontinuity,
-        ];
-    }
+    // public function broadcastOn()
+    // {
+    //     return new Channel($this->channel);
+    // }
+
+    // public function broadcastWith()
+    // {
+    //     return [
+    //         $this->dicontinuity,
+    //     ];
+    // }
 }

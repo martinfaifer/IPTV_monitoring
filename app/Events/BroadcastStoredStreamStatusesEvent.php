@@ -9,7 +9,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BroadcastStoredStreamStatusesEvent implements ShouldBroadcastNow
+class BroadcastStoredStreamStatusesEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,19 +22,18 @@ class BroadcastStoredStreamStatusesEvent implements ShouldBroadcastNow
     {
         //
     }
-
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn()
+    public function handle()
     {
-        return new Channel('StreamsStoredStatuses');
+        //
     }
 
-    public function broadcastWith()
-    {
-        return (new ShowStreamsHistoryStatusesAction())->execute();
-    }
+    // public function broadcastOn()
+    // {
+    //     return new Channel('StreamsStoredStatuses');
+    // }
+
+    // public function broadcastWith()
+    // {
+    //     return (new ShowStreamsHistoryStatusesAction())->execute();
+    // }
 }

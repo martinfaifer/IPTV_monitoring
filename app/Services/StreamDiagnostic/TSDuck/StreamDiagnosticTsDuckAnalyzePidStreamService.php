@@ -59,9 +59,9 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
             $this->collect_video_pids($stream, $this->videoPid);
         }
 
-        if (!empty($this->audioPid)) {
-            $this->collect_audio_pids($stream, $this->audioPid);
-        }
+        // if (!empty($this->audioPid)) {
+        //     $this->collect_audio_pids($stream, $this->audioPid);
+        // }
 
         // if (!empty($this->ecmPid)) {
         //     $this->collect_ca_pids($stream, $this->ecmPid);
@@ -153,9 +153,6 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
         }
 
         (new StoreItemsToCache())->execute(key: 'streamAudioPids_' . $stream->id, value: $this->audioPidsAgregated);
-
-        // new
-        unset($audioPids, $this->audioPidsAgregated);
     }
 
     /**
@@ -276,9 +273,6 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
         }
 
         (new StoreItemsToCache())->execute(key: 'streamVideoPids_' . $stream->id, value: $this->videoPidsAgregated);
-
-        // new
-        unset($videoPids, $this->videoPidsAgregated);
     }
 
     /**

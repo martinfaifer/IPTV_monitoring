@@ -82,7 +82,6 @@ class Stream extends Model
     {
         $query
             ->where('status', Stream::STATUS_WAITING)
-            ->orWhere('status', Stream::STATUS_STARTING)
             ->with('processes');
     }
 

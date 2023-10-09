@@ -139,6 +139,9 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
         }
 
         (new StoreItemsToCache())->execute(key: 'streamAudioPids_' . $stream->id, value: $this->audioPidsAgregated);
+
+        // new
+        unset($audioPids, $this->audioPidsAgregated);
     }
 
     /**
@@ -259,6 +262,9 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
         }
 
         (new StoreItemsToCache())->execute(key: 'streamVideoPids_' . $stream->id, value: $this->videoPidsAgregated);
+
+        // new
+        unset($videoPids, $this->videoPidsAgregated);
     }
 
     /**

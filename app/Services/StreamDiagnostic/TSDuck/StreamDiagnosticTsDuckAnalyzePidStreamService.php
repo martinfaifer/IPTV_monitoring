@@ -73,6 +73,20 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
             Cache::get('streamVideoPids_' . $stream->id),
             Cache::get('streamAudioPids_' . $stream->id)
         );
+
+        $this->videoPid = [];
+
+        $this->audioPid = [];
+
+        $this->ecmPid = [];
+
+        $this->emm = [];
+
+        $this->videoPidsAgregated = [];
+
+        $this->audioPidsAgregated = [];
+
+        $this->caPidsAgregated = [];
     }
 
     /**

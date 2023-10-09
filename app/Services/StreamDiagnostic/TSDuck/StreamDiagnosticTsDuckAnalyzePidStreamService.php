@@ -55,9 +55,9 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
 
         // $this->store_to_cache(stream: $stream);
 
-        if (!empty($this->videoPid)) {
-            $this->collect_video_pids($stream, $this->videoPid);
-        }
+        // if (!empty($this->videoPid)) {
+        //     $this->collect_video_pids($stream, $this->videoPid);
+        // }
 
         // if (!empty($this->audioPid)) {
         //     $this->collect_audio_pids($stream, $this->audioPid);

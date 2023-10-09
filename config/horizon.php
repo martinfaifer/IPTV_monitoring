@@ -185,7 +185,7 @@ return [
                 'minProcesses' => 1,
                 'maxProcesses' => 30,
                 'balanceMaxShift' => 10,
-                'balanceCooldown' => 1,
+                'balanceCooldown' => 10,
                 'tries' => 1,
             ],
             'supervisor-balancer' => [
@@ -195,7 +195,7 @@ return [
                 'minProcesses' => 1,
                 'maxProcesses' => 30,
                 'balanceMaxShift' => 5,
-                'balanceCooldown' => 1,
+                'balanceCooldown' => 5,
                 'tries' => 1,
             ],
             'supervisor-ffprobe' => [

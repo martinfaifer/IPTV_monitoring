@@ -9,7 +9,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-class BroadcastStreamImageEvent
+class BroadcastStreamImageEvent implements ShouldBroadcastNow
 {
     use Dispatchable;
     use InteractsWithSockets;
@@ -27,18 +27,13 @@ class BroadcastStreamImageEvent
         $this->stream = $stream;
     }
 
-    public function handle()
+    public function broadcastOn()
     {
-        //
+        return new Channel('StreamImage' . $this->stream->id);
     }
 
-    // public function broadcastOn()
-    // {
-    //     return new Channel('StreamImage' . $this->stream->id);
-    // }
-
-    // public function broadcastWith()
-    // {
-    //     return ['/streams/image/' . $this->stream->id . '?' . rand()];
-    // }
+    public function broadcastWith()
+    {
+        return ['/streams/image/' . $this->stream->id . '?' . rand()];
+    }
 }

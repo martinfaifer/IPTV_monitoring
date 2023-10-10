@@ -11,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BroadcastWweatherAlertEvent
+class BroadcastWweatherAlertEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -23,19 +23,13 @@ class BroadcastWweatherAlertEvent
         //
     }
 
-    public function handle()
+    public function broadcastOn()
     {
-        //
+        return new Channel('WeatherAlert');
     }
 
-
-    // public function broadcastOn()
-    // {
-    //     return new Channel('WeatherAlert');
-    // }
-
-    // public function broadcastWith()
-    // {
-    //     return $this->weather;
-    // }
+    public function broadcastWith()
+    {
+        return $this->weather;
+    }
 }

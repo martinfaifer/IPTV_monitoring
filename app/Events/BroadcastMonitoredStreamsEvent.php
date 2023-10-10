@@ -9,7 +9,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BroadcastMonitoredStreamsEvent
+class BroadcastMonitoredStreamsEvent implements ShouldBroadcastNow
 {
     use Dispatchable;
     use InteractsWithSockets;
@@ -25,12 +25,8 @@ class BroadcastMonitoredStreamsEvent
         //
     }
 
-    public function handle()
+    public function broadcastOn()
     {
-        //
+        return new Channel('RunningStreams');
     }
-    // public function broadcastOn()
-    // {
-    //     return new Channel('RunningStreams');
-    // }
 }

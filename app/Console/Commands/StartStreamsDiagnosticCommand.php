@@ -35,12 +35,8 @@ class StartStreamsDiagnosticCommand extends Command
         // označení všech streamu jako waiting pro spuštění
         Stream::isNotMonitored()->with('processes')->chunk(50, function ($streams) {
             $streams->each(function ($stream) {
-                try {
-                    if (is_null($stream->processes)) {
-                        StartStreamDiagnosticJob::dispatch($stream->id);
-                    }
-                } catch (\Throwable $th) {
-                    //throw $th;
+                if (is_null($stream->processes)) {
+                    StartStreamDiagnosticJob::dispatch($stream->id);
                 }
             });
         });

@@ -17,7 +17,7 @@ class StreamDiagnosticTsDuckService
 
     public function __construct(int $streamId)
     {
-        $stream = Stream::find($streamId);
+        $stream = Stream::find($streamId)->with('processes');
         $this->updateStatusAction = new UpdateStreamStatusAction();
         if ($stream->status != Stream::STATUS_MONITORING) {
             $this->updateStatusAction->execute(stream: $stream, status: Stream::STATUS_STARTING);
@@ -70,11 +70,14 @@ class StreamDiagnosticTsDuckService
     protected function check_if_stream_can_be_kill(object $stream): bool
     {
         // kontrola existence streamu
-        if (Cache::has('stream_' . $stream->id)) {
-            return false;
-        }
+        // if (Cache::has('stream_' . $stream->id)) {
+        //     return false;
+        // }
 
         // check if process exsists
+        if(is_null($stream->processes)) {
+            return false;
+        }
         if (!posix_kill($stream->processes->diagnostic_pid, 0)) {
             return false;
         }

@@ -24,7 +24,9 @@ class UpdateStreamStatusAction
             Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
         }
 
-        $this->update_stream_status_and_share_it(stream: $stream, status: $status);
+        if ($stream->status != $status) {
+            $this->update_stream_status_and_share_it(stream: $stream, status: $status);
+        }
     }
 
     protected function update_stream_status_and_share_it(object $stream, string $status)
@@ -43,19 +45,16 @@ class UpdateStreamStatusAction
                 $this->monitored_at = now();
             }
 
-            try {
-                $stream->update([
-                    'status' => $status,
-                    'monitored_at' => $this->monitored_at,
-                ]);
+            $stream->update([
+                'status' => $status,
+                'monitored_at' => $this->monitored_at,
+            ]);
 
-                StreamHistoryStatus::create([
-                    'stream_id' => $stream->id,
-                    'status' => $status
-                ]);
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
+            StreamHistoryStatus::create([
+                'stream_id' => $stream->id,
+                'status' => $status
+            ]);
+
 
 
             (new UpdateStreamCacheStatusAction())->execute(status: $status, streamId: $stream->id);

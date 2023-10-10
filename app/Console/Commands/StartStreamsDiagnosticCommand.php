@@ -33,12 +33,11 @@ class StartStreamsDiagnosticCommand extends Command
     public function handle()
     {
         // označení všech streamu jako waiting pro spuštění
-        Stream::isNotMonitored()->with('processes')->chunk(50, function ($streams) {
-            $streams->each(function ($stream) {
-                if (is_null($stream->processes)) {
-                    StartStreamDiagnosticJob::dispatch($stream->id);
-                }
-            });
-        });
+        $streams = Stream::isNotMonitored()->with('processes')->get();
+        foreach ($streams as &$stream) {
+            if (is_null($stream->processes)) {
+                StartStreamDiagnosticJob::dispatch($stream->id);
+            }
+        }
     }
 }

@@ -17,7 +17,7 @@ class StreamDiagnosticTsDuckService
 
     public function __construct(int $streamId)
     {
-        $stream = Stream::find($streamId)->load('processes');
+        $stream = Stream::find($streamId);
         $this->updateStatusAction = new UpdateStreamStatusAction();
         if ($stream->status != Stream::STATUS_MONITORING) {
             $this->updateStatusAction->execute(stream: $stream, status: Stream::STATUS_STARTING);

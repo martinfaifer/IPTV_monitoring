@@ -35,6 +35,7 @@ class StartStreamsDiagnosticCommand extends Command
         // označení všech streamu jako waiting pro spuštění
         $streams = Stream::isNotMonitored()->with('processes')->get();
         foreach ($streams as $stream) {
+            echo $stream->nazev . PHP_EOL;
             try {
                 // if ((new CheckIfStreamCanBeKillAction(streamUrl: $stream->stream_url))->execution() != true) {
                 if (is_null($stream->processes)) {

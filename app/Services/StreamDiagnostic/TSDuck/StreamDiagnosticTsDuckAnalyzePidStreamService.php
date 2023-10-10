@@ -3,9 +3,11 @@
 namespace App\Services\StreamDiagnostic\TSDuck;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use App\Actions\Cache\StoreItemsToCache;
 use App\Actions\Cache\RemoveItemsFromCache;
 use App\Interfaces\DiagnosticAnalyzeInterface;
+use App\Events\BroadcastAudioVideoStreamPidsEvent;
 use App\Actions\Cache\StoreStreamPidDataFroChartToCache;
 use App\Actions\Cache\StoreStreamPidDiscontinuityAction;
 use App\Services\StreamDiagnostic\CheckPids\CheckNumberOfErrorsService;
@@ -51,7 +53,7 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
             }
         }
 
-        // $this->store_to_cache(stream: $stream);
+        $this->store_to_cache(stream: $stream);
 
         if (!empty($this->videoPid)) {
             $this->collect_video_pids($stream, $this->videoPid);
@@ -66,25 +68,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
         // }
 
         // broadcast information about video and audio pids
-        // BroadcastAudioVideoStreamPidsEvent::dispatch(
-        //     $stream,
-        //     Cache::get('streamVideoPids_' . $stream->id),
-        //     Cache::get('streamAudioPids_' . $stream->id)
-        // );
-
-        $this->videoPid = [];
-
-        $this->audioPid = [];
-
-        $this->ecmPid = [];
-
-        $this->emm = [];
-
-        $this->videoPidsAgregated = [];
-
-        $this->audioPidsAgregated = [];
-
-        $this->caPidsAgregated = [];
+        BroadcastAudioVideoStreamPidsEvent::dispatch(
+            $stream,
+            Cache::get('streamVideoPids_' . $stream->id),
+            Cache::get('streamAudioPids_' . $stream->id)
+        );
     }
 
     /**
@@ -129,15 +117,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                         dicontinuity: $audioPid['packets']['discontinuities']
                     );
 
-                    try {
-                        (new CheckNumberOfErrorsService())->check(
-                            pid: $audioPidId,
-                            pidErrors: $audioPid['packets']['discontinuities'],
-                            streamId: $stream->id
-                        );
-                    } catch (\Throwable $th) {
-                        //throw $th;
-                    }
+                    (new CheckNumberOfErrorsService())->check(
+                        pid: $audioPidId,
+                        pidErrors: $audioPid['packets']['discontinuities'],
+                        streamId: $stream->id
+                    );
                 }
             }
 
@@ -217,15 +201,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                         dicontinuity: $videoPid['packets']['discontinuities']
                     );
 
-                    try {
-                        (new CheckNumberOfErrorsService())->check(
-                            pid: $videoPidId,
-                            pidErrors: $videoPid['packets']['discontinuities'],
-                            streamId: $stream->id
-                        );
-                    } catch (\Throwable $th) {
-                        //throw $th;
-                    }
+                    (new CheckNumberOfErrorsService())->check(
+                        pid: $videoPidId,
+                        pidErrors: $videoPid['packets']['discontinuities'],
+                        streamId: $stream->id
+                    );
                 }
 
                 if (array_key_exists('scrambled', $videoPid)) {

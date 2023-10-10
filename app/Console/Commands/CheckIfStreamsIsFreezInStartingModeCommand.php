@@ -32,7 +32,7 @@ class CheckIfStreamsIsFreezInStartingModeCommand extends Command
     {
         Stream::where('status', Stream::STATUS_STARTING)->where('created_at', '<=', now()->subMinutes(5)->toDateTimeString())->chunk(10, function ($freezeStreams) {
             $freezeStreams->each(function ($freezeStream) {
-                (new UnlockStreamUrlAction($freezeStream))->execute();
+                (new UnlockStreamUrlAction($freezeStream))->handle();
                 StartStreamDiagnosticJob::dispatch($freezeStream);
             });
             sleep(1);

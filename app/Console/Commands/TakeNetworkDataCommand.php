@@ -29,8 +29,8 @@ class TakeNetworkDataCommand extends Command
      */
     public function handle()
     {
-        $rx = shell_exec('cat /sys/class/net/eno1np0/statistics/rx_bytes');
-        $tx = shell_exec('cat /sys/class/net/eno1np0/statistics/tx_bytes');
+        $rx = shell_exec('cat /sys/class/net/enp4s0/statistics/rx_bytes');
+        $tx = shell_exec('cat /sys/class/net/enp4s0/statistics/tx_bytes');
         NetworkStatistic::create([
             'rx' => $rx,
             'tx' => $tx,

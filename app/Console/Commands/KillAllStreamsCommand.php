@@ -36,10 +36,12 @@ class KillAllStreamsCommand extends Command
      */
     public function handle()
     {
-        Stream::with('processes')->get()->each(function ($stream) {
-            (new StopStreamAction())->execute($stream);
-        });
-
+        $streams = Stream::with('processes')->get();
+        if (count($streams) != 0) {
+            foreach ($streams as $stream) {
+                (new StopStreamAction())->execute($stream);
+            }
+        }
 
         // kill all running process for tsduck and ffmpeg
         // (new KillAllProcessesByNameAction())->execute('tsp');

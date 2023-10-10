@@ -3,11 +3,14 @@
 namespace App\Services\StreamDiagnostic\TSDuck;
 
 use App\Models\Stream;
+use React\EventLoop\Loop;
 use Illuminate\Support\Facades\Cache;
+use App\Actions\Cache\Locks\LockStreamAction;
 use App\Actions\Streams\UpdateStreamStatusAction;
 use App\Actions\Cache\DeleteStreamPidProcessAction;
 use App\Actions\Streams\Analyze\TsDuckAnalyzeAction;
 use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
+use App\Actions\Cache\StoreStreamDiagnosticTimeStampAction;
 use App\Actions\Streams\Analyze\CheckIfStreamCanBeKillAction;
 use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 
@@ -24,7 +27,7 @@ class StreamDiagnosticTsDuckService
 
     public function monitoring(object $stream)
     {
-        while (1) {
+        while (true) {
             // kontrola zda stream má být dohledován
             if ($this->check_if_stream_can_be_kill(stream: $stream) == true) {
                 $this->change_stream_status_and_release_them(stream: $stream);
@@ -38,26 +41,17 @@ class StreamDiagnosticTsDuckService
 
             $analyzedResultInArray = json_decode(json: $analyzeResultInJson, associative: true);
 
-            unset($analyzeResultInJson);
-
             // kontrola výstupu
             if (is_null($analyzedResultInArray)) {
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_CAN_NOT_START);
-                unset($analyzedResultInArray);
             } else {
-                // store in to cache for showing in to frontend
-                // try {
-                //     (new StoreItemsToCache())->execute(key: 'streamData_' . $stream->id, value: $analyzedResultInArray);
-                // } catch (\Throwable $th) {
-                //     //throw $th;
-                // }
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_MONITORING);
-                // (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
+                (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
                 // (new StreamDiagnosticFfProbeService($stream));
-                // (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
-
-                unset($analyzedResultInArray);
+                (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
             }
+
+            unset($analyzeResultInJson, $analyzedResultInArray);
 
             sleep(4);
         }
@@ -69,11 +63,6 @@ class StreamDiagnosticTsDuckService
         if (Cache::has('stream_' . $stream->id)) {
             return false;
         }
-
-        // check if process exsists
-        // if (!posix_kill($stream->processes->diagnostic_pid, 0)) {
-        //     return false;
-        // }
 
         return (new CheckIfStreamCanBeKillAction(streamUrl: $stream->stream_url))->execution() == true
             ? true

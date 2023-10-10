@@ -27,20 +27,20 @@ class StartPlayVideoForMozaicaCommand extends Command
      */
     public function handle()
     {
-        Stream::playVideo()->isMonitoring()->with('videoPid')->chunk(50, function ($streams) {
-            $streams->each(function ($stream) {
-                if (is_null($stream->videoPid)) {
-                    // start process to play video
-                    (new FFMpegPlayVideoStreamAction())->execute($stream);
-                } else {
-                    // check if pid exists
-                    if (posix_kill($stream->videoPid->pid, 0) == false) {
-                        //     // pid not running => delete from table
-                        //     $stream->videoPid->delete();
-                        //     (new FFMpegPlayVideoStreamAction())->execute($stream);
-                    }
+        $streams = Stream::playVideo()->isMonitoring()->with('videoPid')->get();
+
+        foreach ($streams as $stream) {
+            if (is_null($stream->videoPid)) {
+                // start process to play video
+                (new FFMpegPlayVideoStreamAction())->execute($stream);
+            } else {
+                // check if pid exists
+                if (posix_kill($stream->videoPid->pid, 0) == false) {
+                    //     // pid not running => delete from table
+                    //     $stream->videoPid->delete();
+                    //     (new FFMpegPlayVideoStreamAction())->execute($stream);
                 }
-            });
-        });
+            }
+        }
     }
 }

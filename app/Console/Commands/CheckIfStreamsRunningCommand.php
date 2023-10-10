@@ -32,7 +32,9 @@ class CheckIfStreamsRunningCommand extends Command
      */
     public function handle()
     {
-        Stream::where('status', "!=", Stream::STATUS_WAITING)->orWhere('status', "!=", Stream::STATUS_STOPPED)->get()->each(function ($stream) {
+        $streams = Stream::where('status', "!=", Stream::STATUS_WAITING)->orWhere('status', "!=", Stream::STATUS_STOPPED)->get();
+
+        foreach ($streams as $stream) {
             try {
                 if (!is_null($stream->processes) || !is_null($stream->processes->diagnotic_pid)) {
                     // kontrola existence pidu
@@ -45,6 +47,6 @@ class CheckIfStreamsRunningCommand extends Command
             } catch (\Throwable $th) {
                 //throw $th;
             }
-        });
+        }
     }
 }

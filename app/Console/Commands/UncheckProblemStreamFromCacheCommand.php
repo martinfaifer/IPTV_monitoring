@@ -32,7 +32,9 @@ class UncheckProblemStreamFromCacheCommand extends Command
      */
     public function handle()
     {
-        Stream::get()->each(function ($stream) {
+        $streams = Stream::get();
+
+        foreach ($streams as $stream) {
             if ($stream->status != Stream::STATUS_CAN_NOT_START) {
                 if (Cache::has($stream->id . '_notificationSended')) {
                     // send information about function stream
@@ -50,6 +52,6 @@ class UncheckProblemStreamFromCacheCommand extends Command
                     Cache::pull($stream->id . '_notificationSended');
                 }
             }
-        });
+        }
     }
 }

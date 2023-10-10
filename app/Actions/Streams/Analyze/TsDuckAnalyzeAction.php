@@ -2,8 +2,6 @@
 
 namespace App\Actions\Streams\Analyze;
 
-use Illuminate\Support\Facades\Process;
-
 class TsDuckAnalyzeAction
 {
     public function execute(string $streamUrl)

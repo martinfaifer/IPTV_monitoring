@@ -70,17 +70,13 @@ class StreamDiagnosticTsDuckService
     protected function check_if_stream_can_be_kill(object $stream): bool
     {
         // kontrola existence streamu
-        // if (Cache::has('stream_' . $stream->id)) {
+        if (Cache::has('stream_' . $stream->id)) {
+            return false;
+        }
+
+        // if (!posix_kill($stream->processes->diagnostic_pid, 0)) {
         //     return false;
         // }
-
-        // check if process exsists
-        if(is_null($stream->processes)) {
-            return false;
-        }
-        if (!posix_kill($stream->processes->diagnostic_pid, 0)) {
-            return false;
-        }
 
         return (new CheckIfStreamCanBeKillAction(streamUrl: $stream->stream_url))->execution() == true
             ? true

@@ -47,7 +47,6 @@ class StreamDiagnosticTsDuckService
             // kontrola výstupu
             if (is_null($analyzedResultInArray)) {
                 $this->updateStatusAction->execute(stream: $stream, status: Stream::STATUS_CAN_NOT_START);
-                unset($analyzedResultInArray);
             } else {
                 // store in to cache for showing in to frontend
                 // try {
@@ -59,10 +58,8 @@ class StreamDiagnosticTsDuckService
                 // (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
                 // (new StreamDiagnosticFfProbeService($stream));
                 // (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
-
-                unset($analyzedResultInArray);
             }
-
+            unset($analyzedResultInArray);
             sleep(4);
         }
     }

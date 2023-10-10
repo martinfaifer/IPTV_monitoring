@@ -169,7 +169,7 @@ return [
             'connection' => 'redis',
             'queue' => ['default'],
             'balance' => 'auto',
-            'maxProcesses' => 200,
+            'maxProcesses' => 100,
             'tries' => 1,
             'nice' => 0,
             'sleep' => 1
@@ -183,11 +183,10 @@ return [
                 'queue' => ['default'],
                 'balance' => 'auto',
                 'minProcesses' => 1,
-                'maxProcesses' => 30,
+                'maxProcesses' => 10,
                 'balanceMaxShift' => 10,
                 'balanceCooldown' => 10,
                 'tries' => 1,
-                'sleep' => 1
             ],
             'supervisor-balancer' => [
                 'connection' => 'redis',
@@ -198,7 +197,6 @@ return [
                 'balanceMaxShift' => 5,
                 'balanceCooldown' => 5,
                 'tries' => 1,
-                'sleep' => 1
             ],
             'supervisor-ffprobe' => [
                 'connection' => 'redis',
@@ -209,7 +207,6 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'tries' => 1,
-                'sleep' => 1
             ],
             'supervisor-ffmpeg' => [
                 'connection' => 'redis',
@@ -220,7 +217,6 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'tries' => 1,
-                'sleep' => 1
             ],
             'webhook' => [
                 'connection' => 'redis',
@@ -231,7 +227,6 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 1,
                 'tries' => 1,
-                'sleep' => 1
             ],
         ],
 

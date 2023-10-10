@@ -81,7 +81,9 @@ class Stream extends Model
     public static function scopeIsNotMonitored(Builder $query)
     {
         $query
-            ->where('status', Stream::STATUS_WAITING);
+            ->where('status', Stream::STATUS_WAITING)
+            ->orWhere('status', Stream::STATUS_STARTING)
+            ->with('processes');
     }
 
     public static function scopeIsMonitoring(Builder $query)

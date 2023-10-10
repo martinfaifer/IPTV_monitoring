@@ -5,8 +5,6 @@ namespace App\Events;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
-// use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-// use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Cache;
@@ -29,18 +27,23 @@ class BroadcastAudioVideoStreamPidsEvent implements ShouldBroadcastNow
         $this->audioPids = $audioPids;
     }
 
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return \Illuminate\Broadcasting\Channel|array
+     */
     public function broadcastOn()
     {
-        return new Channel('StreamAudioVideoPids' . $this->stream->id);
+        return new Channel('StreamAudioVideoPids'.$this->stream->id);
     }
 
     public function broadcastWith()
     {
         return [
             'videoPids' => $this->videoPids,
-            'videoFfmpegPids' => Cache::get('streamFfProbeVideoPid_' . $this->stream->id),
+            'videoFfmpegPids' => Cache::get('streamFfProbeVideoPid_'.$this->stream->id),
             'audioPids' => $this->audioPids,
-            'audioFfmpegPids' => Cache::get('streamFfProbeAudioPid_' . $this->stream->id),
+            'audioFfmpegPids' => Cache::get('streamFfProbeAudioPid_'.$this->stream->id),
         ];
     }
 }

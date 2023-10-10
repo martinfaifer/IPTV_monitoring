@@ -22,9 +22,9 @@ class StartStreamDiagnosticJob implements ShouldQueue
     /**
      * create new job instance
      *
-     * @param  int  $stream
+     * @param  object  $stream
      */
-    public function __construct(public int $streamId)
+    public function __construct(public object $stream)
     {
         //
     }
@@ -39,7 +39,7 @@ class StartStreamDiagnosticJob implements ShouldQueue
         // vyčištění cache
         // Cache::pull($this->stream->id . "_" . Stream::STATUS_CAN_NOT_START);
 
-        $processPid = shell_exec("nohup php artisan stream:diagnostic {$this->streamId}" . ' > /dev/null 2>&1 & echo $!');
-        (new StoreStreamDiagnosticPidAction())->execute($this->streamId, $processPid);
+        $processPid = shell_exec("nohup php artisan stream:diagnostic {$this->stream->id}" . ' > /dev/null 2>&1 & echo $!');
+        (new StoreStreamDiagnosticPidAction())->execute($this->stream->id, $processPid);
     }
 }

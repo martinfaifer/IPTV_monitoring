@@ -8,9 +8,8 @@ use App\Actions\Cache\GetStreamsHistoryAction;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-class BroadcastStreamsHistoryStatusEvent implements ShouldBroadcastNow
+class BroadcastStreamsHistoryStatusEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -24,6 +23,11 @@ class BroadcastStreamsHistoryStatusEvent implements ShouldBroadcastNow
         //
     }
 
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return \Illuminate\Broadcasting\Channel|array
+     */
     public function broadcastOn()
     {
         return new Channel('StreamHistoryStatuses');

@@ -3,11 +3,9 @@
 namespace App\Services\StreamDiagnostic\TSDuck;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 use App\Actions\Cache\StoreItemsToCache;
 use App\Actions\Cache\RemoveItemsFromCache;
 use App\Interfaces\DiagnosticAnalyzeInterface;
-use App\Events\BroadcastAudioVideoStreamPidsEvent;
 use App\Actions\Cache\StoreStreamPidDataFroChartToCache;
 use App\Actions\Cache\StoreStreamPidDiscontinuityAction;
 use App\Services\StreamDiagnostic\CheckPids\CheckNumberOfErrorsService;

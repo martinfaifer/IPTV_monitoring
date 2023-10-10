@@ -6,18 +6,14 @@ class TsDuckAnalyzeAction
 {
     public function execute(string $streamUrl)
     {
-        try {
-            if (str_contains($streamUrl, 'http')) {
-                $command = "timeout -k 1 2s tsp -I http {$streamUrl} -P until -s 1 -P analyze --json -O drop";
-            } else {
-                $command = "timeout -k 1 2s tsp -I ip {$streamUrl} -P until -s 1 -P analyze --json -O drop";
-            }
-
-            $result = shell_exec($command);
-            return $result;
-        } catch (\Throwable $th) {
-            return null;
+        if (str_contains($streamUrl, 'http')) {
+            $command = "timeout -k 1 2s tsp -I http {$streamUrl} -P until -s 1 -P analyze --json -O drop";
+        } else {
+            $command = "timeout -k 1 2s tsp -I ip {$streamUrl} -P until -s 1 -P analyze --json -O drop";
         }
+
+        $result = shell_exec($command);
+        return $result;
     }
 
     // spustení streamu ve vlc / mozna i v prohlížeči?

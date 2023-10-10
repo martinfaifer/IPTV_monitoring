@@ -28,7 +28,7 @@ class StreamDiagnosticTsDuckService
 
     public function monitoring(object $stream)
     {
-        while (true) {
+        while (1) {
             // kontrola zda stream má být dohledován
             if ($this->check_if_stream_can_be_kill(stream: $stream) == true) {
                 $this->change_stream_status_and_release_them(stream: $stream);
@@ -47,6 +47,7 @@ class StreamDiagnosticTsDuckService
             // kontrola výstupu
             if (is_null($analyzedResultInArray)) {
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_CAN_NOT_START);
+                unset($analyzedResultInArray);
             } else {
                 // store in to cache for showing in to frontend
                 // try {
@@ -58,9 +59,9 @@ class StreamDiagnosticTsDuckService
                 (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
                 // (new StreamDiagnosticFfProbeService($stream));
                 (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
-            }
 
-            unset($analyzedResultInArray);
+                unset($analyzedResultInArray);
+            }
 
             sleep(4);
         }

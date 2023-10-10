@@ -56,9 +56,9 @@ class StreamDiagnosticTsDuckService
                 //     //throw $th;
                 // }
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_MONITORING);
-                (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
+                // (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
                 // (new StreamDiagnosticFfProbeService($stream));
-                (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
+                // (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
 
                 unset($analyzedResultInArray);
             }
@@ -71,6 +71,11 @@ class StreamDiagnosticTsDuckService
     {
         // kontrola existence streamu
         if (Cache::has('stream_' . $stream->id)) {
+            return false;
+        }
+
+        // check if process exsists
+        if (!posix_kill($stream->processes->diagnostic_pid, 0)) {
             return false;
         }
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StreamResource extends JsonResource
@@ -22,8 +21,7 @@ class StreamResource extends JsonResource
             'status' => $this->status,
             'monitored_at' => $this->monitored_at?->diffForHumans(),
             'image' => '/streams/image/' . $this->id . '?' . rand(),
-            'history' => $this->history,
-            'streamData' => Cache::get('streamData_' . $this->id)
+            'history' => $this->history
         ];
     }
 }

@@ -21,7 +21,7 @@ class SettingsStreamResource extends JsonResource
         }
 
         foreach ($streams as $stream) {
-            $output['streams'][] = [
+            $output[] = [
                 'id' => $stream->id,
                 'nazev' => $stream->nazev,
                 'stream_url' => $stream->stream_url,
@@ -33,14 +33,6 @@ class SettingsStreamResource extends JsonResource
             ];
         }
 
-        $output['stats'] = [
-            'sum' => Stream::count(),
-            'monitored' => Stream::isMonitoring()->count(),
-            'crashed' => Stream::where('status', Stream::STATUS_CAN_NOT_START)->count(),
-            'stopped' => Stream::where('status', Stream::STATUS_STOPPED)->count(),
-            'check_pts' => Stream::checkPts()->count(),
-            'play_video' => Stream::playVideo()->count()
-        ];
         return $output;
     }
 }

@@ -38,7 +38,6 @@ class StartStreamsDiagnosticCommand extends Command
             try {
                 // if ((new CheckIfStreamCanBeKillAction(streamUrl: $stream->stream_url))->execution() != true) {
                 if (is_null($stream->processes)) {
-                    echo $stream->nazev . PHP_EOL;
                     StartStreamDiagnosticJob::dispatch($stream);
                 }
                 // }

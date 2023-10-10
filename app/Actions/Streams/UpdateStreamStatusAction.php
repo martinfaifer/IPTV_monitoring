@@ -23,10 +23,6 @@ class UpdateStreamStatusAction
         if ($status != Stream::STATUS_CAN_NOT_START) {
             Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
         }
-
-        if ($stream->status != $status) {
-            $this->update_stream_status_and_share_it(stream: $stream, status: $status);
-        }
     }
 
     protected function update_stream_status_and_share_it(object $stream, string $status)

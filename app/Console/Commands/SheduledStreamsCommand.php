@@ -33,36 +33,33 @@ class SheduledStreamsCommand extends Command
 
         $time = $currentDay . " " . $currentTime;
 
-        $streams = Stream::with('sheduler')->get();
+        Stream::with('sheduler')->chunk(50, function ($streams) use ($time, $currentTime) {
+            $streams->each(function ($stream) use ($time, $currentTime) {
+                if (count($stream->sheduler) > 0) {
 
-        foreach ($streams as $stream) {
+                    foreach ($stream->sheduler as $sheduler) {
 
-            if (count($stream->sheduler) > 0) {
+                        // check if is daily sheduler
+                        if ($sheduler->is_daily == true) {
+                            $time = $currentTime;
+                        }
 
-                foreach ($stream->sheduler as $sheduler) {
+                        // time to kill stream
+                        if ($sheduler->start_time == $time) {
+                            // kill
+                            (new StopStreamAction())->execute($stream);
+                        }
 
-                    // check if is daily sheduler
-                    if ($sheduler->is_daily == true) {
-                        $time = $currentTime;
-                    }
-
-                    // time to kill stream
-                    if ($sheduler->start_time == $time) {
-                        // kill
-                        (new StopStreamAction())->execute($stream);
-                    }
-
-                    //
-                    if ($sheduler->end_time == $time) {
-                        // update status to waiting || keep it if is monitored or can_not_start
-                        $stream->update([
-                            'status' => Stream::STATUS_WAITING
-                        ]);
+                        //
+                        if ($sheduler->end_time == $time) {
+                            // update status to waiting || keep it if is monitored or can_not_start
+                            $stream->update([
+                                'status' => Stream::STATUS_WAITING
+                            ]);
+                        }
                     }
                 }
-            }
-        }
-
-        dd($currentDay, $currentTime);
+            });
+        });
     }
 }

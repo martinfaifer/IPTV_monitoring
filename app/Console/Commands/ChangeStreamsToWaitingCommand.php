@@ -29,14 +29,13 @@ class ChangeStreamsToWaitingCommand extends Command
      */
     public function handle()
     {
-        $streams = Stream::where('status', Stream::STATUS_STOPPED)->get();
-        if (count($streams) > 0) {
-            foreach ($streams as $stream) {
+        Stream::where('status', Stream::STATUS_STOPPED)->chunk(50, function ($streams) {
+            $streams->each(function ($stream) {
                 Cache::pull($stream->stream_url . '_stop');
                 $stream->update([
                     'status' => Stream::STATUS_WAITING,
                 ]);
-            }
-        }
+            });
+        });
     }
 }

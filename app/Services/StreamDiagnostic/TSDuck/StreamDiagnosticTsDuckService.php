@@ -3,15 +3,11 @@
 namespace App\Services\StreamDiagnostic\TSDuck;
 
 use App\Models\Stream;
-use React\EventLoop\Loop;
 use Illuminate\Support\Facades\Cache;
-use App\Actions\Cache\StoreItemsToCache;
-use App\Actions\Cache\Locks\LockStreamAction;
 use App\Actions\Streams\UpdateStreamStatusAction;
 use App\Actions\Cache\DeleteStreamPidProcessAction;
 use App\Actions\Streams\Analyze\TsDuckAnalyzeAction;
 use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
-use App\Actions\Cache\StoreStreamDiagnosticTimeStampAction;
 use App\Actions\Streams\Analyze\CheckIfStreamCanBeKillAction;
 use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 

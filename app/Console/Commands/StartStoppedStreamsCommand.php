@@ -29,9 +29,10 @@ class StartStoppedStreamsCommand extends Command
      */
     public function handle()
     {
-        $streams = Stream::where('status', Stream::STATUS_STOPPED)->get();
-        foreach ($streams as $stream) {
-            StartStreamDiagnosticJob::dispatch($stream);
-        }
+        Stream::where('status', Stream::STATUS_STOPPED)->chunk(50, function ($streams) {
+            $streams->each(function ($stream) {
+                StartStreamDiagnosticJob::dispatch($stream);
+            });
+        });
     }
 }

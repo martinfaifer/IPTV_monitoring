@@ -44,15 +44,15 @@ class StreamObserver
             (new DeleteAllStreamCacheDataAction())->execute(stream: $stream);
         }
 
-        $notRunnngStreams = new NotRunningStreamsResource([]);
-        if (is_array($notRunnngStreams)) {
-            BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
-        }
+        // $notRunnngStreams = new NotRunningStreamsResource([]);
+        // if (is_array($notRunnngStreams)) {
+        //     BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
+        // }
 
-        $problemStreams = new ShowProblemStreamsResource(Stream::where('status', Stream::STATUS_MONITORING)->get());
-        if (is_array($problemStreams)) {
-            BroadcastProblemStreamsEvent::dispatch($problemStreams);
-        }
+        // $problemStreams = new ShowProblemStreamsResource(Stream::where('status', Stream::STATUS_MONITORING)->get());
+        // if (is_array($problemStreams)) {
+        //     BroadcastProblemStreamsEvent::dispatch($problemStreams);
+        // }
 
         Cache::put('stream_' . $stream->id, $stream);
         // BroadcastMonitoredStreamsEvent::dispatch(); // cpu leak?
@@ -73,18 +73,18 @@ class StreamObserver
 
         Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
 
-        $notRunnngStreams = new NotRunningStreamsResource([]);
-        if (is_array($notRunnngStreams) > 0) {
-            BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
-        }
+        // $notRunnngStreams = new NotRunningStreamsResource([]);
+        // if (is_array($notRunnngStreams) > 0) {
+        //     BroadcastErrorStreamsEvent::dispatch($notRunnngStreams);
+        // }
 
-        $problemStreams = new ShowProblemStreamsResource(resource: Stream::where('status', Stream::STATUS_MONITORING)->get());
-        if (is_array($problemStreams)) {
-            BroadcastProblemStreamsEvent::dispatch($problemStreams);
-        }
+        // $problemStreams = new ShowProblemStreamsResource(resource: Stream::where('status', Stream::STATUS_MONITORING)->get());
+        // if (is_array($problemStreams)) {
+        //     BroadcastProblemStreamsEvent::dispatch($problemStreams);
+        // }
 
         Cache::forget('stream_' . $stream->id);
-        BroadcastMonitoredStreamsEvent::dispatch();
+        // BroadcastMonitoredStreamsEvent::dispatch();
     }
 
     /**

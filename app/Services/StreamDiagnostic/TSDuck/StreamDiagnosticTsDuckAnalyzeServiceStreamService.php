@@ -70,6 +70,18 @@ class StreamDiagnosticTsDuckAnalyzeServiceStreamService implements DiagnosticAna
             components: $this->components,
             packets: $this->packets
         );
+
+        unset(
+            $tsDuckCollection,
+            $stream,
+            $this->tsid,
+            $this->pmtpid,
+            $this->pcrpid,
+            $this->provider,
+            $this->name,
+            $this->components,
+            $this->packets
+        );
     }
 
     public function store_to_cache(object $stream, $tsid, $pmtpid, $pcrpid, $provider, $name, $components, $packets): void

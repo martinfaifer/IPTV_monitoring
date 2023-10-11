@@ -2,12 +2,13 @@
 
 namespace App\Actions\Streams;
 
-use App\Models\ProblemPts;
 use App\Models\Stream;
+use App\Models\VideoPid;
+use App\Models\ProblemPts;
+use Illuminate\Support\Facades\Cache;
 use App\Actions\Streams\Analyze\UnlockStreamUrlAction;
 use App\Actions\Streams\Analyze\MarkStreamForKillAction;
 use App\Actions\System\Process\KillTsDuckStreamProcessAction;
-use App\Models\VideoPid;
 
 class UpdateStreamAction
 {
@@ -49,6 +50,7 @@ class UpdateStreamAction
             //     }
             // }
 
+            Cache::put('streams', Stream::get());
             return true;
         }, function () {
         });

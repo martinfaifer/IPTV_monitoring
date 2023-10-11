@@ -16,9 +16,8 @@ use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 
 class StreamDiagnosticTsDuckService
 {
-    public function __construct(int $streamId)
+    public function __construct(object $stream)
     {
-        $stream = Stream::find($streamId);
         if ($stream->status != Stream::STATUS_MONITORING) {
             (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_STARTING);
         }

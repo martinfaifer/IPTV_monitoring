@@ -34,7 +34,6 @@ class StreamObserver
      */
     public function updated(Stream $stream)
     {
-
         if ($stream->status != Stream::STATUS_CAN_NOT_START) {
             SendedStreamEmail::where('stream_id', $stream->id)->delete();
         }

@@ -1,5 +1,7 @@
 <?php
 
+ini_set('memory_limit', '128M');
+
 namespace App\Console\Commands;
 
 use App\Models\Stream;
@@ -34,6 +36,6 @@ class StreamDiagnoticCommand extends Command
      */
     public function handle()
     {
-        (new StreamDiagnosticTsDuckService($this->argument('streamId')));
+        (new StreamDiagnosticTsDuckService(Stream::find($this->argument('streamId'))));
     }
 }

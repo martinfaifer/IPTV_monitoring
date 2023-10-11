@@ -6,7 +6,7 @@ use App\Models\Stream;
 use App\Services\StreamDiagnostic\TSDuck\StreamDiagnosticTsDuckService;
 use Illuminate\Console\Command;
 
-ini_set('memory_limit', '128M');
+// ini_set('memory_limit', '128M');
 class StreamDiagnoticCommand extends Command
 {
     /**

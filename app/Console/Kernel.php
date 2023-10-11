@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('streams:play-video')->everyFiveMinutes()->runInBackground();
         $schedule->command('streams:start_diagnostic')->everyMinute()->runInBackground();
         $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute()->runInBackground();
-        $schedule->command('system:take_network_data')->everyMinute()->runInBackground();
+        // $schedule->command('system:take_network_data')->everyMinute()->runInBackground();
         $schedule->command('weather:get')->everyFiveMinutes()->runInBackground();
 
         // $schedule->command('ffprobe:analyze_streams')->everyMinute()->runInBackground()->withoutOverlapping(300);

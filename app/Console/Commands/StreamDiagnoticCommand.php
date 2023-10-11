@@ -1,13 +1,12 @@
 <?php
 
-ini_set('memory_limit', '128M');
-
 namespace App\Console\Commands;
 
 use App\Models\Stream;
 use App\Services\StreamDiagnostic\TSDuck\StreamDiagnosticTsDuckService;
 use Illuminate\Console\Command;
 
+ini_set('memory_limit', '128M');
 class StreamDiagnoticCommand extends Command
 {
     /**

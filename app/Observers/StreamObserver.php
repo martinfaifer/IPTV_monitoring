@@ -23,7 +23,7 @@ class StreamObserver
      */
     public function created(Stream $stream)
     {
-        Cache::rememberForever('stream_' . $stream->id, $stream);
+        Cache::forever('stream_' . $stream->id, $stream);
     }
 
     /**
@@ -53,7 +53,7 @@ class StreamObserver
             BroadcastProblemStreamsEvent::dispatch($problemStreams);
         }
 
-        Cache::rememberForever('stream_' . $stream->id, $stream);
+        Cache::forever('stream_' . $stream->id, $stream);
         BroadcastMonitoredStreamsEvent::dispatch();
     }
 

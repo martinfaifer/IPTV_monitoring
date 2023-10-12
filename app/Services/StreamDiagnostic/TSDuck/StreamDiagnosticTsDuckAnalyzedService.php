@@ -24,8 +24,8 @@ class StreamDiagnosticTsDuckAnalyzedService
             new StreamDiagnosticTsDuckAnalyzeServiceStreamService(tsDuckCollection: $tsDuckCollection->only('services'), stream: $stream);
         }
 
-        if ($tsDuckCollection->has('pids')) {
-            new StreamDiagnosticTsDuckAnalyzePidStreamService(tsDuckCollection: $tsDuckCollection->only('pids'), stream: $stream);
-        }
+        // if ($tsDuckCollection->has('pids')) {
+        //     new StreamDiagnosticTsDuckAnalyzePidStreamService(tsDuckCollection: $tsDuckCollection->only('pids'), stream: $stream);
+        // }
     }
 }

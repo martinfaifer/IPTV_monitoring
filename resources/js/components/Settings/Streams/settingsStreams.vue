@@ -101,7 +101,7 @@
                         </v-card-title>
                         <v-data-table
                             :headers="headers"
-                            :items="items.streams"
+                            :items="items"
                             :search="search"
                         >
                             <template v-slot:item.image="{ item }">

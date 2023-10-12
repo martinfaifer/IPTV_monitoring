@@ -960,7 +960,7 @@ var render = function () {
                       _c("v-data-table", {
                         attrs: {
                           headers: _vm.headers,
-                          items: _vm.items.streams,
+                          items: _vm.items,
                           search: _vm.search,
                         },
                         scopedSlots: _vm._u([

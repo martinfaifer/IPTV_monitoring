@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container fluid>
-            <v-row class="mx-auto">
+            <!-- <v-row class="mx-auto">
                 <v-col cols="12" sm="6" md="2" lg="2">
                     <v-card
                         class="overflow-hidden rounded-lg blur shadow-blur"
@@ -68,7 +68,7 @@
                         </v-card-text>
                     </v-card>
                 </v-col>
-            </v-row>
+            </v-row> -->
             <v-row>
                 <v-col cols="12" sm="12" md="12" lg="12">
                     <v-card

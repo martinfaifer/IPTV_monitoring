@@ -14,10 +14,11 @@ class StoreStreamDiagnosticPidAction
                 'stream_id' => $streamId,
                 'diagnostic_pid' => $diagnosticPid
             ]);
-        } else {
-            $streamProcess->update([
-                'diagnostic_pid' => $diagnosticPid
-            ]);
         }
+        // else {
+        //     $streamProcess->update([
+        //         'diagnostic_pid' => $diagnosticPid
+        //     ]);
+        // }
     }
 }

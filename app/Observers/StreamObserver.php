@@ -23,7 +23,7 @@ class StreamObserver
      */
     public function created(Stream $stream)
     {
-        Cache::put('stream_' . $stream->id, $stream);
+        Cache::remember('stream_' . $stream->id, $stream);
     }
 
     /**
@@ -53,7 +53,7 @@ class StreamObserver
             BroadcastProblemStreamsEvent::dispatch($problemStreams);
         }
 
-        Cache::put('stream_' . $stream->id, $stream);
+        Cache::remember('stream_' . $stream->id, $stream);
         BroadcastMonitoredStreamsEvent::dispatch();
     }
 

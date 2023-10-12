@@ -16,8 +16,9 @@ use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 
 class StreamDiagnosticTsDuckService
 {
-    public function __construct(object $stream)
+    public function __construct($streamId)
     {
+        $stream = Stream::find($streamId);
         if ($stream->status != Stream::STATUS_MONITORING) {
             (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_STARTING);
         }
@@ -44,7 +45,10 @@ class StreamDiagnosticTsDuckService
             if (is_null($analyzedResultInArray)) {
                 (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_CAN_NOT_START);
             } else {
-                (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_MONITORING);
+
+                if ($stream->status != Stream::STATUS_MONITORING) {
+                    (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_MONITORING);
+                }
                 (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
                 // (new StreamDiagnosticFfProbeService($stream));
                 (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);

@@ -117,11 +117,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                         dicontinuity: $audioPid['packets']['discontinuities']
                     );
 
-                    (new CheckNumberOfErrorsService())->check(
-                        pid: $audioPidId,
-                        pidErrors: $audioPid['packets']['discontinuities'],
-                        streamId: $stream->id
-                    );
+                    // (new CheckNumberOfErrorsService())->check(
+                    //     pid: $audioPidId,
+                    //     pidErrors: $audioPid['packets']['discontinuities'],
+                    //     streamId: $stream->id
+                    // );
                 }
             }
 
@@ -201,11 +201,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
                         dicontinuity: $videoPid['packets']['discontinuities']
                     );
 
-                    (new CheckNumberOfErrorsService())->check(
-                        pid: $videoPidId,
-                        pidErrors: $videoPid['packets']['discontinuities'],
-                        streamId: $stream->id
-                    );
+                    // (new CheckNumberOfErrorsService())->check(
+                    //     pid: $videoPidId,
+                    //     pidErrors: $videoPid['packets']['discontinuities'],
+                    //     streamId: $stream->id
+                    // );
                 }
 
                 if (array_key_exists('scrambled', $videoPid)) {

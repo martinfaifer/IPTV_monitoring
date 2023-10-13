@@ -35,6 +35,6 @@ class StreamDiagnoticCommand extends Command
      */
     public function handle()
     {
-        (new StreamDiagnosticTsDuckService($this->argument('streamId')));
+        (new StreamDiagnosticTsDuckService())->monitoring($this->argument('streamId'));
     }
 }

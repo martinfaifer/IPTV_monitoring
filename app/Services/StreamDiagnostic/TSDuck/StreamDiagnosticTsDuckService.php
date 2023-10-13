@@ -16,17 +16,22 @@ use App\Actions\System\Process\KillTsDuckStreamProcessAction;
 
 class StreamDiagnosticTsDuckService
 {
-    public function __construct($streamId)
+    // public function __construct($streamId)
+    // {
+    //     $stream = Stream::find($streamId)->load('processes');
+    //     if ($stream->status != Stream::STATUS_MONITORING) {
+    //         (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_STARTING);
+    //     }
+    //     $this->monitoring(stream: $stream);
+    // }
+
+    public function monitoring(int $streamId)
     {
         $stream = Stream::find($streamId)->load('processes');
-        if ($stream->status != Stream::STATUS_MONITORING) {
-            (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_STARTING);
-        }
-        $this->monitoring(stream: $stream);
-    }
+        // if ($stream->status != Stream::STATUS_MONITORING) {
+        //     (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_STARTING);
+        // }
 
-    public function monitoring(object $stream)
-    {
         while (true) {
             // kontrola zda stream má být dohledován
             if ($this->check_if_stream_can_be_kill(stream: $stream) == true) {
@@ -50,9 +55,9 @@ class StreamDiagnosticTsDuckService
                     (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_MONITORING);
                 }
 
-                (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
+                // (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
                 // (new StreamDiagnosticFfProbeService($stream));
-                (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
+                // (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
             }
 
             unset($analyzeResultInJson, $analyzedResultInArray);

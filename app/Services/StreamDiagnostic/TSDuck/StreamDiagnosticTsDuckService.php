@@ -18,7 +18,7 @@ class StreamDiagnosticTsDuckService
 {
     public function __construct($streamId)
     {
-        $stream = Stream::find($streamId);
+        $stream = Stream::find($streamId)->load('processes');
         if ($stream->status != Stream::STATUS_MONITORING) {
             (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_STARTING);
         }
@@ -49,9 +49,10 @@ class StreamDiagnosticTsDuckService
                 if ($stream->status != Stream::STATUS_MONITORING) {
                     (new UpdateStreamStatusAction())->execute(stream: $stream, status: Stream::STATUS_MONITORING);
                 }
-                (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
+
+                // (new StreamDiagnosticTsDuckAnalyzedService(collect($analyzedResultInArray), stream: $stream));
                 // (new StreamDiagnosticFfProbeService($stream));
-                (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
+                // (new StoreStreamDiagnosticTimeStampAction())->execute(stream: $stream);
             }
 
             unset($analyzeResultInJson, $analyzedResultInArray);

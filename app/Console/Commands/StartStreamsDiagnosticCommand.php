@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use App\Jobs\StartStreamDiagnosticJob;
 use Illuminate\Support\Facades\Artisan;
+use App\Actions\Streams\StoreStreamDiagnosticPidAction;
 use App\Actions\Streams\Analyze\CheckIfStreamCanBeKillAction;
 
 class StartStreamsDiagnosticCommand extends Command
@@ -32,18 +33,20 @@ class StartStreamsDiagnosticCommand extends Command
      */
     public function handle()
     {
+        $storeStreamDiagnosticPidAction = new StoreStreamDiagnosticPidAction();
         // označení všech streamu jako waiting pro spuštění
-        $streams = Stream::isNotMonitored()->get(['id']);
+        $streams = Stream::isNotMonitored()->with('processes')->get();
         foreach ($streams as $stream) {
-            try {
-                // if ((new CheckIfStreamCanBeKillAction(streamUrl: $stream->stream_url))->execution() != true) {
-                if (is_null($stream->processes)) {
-                    StartStreamDiagnosticJob::dispatch($stream->id);
-                }
-                // }
-            } catch (\Throwable $th) {
-                //throw $th;
+            // if ((new CheckIfStreamCanBeKillAction(streamUrl: $stream->stream_url))->execution() != true) {
+            if (is_null($stream->processes)) {
+                // StartStreamDiagnosticJob::dispatch($stream->id);
+                $processPid = shell_exec("nohup php artisan stream:diagnostic {$stream->id}" . ' > /dev/null 2>&1 & echo $!');
+                $storeStreamDiagnosticPidAction->execute($stream->id, $processPid);
             }
+            // }
+            unset($stream);
         }
+
+        unset($streams);
     }
 }

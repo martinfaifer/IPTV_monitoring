@@ -43,27 +43,30 @@ class UpdateStreamStatusAction
                 $this->monitored_at = now();
             }
 
-            rescue(function () use ($stream, $status) {
+            try {
                 $stream->update([
                     'status' => $status,
                     'monitored_at' => $this->monitored_at,
                 ]);
-            });
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
 
-
-            rescue(function () use ($stream, $status) {
+            try {
                 StreamHistoryStatus::create([
                     'stream_id' => $stream->id,
                     'status' => $status
                 ]);
-            });
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
 
             (new UpdateStreamCacheStatusAction())->execute(status: $status, streamId: $stream->id);
 
             (new StoreStreamsErrorHistoryAction())->execute(stream: $stream, status: $status);
 
             // fire event for broacast information to notification
-            BroadcastStreamsHistoryStatusEvent::dispatch();
+            // BroadcastStreamsHistoryStatusEvent::dispatch();
         }
     }
 

@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('health:check')->everyMinute();
+        // $schedule->command('health:check')->everyMinute();
 
         $schedule->command('websocket:restart')->daily();
         $schedule->command('model:prune', [
@@ -28,22 +28,22 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('system:prune')->dailyAt('01:00');
 
-        $schedule->command('streams:sheduler')->everyMinute()->runInBackground();
+        // $schedule->command('streams:sheduler')->everyMinute()->runInBackground(); // disabled
         // $schedule->command('streams:play-video')->everyFiveMinutes()->runInBackground();
         $schedule->command('streams:start_diagnostic')->everyMinute()->runInBackground();
-        $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute()->runInBackground();
+        // $schedule->command('streams:take_statuses_and_store_to_database')->everyMinute()->runInBackground(); // disabled
         // $schedule->command('system:take_network_data')->everyMinute()->runInBackground();
-        $schedule->command('weather:get')->everyFiveMinutes()->runInBackground();
+        // $schedule->command('weather:get')->everyFiveMinutes()->runInBackground(); // disabled
 
         // $schedule->command('ffprobe:analyze_streams')->everyMinute()->runInBackground()->withoutOverlapping(300);
 
         // + $schedule->command('notification:send_problem_stream_notification_information')->everyMinute()->runInBackground();
         // + $schedule->command('notification:send_ok_stream_notification_information')->everyFiveMinutes()->runInBackground();
 
-        $schedule->command('streams:check_if_running')->everyTwoMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command('streams:create_image')->everyThirtyMinutes()->runInBackground()->withoutOverlapping();
+        // $schedule->command('streams:check_if_running')->everyTwoMinutes()->withoutOverlapping()->runInBackground(); // disabled
+        // $schedule->command('streams:create_image')->everyThirtyMinutes()->runInBackground()->withoutOverlapping(); // disabled
 
-        $schedule->command('notification:send-error-stream-email')->hourly();
+        // $schedule->command('notification:send-error-stream-email')->hourly(); // disabled
     }
 
     /**

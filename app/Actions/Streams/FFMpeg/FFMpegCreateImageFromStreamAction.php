@@ -42,18 +42,18 @@ class FFMpegCreateImageFromStreamAction
     public function create_image_via_cpu(object $stream)
     {
         if (str_contains($stream->stream_url, 'http')) {
-            shell_exec("timeout -k 1 " . config('app.process_ffmpeg_timeout') . "s ffmpeg -ss 2 -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") . " -timeout 3");
+            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -ss 2 -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") . " -timeout 3");
         } else {
-            shell_exec("timeout -k 1 " . config('app.process_ffmpeg_timeout') . "s ffmpeg -ss 2 -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}" . " -timeout 3"));
+            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -ss 2 -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}" . " -timeout 3"));
         }
     }
 
     public function create_image_via_nvidia_gpu(object $stream)
     {
         if (str_contains($stream->stream_url, 'http')) {
-            shell_exec("timeout -k 1 " . config('app.process_ffmpeg_timeout') . "s ffmpeg -hwaccel cuda -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") .  " -timeout 3");
+            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -hwaccel cuda -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") .  " -timeout 3");
         } else {
-            shell_exec("timeout -k 1 " . config('app.process_ffmpeg_timeout') . "s ffmpeg -hwaccel cuda -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") .  " -timeout 3");
+            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -hwaccel cuda -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") .  " -timeout 3");
         }
     }
 

@@ -15,10 +15,10 @@ class StoreStreamDiagnosticPidAction
                 'diagnostic_pid' => $diagnosticPid
             ]);
         }
-        // else {
-        //     $streamProcess->update([
-        //         'diagnostic_pid' => $diagnosticPid
-        //     ]);
-        // }
+        else {
+            $streamProcess->update([
+                'diagnostic_pid' => $diagnosticPid
+            ]);
+        }
     }
 }

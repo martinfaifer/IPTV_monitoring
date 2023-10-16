@@ -658,6 +658,9 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
+  metaInfo: {
+    title: "IPTV Dohled - nastavení streamů"
+  },
   created: function created() {
     this.index();
   },

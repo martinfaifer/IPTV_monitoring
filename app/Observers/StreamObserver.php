@@ -53,6 +53,7 @@ class StreamObserver
             BroadcastProblemStreamsEvent::dispatch($problemStreams);
         }
 
+        // cached stream information
         Cache::forever('stream_' . $stream->id, $stream);
         BroadcastMonitoredStreamsEvent::dispatch();
     }

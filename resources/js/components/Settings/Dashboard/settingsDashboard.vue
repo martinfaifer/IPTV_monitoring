@@ -119,6 +119,9 @@ import SettingsDashboardNetwork from "./settingsDashboardNetwork.vue";
 import settingsHealthChart from "./settingsHealthChart.vue";
 import settingsDashboardProblemStrems from "./settingsDashboardProblemStreams.vue";
 export default {
+    metaInfo: {
+        title: "IPTV Dohled - Dashboard",
+    },
     components: {
         SettingsDashboardStreamsStatuses,
         SettingsDashboardNetwork,

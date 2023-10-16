@@ -625,6 +625,10 @@ export default {
         };
     },
 
+    metaInfo: {
+        title: "IPTV Dohled - nastavení streamů",
+    },
+
     created() {
         this.index();
     },

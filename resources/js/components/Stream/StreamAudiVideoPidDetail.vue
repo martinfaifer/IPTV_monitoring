@@ -129,6 +129,7 @@ export default {
             lisFfprobeAudioPids: [],
             listVideoPids: [],
             lisFfprobeVideoPids: [],
+            interval: null,
         };
     },
     components: {
@@ -242,6 +243,7 @@ export default {
 
     beforeDestroy: function () {
         window.Echo.leave("StreamAudioVideoPids" + this.$route.params.streamId);
+        clearInterval(this.interval);
     },
 };
 </script>

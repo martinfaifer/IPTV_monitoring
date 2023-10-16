@@ -332,7 +332,8 @@ var StreamAllDiscontinutiesErrors = function StreamAllDiscontinutiesErrors() {
       listAudioPids: [],
       lisFfprobeAudioPids: [],
       listVideoPids: [],
-      lisFfprobeVideoPids: []
+      lisFfprobeVideoPids: [],
+      interval: null
     };
   },
   components: {
@@ -447,6 +448,7 @@ var StreamAllDiscontinutiesErrors = function StreamAllDiscontinutiesErrors() {
   },
   beforeDestroy: function beforeDestroy() {
     window.Echo.leave("StreamAudioVideoPids" + this.$route.params.streamId);
+    clearInterval(this.interval);
   }
 });
 

@@ -354,6 +354,10 @@ export default {
         };
     },
 
+    metaInfo: {
+        title: "IPTV Dohled - uživatelé",
+    },
+
     created() {
         this.index();
     },

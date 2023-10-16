@@ -386,6 +386,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }]
     };
   },
+  metaInfo: {
+    title: "IPTV Dohled - uživatelé"
+  },
   created: function created() {
     this.index();
   },

@@ -87,7 +87,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   components: {},
-  created: function created() {},
+  created: function created() {
+    this.index();
+  },
   methods: {
     index: function index() {
       var _this = this;

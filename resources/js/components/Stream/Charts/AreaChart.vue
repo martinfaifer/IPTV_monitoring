@@ -68,23 +68,24 @@ export default {
     },
     components: {},
 
-    created() {},
+    created() {
+        this.index();
+    },
     methods: {
         async index() {
             // if (this.pidsData != undefined) {
-                await axios
-                    .get(
-                        "streams/charts/" +
-                            this.$route.params.streamId +
-                            "/" +
-                            this.pidsData
-                    )
-                    .then((response) => {
-                        console.log(response.data);
-                        this.chartOptions.xaxis.categories =
-                            response.data.xaxis;
-                        this.series = response.data.seriesData;
-                    });
+            await axios
+                .get(
+                    "streams/charts/" +
+                        this.$route.params.streamId +
+                        "/" +
+                        this.pidsData
+                )
+                .then((response) => {
+                    console.log(response.data);
+                    this.chartOptions.xaxis.categories = response.data.xaxis;
+                    this.series = response.data.seriesData;
+                });
             // }
         },
     },

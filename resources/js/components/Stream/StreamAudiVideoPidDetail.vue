@@ -138,7 +138,7 @@ export default {
 
     created() {
         this.index();
-        this.websocketPidsData();
+        // this.websocketPidsData();
     },
     methods: {
         index() {
@@ -181,7 +181,6 @@ export default {
             await Echo.channel(
                 "StreamAudioVideoPids" + this.$route.params.streamId
             ).listen("BroadcastAudioVideoStreamPidsEvent", (e) => {
-                console.log(e);
                 this.$root.$emit("update_pid_bitrate_charts", "update");
                 this.videoPids = e.videoPids;
                 this.lisFfprobeAudioPids = e.audioFfmpegPids;
@@ -219,11 +218,17 @@ export default {
             }
         },
     },
-
     computed: {},
 
     mounted() {
         this.websocketPidsData();
+        this.interval = setInterval(
+            function () {
+                this.index();
+                this.$root.$emit("update_pid_bitrate_charts", "update");
+            }.bind(this),
+            4000
+        );
     },
     watch: {
         $route(to, from) {

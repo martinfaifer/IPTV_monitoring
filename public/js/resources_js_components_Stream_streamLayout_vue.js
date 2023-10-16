@@ -340,8 +340,7 @@ var StreamAllDiscontinutiesErrors = function StreamAllDiscontinutiesErrors() {
     StreamAllDiscontinutiesErrors: StreamAllDiscontinutiesErrors
   },
   created: function created() {
-    this.index();
-    this.websocketPidsData();
+    this.index(); // this.websocketPidsData();
   },
   methods: {
     index: function index() {
@@ -383,8 +382,6 @@ var StreamAllDiscontinutiesErrors = function StreamAllDiscontinutiesErrors() {
               case 0:
                 _context.next = 2;
                 return Echo.channel("StreamAudioVideoPids" + _this2.$route.params.streamId).listen("BroadcastAudioVideoStreamPidsEvent", function (e) {
-                  console.log(e);
-
                   _this2.$root.$emit("update_pid_bitrate_charts", "update");
 
                   _this2.videoPids = e.videoPids;
@@ -436,6 +433,10 @@ var StreamAllDiscontinutiesErrors = function StreamAllDiscontinutiesErrors() {
   computed: {},
   mounted: function mounted() {
     this.websocketPidsData();
+    this.interval = setInterval(function () {
+      this.index();
+      this.$root.$emit("update_pid_bitrate_charts", "update");
+    }.bind(this), 4000);
   },
   watch: {
     $route: function $route(to, from) {

@@ -45,6 +45,15 @@ export default {
         },
     },
 
-    mounted() {},
+    mounted() {
+        setInterval(
+            function () {
+                try {
+                    this.index();
+                } catch (error) {}
+            }.bind(this),
+            5000
+        );
+    },
 };
 </script>

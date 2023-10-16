@@ -381,6 +381,8 @@ var StreamAllDiscontinutiesErrors = function StreamAllDiscontinutiesErrors() {
               case 0:
                 _context.next = 2;
                 return Echo.channel("StreamAudioVideoPids" + _this2.$route.params.streamId).listen("BroadcastAudioVideoStreamPidsEvent", function (e) {
+                  console.log(e);
+
                   _this2.$root.$emit("update_pid_bitrate_charts", "update");
 
                   _this2.videoPids = e.videoPids;

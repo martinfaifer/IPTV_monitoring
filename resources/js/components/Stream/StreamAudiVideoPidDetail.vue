@@ -180,6 +180,7 @@ export default {
             await Echo.channel(
                 "StreamAudioVideoPids" + this.$route.params.streamId
             ).listen("BroadcastAudioVideoStreamPidsEvent", (e) => {
+                console.log(e);
                 this.$root.$emit("update_pid_bitrate_charts", "update");
                 this.videoPids = e.videoPids;
                 this.lisFfprobeAudioPids = e.audioFfmpegPids;

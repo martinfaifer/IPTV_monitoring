@@ -303,7 +303,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("settings/dashboard/network-speed").then(function (response) {
-        _this.chartOptions.xaxis.categories = response.data.categories;
+        // this.chartOptions.xaxis.categories = response.data.categories;
         _this.series = response.data.series;
       });
     }

@@ -80,7 +80,7 @@ export default {
                             this.pidsData
                     )
                     .then((response) => {
-                        this.chartOptions.xaxis.categories = response.xaxis;
+                        this.chartOptions.xaxis.categories = response.data.xaxis;
                         this.series = response.data.seriesData;
                     });
             }

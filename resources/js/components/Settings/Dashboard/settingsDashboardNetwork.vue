@@ -47,9 +47,7 @@ export default {
                         },
                     },
                 },
-                xaxis: {
-                    categories: undefined,
-                },
+                xaxis: {},
                 yaxis: {
                     show: true,
                 },
@@ -64,7 +62,7 @@ export default {
     methods: {
         index() {
             axios.get("settings/dashboard/network-speed").then((response) => {
-                // this.chartOptions.xaxis.categories = response.data.categories;
+                this.chartOptions.xaxis.categories = response.data.categories;
                 this.series = response.data.series;
             });
         },

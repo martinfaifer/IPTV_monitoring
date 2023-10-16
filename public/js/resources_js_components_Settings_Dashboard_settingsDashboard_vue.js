@@ -285,9 +285,7 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
         },
-        xaxis: {
-          categories: undefined
-        },
+        xaxis: {},
         yaxis: {
           show: true
         }
@@ -303,7 +301,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("settings/dashboard/network-speed").then(function (response) {
-        // this.chartOptions.xaxis.categories = response.data.categories;
+        _this.chartOptions.xaxis.categories = response.data.categories;
         _this.series = response.data.series;
       });
     }

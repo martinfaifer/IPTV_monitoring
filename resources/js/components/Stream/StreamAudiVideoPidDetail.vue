@@ -227,7 +227,7 @@ export default {
                 this.index();
                 this.$root.$emit("update_pid_bitrate_charts", "update");
             }.bind(this),
-            4000
+            2000
         );
     },
     watch: {

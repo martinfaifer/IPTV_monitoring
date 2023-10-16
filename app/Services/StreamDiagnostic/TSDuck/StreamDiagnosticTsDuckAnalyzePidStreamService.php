@@ -68,11 +68,11 @@ class StreamDiagnosticTsDuckAnalyzePidStreamService implements DiagnosticAnalyze
         // }
 
         // broadcast information about video and audio pids
-        BroadcastAudioVideoStreamPidsEvent::dispatch(
-            $stream,
-            Cache::get('streamVideoPids_' . $stream->id),
-            Cache::get('streamAudioPids_' . $stream->id)
-        );
+        // BroadcastAudioVideoStreamPidsEvent::dispatch(
+        //     $stream,
+        //     Cache::get('streamVideoPids_' . $stream->id),
+        //     Cache::get('streamAudioPids_' . $stream->id)
+        // );
     }
 
     /**

@@ -97,19 +97,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.pidsData != undefined)) {
-                  _context.next = 3;
-                  break;
-                }
-
-                _context.next = 3;
+                _context.next = 2;
                 return axios.get("streams/charts/" + _this.$route.params.streamId + "/" + _this.pidsData).then(function (response) {
                   console.log(response.data);
                   _this.chartOptions.xaxis.categories = response.data.xaxis;
                   _this.series = response.data.seriesData;
                 });
 
-              case 3:
+              case 2:
               case "end":
                 return _context.stop();
             }

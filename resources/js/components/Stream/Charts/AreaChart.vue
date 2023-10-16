@@ -71,7 +71,7 @@ export default {
     created() {},
     methods: {
         async index() {
-            if (this.pidsData != undefined) {
+            // if (this.pidsData != undefined) {
                 await axios
                     .get(
                         "streams/charts/" +
@@ -85,7 +85,7 @@ export default {
                             response.data.xaxis;
                         this.series = response.data.seriesData;
                     });
-            }
+            // }
         },
     },
 

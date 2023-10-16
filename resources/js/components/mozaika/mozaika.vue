@@ -103,15 +103,15 @@ export default {
     },
 
     mounted() {
-        // this.websocketData();
-        setInterval(
-            function () {
-                try {
-                    this.index();
-                } catch (error) {}
-            }.bind(this),
-            5000
-        );
+        this.websocketData();
+        // setInterval(
+        //     function () {
+        //         try {
+        //             this.index();
+        //         } catch (error) {}
+        //     }.bind(this),
+        //     15000
+        // );
         this.paginationInterval = setInterval(
             function () {
                 try {

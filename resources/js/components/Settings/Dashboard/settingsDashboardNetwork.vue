@@ -48,10 +48,7 @@ export default {
                     },
                 },
                 xaxis: {
-                    categories: [],
-                    labels: {
-                        show: true,
-                    },
+                    categories: undefined,
                 },
                 yaxis: {
                     show: true,

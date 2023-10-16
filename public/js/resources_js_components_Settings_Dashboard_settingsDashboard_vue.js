@@ -286,10 +286,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         xaxis: {
-          categories: [],
-          labels: {
-            show: true
-          }
+          categories: undefined
         },
         yaxis: {
           show: true

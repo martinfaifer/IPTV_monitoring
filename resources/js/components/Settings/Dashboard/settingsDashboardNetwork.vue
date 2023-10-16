@@ -48,7 +48,7 @@ export default {
                     },
                 },
                 xaxis: {
-                    type: "time",
+                    type: "datetime",
                     categories: [],
                 },
                 yaxis: {

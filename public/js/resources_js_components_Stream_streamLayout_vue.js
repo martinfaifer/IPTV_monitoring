@@ -101,7 +101,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return axios.get("streams/charts/" + _this.$route.params.streamId + "/" + _this.pidsData).then(function (response) {
-                  console.log(response.data);
                   _this.chartOptions.xaxis.categories = response.data.xaxis;
                   _this.series = response.data.seriesData;
                 });
@@ -342,6 +341,7 @@ var StreamAllDiscontinutiesErrors = function StreamAllDiscontinutiesErrors() {
   },
   created: function created() {
     this.index();
+    this.websocketPidsData();
   },
   methods: {
     index: function index() {

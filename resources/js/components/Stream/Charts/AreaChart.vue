@@ -82,7 +82,6 @@ export default {
                         this.pidsData
                 )
                 .then((response) => {
-                    console.log(response.data);
                     this.chartOptions.xaxis.categories = response.data.xaxis;
                     this.series = response.data.seriesData;
                 });

@@ -138,6 +138,7 @@ export default {
 
     created() {
         this.index();
+        this.websocketPidsData();
     },
     methods: {
         index() {

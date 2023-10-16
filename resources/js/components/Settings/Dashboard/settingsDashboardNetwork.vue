@@ -47,7 +47,10 @@ export default {
                         },
                     },
                 },
-                xaxis: {},
+                xaxis: {
+                    type: "numeric",
+                    categories: [],
+                },
                 yaxis: {
                     show: true,
                 },

@@ -285,7 +285,10 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
         },
-        xaxis: {},
+        xaxis: {
+          type: "numeric",
+          categories: []
+        },
         yaxis: {
           show: true
         }

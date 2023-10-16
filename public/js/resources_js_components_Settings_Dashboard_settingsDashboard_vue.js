@@ -286,7 +286,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         xaxis: {
-          type: "numeric",
+          type: "time",
           categories: []
         },
         yaxis: {

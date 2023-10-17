@@ -94,19 +94,19 @@
                         name="CpuLoad"
                     ></settingsHealthChart>
                 </v-col>
-                <v-col cols="12" sm="12" md="5" lg="5">
+                <v-col cols="12" sm="12" md="4" lg="4">
                     <settingsHealthChart
                         title="Zátěž GPU"
                         name="GpuUtil"
                     ></settingsHealthChart>
                 </v-col>
-                <v-col cols="12" sm="12" md="5" lg="5">
+                <v-col cols="12" sm="12" md="4" lg="4">
                     <settingsHealthChart
                         title="GPU Ram"
                         name="GpuUsedMemory"
                     ></settingsHealthChart>
                 </v-col>
-                <v-col cols="12" sm="12" md="2" lg="2">
+                <v-col cols="12" sm="12" md="4" lg="4">
                     <settingsHealthChart
                         title="GPU FAN"
                         name="GpuFanSpeed"

@@ -1339,7 +1339,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "v-col",
-                { attrs: { cols: "12", sm: "12", md: "5", lg: "5" } },
+                { attrs: { cols: "12", sm: "12", md: "4", lg: "4" } },
                 [
                   _c("settingsHealthChart", {
                     attrs: { title: "Zátěž GPU", name: "GpuUtil" },
@@ -1350,7 +1350,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "v-col",
-                { attrs: { cols: "12", sm: "12", md: "5", lg: "5" } },
+                { attrs: { cols: "12", sm: "12", md: "4", lg: "4" } },
                 [
                   _c("settingsHealthChart", {
                     attrs: { title: "GPU Ram", name: "GpuUsedMemory" },
@@ -1361,7 +1361,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "v-col",
-                { attrs: { cols: "12", sm: "12", md: "2", lg: "2" } },
+                { attrs: { cols: "12", sm: "12", md: "4", lg: "4" } },
                 [
                   _c("settingsHealthChart", {
                     attrs: { title: "GPU FAN", name: "GpuFanSpeed" },

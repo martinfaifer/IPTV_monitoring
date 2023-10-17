@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Gpu;
 use Illuminate\Console\Command;
 
 class GetGPUInformationCommand extends Command
@@ -31,7 +32,11 @@ class GetGPUInformationCommand extends Command
         $nvidiaSmiOutputInJson = json_encode($xmlObject);
         $nvidiaSmiOutputInArray = json_decode($nvidiaSmiOutputInJson, true);
 
-        dd($nvidiaSmiOutputInArray['gpu']['serial'], $nvidiaSmiOutputInArray['gpu']['product_name']);
-
+        if (!Gpu::where('serial', $nvidiaSmiOutputInArray['gpu']['serial'])->first()) {
+            Gpu::create([
+                'product_name' => $nvidiaSmiOutputInArray['gpu']['product_name'],
+                'serial' => $nvidiaSmiOutputInArray['gpu']['serial']
+            ]);
+        }
     }
 }

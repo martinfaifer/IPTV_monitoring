@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\AvgNetworkSpeed;
+use App\Models\GpuChart;
 use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
 use App\Models\NetworkStatistic;
@@ -34,5 +35,6 @@ class PrunDataCommand extends Command
         NetworkStatistic::where('created_at', '<=', Carbon::now()->subDay()->toDateTimeString())->delete();
         StreamHistoryStatus::where('created_at', '<=', Carbon::now()->subDays(2)->toDateTimeString())->delete();
         StreamProblemPid::where('created_at', '<=', Carbon::now()->subDay()->toDateTimeString())->delete();
+        GpuChart::where('created_at', '<=', Carbon::now()->subDay()->toDateTimeString())->delete();
     }
 }

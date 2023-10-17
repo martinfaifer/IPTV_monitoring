@@ -267,7 +267,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       chartOptions: {
         legend: {
-          show: true
+          show: false
         },
         dataLabels: {
           enabled: false

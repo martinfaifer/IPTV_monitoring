@@ -29,7 +29,7 @@ export default {
         return {
             chartOptions: {
                 legend: {
-                    show: true,
+                    show: false,
                 },
                 dataLabels: {
                     enabled: false,

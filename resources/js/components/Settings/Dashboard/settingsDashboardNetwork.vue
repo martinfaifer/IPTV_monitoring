@@ -72,7 +72,7 @@ export default {
     methods: {
         index() {
             axios.get("settings/dashboard/network-speed").then((response) => {
-                this.chartOptions.xaxis.categories.push(response.data.categories);
+                this.chartOptions.xaxis.categories.concat(response.data.categories);
                 this.series = response.data.series;
             });
         },

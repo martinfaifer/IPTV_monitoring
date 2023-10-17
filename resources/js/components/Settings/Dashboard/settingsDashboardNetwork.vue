@@ -48,7 +48,7 @@ export default {
                     },
                 },
                 xaxis: {
-                    type: "datetime",
+                    // type: "datetime",
                     categories: [],
                 },
                 // tooltip: {

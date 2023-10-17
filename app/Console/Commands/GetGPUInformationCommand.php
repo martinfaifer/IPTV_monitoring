@@ -38,5 +38,7 @@ class GetGPUInformationCommand extends Command
                 'serial' => $nvidiaSmiOutputInArray['gpu']['serial']
             ]);
         }
+
+        dd($nvidiaSmiOutputInArray['gpu']['fan_speed'], $nvidiaSmiOutputInArray['gpu']['clocks_event_reasons']['fb_memory_usage']['used'], $nvidiaSmiOutputInArray['gpu']['clocks_event_reasons']['fb_memory_usage']['total']);
     }
 }

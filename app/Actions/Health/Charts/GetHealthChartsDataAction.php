@@ -27,7 +27,7 @@ class GetHealthChartsDataAction
             $data = GpuChart::limit('30')
                 ->select('id', $column, 'created_at')->orderByDesc('id')->get();
 
-            // dd($data);
+            dd($data);
         } else {
             $data = Healt::byName($check_name)->get();
         }

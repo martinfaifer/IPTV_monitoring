@@ -27,15 +27,15 @@ class GetHealthChartsDataAction
             $data = GpuChart::limit('30')
                 ->select('id', $column, 'created_at')->orderByDesc('id')->get();
 
-            dd($data);
         } else {
             $data = Healt::byName($check_name)->get();
+            $column = 'short_summary';
         }
         return [
             'series' => [
                 [
                     'name' => $check_name,
-                    'data' => $this->get_list_from_array($data, 'short_summary'),
+                    'data' => $this->get_list_from_array($data, $column),
                 ],
             ],
             'categories' => $this->get_list_from_array($data, 'created_at', true),

@@ -51,6 +51,7 @@ export default {
                     // type: "datetime",
                     categories: [],
                     convertedCatToNumeric: false,
+                    tickPlacement: "between",
                 },
                 // tooltip: {
                 //     x: {

@@ -12,7 +12,7 @@ class GetHealthChartsDataAction
     public function execute(string $check_name): array
     {
         if (str_contains($check_name, 'Gpu')) {
-            $data = GpuChart::limit('30')
+            $data = GpuChart::take('30')
                 ->orderByDesc('id')->get(['id', function () use ($check_name) {
                     if ($check_name == 'GpuUtil') {
                         return "gpu_util";

@@ -22,14 +22,15 @@ class FFMpegCreateImageFromStreamAction
             $this->remove_file($this->filePath);
         }
 
-        $isNvidiaGpu = shell_exec('nvidia-smi');
+        // $isNvidiaGpu = shell_exec('nvidia-smi');
 
-        if (str_contains($isNvidiaGpu, "failed") || str_contains($isNvidiaGpu, "not found")) {
-            $this->create_image_via_cpu($stream);
-        } else {
-            $this->create_image_via_nvidia_gpu($stream);
-        }
-        // $this->create_image_via_cpu($stream);
+        // if (str_contains($isNvidiaGpu, "failed") || str_contains($isNvidiaGpu, "not found")) {
+        //     $this->create_image_via_cpu($stream);
+        // } else {
+        //     $this->create_image_via_nvidia_gpu($stream);
+        // }
+        
+        $this->create_image_via_cpu($stream);
 
         $this->resize_image($this->filePath);
         BroadcastStreamImageEvent::dispatch($stream);
@@ -50,9 +51,9 @@ class FFMpegCreateImageFromStreamAction
     public function create_image_via_nvidia_gpu(object $stream)
     {
         if (str_contains($stream->stream_url, 'http')) {
-            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -hwaccel cuda -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") .  " -timeout 3");
+            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -hwaccel cuda -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") .  " -timeout 5");
         } else {
-            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -hwaccel cuda -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") .  " -timeout 3");
+            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -hwaccel cuda -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") .  " -timeout 5");
         }
     }
 
@@ -78,9 +79,14 @@ class FFMpegCreateImageFromStreamAction
 
     public function resize_image($imagePath)
     {
-        SpatieImage::load($imagePath)
+        try {
+            SpatieImage::load($imagePath)
             ->width(480)
             ->height(270)
             ->save($imagePath);
+        } catch (\Throwable $th) {
+            // 
+        }
+        
     }
 }

@@ -29,6 +29,7 @@ class GetGPUInformationCommand extends Command
 
         $nvidiaSmiOutputInJson = json_encode($nvidiaSmiOutputInXml);
 
-        return $nvidiaSmiOutputInJson;
+        
+        echo $nvidiaSmiOutputInJson;
     }
 }

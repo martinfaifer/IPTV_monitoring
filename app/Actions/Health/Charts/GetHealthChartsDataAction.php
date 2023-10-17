@@ -24,8 +24,8 @@ class GetHealthChartsDataAction
             if ($check_name == 'GpuUsedMemory') {
                 $column = "used_memory";
             }
-            $data = GpuChart::take('30')
-                ->orderByDesc('id')->get(['id', $column, 'created_at']);
+            $data = GpuChart::limit('30')
+                ->select('id', $column, 'created_at')->orderByDesc('id')->get();
 
             // dd($data);
         } else {

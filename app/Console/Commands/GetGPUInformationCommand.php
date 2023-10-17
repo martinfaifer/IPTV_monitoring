@@ -29,7 +29,7 @@ class GetGPUInformationCommand extends Command
 
         $xmlObject = simplexml_load_string($nvidiaSmiOutputInXml);
         $nvidiaSmiOutputInJson = json_encode($xmlObject);
-        $nvidiaSmiOutputInArray = json_decode($nvidiaSmiOutputInJson);
+        $nvidiaSmiOutputInArray = json_decode($nvidiaSmiOutputInJson, true);
 
         dd($nvidiaSmiOutputInArray['gpu']['serial']);
 

@@ -289,6 +289,11 @@ __webpack_require__.r(__webpack_exports__);
           type: "datetime",
           categories: []
         },
+        tooltip: {
+          x: {
+            format: "dd/MM/yy HH:mm"
+          }
+        },
         yaxis: {
           show: true
         }

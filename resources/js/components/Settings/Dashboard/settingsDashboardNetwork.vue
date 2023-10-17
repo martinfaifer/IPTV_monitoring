@@ -51,6 +51,11 @@ export default {
                     type: "datetime",
                     categories: [],
                 },
+                tooltip: {
+                    x: {
+                        format: "dd/MM/yy HH:mm",
+                    },
+                },
                 yaxis: {
                     show: true,
                 },

@@ -267,7 +267,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       chartOptions: {
         legend: {
-          show: false
+          show: true
         },
         dataLabels: {
           enabled: false
@@ -278,7 +278,7 @@ __webpack_require__.r(__webpack_exports__);
           },
           type: "area",
           animations: {
-            enabled: false,
+            enabled: true,
             easing: "linear",
             dynamicAnimation: {
               speed: 1000
@@ -311,7 +311,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("settings/dashboard/network-speed").then(function (response) {
-        _this.chartOptions.xaxis.categories = response.data.categories;
+        _this.chartOptions.xaxis.categories.push(response.data.categories);
+
         _this.series = response.data.series;
       });
     }

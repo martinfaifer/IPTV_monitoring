@@ -12,20 +12,20 @@ class GetHealthChartsDataAction
     public function execute(string $check_name): array
     {
         if (str_contains($check_name, 'Gpu')) {
+
+            if ($check_name == 'GpuUtil') {
+                $column = "gpu_util";
+            }
+
+            if ($check_name == 'GpuFanSpeed') {
+                $column = "fan_speed";
+            }
+
+            if ($check_name == 'GpuUsedMemory') {
+                $column = "used_memory";
+            }
             $data = GpuChart::take('30')
-                ->get(['id', function () use ($check_name) {
-                    if ($check_name == 'GpuUtil') {
-                        return "gpu_util";
-                    }
-
-                    if ($check_name == 'GpuFanSpeed') {
-                        return "fan_speed";
-                    }
-
-                    if ($check_name == 'GpuUsedMemory') {
-                        return "used_memory";
-                    }
-                }, 'created_at']);
+                ->orderByDesc('id')->get(['id', $column, 'created_at']);
 
             // dd($data);
         } else {

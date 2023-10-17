@@ -26,6 +26,8 @@ class GetHealthChartsDataAction
                         return "used_memory";
                     }
                 }, 'created_at');
+
+                dd($data);
         } else {
             $data = Healt::byName($check_name)->get();
         }

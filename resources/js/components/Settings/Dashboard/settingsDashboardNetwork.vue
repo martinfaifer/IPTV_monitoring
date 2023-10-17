@@ -50,6 +50,7 @@ export default {
                 xaxis: {
                     // type: "datetime",
                     categories: [],
+                    convertedCatToNumeric: false,
                 },
                 // tooltip: {
                 //     x: {

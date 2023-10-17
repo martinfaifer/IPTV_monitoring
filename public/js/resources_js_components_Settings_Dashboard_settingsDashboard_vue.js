@@ -286,7 +286,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         xaxis: {
-          // type: "datetime",
+          type: "datetime",
           categories: [],
           // convertedCatToNumeric: false,
           tickPlacement: "between"

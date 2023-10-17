@@ -14,37 +14,36 @@ class FFMpegCreateImageFromStreamAction
 
     public function execute(object $stream)
     {
-        try {
-            $this->imageName = Str::slug($stream->nazev) . '.jpg';
-            $this->filePath = public_path("storage/streamImages/{$this->imageName}");
+        // try {
+        $this->imageName = Str::slug($stream->nazev) . '.jpg';
+        $this->filePath = public_path("storage/streamImages/{$this->imageName}");
 
-            if (file_exists($this->filePath)) {
-                $this->remove_file($this->filePath);
-            }
-
-            // $isNvidiaGpu = shell_exec('nvidia-smi');
-
-            // if (str_contains($isNvidiaGpu, "failed") || str_contains($isNvidiaGpu, "not found")) {
-            //     $this->create_image_via_cpu($stream);
-            // } else {
-            //     $this->create_image_via_nvidia_gpu($stream);
-            // }
-
-            $this->create_image_via_cpu($stream);
-
-            $this->resize_image($this->filePath);
-            BroadcastStreamImageEvent::dispatch($stream);
-            // $this->cache_image($this->filePath);
-        } catch (\Throwable $th) {
+        if (file_exists($this->filePath)) {
+            $this->remove_file($this->filePath);
         }
+
+        $isNvidiaGpu = shell_exec('nvidia-smi');
+
+        if (str_contains($isNvidiaGpu, "failed") || str_contains($isNvidiaGpu, "not found")) {
+            $this->create_image_via_cpu($stream);
+        } else {
+            $this->create_image_via_nvidia_gpu($stream);
+        }
+        // $this->create_image_via_cpu($stream);
+
+        $this->resize_image($this->filePath);
+        BroadcastStreamImageEvent::dispatch($stream);
+        // $this->cache_image($this->filePath);
+        // } catch (\Throwable $th) {
+        // }
     }
 
     public function create_image_via_cpu(object $stream)
     {
         if (str_contains($stream->stream_url, 'http')) {
-            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -ss 2 -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") . " -timeout 3");
+            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -ss 2 -i {$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}") . " -timeout 5");
         } else {
-            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -ss 2 -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}" . " -timeout 3"));
+            shell_exec("timeout -k 1 5s " . config('app.process_ffmpeg_timeout') . "s ffmpeg -ss 2 -i udp://{$stream->stream_url} -vframes:v 1 " . public_path("storage/streamImages/{$this->imageName}" . " -timeout 5"));
         }
     }
 

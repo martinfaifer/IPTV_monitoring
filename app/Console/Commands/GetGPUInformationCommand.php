@@ -40,10 +40,10 @@ class GetGPUInformationCommand extends Command
         }
 
         dd(
-            $nvidiaSmiOutputInArray['gpu']['fan_speed'],
-            $nvidiaSmiOutputInArray['gpu']['fb_memory_usage']['used'],
-            $nvidiaSmiOutputInArray['gpu']['fb_memory_usage']['total'],
-            $nvidiaSmiOutputInArray['gpu']['utilization']['gpu_util']
+            (int) $nvidiaSmiOutputInArray['gpu']['fan_speed'],
+            (int) $nvidiaSmiOutputInArray['gpu']['fb_memory_usage']['used'],
+            (int) $nvidiaSmiOutputInArray['gpu']['fb_memory_usage']['total'],
+            (int) $nvidiaSmiOutputInArray['gpu']['utilization']['gpu_util']
         );
     }
 }

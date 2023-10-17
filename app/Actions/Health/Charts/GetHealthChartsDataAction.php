@@ -13,7 +13,7 @@ class GetHealthChartsDataAction
     {
         if (str_contains($check_name, 'Gpu')) {
             $data = GpuChart::limit('30')
-                ->orderByDesc('id')->get('id', function () use ($check_name) {
+                ->orderByDesc('id')->get(['id', function () use ($check_name) {
                     if ($check_name == 'GpuUtil') {
                         return "gpu_util";
                     }
@@ -25,9 +25,9 @@ class GetHealthChartsDataAction
                     if ($check_name == 'GpuUsedMemory') {
                         return "used_memory";
                     }
-                }, 'created_at');
+                }, 'created_at']);
 
-                dd($data);
+            // dd($data);
         } else {
             $data = Healt::byName($check_name)->get();
         }

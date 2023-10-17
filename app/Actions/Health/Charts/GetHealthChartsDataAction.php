@@ -11,7 +11,7 @@ class GetHealthChartsDataAction
     use GetListFromArrayTrait;
     public function execute(string $check_name): array
     {
-        if (str_contains($check_name, 'gpu')) {
+        if (str_contains($check_name, 'Gpu')) {
             $data = GpuChart::limit('30')
                 ->select('id', function () use ($check_name) {
                     if ($check_name == 'GpuUtil') {

@@ -130,6 +130,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1314,6 +1332,39 @@ var render = function () {
                 [
                   _c("settingsHealthChart", {
                     attrs: { title: "Vytížení CPU", name: "CpuLoad" },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", sm: "12", md: "5", lg: "5" } },
+                [
+                  _c("settingsHealthChart", {
+                    attrs: { title: "Zátěž GPU", name: "GpuUtil" },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", sm: "12", md: "5", lg: "5" } },
+                [
+                  _c("settingsHealthChart", {
+                    attrs: { title: "GPU Ram", name: "GpuUsedMemory" },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", sm: "12", md: "2", lg: "2" } },
+                [
+                  _c("settingsHealthChart", {
+                    attrs: { title: "GPU FAN", name: "GpuFanSpeed" },
                   }),
                 ],
                 1

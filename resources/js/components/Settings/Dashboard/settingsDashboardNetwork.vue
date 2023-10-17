@@ -49,7 +49,7 @@ export default {
                 },
                 xaxis: {
                     // type: "datetime",
-                    categories: undefined,
+                    // categories: undefined,
                     // convertedCatToNumeric: false,
                     tickPlacement: "between",
                 },

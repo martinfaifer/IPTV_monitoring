@@ -287,7 +287,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         xaxis: {
           // type: "datetime",
-          categories: undefined,
+          // categories: undefined,
           // convertedCatToNumeric: false,
           tickPlacement: "between"
         },

@@ -48,9 +48,9 @@ export default {
                     },
                 },
                 xaxis: {
-                    type: "datetime",
+                    // type: "datetime",
                     categories: [],
-                    convertedCatToNumeric: false,
+                    // convertedCatToNumeric: false,
                     tickPlacement: "between",
                 },
                 // tooltip: {

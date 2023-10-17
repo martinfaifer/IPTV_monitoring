@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Gpu extends Model
 {
@@ -10,4 +11,9 @@ class Gpu extends Model
         'product_name',
         'serial'
     ];
+
+    public function gpu_chart(): HasMany
+    {
+        return $this->hasMany(GpuChart::class, 'gpu_id', 'id');
+    }
 }

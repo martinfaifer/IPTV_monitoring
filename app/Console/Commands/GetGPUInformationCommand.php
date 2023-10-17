@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Gpu;
+use App\Models\GpuChart;
 use Illuminate\Console\Command;
 
 class GetGPUInformationCommand extends Command
@@ -26,6 +27,10 @@ class GetGPUInformationCommand extends Command
      */
     public function handle()
     {
+        $nvidiaSmi = shell_exec('nvidia-smi');
+        if (!str_contains($nvidiaSmi, "CUDA")) {
+            die();
+        }
         $nvidiaSmiOutputInXml = shell_exec('nvidia-smi -q -x');
 
         $xmlObject = simplexml_load_string($nvidiaSmiOutputInXml);
@@ -33,17 +38,19 @@ class GetGPUInformationCommand extends Command
         $nvidiaSmiOutputInArray = json_decode($nvidiaSmiOutputInJson, true);
 
         if (!Gpu::where('serial', $nvidiaSmiOutputInArray['gpu']['serial'])->first()) {
-            Gpu::create([
+            $gpu = Gpu::create([
                 'product_name' => $nvidiaSmiOutputInArray['gpu']['product_name'],
                 'serial' => $nvidiaSmiOutputInArray['gpu']['serial']
             ]);
+        } else {
+            $gpu = Gpu::where('serial', $nvidiaSmiOutputInArray['gpu']['serial'])->first();
         }
 
-        dd(
-            (int) $nvidiaSmiOutputInArray['gpu']['fan_speed'],
-            (int) $nvidiaSmiOutputInArray['gpu']['fb_memory_usage']['used'],
-            (int) $nvidiaSmiOutputInArray['gpu']['fb_memory_usage']['total'],
-            (int) $nvidiaSmiOutputInArray['gpu']['utilization']['gpu_util']
-        );
+        GpuChart::create([
+            'gpu_id' => $gpu->id,
+            'used_memory' => (int) $nvidiaSmiOutputInArray['gpu']['fb_memory_usage']['used'],
+            'fan_speed' => (int) $nvidiaSmiOutputInArray['gpu']['fan_speed'],
+            'gpu_util' => (int) $nvidiaSmiOutputInArray['gpu']['utilization']['gpu_util']
+        ]);
     }
 }

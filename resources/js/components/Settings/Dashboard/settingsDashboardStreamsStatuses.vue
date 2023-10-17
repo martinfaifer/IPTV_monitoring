@@ -49,8 +49,9 @@ export default {
                     },
                 },
                 xaxis: {
-                    show: true,
+                    show: false,
                     categories: [],
+                    tickPlacement: "between",
                 },
                 yaxis: {
                     show: true,

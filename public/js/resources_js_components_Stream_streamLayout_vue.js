@@ -72,6 +72,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         xaxis: {
           show: false,
           categories: [],
+          tickPlacement: "between",
           labels: {
             show: false
           }

@@ -53,11 +53,6 @@ export default {
                     // convertedCatToNumeric: false,
                     tickPlacement: "between",
                 },
-                // tooltip: {
-                //     x: {
-                //         format: "dd/MM/yy HH:mm",
-                //     },
-                // },
                 yaxis: {
                     show: true,
                 },

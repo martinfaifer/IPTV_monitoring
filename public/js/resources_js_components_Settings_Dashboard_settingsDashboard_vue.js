@@ -291,11 +291,6 @@ __webpack_require__.r(__webpack_exports__);
           // convertedCatToNumeric: false,
           tickPlacement: "between"
         },
-        // tooltip: {
-        //     x: {
-        //         format: "dd/MM/yy HH:mm",
-        //     },
-        // },
         yaxis: {
           show: true
         }
@@ -611,8 +606,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         },
         xaxis: {
-          show: true,
-          categories: []
+          show: false,
+          categories: [],
+          tickPlacement: "between"
         },
         yaxis: {
           show: true
@@ -725,8 +721,9 @@ __webpack_require__.r(__webpack_exports__);
         },
         xaxis: {
           categories: [],
+          tickPlacement: "between",
           labels: {
-            show: true
+            show: false
           }
         },
         yaxis: {

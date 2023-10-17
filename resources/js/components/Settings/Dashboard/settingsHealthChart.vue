@@ -50,8 +50,9 @@ export default {
                 },
                 xaxis: {
                     categories: [],
+                    tickPlacement: "between",
                     labels: {
-                        show: true,
+                        show: false,
                     },
                 },
                 yaxis: {

@@ -11,7 +11,7 @@ trait GetListFromArrayTrait
         $result = [];
         if ($isDate == true) {
             foreach ($collection as $val) {
-                $result[] = $val[$key];
+                $result[] = $val[$key]->format('H:i');
             }
 
             return $result;

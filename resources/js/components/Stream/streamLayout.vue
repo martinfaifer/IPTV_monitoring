@@ -454,7 +454,14 @@ export default {
         },
     },
 
-    mounted() {},
+    mounted() {
+        this.interval = setInterval(
+            function () {
+                this.index();
+            }.bind(this),
+            30000
+        );
+    },
     watch: {
         $route(to, from) {
             this.index();

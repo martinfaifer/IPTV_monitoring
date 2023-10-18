@@ -2200,7 +2200,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     }
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.interval = setInterval(function () {
+      this.index();
+    }.bind(this), 30000);
+  },
   watch: {
     $route: function $route(to, from) {
       this.index();

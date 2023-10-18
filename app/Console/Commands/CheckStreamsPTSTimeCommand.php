@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Stream;
 use App\Models\ProblemPts;
 use Illuminate\Console\Command;
+use App\Jobs\FFMpegGetPtsTimeStreamJob;
 use App\Actions\Streams\FFMpeg\FFMpegGetPtsTimeStreamAction;
 
 class CheckStreamsPTSTimeCommand extends Command
@@ -33,17 +34,7 @@ class CheckStreamsPTSTimeCommand extends Command
         $getPtsTime = new FFMpegGetPtsTimeStreamAction();
 
         foreach ($streams as $stream) {
-            $ptsTime = $getPtsTime->execute(stream: $stream);
-
-            if ($ptsTime == 2) {
-                rescue(function () use ($stream) {
-                    $stream->problemPts->delete();
-                });
-            } else {
-                ProblemPts::firstOrCreate(
-                    ['stream_id' => $stream->id]
-                );
-            }
+            FFMpegGetPtsTimeStreamJob::dispatch($stream);
         }
     }
 }

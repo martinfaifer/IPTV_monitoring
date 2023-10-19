@@ -14,11 +14,11 @@
                     :streamImageUrl="stream.image"
                 ></StreamImage>
                 <!-- stream history -->
-                <StreamHistory
+                <!-- <StreamHistory
                     class="mb-3"
                     :history="stream.history"
                 ></StreamHistory>
-                <StreamPidsErrors class="mb-3"></StreamPidsErrors>
+                <StreamPidsErrors class="mb-3"></StreamPidsErrors> -->
                 <!-- <StreamPids></StreamPids> -->
                 <!-- <FfprobeStream></FfprobeStream> -->
             </v-col>
@@ -340,7 +340,8 @@
                         </v-card>
                     </v-col>
                 </v-row>
-
+            </v-col>
+            <v-col class="mt-n3" cols="12" sm="12" md="12" lg="12">
                 <StreamAudioVideoPidDetail :hasIframe="stream.check_pts"></StreamAudioVideoPidDetail>
             </v-col>
         </v-row>

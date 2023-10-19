@@ -2082,6 +2082,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -5468,13 +5469,6 @@ var render = function () {
                 staticClass: "mb-3",
                 attrs: { streamImageUrl: _vm.stream.image },
               }),
-              _vm._v(" "),
-              _c("StreamHistory", {
-                staticClass: "mb-3",
-                attrs: { history: _vm.stream.history },
-              }),
-              _vm._v(" "),
-              _c("StreamPidsErrors", { staticClass: "mb-3" }),
             ],
             1
           ),
@@ -6115,7 +6109,17 @@ var render = function () {
                 ],
                 1
               ),
-              _vm._v(" "),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            {
+              staticClass: "mt-n3",
+              attrs: { cols: "12", sm: "12", md: "12", lg: "12" },
+            },
+            [
               _c("StreamAudioVideoPidDetail", {
                 attrs: { hasIframe: _vm.stream.check_pts },
               }),

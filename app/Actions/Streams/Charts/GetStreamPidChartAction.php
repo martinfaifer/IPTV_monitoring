@@ -15,8 +15,7 @@ class GetStreamPidChartAction
 
     public function execute(object $stream, string $pid)
     {
-
-        if ($pid = "iframe") {
+        if ($pid == "iframe") {
             $iframes = StreamPtsHistory::where('stream_id', $stream->id)->get();
 
             foreach ($iframes as $iframe) {

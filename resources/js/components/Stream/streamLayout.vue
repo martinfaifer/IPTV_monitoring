@@ -8,18 +8,26 @@
         </v-col>
 
         <v-row>
-            <v-col class="mt-n3" cols="12" sm="12" md="12" lg="12">
+            <v-col class="mt-n3" cols="12" sm="12" md="3" lg="3">
+                <StreamImage
+                    class="mb-3"
+                    :streamImageUrl="stream.image"
+                ></StreamImage>
+                <!-- stream history -->
+                <StreamHistory
+                    class="mb-3"
+                    :history="stream.history"
+                ></StreamHistory>
+                <StreamPidsErrors class="mb-3"></StreamPidsErrors>
+                <!-- <StreamPids></StreamPids> -->
+                <!-- <FfprobeStream></FfprobeStream> -->
+            </v-col>
+            <v-col class="mt-n3" cols="12" sm="12" md="9" lg="9">
                 <v-row>
-                    <v-col cols="12" sm="12" md="3" lg="3">
-                        <StreamImage
-                            class="mb-3"
-                            :streamImageUrl="stream.image"
-                        ></StreamImage>
-                    </v-col>
                     <v-col cols="12" sm="12" md="4" lg="4">
                         <StreamService class="mb-3"></StreamService>
                     </v-col>
-                    <v-col cols="12" sm="12" md="5" lg="5">
+                    <v-col cols="12" sm="12" md="8" lg="8">
                         <v-card
                             class="overflow-hidden rounded-lg blur shadow-blur mb-6"
                         >
@@ -332,8 +340,7 @@
                         </v-card>
                     </v-col>
                 </v-row>
-            </v-col>
-            <v-col class="mt-n3" cols="12" sm="12" md="12" lg="12">
+
                 <StreamAudioVideoPidDetail
                     :hasIframe="stream.check_pts"
                 ></StreamAudioVideoPidDetail>

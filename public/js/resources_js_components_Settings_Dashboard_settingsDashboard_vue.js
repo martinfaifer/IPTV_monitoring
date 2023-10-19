@@ -283,6 +283,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      interval: null,
       chartOptions: {
         legend: {
           show: false
@@ -329,7 +330,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.interval = setInterval(function () {
+      this.index();
+    }.bind(this), 30000);
+  },
+  beforeDestroy: function beforeDestroy() {
+    clearInterval(this.interval);
+  }
 });
 
 /***/ }),
@@ -717,6 +725,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ["title", "name"],
   data: function data() {
     return {
+      interval: null,
       chartOptions: {
         legend: {
           show: false
@@ -764,7 +773,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.interval = setInterval(function () {
+      this.index();
+    }.bind(this), 30000);
+  },
+  beforeDestroy: function beforeDestroy() {
+    clearInterval(this.interval);
+  }
 });
 
 /***/ }),

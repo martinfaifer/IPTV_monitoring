@@ -28,6 +28,7 @@ export default {
     props: ["title", "name"],
     data() {
         return {
+            interval: null,
             chartOptions: {
                 legend: {
                     show: false,
@@ -78,6 +79,17 @@ export default {
         },
     },
 
-    mounted() {},
+    mounted() {
+        this.interval = setInterval(
+            function () {
+                this.index();
+            }.bind(this),
+            30000
+        );
+    },
+
+    beforeDestroy: function () {
+        clearInterval(this.interval);
+    },
 };
 </script>

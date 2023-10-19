@@ -32,9 +32,11 @@ class FFMpegGetPtsTimeStreamJob implements ShouldQueue
         $ptsTime = (new FFMpegGetPtsTimeStreamAction())->execute(stream: $this->stream);
 
         if ($ptsTime == 2) {
-            rescue(function () {
+            try {
                 $this->stream->problemPts->delete();
-            });
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
         } else {
             ProblemPts::firstOrCreate(
                 ['stream_id' => $this->stream->id]

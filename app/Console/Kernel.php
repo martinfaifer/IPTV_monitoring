@@ -46,7 +46,7 @@ class Kernel extends ConsoleKernel
 
         // $schedule->command('notification:send-error-stream-email')->hourly(); // disabled
 
-        $schedule->command('streams:check-pts')->everyFifteenMinutes()->withoutOverlapping()->runInBackground();
+        $schedule->command('streams:check-pts')->everyThirtyMinutes()->withoutOverlapping()->runInBackground();
     }
 
     /**

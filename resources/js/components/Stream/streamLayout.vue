@@ -341,7 +341,7 @@
                     </v-col>
                 </v-row>
 
-                <StreamAudioVideoPidDetail></StreamAudioVideoPidDetail>
+                <StreamAudioVideoPidDetail :hasIframe="stream.check_pts"></StreamAudioVideoPidDetail>
             </v-col>
         </v-row>
 

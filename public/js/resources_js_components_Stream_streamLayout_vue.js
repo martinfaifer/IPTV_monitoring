@@ -328,6 +328,7 @@ var StreamAllDiscontinutiesErrors = function StreamAllDiscontinutiesErrors() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ["hasIframe"],
   data: function data() {
     return {
       showFfmpegDetail: false,
@@ -3518,23 +3519,25 @@ var render = function () {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "v-col",
-                                  {
-                                    attrs: {
-                                      cols: "12",
-                                      sm: "12",
-                                      md: "12",
-                                      lg: "12",
-                                    },
-                                  },
-                                  [
-                                    _c("AreaChart", {
-                                      attrs: { pidsData: "iframe" },
-                                    }),
-                                  ],
-                                  1
-                                ),
+                                _vm.hasIframe == true
+                                  ? _c(
+                                      "v-col",
+                                      {
+                                        attrs: {
+                                          cols: "12",
+                                          sm: "12",
+                                          md: "12",
+                                          lg: "12",
+                                        },
+                                      },
+                                      [
+                                        _c("AreaChart", {
+                                          attrs: { pidsData: "iframe" },
+                                        }),
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c(
                                   "v-col",
@@ -6113,7 +6116,9 @@ var render = function () {
                 1
               ),
               _vm._v(" "),
-              _c("StreamAudioVideoPidDetail"),
+              _c("StreamAudioVideoPidDetail", {
+                attrs: { hasIframe: _vm.stream.check_pts },
+              }),
             ],
             1
           ),

@@ -102,7 +102,7 @@
                                         videoPid.description
                                     }}</span>
                                 </v-col>
-                                <v-col cols="12" sm="12" md="12" lg="12">
+                                <v-col cols="12" sm="12" md="12" lg="12" v-if="hasIframe == true">
                                     <AreaChart pidsData="iframe"></AreaChart>
                                 </v-col>
                                 <v-col cols="12" sm="12" md="12" lg="12">
@@ -123,6 +123,7 @@ import AreaChart from "./Charts/AreaChart.vue";
 let StreamAllDiscontinutiesErrors = () =>
     import("./streamAllDiscontinutiesErrors.vue");
 export default {
+    props: ["hasIframe"],
     data() {
         return {
             showFfmpegDetail: false,

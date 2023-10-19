@@ -8,7 +8,7 @@ use App\Models\Stream;
 
 class StreamPidChartController extends Controller
 {
-    public function __invoke(Stream $stream, int $pid, GetStreamPidChartAction $getStreamPidChartAction)
+    public function __invoke(Stream $stream, string $pid, GetStreamPidChartAction $getStreamPidChartAction)
     {
         return $getStreamPidChartAction->execute(stream: $stream, pid: $pid);
     }

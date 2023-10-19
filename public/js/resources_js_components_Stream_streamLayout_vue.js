@@ -318,6 +318,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 var StreamAllDiscontinutiesErrors = function StreamAllDiscontinutiesErrors() {
@@ -3513,6 +3516,24 @@ var render = function () {
                                       [_vm._v(_vm._s(videoPid.description))]
                                     ),
                                   ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  {
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "12",
+                                      md: "12",
+                                      lg: "12",
+                                    },
+                                  },
+                                  [
+                                    _c("AreaChart", {
+                                      attrs: { pidsData: "iframe" },
+                                    }),
+                                  ],
+                                  1
                                 ),
                                 _vm._v(" "),
                                 _c(

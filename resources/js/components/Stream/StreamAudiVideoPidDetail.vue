@@ -103,6 +103,9 @@
                                     }}</span>
                                 </v-col>
                                 <v-col cols="12" sm="12" md="12" lg="12">
+                                    <AreaChart pidsData="iframe"></AreaChart>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="12" lg="12">
                                     <AreaChart
                                         :pidsData="videoPid.pid"
                                     ></AreaChart>

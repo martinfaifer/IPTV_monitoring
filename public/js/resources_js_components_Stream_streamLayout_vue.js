@@ -2077,12 +2077,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5462,27 +5456,24 @@ var render = function () {
             "v-col",
             {
               staticClass: "mt-n3",
-              attrs: { cols: "12", sm: "12", md: "3", lg: "3" },
-            },
-            [
-              _c("StreamImage", {
-                staticClass: "mb-3",
-                attrs: { streamImageUrl: _vm.stream.image },
-              }),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-col",
-            {
-              staticClass: "mt-n3",
-              attrs: { cols: "12", sm: "12", md: "9", lg: "9" },
+              attrs: { cols: "12", sm: "12", md: "12", lg: "12" },
             },
             [
               _c(
                 "v-row",
                 [
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", sm: "12", md: "3", lg: "3" } },
+                    [
+                      _c("StreamImage", {
+                        staticClass: "mb-3",
+                        attrs: { streamImageUrl: _vm.stream.image },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
                   _c(
                     "v-col",
                     { attrs: { cols: "12", sm: "12", md: "4", lg: "4" } },
@@ -5492,7 +5483,7 @@ var render = function () {
                   _vm._v(" "),
                   _c(
                     "v-col",
-                    { attrs: { cols: "12", sm: "12", md: "8", lg: "8" } },
+                    { attrs: { cols: "12", sm: "12", md: "5", lg: "5" } },
                     [
                       _c(
                         "v-card",

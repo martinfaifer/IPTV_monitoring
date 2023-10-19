@@ -1,4 +1,4 @@
-<?php
+¨<?php
 
 namespace App\Console;
 
@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('health:check')->everyMinute();
+        $schedule->command('health:check')->everyMinute();
 
         $schedule->command('websocket:restart')->daily();
         $schedule->command('model:prune', [
@@ -46,7 +46,7 @@ class Kernel extends ConsoleKernel
 
         // $schedule->command('notification:send-error-stream-email')->hourly(); // disabled
 
-        // $schedule->command('streams:check-pts')->everyThreeHours()->withoutOverlapping()->runInBackground();
+        // $schedule->command('streams:check-pts')->everyFifteenMinutes()->withoutOverlapping()->runInBackground();
     }
 
     /**

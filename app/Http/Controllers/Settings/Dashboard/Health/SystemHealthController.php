@@ -27,7 +27,6 @@ class SystemHealthController extends Controller
                     'status' => $usedDiskSpace->status,
                     'meta' => json_decode($usedDiskSpace->meta, true),
                     'value' => str_replace("%", "", $usedDiskSpace->short_summary)
-
                 ],
                 [
                     'name' => $databaseConnectionCount->check_name,
@@ -36,7 +35,6 @@ class SystemHealthController extends Controller
                     'status' => $databaseConnectionCount->status,
                     'meta' => json_decode($databaseConnectionCount->meta, true),
                     'value' => ((int) $databaseConnectionCount->short_summary / 1000) * 100,
-
                 ],
                 [
                     'name' => $cpuLoad->check_name,
@@ -45,7 +43,6 @@ class SystemHealthController extends Controller
                     'status' => $cpuLoad->status,
                     'meta' => json_decode($cpuLoad->meta, true),
                     'value' => get_value(json_decode($cpuLoad->meta, true), "last_minute")
-
                 ],
                 [
                     'name' => "Sít",

@@ -179,7 +179,7 @@ var render = function () {
         "v-navigation-drawer",
         {
           staticClass: "mt-10",
-          staticStyle: { background: "linear-gradient(#0d1426, #000000)" },
+          staticStyle: { background: "linear-gradient(#080e1a, #000000)" },
           attrs: { fixed: "", app: "", "mini-variant": "" },
           model: {
             value: _vm.drawer,

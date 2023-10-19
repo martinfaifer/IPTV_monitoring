@@ -2,7 +2,7 @@
     <div>
         <!-- sidebar -->
         <v-navigation-drawer
-            style="background: linear-gradient(#0d1426, #000000)"
+            style="background: linear-gradient(#080e1a, #000000)"
             v-model="drawer"
             fixed
             app

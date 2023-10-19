@@ -12,6 +12,8 @@ use App\Http\Resources\NotRunningStreamsResource;
 use App\Http\Resources\ShowProblemStreamsResource;
 use App\Actions\Cache\DeleteAllStreamCacheDataAction;
 use App\Actions\System\Process\KillTsDuckStreamProcessAction;
+use App\Models\StreamPtsHistory;
+use App\Models\StreamSheduler;
 
 class StreamObserver
 {
@@ -70,6 +72,8 @@ class StreamObserver
         (new DeleteAllStreamCacheDataAction())->execute($stream);
 
         SendedStreamEmail::where('stream_id', $stream->id)->delete();
+        StreamPtsHistory::where('stream_id', $stream->id)->delete();
+        StreamSheduler::where('stream_id', $stream->id)->delete();
 
         Cache::pull($stream->id . "_" . Stream::STATUS_CAN_NOT_START);
 

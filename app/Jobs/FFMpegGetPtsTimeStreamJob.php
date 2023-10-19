@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use App\Actions\Streams\FFMpeg\FFMpegGetPtsTimeStreamAction;
+use App\Models\StreamPtsHistory;
 
 class FFMpegGetPtsTimeStreamJob implements ShouldQueue
 {
@@ -39,5 +40,10 @@ class FFMpegGetPtsTimeStreamJob implements ShouldQueue
                 ['stream_id' => $this->stream->id]
             );
         }
+
+        StreamPtsHistory::create([
+            'stream_id' => $this->stream->id,
+            'pts' => $ptsTime
+        ]);
     }
 }

@@ -31,7 +31,7 @@ class CheckStreamsPTSTimeCommand extends Command
     public function handle()
     {
         $streams = Stream::checkPts()->with('problemPts')->get();
-        $getPtsTime = new FFMpegGetPtsTimeStreamAction();
+        // $getPtsTime = new FFMpegGetPtsTimeStreamAction();
 
         foreach ($streams as $stream) {
             FFMpegGetPtsTimeStreamJob::dispatch($stream);

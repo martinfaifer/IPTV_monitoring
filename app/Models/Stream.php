@@ -63,6 +63,11 @@ class Stream extends Model
         return $this->hasOne(ProblemPts::class, 'stream_id', 'id');
     }
 
+    public function ptsHistory(): HasMany
+    {
+        return $this->hasMany(StreamPtsHistory::class, 'stream_id', 'id');
+    }
+
     public function sendedAlert(): HasOne
     {
         return $this->hasOne(SendedStreamEmail::class, 'stream_id', 'id');

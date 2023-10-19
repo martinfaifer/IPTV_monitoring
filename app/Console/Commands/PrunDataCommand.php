@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 use App\Models\NetworkStatistic;
 use App\Models\StreamHistoryStatus;
 use App\Models\StreamProblemPid;
+use App\Models\StreamPtsHistory;
 
 class PrunDataCommand extends Command
 {
@@ -36,5 +37,6 @@ class PrunDataCommand extends Command
         StreamHistoryStatus::where('created_at', '<=', Carbon::now()->subDays(2)->toDateTimeString())->delete();
         StreamProblemPid::where('created_at', '<=', Carbon::now()->subDay()->toDateTimeString())->delete();
         GpuChart::where('created_at', '<=', Carbon::now()->subDay()->toDateTimeString())->delete();
+        StreamPtsHistory::where('created_at', '<=', Carbon::now()->subDays(2)->toDateTimeString())->delete();
     }
 }

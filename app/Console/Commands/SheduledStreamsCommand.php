@@ -62,7 +62,5 @@ class SheduledStreamsCommand extends Command
                 }
             }
         }
-
-        dd($currentDay, $currentTime);
     }
 }

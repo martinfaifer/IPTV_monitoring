@@ -11,10 +11,7 @@ class StreamDiagnosticFfProbeService
 {
     public function __construct(object $stream)
     {
-        $lock = Cache::lock('runningFfprobe_' . $stream->id, 10);
-        if ($lock->get()) {
-            $this->monitoring($stream);
-        }
+        $this->monitoring($stream);
     }
 
     public function monitoring(object $stream)
@@ -74,7 +71,7 @@ class StreamDiagnosticFfProbeService
                     if ($streams["codec_type"] == "audio") {
                         if (array_key_exists("index", $streams)) {
                             $audioStreams['id'] =
-                            data_set($audioStreams[], 'name', "index: " . $streams["index"]);
+                                data_set($audioStreams[], 'name', "index: " . $streams["index"]);
                         }
                         if (array_key_exists("codec_name", $streams)) {
                             data_set($audioStreams[], 'name', "codec_name: " . $streams["codec_name"]);

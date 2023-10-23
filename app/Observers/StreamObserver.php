@@ -12,6 +12,7 @@ use App\Http\Resources\NotRunningStreamsResource;
 use App\Http\Resources\ShowProblemStreamsResource;
 use App\Actions\Cache\DeleteAllStreamCacheDataAction;
 use App\Actions\System\Process\KillTsDuckStreamProcessAction;
+use App\Models\StreamProcessPid;
 use App\Models\StreamPtsHistory;
 use App\Models\StreamSheduler;
 
@@ -43,6 +44,11 @@ class StreamObserver
         Cache::forget('stream_' . $stream->id);
         if ($stream->status == Stream::STATUS_WAITING) {
             (new DeleteAllStreamCacheDataAction())->execute(stream: $stream);
+            try {
+                StreamProcessPid::where('stream_id', $stream->id)->delete();
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
         }
 
         $notRunnngStreams = new NotRunningStreamsResource([]);

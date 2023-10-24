@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\LogOutController;
 use App\Http\Controllers\UserWebhookController;
 use App\Http\Controllers\Search\SearchController;
 use App\Http\Controllers\Streams\StreamController;
+use App\Http\Controllers\StreamShedulerController;
+use App\Http\Controllers\GpuNotificationController;
 use App\Http\Controllers\StreamsHistoryStatusController;
 use App\Http\Controllers\UserGeneratePasswordController;
 use App\Http\Controllers\Streams\CustomStreamsController;
@@ -38,7 +40,6 @@ use App\Http\Controllers\Streams\StreamPidDiscontinuityStartedTimeController;
 use App\Http\Controllers\Settings\Dashboard\Network\AvgNetworkSpeedController;
 use App\Http\Controllers\Streams\API\GetStreamInformationFromIptvDokuController;
 use App\Http\Controllers\Settings\Dashboard\SystemInformation\SystemInformationController;
-use App\Http\Controllers\StreamShedulerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,6 +56,7 @@ Route::prefix('auth')->group(function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::post('search', SearchController::class);
     Route::get('weather', ApiWeatherController::class);
+    Route::get('gpu-notification', GpuNotificationController::class);
 
     Route::prefix('users')->group(function () {
         Route::get('user', [UserController::class, 'show']);

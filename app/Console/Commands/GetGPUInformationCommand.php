@@ -6,6 +6,8 @@ use App\Models\Gpu;
 use App\Models\GpuChart;
 use Illuminate\Console\Command;
 
+use function RingCentral\Psr7\try_fopen;
+
 class GetGPUInformationCommand extends Command
 {
     /**
@@ -29,8 +31,30 @@ class GetGPUInformationCommand extends Command
     {
         $nvidiaSmi = shell_exec('nvidia-smi');
         if (!str_contains($nvidiaSmi, "CUDA")) {
+            // store problem in to the table
+            try {
+                Gpu::where('status', 'running')->get()->each(function ($gpu) {
+                    $gpu->update([
+                        'status' => "error"
+                    ]);
+                });
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+            // send alert
             die();
         }
+
+        try {
+            Gpu::where('status', 'error')->get()->each(function ($gpu) {
+                $gpu->update([
+                    'status' => "running"
+                ]);
+            });
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
         $nvidiaSmiOutputInXml = shell_exec('nvidia-smi -q -x');
 
         $xmlObject = simplexml_load_string($nvidiaSmiOutputInXml);

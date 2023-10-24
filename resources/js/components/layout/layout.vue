@@ -3,6 +3,7 @@
         <div>
             <VerticalMenu></VerticalMenu>
             <!-- notifikace pro uzivatele z rozhraní o provedení akcí -->
+            <pernamentSnackBarNotification></pernamentSnackBarNotification>
             <SnackBarNotification></SnackBarNotification>
             <v-main>
                 <v-container fluid class="mx-auto">
@@ -16,6 +17,7 @@
 <script>
 import VerticalMenu from "./navigation/verticalNavigation.vue";
 import SnackBarNotification from "./navigation/Notifications/snackbarNotification.vue";
+import pernamentSnackBarNotification from "./navigation/Notifications/pernamentSnackBarNotification.vue";
 
 export default {
     computed: {},
@@ -28,6 +30,7 @@ export default {
     components: {
         VerticalMenu,
         SnackBarNotification,
+        pernamentSnackBarNotification
     },
 
     created() {

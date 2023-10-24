@@ -9,7 +9,8 @@ class Gpu extends Model
 {
     protected $fillable = [
         'product_name',
-        'serial'
+        'serial',
+        'status'
     ];
 
     public function gpu_chart(): HasMany

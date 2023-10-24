@@ -13,6 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _navigation_verticalNavigation_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./navigation/verticalNavigation.vue */ "./resources/js/components/layout/navigation/verticalNavigation.vue");
 /* harmony import */ var _navigation_Notifications_snackbarNotification_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navigation/Notifications/snackbarNotification.vue */ "./resources/js/components/layout/navigation/Notifications/snackbarNotification.vue");
+/* harmony import */ var _navigation_Notifications_pernamentSnackBarNotification_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navigation/Notifications/pernamentSnackBarNotification.vue */ "./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue");
 //
 //
 //
@@ -28,6 +29,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -39,7 +42,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     VerticalMenu: _navigation_verticalNavigation_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    SnackBarNotification: _navigation_Notifications_snackbarNotification_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    SnackBarNotification: _navigation_Notifications_snackbarNotification_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    pernamentSnackBarNotification: _navigation_Notifications_pernamentSnackBarNotification_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   created: function created() {
     this.index();
@@ -60,6 +64,73 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   watch: {
     $route: function $route(to, from) {}
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      description: "",
+      showSnackBar: false
+    };
+  },
+  created: function created() {
+    this.index();
+  },
+  methods: {
+    index: function index() {
+      var _this = this;
+
+      axios.get("gpu-notification").then(function (response) {
+        if (response.data.status == "success") {
+          _this.showSnackBar = true;
+          _this.description = response.data.message;
+        } else {
+          _this.showSnackBar = false;
+          _this.description = "";
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.interval = setInterval(function () {
+      this.index();
+    }.bind(this), 60000);
+  },
+  watch: {//
   }
 });
 
@@ -860,6 +931,44 @@ component.options.__file = "resources/js/components/layout/layout.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _pernamentSnackBarNotification_vue_vue_type_template_id_44f93fc6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pernamentSnackBarNotification.vue?vue&type=template&id=44f93fc6& */ "./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=template&id=44f93fc6&");
+/* harmony import */ var _pernamentSnackBarNotification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pernamentSnackBarNotification.vue?vue&type=script&lang=js& */ "./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _pernamentSnackBarNotification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _pernamentSnackBarNotification_vue_vue_type_template_id_44f93fc6___WEBPACK_IMPORTED_MODULE_0__.render,
+  _pernamentSnackBarNotification_vue_vue_type_template_id_44f93fc6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/layout/navigation/Notifications/snackbarNotification.vue":
 /*!******************************************************************************************!*\
   !*** ./resources/js/components/layout/navigation/Notifications/snackbarNotification.vue ***!
@@ -1065,6 +1174,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************!*\
+  !*** ./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_pernamentSnackBarNotification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./pernamentSnackBarNotification.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_pernamentSnackBarNotification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/layout/navigation/Notifications/snackbarNotification.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************!*\
   !*** ./resources/js/components/layout/navigation/Notifications/snackbarNotification.vue?vue&type=script&lang=js& ***!
@@ -1152,6 +1276,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_layout_vue_vue_type_template_id_53216c18___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_layout_vue_vue_type_template_id_53216c18___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./layout.vue?vue&type=template&id=53216c18& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layout/layout.vue?vue&type=template&id=53216c18&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=template&id=44f93fc6&":
+/*!**********************************************************************************************************************************!*\
+  !*** ./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=template&id=44f93fc6& ***!
+  \**********************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_pernamentSnackBarNotification_vue_vue_type_template_id_44f93fc6___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_pernamentSnackBarNotification_vue_vue_type_template_id_44f93fc6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_pernamentSnackBarNotification_vue_vue_type_template_id_44f93fc6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./pernamentSnackBarNotification.vue?vue&type=template&id=44f93fc6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=template&id=44f93fc6&");
 
 
 /***/ }),
@@ -1257,6 +1397,8 @@ var render = function () {
       [
         _c("VerticalMenu"),
         _vm._v(" "),
+        _c("pernamentSnackBarNotification"),
+        _vm._v(" "),
         _c("SnackBarNotification"),
         _vm._v(" "),
         _c(
@@ -1275,6 +1417,66 @@ var render = function () {
       1
     ),
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=template&id=44f93fc6&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layout/navigation/Notifications/pernamentSnackBarNotification.vue?vue&type=template&id=44f93fc6& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.showSnackBar == true
+        ? _c(
+            "v-snackbar",
+            {
+              staticClass: "my-3",
+              attrs: {
+                timeout: -1,
+                value: true,
+                top: "",
+                centered: "",
+                color: "red",
+                elevation: "24",
+              },
+            },
+            [
+              _c(
+                "v-row",
+                { staticClass: "d-flex justify-space-between ml-3 mr-6" },
+                [
+                  _c("v-icon", [_vm._v("mdi-information")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "body-1 font-weight-medium" }, [
+                    _vm._v("Nefunkční nvidi-smi"),
+                  ]),
+                ],
+                1
+              ),
+            ],
+            1
+          )
+        : _vm._e(),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

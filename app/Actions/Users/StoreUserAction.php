@@ -21,7 +21,7 @@ class StoreUserAction
 
 
             // send email notification with username and password
-            $text = "Vaše přihlášovací údaje jsou </br> " . $formData->email . " / " . $password;
+            $text = "Vaše přihlášovací údaje do iptvdohled.grapesc.cz </br> " . $formData->email . " / " . $password;
             SendEmailJob::dispatch($formData->email, $text, "Vítejte v iptv dohledu");
             return true;
         }, function () {

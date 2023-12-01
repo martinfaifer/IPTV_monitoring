@@ -9,6 +9,7 @@ use App\Models\StreamHistoryStatus;
 use App\Models\StreamProblemPid;
 use App\Models\StreamProcessPid;
 use App\Models\StreamPtsHistory;
+use App\Models\StreamSheduler;
 
 class DeleteStreamAction
 {
@@ -23,6 +24,7 @@ class DeleteStreamAction
         StreamProblemPid::where('stream_id', $stream->id)->delete();
         ProblemPts::where('stream_id', $stream->id)->delete();
         StreamPtsHistory::where('stream_id', $stream->id)->delete();
+        StreamSheduler::where('stream_id', $stream->id)->delete();
         return $stream->delete();
     }
 }

@@ -11,9 +11,7 @@ export const store = new Vuex.Store({
     },
     actions: {},
     mutations: {
-        update(state, alert) {
-            state.alerts.push(alert);
-        },
+
     },
     getters: {},
 });

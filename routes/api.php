@@ -17,6 +17,7 @@ Route::middleware('auth.basic')->group(function () {
     Route::prefix('v2')->group(function () {
         Route::prefix('stream')->group(function () {
             Route::get('alerts', ApiStreamAlertController::class);
+            Route::get('by-ip/{ip}', [ApiStreamController::class, 'show_by_ip'])->middleware('isAdmin');
             Route::get('{stream}', [ApiStreamController::class, 'show'])->middleware('isAdmin');
             Route::post('', [ApiStreamController::class, 'store'])->middleware('isAdmin');
             Route::delete('{stream}', [ApiStreamController::class, 'destroy'])->middleware('isAdmin');

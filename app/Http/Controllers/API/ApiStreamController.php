@@ -23,6 +23,17 @@ class ApiStreamController extends Controller
         return (new ShowStreamInformationAction())->execute($stream->id);
     }
 
+    public function show_by_ip($ip)
+    {
+        $stream = Stream::where('stream_url')->first();
+
+        if(!$stream) {
+            return abort(404);
+        };
+
+        return (new ShowStreamInformationAction())->execute($stream->id);
+    }
+
     public function store(StreamStoreApiRequest $request, StoreStreamAction $storeStreamAction)
     {
         return $storeStreamAction->execute(formData: $request);

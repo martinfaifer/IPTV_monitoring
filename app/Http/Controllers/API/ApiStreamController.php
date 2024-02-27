@@ -25,7 +25,7 @@ class ApiStreamController extends Controller
 
     public function show_by_ip($ip)
     {
-        $stream = Stream::where('stream_url')->first();
+        $stream = Stream::where('stream_url', $ip)->first();
 
         if(!$stream) {
             return abort(404);

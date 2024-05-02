@@ -21,6 +21,7 @@ Route::middleware('auth.basic')->group(function () {
             Route::get('{stream}', [ApiStreamController::class, 'show'])->middleware('isAdmin');
             Route::post('', [ApiStreamController::class, 'store'])->middleware('isAdmin');
             Route::delete('{stream}', [ApiStreamController::class, 'destroy'])->middleware('isAdmin');
+            Route::delete('by-ip/{ip}', [ApiStreamController::class, 'destroy_by_ip'])->middleware('isAdmin');
             Route::post('analyze', ApiStreamAnalyzeController::class)->middleware('isAdmin');
             Route::get('{stream}/image', ApiStreamImageController::class)->middleware('isAdmin');
             Route::patch('{stream}/stop', ApiStreamStopController::class)->middleware('isAdmin');

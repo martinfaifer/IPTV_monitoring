@@ -27,7 +27,7 @@ class ApiStreamController extends Controller
     {
         $stream = Stream::where('stream_url', $ip)->first();
 
-        if(!$stream) {
+        if (!$stream) {
             return abort(404);
         };
 
@@ -41,6 +41,15 @@ class ApiStreamController extends Controller
 
     public function destroy(Stream $stream, DeleteStreamAction $deleteStreamAction)
     {
+        return $deleteStreamAction->execute(stream: $stream) == true
+            ? $this->success_response('Odebráno')
+            : $this->error_response();
+    }
+
+    public function destroy_by_ip($ip, DeleteStreamAction $deleteStreamAction)
+    {
+        $stream = Stream::where('stream_url', $ip)->first();
+
         return $deleteStreamAction->execute(stream: $stream) == true
             ? $this->success_response('Odebráno')
             : $this->error_response();

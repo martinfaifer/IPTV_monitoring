@@ -18,7 +18,7 @@ class GetStreamsWithProblemsAction
                 'name' => $stream->nazev,
                 'stream_url' => $stream->stream_url,
                 'status' => $stream->status,
-                'monitored_at' => !blank($stream->monitored_at) ? $stream->monitored_at : null,
+                'updated_at' => !blank($stream->updated_at) ? $stream->updated_at : null,
             ];
         });
 

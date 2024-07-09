@@ -28,7 +28,7 @@ class GetStreamsWithProblemsAction
             foreach ($pts_problem_streams as $stream_with_pts_problem) {
                 $this->result[] = [
                     'id' => $stream_with_pts_problem['id'] . "_pts_problem",
-                    'img' => config('app.url') . "/" . (new GetStreamVideoImageAction())->execute(Stream::find($stream_with_pts_problem['id']), true),
+                    // 'img' => config('app.url') . "/" . (new GetStreamVideoImageAction())->execute(Stream::find($stream_with_pts_problem['id']), true),
                     'name' => $stream_with_pts_problem['stream']['nazev'],
                     'stream_url' => $stream_with_pts_problem['stream']['stream_url'],
                     'status' => 'pts_problem',

@@ -2,22 +2,30 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Actions\Streams\API\ShowStreamInformationAction;
 use App\Models\Stream;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Actions\Streams\StoreStreamAction;
 use App\Actions\Streams\DeleteStreamAction;
 use App\Http\Resources\ShowAudioPidResource;
 use App\Http\Resources\ShowVideoPidResource;
+use App\Actions\Streams\API\GetStreamsAction;
 use App\Http\Resources\ShowServicePidResource;
 use App\Http\Requests\Api\StreamShowApiRequest;
 use App\Http\Requests\Api\StreamStoreApiRequest;
 use App\Actions\Streams\GetStreamVideoImageAction;
+use App\Actions\Streams\API\ShowStreamInformationAction;
+use App\Actions\Streams\API\GetStreamsWithProblemsAction;
 use App\Actions\Streams\ProblemPids\ShowProblemPidsAction;
-use Illuminate\Support\Facades\Log;
 
 class ApiStreamController extends Controller
 {
+
+    public function with_problems()
+    {
+        return (new GetStreamsWithProblemsAction())->execute();
+    }
+
     public function show(Stream $stream)
     {
         return (new ShowStreamInformationAction())->execute($stream->id);

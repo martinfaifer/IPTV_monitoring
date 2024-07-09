@@ -16,6 +16,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth.basic')->group(function () {
     Route::prefix('v2')->group(function () {
         Route::prefix('stream')->group(function () {
+            Route::get('streams-with-problems',[ ApiStreamController::class, 'with_problems']);
             Route::get('alerts', ApiStreamAlertController::class);
             Route::get('by-ip/{ip}', [ApiStreamController::class, 'show_by_ip'])->middleware('isAdmin');
             Route::get('{stream}', [ApiStreamController::class, 'show'])->middleware('isAdmin');

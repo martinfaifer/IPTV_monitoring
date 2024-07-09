@@ -32,7 +32,7 @@ class GetStreamsWithProblemsAction
                     'name' => $stream_with_pts_problem['stream']['nazev'],
                     'stream_url' => $stream_with_pts_problem['stream']['stream_url'],
                     'status' => 'pts_problem',
-                    'monitored_at' => !blank($stream_with_pts_problem['updated_at']) ? $stream_with_pts_problem['updated_at'] : null,
+                    'updated_at' => !blank($stream_with_pts_problem['updated_at']) ? $stream_with_pts_problem['updated_at'] : null,
                 ];
             }
         }
